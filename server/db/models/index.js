@@ -26,11 +26,11 @@ Meme.belongsToMany(User, {through: UserComment})
 User.belongsToMany(Meme, {through: UserComment})
 
 //Transactions link for completed transactions between two users
-User.belongsToMany(User, {through: Transaction})
-User.belongsToMany(User, {through: Transaction})
+User.belongsToMany(User, {as: 'buyer', foreignKey: 'buyUserId', through: Transaction})
+User.belongsToMany(User, {as: 'seller', foreignKey: 'sellUserId', through: Transaction})
 //Link to include Memes on Transactions table
 Meme.belongsTo(Transaction)
-Transactions.hasMany(Meme)
+Transaction.hasMany(Meme)
 
 //Link between Offers & Transactions
 Offer.belongsToMany(Transaction, {through: 'offer-transactions'})
