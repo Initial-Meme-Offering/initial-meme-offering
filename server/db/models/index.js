@@ -53,5 +53,6 @@ Indice.belongsToMany(Meme, {through: 'meme-indices'})
   Offer,
   Transaction,
   MemeStock,
-  Indice
+  Indice,
+  UserComment
 }
