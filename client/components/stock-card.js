@@ -1,13 +1,5 @@
 import React from 'react'
-import {Button, Grid, Image, Container, Icon, Divider} from 'semantic-ui-react'
-
-// export const Stockcard = () => {
-//   return (
-//     <div>
-//       <Button>Click Me</Button>
-//     </div>
-//   )
-// }
+import {Grid, Image, Container, Icon, Divider} from 'semantic-ui-react'
 
 export const Stockcard = () => {
   return (
