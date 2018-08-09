@@ -7,6 +7,21 @@ const Offer = db.define('offer', {
       primaryKey: true,
       type: Sequelize.INTEGER
     },
+    offerType:  {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        isIn: [['buy', 'sell']]
+      }
+    },
+    status: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: 'Pending',
+      validate: {
+        isIn: [['Pending', 'Complete']]
+      }
+    },
     quantity: {
       type: Sequelize.INTEGER,
       allowNull: false,
