@@ -1,9 +1,10 @@
 const User = require('./user')
 const Meme = require('./meme')
 const Offer = require('./offer')
-const MemeStock = require('./memestock')
+const MemeStock = require('./meme-stock')
 const Transaction = require('./transaction')
 const Indice = require('./indice')
+const UserComment = require('./user-comment')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -19,6 +20,10 @@ User.belongsToMany(Meme, {through: MemeStock})
 //Offers link for both buy and sell user offers
 Meme.belongsToMany(User, {through: Offer})
 User.belongsToMany(Meme, {through: Offer})
+
+//Comments between Users and Memes
+Meme.belongsToMany(User, {through: UserComment})
+User.belongsToMany(Meme, {through: UserComment})
 
 //Transactions link for completed transactions between two users
 User.belongsToMany(User, {through: Transaction})
