@@ -2,7 +2,7 @@
 
 const db = require('../server/db')
 const {User, Meme, MemeStock, Indice, Offer, Transaction, UserComment} = require('../server/db/models')
-
+const {memes, users, usercomments} = require('./seedData1')
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')

@@ -8,11 +8,14 @@ const Meme = db.define('meme', {
     desc: {
         type: Sequelize.TEXT
     },
+    imageUrl: {
+        type: Sequelize.STRING
+    },
     status: {
         type: Sequelize.STRING,
         defaultValue: 'review',
         validate: {
-            isIn: [['review', 'offering', 'released']]
+            isIn: [['review', 'offering', 'released', 'removed']]
         }
     },
     totalStock: {
