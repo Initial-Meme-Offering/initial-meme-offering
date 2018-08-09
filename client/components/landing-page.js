@@ -1,13 +1,14 @@
 import React from 'react'
 import {VictoryChart, VictoryLine, VictoryScatter} from 'victory'
+import {Container} from 'semantic-ui-react'
 
-const data = [
-  {month: 3, earnings: 13000},
-  {month: 4, earnings: 16500},
-  {month: 5, earnings: 14250},
-  {month: 6, earnings: 19000},
-  {month: 7, earnings: 19000},
-  {month: 8, earnings: 19000}
+const sixMonths = [
+  {month: 'March', marketVal: 64000},
+  {month: 'April', marketVal: 58000},
+  {month: 'May', marketVal: 61000},
+  {month: 'June', marketVal: 60000},
+  {month: 'July', marketVal: 34000},
+  {month: 'August', marketVal: 50000}
 ]
 
 export default class LandingPage extends React.Component {
@@ -15,16 +16,31 @@ export default class LandingPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <VictoryChart height={400}>
+      <Container>
+        <VictoryChart
+          data={sixMonths}
+          height={250}
+          x="month"
+          y="marketVal"
+          title="Total Market Value"
+        >
           <VictoryLine
             interpolation="linear"
-            data={data}
-            style={{data: {stroke: '#c43a31'}}}
+            data={sixMonths}
+            x="month"
+            y="marketVal"
+            style={{
+              data: {stroke: '#c43a31', strokeWidth: 1}
+            }}
           />
-          <VictoryScatter data={data} style={{data: {fill: 'c43a31'}}} />
+          <VictoryScatter
+            data={sixMonths}
+            x="month"
+            y="marketVal"
+            style={{data: {fill: 'c43a31'}}}
+          />
         </VictoryChart>
-      </div>
+      </Container>
     )
   }
 }
