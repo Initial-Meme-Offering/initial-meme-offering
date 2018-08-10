@@ -1,6 +1,7 @@
 import React from 'react'
 import {Container, Header} from 'semantic-ui-react'
 import {MarketChart} from '../components'
+import {connect} from 'react-redux'
 
 const styles = {
   div: {
@@ -33,31 +34,41 @@ const oneWeek = [
 
 const fiveStocks = Array(5).fill(oneWeek)
 
-export default class LandingPage extends React.Component {
-  state = {}
-
-  render() {
-    return (
-      <div>
+const LandingPage = props => {
+  return (
+    <div>
+      <MarketChart
+        data={sixMonths}
+        title="Total Market Value"
+        x="month"
+        y="marketVal"
+      />
+      <Header as="h1" style={styles.subHeader}>
+        <Header.Content>Trending Stocks</Header.Content>
+      </Header>
+      {fiveStocks.map((trend, i) => (
         <MarketChart
-          data={sixMonths}
-          title="Total Market Value"
-          x="month"
-          y="marketVal"
+          key={i}
+          data={trend}
+          title="Stock Name"
+          x="seedDate"
+          y="price"
         />
-        <Header as="h1" style={styles.subHeader}>
-          <Header.Content>Trending Stocks</Header.Content>
-        </Header>
-        {fiveStocks.map((trend, i) => (
-          <MarketChart
-            key={i}
-            data={trend}
-            title="Stock Name"
-            x="seedDate"
-            y="price"
-          />
-        ))}
-      </div>
-    )
+      ))}
+    </div>
+  )
+}
+
+const mapState = (state, ownProps) => {
+  // console.log('state.memes.byId[0]', state.memes.byId[5])
+  console.log('MEMES', state.memes.byId)
+  console.log('MEMESTOCKS', state.memeStocks.byId)
+  return {
+    memes: state.memes.byId,
+    memeStocks: state.memeStocks.byId
   }
 }
+
+const mapDispatch = () => ({})
+
+export default connect(mapState, mapDispatch)(LandingPage)
