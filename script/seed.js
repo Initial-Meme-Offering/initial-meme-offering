@@ -103,7 +103,7 @@ async function seed() {
     return memes
   }
 
-  seedMemeIndices()
+  await seedMemeIndices()
   console.log('Meme Indices seeded')
 
   async function seedOfferTransactions() {
@@ -114,7 +114,7 @@ async function seed() {
     return transactions
   }
 
-  seedOfferTransactions()
+  await seedOfferTransactions()
   console.log('Offer Transactions seeded')
 
   async function seedUserComments() {
@@ -125,7 +125,7 @@ async function seed() {
       await usercomments[i].setMeme(randomMeme)
     }
   }
-  seedUserComments()
+  await seedUserComments()
   console.log('User Comments seeded')
 
   await db.sync()
