@@ -20,10 +20,9 @@ const Transaction = db.define('transaction', {
     validate: {
       notEmpty: true
     }
-  }
-}, {
-  validate: {
-    
+  },
+  seedDate: {
+    type: Sequelize.DATE
   }
 })
 
