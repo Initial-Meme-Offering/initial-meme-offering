@@ -1,6 +1,16 @@
 import React from 'react'
-import {VictoryChart, VictoryLine, VictoryScatter} from 'victory'
-import {Container} from 'semantic-ui-react'
+import {Container, Header} from 'semantic-ui-react'
+import {MarketChart} from '../components'
+
+const styles = {
+  div: {
+    marginTop: 40,
+    width: 2000
+  },
+  subHeader: {
+    paddingLeft: 100
+  }
+}
 
 const sixMonths = [
   {month: 'March', marketVal: 64000},
@@ -11,36 +21,43 @@ const sixMonths = [
   {month: 'August', marketVal: 50000}
 ]
 
+const oneWeek = [
+  {seedDate: '07-14', price: 65},
+  {seedDate: '07-15', price: 45},
+  {seedDate: '07-16', price: 5},
+  {seedDate: '07-17', price: 10},
+  {seedDate: '07-18', price: 115},
+  {seedDate: '07-19', price: 70},
+  {seedDate: '07-20', price: 56}
+]
+
+const fiveStocks = Array(5).fill(oneWeek)
+
 export default class LandingPage extends React.Component {
   state = {}
 
   render() {
     return (
-      <Container>
-        <VictoryChart
+      <div>
+        <MarketChart
           data={sixMonths}
-          height={250}
+          title="Total Market Value"
           x="month"
           y="marketVal"
-          title="Total Market Value"
-        >
-          <VictoryLine
-            interpolation="linear"
-            data={sixMonths}
-            x="month"
-            y="marketVal"
-            style={{
-              data: {stroke: '#c43a31', strokeWidth: 1}
-            }}
+        />
+        <Header as="h1" style={styles.subHeader}>
+          <Header.Content>Trending Stocks</Header.Content>
+        </Header>
+        {fiveStocks.map((trend, i) => (
+          <MarketChart
+            key={i}
+            data={trend}
+            title="Stock Name"
+            x="seedDate"
+            y="price"
           />
-          <VictoryScatter
-            data={sixMonths}
-            x="month"
-            y="marketVal"
-            style={{data: {fill: 'c43a31'}}}
-          />
-        </VictoryChart>
-      </Container>
+        ))}
+      </div>
     )
   }
 }
