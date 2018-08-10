@@ -1,6 +1,17 @@
 import React from 'react'
 import {VictoryChart, VictoryLine, VictoryScatter} from 'victory'
-import {Container} from 'semantic-ui-react'
+import {Container, Header} from 'semantic-ui-react'
+
+const styles = {
+  div: {
+    marginTop: 40,
+    width: 2000
+  },
+  subtotal: {
+    textAlign: 'right',
+    marginRight: 20
+  }
+}
 
 const sixMonths = [
   {month: 'March', marketVal: 64000},
@@ -16,7 +27,13 @@ export default class LandingPage extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container
+        className="ui raised very padded text container segment"
+        style={styles.div}
+      >
+        <Header as="h2" textAlign="center">
+          <Header.Content>Total Market Value</Header.Content>
+        </Header>
         <VictoryChart
           data={sixMonths}
           height={250}
