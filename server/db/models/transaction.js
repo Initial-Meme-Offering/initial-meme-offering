@@ -26,6 +26,4 @@ const Transaction = db.define('transaction', {
   }
 })
 
-Transaction.beforeCreate((transaction, options))
-
 module.exports = Transaction
