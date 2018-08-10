@@ -1,4 +1,4 @@
-const memes = [
+const memesdata = [
   {
     name: 'Distracted Boyfriend',
     imageUrl: 'https://i.imgflip.com/1ur9b0.jpg',
@@ -501,7 +501,7 @@ const memes = [
   }
 ]
 
-const users = [
+const usersdata = [
   {id: 1, email: 'mkingcott0@slate.com', password: 'p7HhnIiHO'},
   {id: 2, email: 'ccogar1@github.com', password: 'slihZZ'},
   {id: 3, email: 'mcutforth2@sphinn.com', password: 'bVYx06Bbxil'},
@@ -554,7 +554,7 @@ const users = [
   {id: 50, email: 'jlilian1d@rambler.ru', password: 'aaR3zC3hGFA'}
 ]
 
-const usercomments = [{"text":"Lobectomy of brain"},
+const usercommentsdata = [{"text":"Lobectomy of brain"},
 {"text":"Closed [endoscopic] biopsy of trachea"},
 {"text":"Culdotomy"},
 {"text":"Removal of intraocular foreign body from anterior segment of eye, not otherwise specified"},
@@ -2556,7 +2556,7 @@ const usercomments = [{"text":"Lobectomy of brain"},
 {"text":"Teleradiotherapy using photons"}]
 
 module.exports = {
-  memes,
-  users,
-  usercomments
+  memesdata,
+  usersdata,
+  usercommentsdata
 }

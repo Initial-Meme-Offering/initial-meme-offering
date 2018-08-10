@@ -1,4 +1,4 @@
-const offers = [{"offerType":"buy","status":"Pending","quantity":15,"price":60,"userId":26,"memeId":1},
+const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":60,"userId":26,"memeId":1},
 {"offerType":"buy","status":"Pending","quantity":20,"price":65,"userId":14,"memeId":2},
 {"offerType":"buy","status":"Pending","quantity":15,"price":5,"userId":46,"memeId":3},
 {"offerType":"sell","status":"Pending","quantity":30,"price":30,"userId":40,"memeId":3},
@@ -11000,5 +11000,5 @@ const offers = [{"offerType":"buy","status":"Pending","quantity":15,"price":60,"
 {"offerType":"sell","status":"Pending","quantity":135,"price":35,"userId":49,"memeId":2}]
 
 module.exports = {
-    offers
+    offersdata
 }

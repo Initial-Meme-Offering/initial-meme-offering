@@ -2,17 +2,56 @@
 
 const db = require('../server/db')
 const {User, Meme, MemeStock, Indice, Offer, Transaction, UserComment} = require('../server/db/models')
-const {memes, users, usercomments} = require('./seedData1')
+const {memesdata, usersdata, usercommentsdata} = require('./seedData1')
+const {offersdata} = require('./seedData2')
+const {memestocksdata, transactionsdata, indicesdata} = require('./seedData3')
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
-
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+  const memesPromise = Meme.bulkCreate(memesdata, {returning: true})
+  const usersPromise = User.bulkCreate(usersdata, {returning: true})
+  const usercommentsPromise = UserComment.bulkCreate(usercommentsdata, {returning: true})
+  const offersPromise = Offer.bulkCreate(offersdata, {returning: true})
+  const memestockPromise = MemeStock.bulkCreate(memestocksdata, {returning: true})
+  const transactionsPromise = Transaction.bulkCreate(transactionsdata, {returning: true})
+  const indicesPromise = Indice.bulkCreate(indicesdata, {returning: true})
+  
+  await Promise.all([
+    memesPromise,
+    usersPromise,
+    usercommentsPromise,
+    offersPromise,
+    memestockPromise,
+    transactionsPromise,
+    indicesPromise
   ])
 
-  console.log(`seeded ${users.length} users`)
+  const transactions = await Transaction.findAll()
+  const indices = await Indice.findAll()
+  const memes = await Meme.findAll()
+
+
+  async function seedMemeIndices() {
+    for (let i = 0; i < memes.length; i++) {
+      const randomIndices = indices.sort(shuffle).slice(0, 2)
+      await memes[i].setIndices(randomIndices)
+    }
+    return memes
+  }
+  
+  seedMemeIndices()
+
+  async function seedOfferTransactions() {
+    for(let i = 0; i < transactions.length; i++) {
+      const randomOffers = offersdata.sort(shuffle).slice(0, 2)
+      await transactions[i].setOffers(randomOffers)
+    }
+    return transactions
+  }
+  seedOfferTransactions()
+
+  await db.sync()
   console.log(`seeded successfully`)
 }
 
