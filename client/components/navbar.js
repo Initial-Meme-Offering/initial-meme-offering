@@ -13,7 +13,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           {/* The navbar will show these links after you log in */}
           <Menu>
             <Menu.Item>
-              <Link to="/home">
+              <Link to="/landingPage">
                 <Button primary>Home</Button>
               </Link>
             </Menu.Item>
