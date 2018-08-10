@@ -996,8 +996,8 @@ const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":
 {"offerType":"buy","status":"Pending","quantity":105,"price":80,"userId":13,"memeId":1},
 {"offerType":"buy","status":"Pending","quantity":20,"price":85,"userId":39,"memeId":3},
 {"offerType":"buy","status":"Pending","quantity":30,"price":45,"userId":2,"memeId":1},
-{"offerType":"sell","status":"Pending","quantity":55,"price":60,"userId":42,"memeId":1},
-{"offerType":"buy","status":"Pending","quantity":80,"price":80,"userId":38,"memeId":1},
+{"offerType":"sell","status":"Pending","quantity":55,"price":60,"userId":42,"memeId":1}]
+const offersdata1 = [{"offerType":"buy","status":"Pending","quantity":80,"price":80,"userId":38,"memeId":1},
 {"offerType":"sell","status":"Pending","quantity":45,"price":70,"userId":14,"memeId":1},
 {"offerType":"sell","status":"Pending","quantity":120,"price":60,"userId":36,"memeId":5},
 {"offerType":"sell","status":"Pending","quantity":140,"price":85,"userId":30,"memeId":1},
@@ -1996,8 +1996,9 @@ const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":
 {"offerType":"buy","status":"Pending","quantity":110,"price":70,"userId":14,"memeId":2},
 {"offerType":"sell","status":"Pending","quantity":90,"price":65,"userId":6,"memeId":4},
 {"offerType":"buy","status":"Pending","quantity":95,"price":95,"userId":22,"memeId":3},
-{"offerType":"buy","status":"Pending","quantity":15,"price":15,"userId":4,"memeId":5},
-{"offerType":"sell","status":"Pending","quantity":45,"price":90,"userId":47,"memeId":2},
+{"offerType":"buy","status":"Pending","quantity":15,"price":15,"userId":4,"memeId":5}]
+
+const offersdata2 = [{"offerType":"sell","status":"Pending","quantity":45,"price":90,"userId":47,"memeId":2},
 {"offerType":"sell","status":"Pending","quantity":10,"price":60,"userId":20,"memeId":3},
 {"offerType":"sell","status":"Pending","quantity":10,"price":70,"userId":46,"memeId":3},
 {"offerType":"sell","status":"Pending","quantity":10,"price":65,"userId":1,"memeId":2},
@@ -2996,8 +2997,9 @@ const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":
 {"offerType":"sell","status":"Pending","quantity":120,"price":35,"userId":25,"memeId":5},
 {"offerType":"buy","status":"Pending","quantity":10,"price":30,"userId":48,"memeId":4},
 {"offerType":"buy","status":"Pending","quantity":55,"price":35,"userId":9,"memeId":5},
-{"offerType":"buy","status":"Pending","quantity":5,"price":5,"userId":6,"memeId":2},
-{"offerType":"sell","status":"Pending","quantity":55,"price":15,"userId":27,"memeId":3},
+{"offerType":"buy","status":"Pending","quantity":5,"price":5,"userId":6,"memeId":2}]
+
+const offersdata3 = [{"offerType":"sell","status":"Pending","quantity":55,"price":15,"userId":27,"memeId":3},
 {"offerType":"sell","status":"Pending","quantity":10,"price":5,"userId":22,"memeId":3},
 {"offerType":"buy","status":"Pending","quantity":15,"price":80,"userId":7,"memeId":3},
 {"offerType":"sell","status":"Pending","quantity":140,"price":45,"userId":7,"memeId":1},
@@ -3996,8 +3998,9 @@ const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":
 {"offerType":"buy","status":"Pending","quantity":20,"price":60,"userId":25,"memeId":1},
 {"offerType":"buy","status":"Pending","quantity":30,"price":55,"userId":44,"memeId":1},
 {"offerType":"buy","status":"Pending","quantity":5,"price":5,"userId":21,"memeId":1},
-{"offerType":"buy","status":"Pending","quantity":90,"price":55,"userId":41,"memeId":1},
-{"offerType":"sell","status":"Pending","quantity":65,"price":85,"userId":8,"memeId":5},
+{"offerType":"buy","status":"Pending","quantity":90,"price":55,"userId":41,"memeId":1}]
+
+const offersdata4 = [{"offerType":"sell","status":"Pending","quantity":65,"price":85,"userId":8,"memeId":5},
 {"offerType":"buy","status":"Pending","quantity":145,"price":85,"userId":44,"memeId":2},
 {"offerType":"sell","status":"Pending","quantity":90,"price":10,"userId":1,"memeId":5},
 {"offerType":"buy","status":"Pending","quantity":140,"price":15,"userId":48,"memeId":1},
@@ -4996,8 +4999,9 @@ const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":
 {"offerType":"sell","status":"Pending","quantity":5,"price":20,"userId":38,"memeId":1},
 {"offerType":"sell","status":"Pending","quantity":70,"price":10,"userId":3,"memeId":4},
 {"offerType":"sell","status":"Pending","quantity":20,"price":10,"userId":48,"memeId":5},
-{"offerType":"sell","status":"Pending","quantity":30,"price":15,"userId":9,"memeId":4},
-{"offerType":"buy","status":"Pending","quantity":140,"price":5,"userId":5,"memeId":5},
+{"offerType":"sell","status":"Pending","quantity":30,"price":15,"userId":9,"memeId":4}]
+
+const offersdata5 = [{"offerType":"buy","status":"Pending","quantity":140,"price":5,"userId":5,"memeId":5},
 {"offerType":"sell","status":"Pending","quantity":10,"price":10,"userId":46,"memeId":4},
 {"offerType":"sell","status":"Pending","quantity":15,"price":45,"userId":20,"memeId":5},
 {"offerType":"sell","status":"Pending","quantity":10,"price":5,"userId":12,"memeId":3},
@@ -5996,8 +6000,9 @@ const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":
 {"offerType":"sell","status":"Pending","quantity":15,"price":65,"userId":36,"memeId":4},
 {"offerType":"buy","status":"Pending","quantity":140,"price":95,"userId":44,"memeId":4},
 {"offerType":"sell","status":"Pending","quantity":60,"price":5,"userId":13,"memeId":3},
-{"offerType":"sell","status":"Pending","quantity":135,"price":40,"userId":29,"memeId":5},
-{"offerType":"sell","status":"Pending","quantity":115,"price":30,"userId":2,"memeId":2},
+{"offerType":"sell","status":"Pending","quantity":135,"price":40,"userId":29,"memeId":5}]
+
+const offersdata6 = [{"offerType":"sell","status":"Pending","quantity":115,"price":30,"userId":2,"memeId":2},
 {"offerType":"sell","status":"Pending","quantity":30,"price":95,"userId":9,"memeId":1},
 {"offerType":"sell","status":"Pending","quantity":140,"price":70,"userId":33,"memeId":5},
 {"offerType":"buy","status":"Pending","quantity":35,"price":60,"userId":3,"memeId":4},
@@ -6996,8 +7001,9 @@ const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":
 {"offerType":"sell","status":"Pending","quantity":40,"price":20,"userId":35,"memeId":4},
 {"offerType":"buy","status":"Pending","quantity":55,"price":15,"userId":30,"memeId":5},
 {"offerType":"sell","status":"Pending","quantity":20,"price":20,"userId":50,"memeId":4},
-{"offerType":"buy","status":"Pending","quantity":140,"price":10,"userId":14,"memeId":3},
-{"offerType":"sell","status":"Pending","quantity":40,"price":85,"userId":28,"memeId":1},
+{"offerType":"buy","status":"Pending","quantity":140,"price":10,"userId":14,"memeId":3}]
+
+const offersdata7 = [{"offerType":"sell","status":"Pending","quantity":40,"price":85,"userId":28,"memeId":1},
 {"offerType":"sell","status":"Pending","quantity":45,"price":70,"userId":12,"memeId":5},
 {"offerType":"buy","status":"Pending","quantity":80,"price":55,"userId":19,"memeId":1},
 {"offerType":"buy","status":"Pending","quantity":20,"price":15,"userId":47,"memeId":5},
@@ -7996,8 +8002,9 @@ const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":
 {"offerType":"sell","status":"Pending","quantity":20,"price":45,"userId":35,"memeId":2},
 {"offerType":"sell","status":"Pending","quantity":30,"price":55,"userId":2,"memeId":4},
 {"offerType":"buy","status":"Pending","quantity":25,"price":10,"userId":24,"memeId":2},
-{"offerType":"buy","status":"Pending","quantity":15,"price":80,"userId":34,"memeId":4},
-{"offerType":"buy","status":"Pending","quantity":30,"price":30,"userId":11,"memeId":4},
+{"offerType":"buy","status":"Pending","quantity":15,"price":80,"userId":34,"memeId":4}]
+
+const offersdata8 = [{"offerType":"buy","status":"Pending","quantity":30,"price":30,"userId":11,"memeId":4},
 {"offerType":"sell","status":"Pending","quantity":35,"price":60,"userId":46,"memeId":1},
 {"offerType":"sell","status":"Pending","quantity":40,"price":55,"userId":22,"memeId":1},
 {"offerType":"buy","status":"Pending","quantity":30,"price":20,"userId":18,"memeId":5},
@@ -8996,8 +9003,9 @@ const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":
 {"offerType":"buy","status":"Pending","quantity":105,"price":20,"userId":16,"memeId":1},
 {"offerType":"sell","status":"Pending","quantity":40,"price":85,"userId":7,"memeId":2},
 {"offerType":"buy","status":"Pending","quantity":55,"price":5,"userId":6,"memeId":4},
-{"offerType":"buy","status":"Pending","quantity":20,"price":5,"userId":23,"memeId":2},
-{"offerType":"sell","status":"Pending","quantity":140,"price":70,"userId":42,"memeId":3},
+{"offerType":"buy","status":"Pending","quantity":20,"price":5,"userId":23,"memeId":2}]
+
+const offersdata9 = [{"offerType":"sell","status":"Pending","quantity":140,"price":70,"userId":42,"memeId":3},
 {"offerType":"buy","status":"Pending","quantity":15,"price":40,"userId":12,"memeId":2},
 {"offerType":"buy","status":"Pending","quantity":110,"price":5,"userId":20,"memeId":1},
 {"offerType":"buy","status":"Pending","quantity":10,"price":45,"userId":27,"memeId":5},
@@ -9996,8 +10004,9 @@ const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":
 {"offerType":"sell","status":"Pending","quantity":65,"price":20,"userId":8,"memeId":3},
 {"offerType":"buy","status":"Pending","quantity":45,"price":85,"userId":2,"memeId":1},
 {"offerType":"buy","status":"Pending","quantity":10,"price":10,"userId":44,"memeId":2},
-{"offerType":"buy","status":"Pending","quantity":5,"price":90,"userId":28,"memeId":4},
-{"offerType":"sell","status":"Pending","quantity":65,"price":15,"userId":9,"memeId":1},
+{"offerType":"buy","status":"Pending","quantity":5,"price":90,"userId":28,"memeId":4}]
+
+const offersdata10 = [
 {"offerType":"sell","status":"Pending","quantity":95,"price":90,"userId":32,"memeId":4},
 {"offerType":"sell","status":"Pending","quantity":30,"price":80,"userId":37,"memeId":2},
 {"offerType":"buy","status":"Pending","quantity":30,"price":35,"userId":35,"memeId":1},
@@ -11000,5 +11009,15 @@ const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":
 {"offerType":"sell","status":"Pending","quantity":135,"price":35,"userId":49,"memeId":2}]
 
 module.exports = {
-    offersdata
+    offersdata,
+    offersdata1,
+    offersdata2,
+    offersdata3,
+    offersdata4,
+    offersdata5,
+    offersdata6,
+    offersdata7,
+    offersdata8,
+    offersdata9,
+    offersdata10
 }
