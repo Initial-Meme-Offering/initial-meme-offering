@@ -50,11 +50,10 @@ export default function(state = defaultTransactions, action) {
 }
 
 //SELECTORS
-
-// export const getSingleStockChart = (state, memeId) => {
-//   return Object.values(state.memeStocks.byId).reduce((result, memeStock) => {
-//     if(memeStock.memeId == memeId)
-//     result.push({x: memeStock.})
-//   }
-
-// }
+export const getSingleStockChart = (state, memeId) => {
+  return Object.values(state.transactions.byId).reduce((result, trans) => {
+    if (trans.memeId == memeId)
+      result.push({x: trans.seedDate, y: trans.price})
+    return result.sort()
+  }, [])
+}

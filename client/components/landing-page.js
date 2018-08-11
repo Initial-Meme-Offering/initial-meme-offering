@@ -2,6 +2,7 @@ import React from 'react'
 import {Container, Header} from 'semantic-ui-react'
 import {MarketChart} from '../components'
 import {connect} from 'react-redux'
+import {getSingleStockChart} from '../store'
 
 const styles = {
   div: {
@@ -35,13 +36,15 @@ const oneWeek = [
 const fiveStocks = Array(5).fill(oneWeek)
 
 const LandingPage = props => {
+  const stockChart = props.stockChart
+  console.log('STOCKCHART', stockChart)
   return (
     <div>
       <MarketChart
-        data={sixMonths}
+        data={stockChart}
         title="Total Market Value"
-        x="month"
-        y="marketVal"
+        x={x}
+        y={y}
       />
       <Header as="h1" style={styles.subHeader}>
         <Header.Content>Trending Stocks</Header.Content>
@@ -60,10 +63,8 @@ const LandingPage = props => {
 }
 
 const mapState = (state, ownProps) => {
-  console.log('TRANSACTIONS', state.transactions.byId)
   return {
-    memes: state.memes.byId,
-    memeStocks: state.memeStocks.byId
+    stockChart: getSingleStockChart(state, 1)
   }
 }
 
