@@ -2,7 +2,7 @@ import React from 'react'
 import {Container, Header} from 'semantic-ui-react'
 import {MarketChart} from '../components'
 import {connect} from 'react-redux'
-import {getSingleStockChart} from '../store'
+import {getSingleStockChart, getTrendingStocks} from '../store'
 
 const styles = {
   div: {
@@ -14,60 +14,42 @@ const styles = {
   }
 }
 
-const sixMonths = [
-  {month: 'March', marketVal: 64000},
-  {month: 'April', marketVal: 58000},
-  {month: 'May', marketVal: 61000},
-  {month: 'June', marketVal: 60000},
-  {month: 'July', marketVal: 34000},
-  {month: 'August', marketVal: 50000}
-]
-
-const oneWeek = [
-  {seedDate: '07-14', price: 65},
-  {seedDate: '07-15', price: 45},
-  {seedDate: '07-16', price: 5},
-  {seedDate: '07-17', price: 10},
-  {seedDate: '07-18', price: 115},
-  {seedDate: '07-19', price: 70},
-  {seedDate: '07-20', price: 56}
-]
-
-const fiveStocks = Array(5).fill(oneWeek)
-
 const LandingPage = props => {
-  const stockChart = props.stockChart
-  console.log('STOCKCHART', stockChart)
+  const {trending, totalMarket, memeName} = props
+  console.log('totalMarket', totalMarket)
   return (
     <div>
       <MarketChart
-        data={stockChart}
+        data={totalMarket}
         title="Total Market Value"
-        x={x}
-        y={y}
+        x={totalMarket.x}
+        y={totalMarket.y}
       />
       <Header as="h1" style={styles.subHeader}>
         <Header.Content>Trending Stocks</Header.Content>
       </Header>
-      {fiveStocks.map((trend, i) => (
+      {trending.map((trend, i) => (
         <MarketChart
           key={i}
-          data={trend}
-          title="Stock Name"
-          x="seedDate"
-          y="price"
+          data={trend.chart}
+          title={trend.name}
+          x={trend.chart.x}
+          y={trend.chart.y}
         />
       ))}
     </div>
   )
 }
 
-const mapState = (state, ownProps) => {
+const mapState = state => {
+  const memeIds = getTrendingStocks(state)
   return {
-    stockChart: getSingleStockChart(state, 1)
+    totalMarket: getSingleStockChart(state, 1),
+    trending: memeIds.map(memeId => ({
+      name: state.memes.byId[memeId].name,
+      chart: getSingleStockChart(state, memeId)
+    }))
   }
 }
 
-const mapDispatch = () => ({})
-
-export default connect(mapState, mapDispatch)(LandingPage)
+export default connect(mapState, null)(LandingPage)

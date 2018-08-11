@@ -50,10 +50,30 @@ export default function(state = defaultTransactions, action) {
 }
 
 //SELECTORS
+
+//Returns an array of {x: date, y: price} items for one stock
 export const getSingleStockChart = (state, memeId) => {
   return Object.values(state.transactions.byId).reduce((result, trans) => {
-    if (trans.memeId == memeId)
-      result.push({x: trans.seedDate, y: trans.price})
+    if (trans.memeId == memeId) result.push({x: trans.seedDate, y: trans.price})
     return result.sort()
   }, [])
+}
+
+//Returns three ordered memeIds for stocks with the most activity in the past month
+export const getTrendingStocks = state => {
+  const oneMonthAgo = new Date()
+  oneMonthAgo.setDate(oneMonthAgo.getDate() - 30)
+  const counts = Object.values(state.transactions.byId).reduce(
+    (tally, trans) => {
+      let date = new Date(trans.seedDate)
+      if (date > oneMonthAgo) {
+        tally[trans.memeId] = (tally[trans.memeId] || 0) + 1
+      }
+      return tally
+    },
+    {}
+  )
+  return Object.keys(counts)
+    .sort((a, b) => counts[a] < counts[b])
+    .slice(0, 3)
 }
