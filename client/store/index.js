@@ -5,8 +5,9 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import memes from './memes'
 import memeStocks from './meme-stocks'
+import transactions from './transactions'
 
-const reducer = combineReducers({user, memes, memeStocks})
+const reducer = combineReducers({user, memes, memeStocks, transactions})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
@@ -16,3 +17,4 @@ export default store
 export * from './user'
 export * from './memes'
 export * from './meme-stocks'
+export * from './transactions'

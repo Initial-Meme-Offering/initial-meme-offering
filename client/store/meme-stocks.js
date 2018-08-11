@@ -1,5 +1,4 @@
 import axios from 'axios'
-import history from '../history'
 
 //ACTION TYPES
 const GET_MEMESTOCKS = 'GET_MEMESTOCKS'
@@ -10,10 +9,7 @@ const defaultMemeStocks = {
     0: {
       id: 0,
       quantity: 0,
-      price: 0,
-      seedDate: 0,
-      buyUserId: 0,
-      sellUserId: 0,
+      userId: 0,
       memeId: 0
     }
   },

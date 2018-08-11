@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, LandingPage, Stockcard} from './components'
-import {me, getMemes, getMemeStocks} from './store'
+import {me, getMemes, getMemeStocks, getTransactions} from './store'
 
 /**
  * COMPONENT
@@ -53,7 +53,8 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
       dispatch(getMemes())
-      dispatch(getMemeStocks())
+      dispatch(getTransactions())
+      // dispatch(getMemeStocks())
     }
   }
 }

@@ -60,9 +60,7 @@ const LandingPage = props => {
 }
 
 const mapState = (state, ownProps) => {
-  // console.log('state.memes.byId[0]', state.memes.byId[5])
-  console.log('MEMES', state.memes.byId)
-  console.log('MEMESTOCKS', state.memeStocks.byId)
+  console.log('TRANSACTIONS', state.transactions.byId)
   return {
     memes: state.memes.byId,
     memeStocks: state.memeStocks.byId

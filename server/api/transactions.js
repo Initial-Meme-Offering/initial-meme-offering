@@ -1,12 +1,12 @@
 const router = require('express').Router()
-const {Meme} = require('../db/models')
+const {Transaction} = require('../db/models')
 
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const memes = await Meme.findAll({})
-    res.json(memes)
+    const transactions = await Transaction.findAll({})
+    res.json(transactions)
   } catch (err) {
     next(err)
   }
