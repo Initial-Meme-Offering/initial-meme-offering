@@ -16,6 +16,7 @@ const styles = {
 
 const LandingPage = props => {
   const {trending, totalMarket} = props
+  console.log('totalMarket', totalMarket)
   return (
     <div>
       <MarketChart

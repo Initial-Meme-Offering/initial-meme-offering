@@ -55,7 +55,7 @@ export default function(state = defaultTransactions, action) {
 export const getSingleStockChart = (state, memeId) => {
   return Object.values(state.transactions.byId).reduce((result, trans) => {
     if (trans.memeId == memeId) result.push({x: trans.seedDate, y: trans.price})
-    return result.sort()
+    return result.sort((a, b) => new Date(a.x) < new Date(b.x))
   }, [])
 }
 
