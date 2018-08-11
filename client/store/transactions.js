@@ -59,7 +59,7 @@ export const getSingleStockChart = (state, memeId) => {
   }, [])
 }
 
-//Returns three ordered memeIds for stocks with the most activity in the past month
+//Returns three memeIds for stocks ordered by most activity in the past month
 export const getTrendingStocks = state => {
   const oneMonthAgo = new Date()
   oneMonthAgo.setDate(oneMonthAgo.getDate() - 30)

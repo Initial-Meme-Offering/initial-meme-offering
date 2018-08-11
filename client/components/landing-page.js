@@ -1,5 +1,5 @@
 import React from 'react'
-import {Container, Header} from 'semantic-ui-react'
+import {Header} from 'semantic-ui-react'
 import {MarketChart} from '../components'
 import {connect} from 'react-redux'
 import {getSingleStockChart, getTrendingStocks} from '../store'
@@ -15,8 +15,7 @@ const styles = {
 }
 
 const LandingPage = props => {
-  const {trending, totalMarket, memeName} = props
-  console.log('totalMarket', totalMarket)
+  const {trending, totalMarket} = props
   return (
     <div>
       <MarketChart
