@@ -30,7 +30,7 @@ const LandingPage = props => {
       </Header>
       {trending.map((trend, i) => (
         <MarketChart
-          key={i}
+          key={trend.memeId}
           data={trend.chart}
           title={trend.name}
           x={trend.chart.x}
@@ -46,6 +46,7 @@ const mapState = state => {
   return {
     totalMarket: getSingleStockChart(state, 1),
     trending: memeIds.map(memeId => ({
+      memeId,
       name: state.memes.byId[memeId].name,
       chart: getSingleStockChart(state, memeId)
     }))
