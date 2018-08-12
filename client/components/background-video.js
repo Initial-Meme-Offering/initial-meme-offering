@@ -9,6 +9,10 @@ export class BackgroundVideo extends React.Component {
     event.target.playVideo()
   }
 
+  videoOnEnd(event) {
+    event.target.playVideo()
+  }
+
   render() {
     const opts = {
       height: '390',
@@ -22,7 +26,12 @@ export class BackgroundVideo extends React.Component {
     return (
       <div className='video-background'> 
         <div className='video-foreground'>
-          <YouTube videoId="0HJdT7aNVgI" opts={opts} onReady={this.videoOnReady} />
+          <YouTube 
+            videoId="0HJdT7aNVgI" 
+            opts={opts} 
+            onReady={this.videoOnReady}
+            onEnd={this.videoOnEnd} 
+          />
         </div>
       </div>    
     )
