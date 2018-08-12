@@ -7,7 +7,7 @@
 @import '../../node_modules/bulma/sass/utilities/functions';
 
 // custom variable overrides
-@import 'abstracts/variables';
+//@import 'abstracts/variables';
 
 // full Bulma
 @import '../../node_modules/bulma';
@@ -24,20 +24,20 @@
 // 6. Layout
 // ----------------------------------------------------------------------------
 
-// @import 'base/generic';
+@import 'base/generic';
 
-// @import 'elements/box';
-// @import 'elements/button';
-// @import 'elements/form';
-// @import 'elements/image';
-// @import 'elements/progress';
-// @import 'elements/table';
-// @import 'elements/tag';
-// @import 'elements/title';
+@import 'elements/box';
+@import 'elements/button';
+@import 'elements/form';
+@import 'elements/image';
+@import 'elements/progress';
+@import 'elements/table';
+@import 'elements/tag';
+@import 'elements/title';
 
-// @import 'components/card';
-// @import 'components/navbar';
+@import 'components/card';
+@import 'components/navbar';
 
-// @import 'layout/header';
-// @import 'layout/page-header';
-// @import 'layout/footer';
+@import 'layout/header';
+@import 'layout/page-header';
+@import 'layout/footer';
