@@ -30,12 +30,12 @@ const MarketChart = props => {
             data: {stroke: '#c43a31', strokeWidth: 1}
           }}
         />
-        <VictoryScatter
+        {/* <VictoryScatter
           data={props.data}
           x={x}
           y={y}
           style={{data: {fill: 'c43a31'}}}
-        />
+        /> */}
       </VictoryChart>
     </Container>
   )
