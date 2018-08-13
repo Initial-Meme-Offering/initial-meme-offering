@@ -43,3 +43,12 @@ export default function(state = defaultMemeIndices, action) {
       return state
   }
 }
+
+//SELECTORS
+export const getMemesByIndex = (state, indiceId) => {
+  return state.memeIndices.allIds.reduce((result, memeIndexId) => {
+    if (state.memeIndices.byId[memeIndexId].indiceId == indiceId)
+      result.push(state.memes.byId[state.memeIndices.byId[memeIndexId].memeId])
+    return result
+  }, [])
+}

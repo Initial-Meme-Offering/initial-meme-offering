@@ -8,7 +8,7 @@ const defaultIndices = {
   byId: {
     0: {
       id: 0,
-      name: 0
+      name: ''
     }
   },
   allIds: []

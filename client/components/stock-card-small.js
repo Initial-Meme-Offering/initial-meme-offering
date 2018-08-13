@@ -1,7 +1,7 @@
 import React from 'react'
 
 //May need to afix cemented size to make sure multiple per row fit
-export const smallStockCard = () => {
+const SmallStockCard = () => {
   return (
     <section className="section">
       <div className="container">
@@ -32,3 +32,5 @@ export const smallStockCard = () => {
     </section>
   )
 }
+
+export default SmallStockCard
