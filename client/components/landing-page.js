@@ -1,6 +1,6 @@
 import React from 'react'
 import {Header} from 'semantic-ui-react'
-import {MarketChart} from '../components'
+import {MarketChart, BackgroundVideo} from '../components'
 import {connect} from 'react-redux'
 import {
   getSingleStockChart,
@@ -23,6 +23,7 @@ const LandingPage = props => {
   console.log('totalMarket', totalMarket)
   return (
     <div>
+      <BackgroundVideo className='lowest-level'/>
       <MarketChart
         data={totalMarket}
         title="Total Market Value"
@@ -44,6 +45,7 @@ const LandingPage = props => {
     </div>
   )
 }
+
 
 const mapState = state => {
   const memeIds = getTrendingStocks(state)
