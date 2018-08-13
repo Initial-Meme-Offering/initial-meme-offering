@@ -1,44 +1,47 @@
 import React from 'react'
-import {VictoryChart, VictoryLine, VictoryScatter} from 'victory'
+import {VictoryChart, VictoryLine, VictoryScatter, VictoryAxis} from 'victory'
 import {Container, Header} from 'semantic-ui-react'
 
-const MarketChart = props => {
-  const {x, y, title} = props
-
-  return (
-    <Container
-      className="ui raised very padded text container segment"
-      style={styles.div}
-    >
-      <Header as="h2" textAlign="center">
-        <Header.Content>{title}</Header.Content>
-      </Header>
-
-      <VictoryChart
-        data={props.data}
-        height={250}
-        x={x}
-        y={y}
-        title="Total Market Value"
+class MarketChart extends React.Component {
+  render() {
+    const {x, y, title} = this.props
+    return (
+      <Container
+        className="ui raised very padded text container segment"
+        style={styles.div}
       >
-        <VictoryLine
-          interpolation="linear"
-          data={props.data}
-          x={x}
-          y={y}
-          style={{
-            data: {stroke: '#c43a31', strokeWidth: 1}
-          }}
-        />
-        {/* <VictoryScatter
+        <Header as="h2" textAlign="center">
+          <Header.Content>{title}</Header.Content>
+        </Header>
+
+        <VictoryChart
+          scale={{x: 'time'}}
+          data={this.props.data}
+          height={250}
+          // x={x}
+          // y={y}
+          title="Total Market Value"
+        >
+          <VictoryLine
+            interpolation="linear"
+            data={this.props.data}
+            x={x}
+            y={y}
+            style={{
+              data: {stroke: '#c43a31', strokeWidth: 1}
+            }}
+          />
+          {/* <VictoryScatter
           data={props.data}
           x={x}
           y={y}
           style={{data: {fill: 'c43a31'}}}
         /> */}
-      </VictoryChart>
-    </Container>
-  )
+          {/* <VictoryAxis fixLabelOverlap={true} /> */}
+        </VictoryChart>
+      </Container>
+    )
+  }
 }
 
 export default MarketChart
