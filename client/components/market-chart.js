@@ -1,10 +1,20 @@
 import React from 'react'
-import {VictoryChart, VictoryLine, VictoryScatter, VictoryAxis} from 'victory'
+import {VictoryChart, VictoryLine, VictoryZoomContainer} from 'victory'
 import {Container, Header} from 'semantic-ui-react'
 
 class MarketChart extends React.Component {
+  state = {
+    zoomDomain: {
+      x: [new Date('2018-07-14'), new Date('2017-08-09')]
+    }
+  }
+
+  handleZoom = domain => {
+    this.setState({zoomDomain: domain})
+  }
+
   render() {
-    const {x, y, title} = this.props
+    const {x, y, title, data} = this.props
     return (
       <Container
         className="ui raised very padded text container segment"
@@ -13,31 +23,28 @@ class MarketChart extends React.Component {
         <Header as="h2" textAlign="center">
           <Header.Content>{title}</Header.Content>
         </Header>
-
         <VictoryChart
+          containerComponent={
+            <VictoryZoomContainer
+              zoomDimension="x"
+              zoomDomain={this.state.zoomDomain}
+              onZoomDomainChange={this.handleZoom}
+            />
+          }
           scale={{x: 'time'}}
-          data={this.props.data}
+          data={data}
           height={250}
-          // x={x}
-          // y={y}
-          title="Total Market Value"
+          // title={title}
         >
           <VictoryLine
             interpolation="linear"
-            data={this.props.data}
+            data={data}
             x={x}
             y={y}
             style={{
               data: {stroke: '#c43a31', strokeWidth: 1}
             }}
           />
-          {/* <VictoryScatter
-          data={props.data}
-          x={x}
-          y={y}
-          style={{data: {fill: 'c43a31'}}}
-        /> */}
-          {/* <VictoryAxis fixLabelOverlap={true} /> */}
         </VictoryChart>
       </Container>
     )

@@ -28,7 +28,7 @@ const LandingPage = props => {
       <Header as="h1" style={styles.subHeader}>
         <Header.Content>Trending Stocks</Header.Content>
       </Header>
-      {trending.map((trend, i) => (
+      {trending.map(trend => (
         <MarketChart
           key={trend.memeId}
           data={trend.chart}
@@ -53,4 +53,4 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState, null)(LandingPage)
+export default connect(mapState)(LandingPage)

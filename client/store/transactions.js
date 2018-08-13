@@ -54,13 +54,11 @@ export default function(state = defaultTransactions, action) {
 
 //Returns an array of {x: date, y: price} items for one stock
 export const getSingleStockChart = (state, memeId) => {
-  return Object.values(state.transactions.byId)
-    .reduce((result, trans) => {
-      if (trans.memeId == memeId)
-        result.push({x: new Date(trans.seedDate), y: trans.price})
-      return result
-    }, [])
-    .sort((a, b) => a.x - b.x)
+  return Object.values(state.transactions.byId).reduce((result, trans) => {
+    if (trans.memeId == memeId)
+      result.push({x: new Date(trans.seedDate), y: trans.price})
+    return result.sort((a, b) => a.x - b.x)
+  }, [])
 }
 
 //Returns three memeIds for stocks ordered by most activity in the past month
