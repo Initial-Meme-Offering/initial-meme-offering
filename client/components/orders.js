@@ -5,7 +5,7 @@ class Orders extends React.Component {
     console.log('HELLO WORLD')
     return (
       <div className="container">
-        <div classname="notification" />
+        <div className="notification">Hello World</div>
       </div>
     )
   }

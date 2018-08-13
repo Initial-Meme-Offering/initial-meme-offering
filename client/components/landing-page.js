@@ -7,16 +7,6 @@ import {
   getTotalMarketChart
 } from '../store'
 
-const styles = {
-  div: {
-    marginTop: 40,
-    width: 2000
-  },
-  subHeader: {
-    paddingLeft: 100
-  }
-}
-
 const LandingPage = props => {
   const {trending, totalMarket} = props
   console.log('totalMarket', totalMarket)
@@ -48,8 +38,6 @@ const LandingPage = props => {
 
 const mapState = state => {
   const memeIds = getTrendingStocks(state)
-  console.log('state.indices.byId', state.indices.byId)
-  console.log('state.memeindices.byId', state.memeIndices.byId)
 
   return {
     totalMarket: getSingleStockChart(state, 1),
