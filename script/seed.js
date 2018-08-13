@@ -29,7 +29,7 @@ const {memestocksdata, transactionsdata, indicesdata} = require('./seedData3')
 transactionsdata.sort((transaction1, transaction2) => {
   const date1 = new Date(transaction1.seedDate)
   const date2 = new Date(transaction2.seedDate)
-  return date2 - date1
+  return date1 - date2
 })
 
 const shuffle = () => 0.5 - Math.random()
