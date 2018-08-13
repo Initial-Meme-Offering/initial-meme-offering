@@ -26,6 +26,8 @@ const {
 } = require('./seedData2')
 const {memestocksdata, transactionsdata, indicesdata} = require('./seedData3')
 
+transactionsdata.sort((transaction1, transaction2) => transaction1.seedDate < transaction2.seedDate)
+
 const shuffle = () => 0.5 - Math.random()
 
 async function seed() {
