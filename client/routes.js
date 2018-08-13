@@ -2,7 +2,14 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, LandingPage, Stockcard} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  LandingPage,
+  Stockcard,
+  smallStockCard
+} from './components'
 import {me, getMemes, getMemeStocks, getTransactions} from './store'
 
 /**
@@ -23,6 +30,7 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/stockcard" component={Stockcard} />
+        <Route path="/smallStockCard" component={smallStockCard} />
         <Route exact path="/" component={LandingPage} />
         {isLoggedIn && (
           <Switch>
