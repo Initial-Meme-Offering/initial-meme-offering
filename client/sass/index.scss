@@ -7,10 +7,10 @@
 @import '../../node_modules/bulma/sass/utilities/functions';
 
 // custom variable overrides
-@import 'abstracts/variables';
+//@import 'abstracts/variables';
 
 // full Bulma
-@import '../../node_modules/bulma';
+@import '../../node_modules/bulma/bulma.sass';
 @import '../../node_modules/bulma-switch/dist/css/bulma-switch';
 
 // Add custom code base
