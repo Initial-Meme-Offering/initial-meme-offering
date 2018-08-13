@@ -1,6 +1,5 @@
 import React from 'react'
 import {VictoryChart, VictoryLine, VictoryScatter} from 'victory'
-import {Container, Header} from 'semantic-ui-react'
 
 const MarketChart = props => {
   const {x, y, title} = props

@@ -13,7 +13,7 @@ const toggleNav = event => {
 }
 
 const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
-  <nav className="navbar is-primary is-fixed-top">
+  <nav className="navbar is-danger is-fixed-top level">
     <div className="container">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item has-text-weight-bold">
@@ -31,13 +31,16 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
 
       <div className="navbar-menu">
         <div className="navbar-start">
-          <div className="field has-addons">
-            <div className="control">
-              <br />
-              <input className="input" type="text" placeholder="Search" />
-            </div>
-            <div className="control">
-              <a className="button is-info">Search</a>
+          <div className="level-left">
+            <div className="level-item">
+              <div className="field has-addons">
+                <div className="control">
+                  <input className="input" type="text" placeholder="Search" />
+                </div>
+                <div className="control">
+                  <a className="button is-info">Search</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
