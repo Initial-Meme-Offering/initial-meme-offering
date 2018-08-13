@@ -1,65 +1,126 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
-import {Button, Menu, Input} from 'semantic-ui-react'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    {isLoggedIn ? (
-      <div>
-        {/* The navbar will show these links after you log in */}
-        <Menu>
-          <Menu.Item>
-            <Link to="/landingPage">
-              <Button primary>Home</Button>
-            </Link>
-          </Menu.Item>
-          <Menu.Item>
-            <a href="#" onClick={handleClick}>
-              <Button>Logout</Button>
-            </a>
-          </Menu.Item>
-          <Menu.Item position="center">
-            <h1>Meme Economy</h1>
-          </Menu.Item>
-          <Menu.Item position="right">
-            <Input
-              action={{type: 'submit', content: 'Go'}}
-              placeholder="Navigate to..."
-            />
-          </Menu.Item>
-        </Menu>
+const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
+  <nav className="navbar is-primary is-fixed-top">
+    <div className="container">
+      <div className="navbar-brand">
+        <Link to="/" className="navbar-item has-text-weight-bold">
+          Memenomics
+        </Link>
+        {/* <div
+          className="navbar-burger burger"
+          onClick={event => toggleNav(event)}
+          data-target="navPrimary"
+        >
+        <span></span>
+        </div> */}
+        <div className="navbar-menu">
+          <div className="navbar-start">
+            <span>Start</span>
+          </div>
+        </div>
+
+        <div className="navbar-end">
+          {isLoggedIn && (
+            <div className="navbar-item has-dropdown is-hoverable">
+              <Link className="navbar-link" to="/user-portfolio">
+                Account
+              </Link>
+              <div className="navbar-dropdown">
+                <NavLink
+                  to={`/user/${id}/portfolio`}
+                  className="navbar-item"
+                  activeClassName="is-active"
+                >
+                  Portfolio
+                </NavLink>
+                <Link to={`user/${id}/offers`} className="navbar-item">
+                  Offers
+                </Link>
+                {isAdmin && (
+                  <div>
+                    <hr className="navbar-divider" />
+                    <NavLink
+                      to="/manage"
+                      className="navbar-item"
+                      activeClassName="is-active"
+                    >
+                      Manage
+                    </NavLink>
+                  </div>
+                )}
+                <hr className="navbar-divider" />
+                <a href="#" onClick={handleLogout} className="navbar-item">
+                  Logout
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-    ) : (
-      <div>
-        <Menu>
-          {/* The navbar will show these links before you log in */}
-          <Menu.Item>
-            <Link to="/login">
-              <Button primary>Login</Button>
-            </Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/signup">
-              <Button>Sign up</Button>
-            </Link>
-          </Menu.Item>
-          <Menu.Item position="center">
-            <h1>Meme Economy</h1>
-          </Menu.Item>
-          <Menu.Item position="right">
-            <Input
-              action={{type: 'submit', content: 'Go'}}
-              placeholder="Navigate to..."
-            />
-          </Menu.Item>
-        </Menu>
-      </div>
-    )}
-  </div>
+    </div>
+  </nav>
 )
+
+// const Navbar = ({handleClick, isLoggedIn}) => (
+//   <div>
+//     {isLoggedIn ? (
+//       <div>
+//         {/* The navbar will show these links after you log in */}
+//         <Menu>
+//           <Menu.Item>
+//             <Link to="/landingPage">
+//               <Button primary>Home</Button>
+//             </Link>
+//           </Menu.Item>
+//           <Menu.Item>
+//             <a href="#" onClick={handleClick}>
+//               <Button>Logout</Button>
+//             </a>
+//           </Menu.Item>
+//           <Menu.Item position="center">
+//             <h1>Meme Economy</h1>
+//           </Menu.Item>
+//           <Menu.Item position="right">
+//             <Input
+//               action={{type: 'submit', content: 'Go'}}
+//               placeholder="Navigate to..."
+//             />
+//           </Menu.Item>
+//         </Menu>
+//       </div>
+//     ) : (
+//       <div>
+//         <Menu>
+//           {/* The navbar will show these links before you log in */}
+//           <Menu.Item>
+//             <Link to="/login">
+//               <Button primary>Login</Button>
+//             </Link>
+//           </Menu.Item>
+//           <Menu.Item>
+//             <Link to="/signup">
+//               <Button>Sign up</Button>
+//             </Link>
+//           </Menu.Item>
+//           <Menu.Item position="center">
+//             <h1>Meme Economy</h1>
+//           </Menu.Item>
+//           <Menu.Item position="right">
+//             <Input
+//               action={{type: 'submit', content: 'Go'}}
+//               placeholder="Navigate to..."
+//             />
+//           </Menu.Item>
+//         </Menu>
+//       </div>
+//     )}
+//   </div>
+// )
 
 /**
  * CONTAINER
