@@ -95,7 +95,7 @@
     "lint-staged": "^7.2.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.3",
-    "node-sass": "^4.9.3",
+    "node-sass": "^4.9.2",
     "npm-merge-driver": "^2.3.5",
     "prettier": "1.11.1",
     "postcss-loader": "^3.0.0",
