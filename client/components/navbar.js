@@ -33,7 +33,7 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
         <div className="navbar-start">
           <div className="field has-addons">
             <div className="control">
-              {/* <br /> */}
+              <br />
               <input className="input" type="text" placeholder="Search" />
             </div>
             <div className="control">
@@ -45,22 +45,22 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
         <div className="navbar-end">
           {isLoggedIn && (
             <div className="navbar-item has-dropdown is-hoverable">
-              <Link className="navbar-link" to="/user-portfolio">
+              <Link className="navbar-link" to="/user">
                 Account
               </Link>
-              {/* <div className="navbar-dropdown">
+              <div className="navbar-dropdown">
                 <NavLink
-                  to={`/user/${id}/portfolio`}
+                  to={`/user/#`}
                   className="navbar-item"
                   activeClassName="is-active"
                 >
                   Portfolio
                 </NavLink>
-                <Link to={`user/${id}/offers`} className="navbar-item">
+                <Link to={`user/#`} className="navbar-item">
                   Offers
-                </Link> */}
+                </Link>
 
-              {/* {isAdmin && (
+                {/* {isAdmin && (
                   <div>
                     <hr className="navbar-divider" />
                     <NavLink
@@ -73,12 +73,12 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
                   </div>
                 )} */}
 
-              <hr className="navbar-divider" />
-              <a href="#" onClick={handleLogout} className="navbar-item">
-                Logout
-              </a>
+                <hr className="navbar-divider" />
+                <a href="#" onClick={handleLogout} className="navbar-item">
+                  Logout
+                </a>
+              </div>{' '}
             </div>
-            // </div>
           )}
           {!isLoggedIn && (
             <Link to="/login" className="navbar-item">
@@ -95,7 +95,6 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
     </div>
   </nav>
 )
-
 /**
  * CONTAINER
  */
