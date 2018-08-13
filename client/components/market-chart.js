@@ -5,13 +5,10 @@ const MarketChart = props => {
   const {x, y, title} = props
 
   return (
-    <Container
-      className="ui raised very padded text container segment"
-      style={styles.div}
-    >
-      <Header as="h2" textAlign="center">
-        <Header.Content>{title}</Header.Content>
-      </Header>
+    <div className="container" style={styles.div}>
+      <div as="h2">
+        <h1>{title}</h1>
+      </div>
 
       <VictoryChart
         data={props.data}
@@ -36,7 +33,7 @@ const MarketChart = props => {
           style={{data: {fill: 'c43a31'}}}
         /> */}
       </VictoryChart>
-    </Container>
+    </div>
   )
 }
 

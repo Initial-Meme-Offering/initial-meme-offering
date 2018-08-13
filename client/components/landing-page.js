@@ -25,9 +25,9 @@ const LandingPage = props => {
         x={totalMarket.x}
         y={totalMarket.y}
       />
-      <Header as="h1" style={styles.subHeader}>
-        <Header.Content>Trending Stocks</Header.Content>
-      </Header>
+      <div className="container">
+        <h1>Trending Stocks</h1>
+      </div>
       {trending.map((trend, i) => (
         <MarketChart
           key={trend.memeId}
