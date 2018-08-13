@@ -2,7 +2,11 @@ import React from 'react'
 import {Header} from 'semantic-ui-react'
 import {MarketChart} from '../components'
 import {connect} from 'react-redux'
-import {getSingleStockChart, getTrendingStocks} from '../store'
+import {
+  getSingleStockChart,
+  getTrendingStocks,
+  getTotalMarketChart
+} from '../store'
 
 const styles = {
   div: {
@@ -43,6 +47,7 @@ const LandingPage = props => {
 
 const mapState = state => {
   const memeIds = getTrendingStocks(state)
+  console.log('getSingleStockChart', getSingleStockChart(state, 1))
   return {
     totalMarket: getSingleStockChart(state, 1),
     trending: memeIds.map(memeId => ({

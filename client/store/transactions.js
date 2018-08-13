@@ -52,16 +52,28 @@ export default function(state = defaultTransactions, action) {
 
 //SELECTORS
 
-//Returns an array of {x: date, y: price} items for one stock
-export const getSingleStockChart = (state, memeId) => {
-  return Object.values(state.transactions.byId).reduce((result, trans) => {
-    if (trans.memeId == memeId)
-      result.push({x: new Date(trans.seedDate), y: trans.price})
-    return result.sort((a, b) => a.x - b.x)
+export const getTotalMarketChart = state => {
+  return state.transactions.allIds.reduce((result, transId) => {
+    result.push({
+      x: new Date(state.transactions.byId[transId].seedDate),
+      y: state.transactions.byId[transId].price
+    })
+    return result
   }, [])
 }
 
-//Returns three memeIds for stocks ordered by most activity in the past month
+export const getSingleStockChart = (state, memeId) => {
+  return state.transactions.allIds.reduce((result, transId) => {
+    if (state.transactions.byId[transId].memeId == memeId) {
+      result.push({
+        x: new Date(state.transactions.byId[transId].seedDate),
+        y: state.transactions.byId[transId].price
+      })
+    }
+    return result
+  }, [])
+}
+
 export const getTrendingStocks = state => {
   const oneMonthAgo = new Date()
   oneMonthAgo.setDate(oneMonthAgo.getDate() - 30)
