@@ -8,18 +8,18 @@ import {
   UserHome,
   LandingPage,
   Stockcard,
-  SingleIndice
+  SingleIndice,
+  SmallStockCard,
+  Orders
 } from './components'
 import {
   me,
   getMemes,
+  getMemeStocks,
   getTransactions,
   getIndices,
   getMemeIndices
 } from './store'
-import {smallStockCard} from './components'
-import {me, getMemes, getMemeStocks, getTransactions} from './store'
-
 
 /**
  * COMPONENT
@@ -40,8 +40,9 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/stockcard" component={Stockcard} />
-        <Route path="/smallStockCard" component={smallStockCard} />
+        <Route path="/smallStockCard" component={SmallStockCard} />
         <Route exact path="/" component={LandingPage} />
+        <Route path="/orders/:userId" component={Orders} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

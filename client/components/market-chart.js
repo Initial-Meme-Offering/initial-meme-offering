@@ -16,8 +16,7 @@ class MarketChart extends React.Component {
     const {x, y, title, data} = this.props
     return (
       <div className="container">
-          <h1>{title}</h1>
-        </div>
+        <h1>{title}</h1>
         <VictoryChart
           containerComponent={
             <VictoryZoomContainer
@@ -47,4 +46,3 @@ class MarketChart extends React.Component {
 }
 
 export default MarketChart
-
