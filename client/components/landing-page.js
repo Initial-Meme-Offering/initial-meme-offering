@@ -23,7 +23,7 @@ const LandingPage = props => {
   console.log('totalMarket', totalMarket)
   return (
     <div>
-      <BackgroundVideo className='lowest-level'/>
+      <BackgroundVideo className="lowest-level" />
       <MarketChart
         data={totalMarket}
         title="Total Market Value"
@@ -46,10 +46,11 @@ const LandingPage = props => {
   )
 }
 
-
 const mapState = state => {
   const memeIds = getTrendingStocks(state)
-  console.log('getSingleStockChart', getSingleStockChart(state, 1))
+  console.log('state.indices.byId', state.indices.byId)
+  console.log('state.memeindices.byId', state.memeIndices.byId)
+
   return {
     totalMarket: getSingleStockChart(state, 1),
     trending: memeIds.map(memeId => ({

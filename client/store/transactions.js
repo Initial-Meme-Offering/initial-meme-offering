@@ -91,3 +91,5 @@ export const getTrendingStocks = state => {
     .sort((a, b) => counts[a] < counts[b])
     .slice(0, 3)
 }
+
+// export const getIndiceChart = (state,
