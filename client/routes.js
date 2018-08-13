@@ -8,9 +8,18 @@ import {
   UserHome,
   LandingPage,
   Stockcard,
-  smallStockCard
+  SingleIndice
 } from './components'
+import {
+  me,
+  getMemes,
+  getTransactions,
+  getIndices,
+  getMemeIndices
+} from './store'
+import {smallStockCard} from './components'
 import {me, getMemes, getMemeStocks, getTransactions} from './store'
+
 
 /**
  * COMPONENT
@@ -26,6 +35,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route path="/index/:indiceId" component={SingleIndice} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route path="/landingPage" component={LandingPage} />
@@ -62,7 +72,8 @@ const mapDispatch = dispatch => {
       dispatch(me())
       dispatch(getMemes())
       dispatch(getTransactions())
-      // dispatch(getMemeStocks())
+      dispatch(getIndices())
+      dispatch(getMemeIndices())
     }
   }
 }

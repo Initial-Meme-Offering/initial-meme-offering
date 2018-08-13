@@ -1,5 +1,4 @@
 import axios from 'axios'
-import history from '../history'
 
 //ACTION TYPES
 const GET_MEMES = 'GET_MEMES'

@@ -5,7 +5,7 @@ const MemeStock = require('./meme-stock')
 const Transaction = require('./transaction')
 const Indice = require('./indice')
 const UserComment = require('./user-comment')
-
+const MemeIndice = require('./meme-indices')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -13,7 +13,7 @@ const UserComment = require('./user-comment')
  *    BlogPost.belongsTo(User)
  */
 
- //MemeStock link to get User shares of a Meme
+//MemeStock link to get User shares of a Meme
 // Meme.belongsToMany(User, {through: MemeStock})
 // User.belongsToMany(Meme, {through: MemeStock})
 Meme.hasMany(MemeStock)
@@ -28,7 +28,6 @@ Meme.hasMany(Offer)
 User.hasMany(Offer)
 Offer.belongsTo(Meme)
 Offer.belongsTo(User)
-
 
 //Comments between Users and Memes
 // Meme.belongsToMany(User, {through: UserComment})
@@ -63,12 +62,13 @@ Indice.belongsToMany(Meme, {through: 'meme-indices'})
  * instead of: const User = require('../db/models/user')
  */
 
- module.exports = {
+module.exports = {
   User,
   Meme,
   Offer,
   Transaction,
   MemeStock,
   Indice,
-  UserComment
+  UserComment,
+  MemeIndice
 }

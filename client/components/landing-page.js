@@ -1,7 +1,11 @@
 import React from 'react'
 import {MarketChart, BackgroundVideo} from '../components'
 import {connect} from 'react-redux'
-import {getSingleStockChart, getTrendingStocks} from '../store'
+import {
+  getSingleStockChart,
+  getTrendingStocks,
+  getTotalMarketChart
+} from '../store'
 
 const styles = {
   div: {
@@ -25,6 +29,7 @@ const LandingPage = props => {
         x={totalMarket.x}
         y={totalMarket.y}
       />
+
       <div className="container">
         <h1>Trending Stocks</h1>
       </div>
@@ -43,6 +48,9 @@ const LandingPage = props => {
 
 const mapState = state => {
   const memeIds = getTrendingStocks(state)
+  console.log('state.indices.byId', state.indices.byId)
+  console.log('state.memeindices.byId', state.memeIndices.byId)
+
   return {
     totalMarket: getSingleStockChart(state, 1),
     trending: memeIds.map(memeId => ({
@@ -53,4 +61,4 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState, null)(LandingPage)
+export default connect(mapState)(LandingPage)
