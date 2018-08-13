@@ -17,6 +17,9 @@ import {
   getIndices,
   getMemeIndices
 } from './store'
+import {smallStockCard} from './components'
+import {me, getMemes, getMemeStocks, getTransactions} from './store'
+
 
 /**
  * COMPONENT
@@ -37,6 +40,7 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/stockcard" component={Stockcard} />
+        <Route path="/smallStockCard" component={smallStockCard} />
         <Route exact path="/" component={LandingPage} />
         {isLoggedIn && (
           <Switch>

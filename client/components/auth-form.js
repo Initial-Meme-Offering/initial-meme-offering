@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import { Card, Icon, Image } from 'semantic-ui-react'
 
 /**
  * COMPONENT
@@ -12,39 +11,42 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div id='login-form' className= 'ui middle aligned center aligned grid'>
-      <div className='column'>
+    <div id="login-form" className="ui middle aligned center aligned grid">
+      <div className="column">
         <h2 className="ui image header">
-          <div className="content">
-            Log-in to your account
-          </div>
+          <div className="content">Log-in to your account</div>
         </h2>
-        <form onSubmit={handleSubmit} name={name} className='ui large form '>
+        <form onSubmit={handleSubmit} name={name} className="ui large form ">
           <div className="ui stacked secondary segment column">
-            <div className='field'>
+            <div className="field">
               <div className="ui left icon input">
-                <i className="user icon"></i>
-                <input name="email" type="text" placeholder="E-mail address"/>
+                <i className="user icon" />
+                <input name="email" type="text" placeholder="E-mail address" />
               </div>
             </div>
-            <br/>
-            <div className='field'>
+            <br />
+            <div className="field">
               <div className="ui left icon input">
-                <i className="lock icon"></i>
-                <input name="password" type="password" placeholder="Password"/>
+                <i className="lock icon" />
+                <input name="password" type="password" placeholder="Password" />
               </div>
             </div>
-            <br/>
-          <div>
-            <button type='submit' className="ui fluid large teal submit button">
-              {displayName}
-            </button>
-          </div>
-          <div>
-            <a href="/auth/google">
-              <button type='button' className='ui fluid large red button'>{displayName} with Google</button>
-            </a>
-          </div>
+            <br />
+            <div>
+              <button
+                type="submit"
+                className="ui fluid large teal submit button"
+              >
+                {displayName}
+              </button>
+            </div>
+            <div>
+              <a href="/auth/google">
+                <button type="button" className="ui fluid large red button">
+                  {displayName} with Google
+                </button>
+              </a>
+            </div>
             {error && error.response && <div> {error.response.data} </div>}
           </div>
         </form>

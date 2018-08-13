@@ -11,8 +11,8 @@ const SmallStockCard = () => {
               <div className="card-content">
                 <div className="media">
                   <div className="media-left">
-                    <figure className="image is-48x48">
-                      <img src="http://bulma.io/placeholders/96x96.png" />
+                    <figure className="image is-128x128">
+                      <img src="https://images.theconversation.com/files/38926/original/5cwx89t4-1389586191.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip" />
                     </figure>
                   </div>
                   <div className="media-content">

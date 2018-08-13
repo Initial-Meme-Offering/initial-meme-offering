@@ -1,5 +1,4 @@
 import React from 'react'
-import {Header} from 'semantic-ui-react'
 import {MarketChart, BackgroundVideo} from '../components'
 import {connect} from 'react-redux'
 import {
@@ -30,10 +29,11 @@ const LandingPage = props => {
         x={totalMarket.x}
         y={totalMarket.y}
       />
-      <Header as="h1" style={styles.subHeader}>
-        <Header.Content>Trending Stocks</Header.Content>
-      </Header>
-      {trending.map(trend => (
+
+      <div className="container">
+        <h1>Trending Stocks</h1>
+      </div>
+      {trending.map((trend, i) => (
         <MarketChart
           key={trend.memeId}
           data={trend.chart}
