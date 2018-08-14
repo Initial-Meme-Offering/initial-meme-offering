@@ -30,22 +30,22 @@ Offer.belongsTo(Meme)
 Offer.belongsTo(User)
 
 //Comments between Users and Memes
-// Meme.belongsToMany(User, {through: UserComment})
-// User.belongsToMany(Meme, {through: UserComment})
 Meme.hasMany(UserComment)
 User.hasMany(UserComment)
 UserComment.belongsTo(Meme)
 UserComment.belongsTo(User)
 
 //Transactions link for completed transactions between two users
-// User.belongsToMany(User, {as: 'buyer', foreignKey: 'buyUserId', through: Transaction})
 User.hasMany(Transaction)
 Transaction.belongsTo(User, {foreignKey: 'buyUserId'})
 Transaction.belongsTo(User, {foreignKey: 'sellUserId'})
-// User.belongsToMany(User, {as: 'seller', foreignKey: 'sellUserId', through: Transaction})
 //Link to include Memes on Transactions table
 Meme.hasMany(Transaction)
 Transaction.belongsTo(Meme)
+
+//creating a market history for each meme for the previous year
+Meme.hasMany(MarketHistory)
+MarketHistory.belongsTo(Meme)
 
 //Link between Offers & Transactions
 Offer.belongsToMany(Transaction, {through: 'offer-transactions'})
