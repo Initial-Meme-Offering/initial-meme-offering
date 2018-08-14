@@ -10,7 +10,6 @@ import {
   Stockcard,
   SmallStockCard,
   SingleIndice,
-  // SmallStockCard,
   Orders
 } from './components'
 import {
