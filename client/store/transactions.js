@@ -92,4 +92,12 @@ export const getTrendingStocks = state => {
     .slice(0, 3)
 }
 
-// export const getIndiceChart = (state,
+export const valueOfLastStockTrade = (state, memeId) => {
+  const len = state.transactions.allIds.length
+  for (let i = len; i >= 0; i--) {
+    if (state.transactions.byId[i].memeId == memeId) {
+      return state.transactions.byId[i]
+    }
+  }
+  return -1
+}

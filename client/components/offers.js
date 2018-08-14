@@ -1,7 +1,8 @@
 import React from 'react'
 import {OfferForm} from '../components'
 import {connect} from 'react-redux'
-import {postOffer} from '../store'
+import {postOffer, valueOfLastStockTrade} from '../store'
+import moment from 'moment'
 
 class Offers extends React.Component {
   handleSubmit = newOffer => {
@@ -9,8 +10,8 @@ class Offers extends React.Component {
   }
 
   render() {
-    console.log('meme', this.props.meme)
-    const {meme} = this.props
+    const {meme, lastTrade} = this.props
+    const lastDate = moment(lastTrade.seedDate).format('LLL')
     return !meme ? (
       'Loading...'
     ) : (
@@ -22,6 +23,7 @@ class Offers extends React.Component {
         </section>
 
         <section className="section">
+          <h3 className="title is-3">Place an Offer</h3>
           <div className="container">
             <div className="notification">
               <article className="media">
@@ -33,32 +35,21 @@ class Offers extends React.Component {
                 <div className="media-content">
                   <div className="content">
                     <p>
-                      <strong>{meme.name}</strong> <small>@johnsmith</small>{' '}
-                      <small>31m</small>
+                      <strong>{meme.name}</strong>
+                      {'   '}
+                      <small>{meme.symbol || 'DB'}</small>
                       <br />
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Proin ornare magna eros, eu pellentesque tortor vestibulum
-                      ut. Maecenas non massa sem. Etiam finibus odio quis
-                      feugiat facilisis.
+                      {meme.desc ||
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.'}
                     </p>
                   </div>
                   <nav className="level is-mobile">
                     <div className="level-left">
-                      <a className="level-item">
-                        <span className="icon is-small">
-                          <i className="fas fa-reply" />
-                        </span>
-                      </a>
-                      <a className="level-item">
-                        <span className="icon is-small">
-                          <i className="fas fa-retweet" />
-                        </span>
-                      </a>
-                      <a className="level-item">
-                        <span className="icon is-small">
-                          <i className="fas fa-heart" />
-                        </span>
-                      </a>
+                      <div className="level-item">
+                        <strong>Last Traded At:</strong>
+                        {'    '}
+                        {`$${lastTrade.price} on ${lastDate}`}
+                      </div>
                     </div>
                   </nav>
                 </div>
@@ -82,7 +73,8 @@ class Offers extends React.Component {
 
 const mapState = (state, {match}) => {
   return {
-    meme: state.memes.byId[match.params.memeId]
+    meme: state.memes.byId[match.params.memeId],
+    lastTrade: valueOfLastStockTrade(state, match.params.memeId)
   }
 }
 
@@ -91,50 +83,3 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapState, mapDispatch)(Offers)
-
-{
-  /* <div className="box">
-          <article className="media">
-            <figure className="media-left">
-              <p className="image is-64x64">
-                <img src="https://bulma.io/images/placeholders/128x128.png" />
-              </p>
-            </figure>
-            <div className="media-content">
-              <div className="content">
-                <p>
-                  <strong>John Smith</strong> <small>@johnsmith</small>{' '}
-                  <small>31m</small>
-                  <br />
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                  ornare magna eros, eu pellentesque tortor vestibulum ut.
-                  Maecenas non massa sem. Etiam finibus odio quis feugiat
-                  facilisis.
-                </p>
-              </div>
-              <nav className="level is-mobile">
-                <div className="level-left">
-                  <a className="level-item">
-                    <span className="icon is-small">
-                      <i className="fas fa-reply" />
-                    </span>
-                  </a>
-                  <a className="level-item">
-                    <span className="icon is-small">
-                      <i className="fas fa-retweet" />
-                    </span>
-                  </a>
-                  <a className="level-item">
-                    <span className="icon is-small">
-                      <i className="fas fa-heart" />
-                    </span>
-                  </a>
-                </div>
-              </nav>
-            </div>
-            <div className="media-right">
-              <button type="button" className="delete" />
-            </div>
-          </article>
-        </div> */
-}
