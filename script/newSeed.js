@@ -263,7 +263,7 @@ async function seed() {
         await Transaction.create({
           quantity: 1,
           price: data[minutes],
-          seedDateTime: today,
+          seedDate: today,
           memeId: memes[memeIndex].id
         })
         dateChange(today, 'minute', 5)
