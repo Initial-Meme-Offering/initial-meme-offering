@@ -8,6 +8,7 @@ import {
   UserHome,
   LandingPage,
   Stockcard,
+  SmallStockCard,
   SingleIndice,
   SmallStockCard,
   Offers

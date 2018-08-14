@@ -13,7 +13,7 @@ const toggleNav = event => {
 }
 
 const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
-  <nav className="navbar is-danger is-fixed-top level">
+  <nav className="navbar is-primary is-fixed-top level">
     <div className="container">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item has-text-weight-bold">
@@ -31,16 +31,19 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
 
       <div className="navbar-menu">
         <div className="navbar-start">
-          <div className="level-left">
-            <div className="level-item">
-              <div className="field has-addons">
-                <div className="control">
-                  <input className="input" type="text" placeholder="Search" />
-                </div>
-                <div className="control">
-                  <a className="button is-info">Search</a>
-                </div>
-              </div>
+          <div className="field has-addons">
+            <div className="control">
+              <input
+                id="nav-search"
+                className="input"
+                type="text"
+                placeholder="Search"
+              />
+            </div>
+            <div className="control">
+              <a id="nav-search" className="button is-info">
+                Search
+              </a>
             </div>
           </div>
         </div>
@@ -48,19 +51,18 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
         <div className="navbar-end">
           {isLoggedIn && (
             <div className="navbar-item has-dropdown is-hoverable">
-              <Link className="navbar-link" to="/user">
+              <Link className="navbar-link" to={`/account`}>
                 Account
               </Link>
               <div className="navbar-dropdown">
-                <NavLink
-                  to={`/user/#`}
-                  className="navbar-item"
-                  activeClassName="is-active"
-                >
+                <Link to={`/portfolio`} className="navbar-item">
                   Portfolio
-                </NavLink>
-                <Link to={`user/#`} className="navbar-item">
+                </Link>
+                <Link to={`/offers`} className="navbar-item">
                   Offers
+                </Link>
+                <Link to={`/manage`} className="navbar-item">
+                  Manage Account
                 </Link>
 
                 {/* {isAdmin && (

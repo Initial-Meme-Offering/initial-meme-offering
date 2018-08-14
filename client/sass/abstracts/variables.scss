@@ -1,0 +1,33 @@
+//Customized Variables
+
+//Initial variable (our color pallete)
+$red: #ea443c;
+$black: #080808;
+$darkgrey: #4d5560;
+$grey: #9cacbb;
+$lightgrey: #f5f9fc;
+$lightblue: #7acfd6;
+
+//Derived variables
+$primary: $red;
+
+//Custom CSS
+
+//Small stock card
+#small-stock-card {
+  margin: $size-1;
+  padding: $size-1;
+}
+
+//Navbar customization
+#nav-search {
+  margin: $size-3;
+}
+
+.navbar {
+  font-size: 1.075rem;
+}
+
+.navbar-burger {
+  height: auto;
+}
