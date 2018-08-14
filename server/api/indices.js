@@ -1,12 +1,12 @@
 const router = require('express').Router()
-const {Transaction} = require('../db/models')
+const {Indice} = require('../db/models')
 
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const transactions = await Transaction.findAll({})
-    res.json(transactions)
+    const indices = await Indice.findAll({})
+    res.json(indices)
   } catch (err) {
     next(err)
   }

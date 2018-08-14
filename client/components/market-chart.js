@@ -1,50 +1,48 @@
 import React from 'react'
-import {VictoryChart, VictoryLine, VictoryScatter} from 'victory'
+import {VictoryChart, VictoryLine, VictoryZoomContainer} from 'victory'
 
-const MarketChart = props => {
-  const {x, y, title} = props
+class MarketChart extends React.Component {
+  state = {
+    zoomDomain: {
+      x: [new Date('2018-07-14'), new Date('2017-08-09')]
+    }
+  }
 
-  return (
-    <div className="container" style={styles.div}>
-      <div as="h2">
+  handleZoom = domain => {
+    this.setState({zoomDomain: domain})
+  }
+
+  render() {
+    const {x, y, title, data} = this.props
+    return (
+      <div className="container">
         <h1>{title}</h1>
+        <VictoryChart
+          containerComponent={
+            <VictoryZoomContainer
+              zoomDimension="x"
+              zoomDomain={this.state.zoomDomain}
+              onZoomDomainChange={this.handleZoom}
+            />
+          }
+          scale={{x: 'time'}}
+          data={data}
+          height={250}
+          // title={title}
+        >
+          <VictoryLine
+            interpolation="linear"
+            data={data}
+            x={x}
+            y={y}
+            style={{
+              data: {stroke: '#c43a31', strokeWidth: 1}
+            }}
+          />
+        </VictoryChart>
       </div>
-
-      <VictoryChart
-        data={props.data}
-        height={250}
-        x={x}
-        y={y}
-        title="Total Market Value"
-      >
-        <VictoryLine
-          interpolation="linear"
-          data={props.data}
-          x={x}
-          y={y}
-          style={{
-            data: {stroke: '#c43a31', strokeWidth: 1}
-          }}
-        />
-        {/* <VictoryScatter
-          data={props.data}
-          x={x}
-          y={y}
-          style={{data: {fill: 'c43a31'}}}
-        /> */}
-      </VictoryChart>
-    </div>
-  )
+    )
+  }
 }
 
 export default MarketChart
-
-const styles = {
-  div: {
-    marginTop: 40,
-    width: 2000
-  },
-  subHeader: {
-    paddingLeft: 100
-  }
-}
