@@ -6,6 +6,7 @@ const Transaction = require('./transaction')
 const Indice = require('./indice')
 const UserComment = require('./user-comment')
 const MemeIndice = require('./meme-indices')
+const MarketHistory = require('./markethistory')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -70,5 +71,6 @@ module.exports = {
   MemeStock,
   Indice,
   UserComment,
-  MemeIndice
+  MemeIndice,
+  MarketHistory
 }
