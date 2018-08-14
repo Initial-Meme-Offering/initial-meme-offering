@@ -20,9 +20,10 @@ form div {
   display: inline-block;
 }
 
-#login-form {
+.below-nav-bar {
   margin-top: 100px;
 }
+
 
 /* .video-background {
   background: #000;
@@ -42,11 +43,11 @@ form div {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1; */
-/* background: rgba(0,0,0,0.75) */
-/* } */
+  z-index: 1; 
+background: rgba(0,0,0,0.75)
+}
 
-/* .video-foreground,
+.video-foreground,
 .video-background iframe {
   position: absolute;
   top: 0;
