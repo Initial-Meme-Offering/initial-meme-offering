@@ -8,6 +8,7 @@ import memeStocks from './meme-stocks'
 import transactions from './transactions'
 import indices from './indices'
 import memeIndices from './meme-indices'
+import offers from './offers'
 
 const reducer = combineReducers({
   user,
@@ -15,7 +16,8 @@ const reducer = combineReducers({
   memeStocks,
   transactions,
   indices,
-  memeIndices
+  memeIndices,
+  offers
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -29,3 +31,4 @@ export * from './meme-stocks'
 export * from './transactions'
 export * from './indices'
 export * from './meme-indices'
+export * from './offers'
