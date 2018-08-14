@@ -12,7 +12,6 @@ const LandingPage = props => {
   console.log('totalMarket', totalMarket)
   return (
     <div>
-      <BackgroundVideo className="lowest-level" />
       <MarketChart 
         data={totalMarket}
         title="Total Market Value"
