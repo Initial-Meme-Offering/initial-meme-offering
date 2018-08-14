@@ -7,7 +7,6 @@ import {
   Signup,
   UserHome,
   LandingPage,
-  Stockcard,
   SmallStockCard,
   SingleIndice,
   Offers
@@ -38,7 +37,6 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route path="/landingPage" component={LandingPage} />
-        <Route path="/stockcard" component={Stockcard} />
         <Route path="/smallStockCard" component={SmallStockCard} />
         <Route path="/offer/:memeId" component={Offers} />
         <Route exact path="/" component={LandingPage} />
