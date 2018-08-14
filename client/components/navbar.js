@@ -13,7 +13,7 @@ const toggleNav = event => {
 }
 
 const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
-  <nav className="navbar is-primary is-fixed-top level">
+  <nav className="navbar is-transparent is-fixed-top level">
     <div className="container">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item has-text-weight-bold">
