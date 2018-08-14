@@ -42,6 +42,7 @@ class Routes extends Component {
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/stockcard" component={Stockcard} />
         <Route path="/smallStockCard" component={SmallStockCard} />
+        <Route path="/offer/:memeId" component={Offer} />
         <Route exact path="/" component={LandingPage} />
         {isLoggedIn && (
           <Switch>
