@@ -6,7 +6,7 @@ const SmallStockCard = () => {
     <section className="section">
       <div className="container">
         <div className="columns">
-          <div className="column">
+          <div id="small-stock-card" className="column">
             <div className="card">
               <div className="card-content">
                 <div className="media">
@@ -16,12 +16,12 @@ const SmallStockCard = () => {
                     </figure>
                   </div>
                   <div className="media-content">
-                    <p className="title is-4">Title</p>
-                    <p className="title is-6">Subtitle</p>
-                  </div>
-                  <div className="content">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Aenean commodo ligula eget dolor. Aenean massa strong.
+                    <p className="title is-4">Name of Meme</p>
+                    <p className="title is-6">Description of Meme</p>
+                    <p className="content">
+                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                      Aenean commodo ligula eget dolor. Aenean massa strong.
+                    </p>
                   </div>
                 </div>
               </div>
