@@ -8,7 +8,7 @@ import {
   UserHome,
   LandingPage,
   Stockcard,
-  smallStockCard
+  SmallStockCard
 } from './components'
 import {me, getMemes, getMemeStocks, getTransactions} from './store'
 
@@ -30,7 +30,7 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/stockcard" component={Stockcard} />
-        <Route path="/smallStockCard" component={smallStockCard} />
+        <Route path="/smallStockCard" component={SmallStockCard} />
         <Route exact path="/" component={LandingPage} />
         {isLoggedIn && (
           <Switch>

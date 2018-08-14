@@ -24,7 +24,7 @@ form div {
   margin-top: 100px;
 }
 
-.video-background {
+/* .video-background {
   background: #000;
   position: fixed;
   top: 0;
@@ -42,11 +42,11 @@ form div {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  /* background: rgba(0,0,0,0.75) */
-}
+  z-index: 1; */
+/* background: rgba(0,0,0,0.75) */
+/* } */
 
-.video-foreground,
+/* .video-foreground,
 .video-background iframe {
   position: absolute;
   top: 0;
@@ -61,4 +61,4 @@ form div {
 }
 @media (max-aspect-ratio: 16/9) {
   .video-foreground { width: 300%; left: -100%; }
-}
+} */
