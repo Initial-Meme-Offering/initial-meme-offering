@@ -11,47 +11,38 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div id="login-form" className="ui middle aligned center aligned grid">
-      <div className="column">
-        <h2 className="ui image header">
-          <div className="content">Log-in to your account</div>
-        </h2>
-        <form onSubmit={handleSubmit} name={name} className="ui large form ">
-          <div className="ui stacked secondary segment column">
-            <div className="field">
-              <div className="ui left icon input">
-                <i className="user icon" />
-                <input name="email" type="text" placeholder="E-mail address" />
-              </div>
-            </div>
-            <br />
-            <div className="field">
-              <div className="ui left icon input">
-                <i className="lock icon" />
-                <input name="password" type="password" placeholder="Password" />
-              </div>
-            </div>
-            <br />
-            <div>
-              <button
-                type="submit"
-                className="ui fluid large teal submit button"
-              >
-                {displayName}
-              </button>
-            </div>
-            <div>
-              <a href="/auth/google">
-                <button type="button" className="ui fluid large red button">
-                  {displayName} with Google
-                </button>
-              </a>
-            </div>
-            {error && error.response && <div> {error.response.data} </div>}
-          </div>
-        </form>
-      </div>
-    </div>
+//   <div>
+//     <div className='card'>
+//     <form className='move-form-down'>
+//       <div class="field">
+//         <div class="sucess">
+//           <input class="input is-primary" type="text" placeholder="Primary input"/>
+//         </div>
+//       </div>
+//     </form>
+//     </div>
+//  </div>
+<div className='move-form-down is-centered'>
+  <div class="field column is-4">
+    <p class="control has-icons-left has-icons-right">
+      <input class="input" type="email" placeholder="Email"/>
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+    </span>
+  </p>
+</div>
+  <div class="field column is-4">
+    <p class="control has-icons-left">
+      <input class="input" type="password" placeholder="Password"/>
+      <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </p>
+  </div>
+</div>
   )
 }
 
