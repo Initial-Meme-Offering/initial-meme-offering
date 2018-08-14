@@ -13,7 +13,6 @@ class Offers extends React.Component {
 
   render() {
     const {meme, lastTrade} = this.props
-
     const lastDate = moment(lastTrade.seedDate).format('LLL')
     return !meme ? (
       'Loading...'
@@ -50,7 +49,9 @@ class Offers extends React.Component {
                     <div className="level-left">
                       <div className="level-item">
                         <strong>Last Traded At:&nbsp;&nbsp;</strong>
-                        {`$${lastTrade.price} on ${lastDate}`}
+                        {!lastTrade.price
+                          ? 'None recorded'
+                          : `$${lastTrade.price} on ${lastDate}`}
                       </div>
                     </div>
                   </nav>
