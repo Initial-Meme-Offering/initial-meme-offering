@@ -6,6 +6,8 @@ import moment from 'moment'
 
 class Offers extends React.Component {
   handleSubmit = newOffer => {
+    newOffer.userId = this.props.user.id
+    newOffer.memeId = this.props.meme.id
     this.props.postOffer(newOffer)
   }
 
@@ -53,9 +55,6 @@ class Offers extends React.Component {
                     </div>
                   </nav>
                 </div>
-                <div className="media-right">
-                  <button className="delete" />
-                </div>
               </article>
             </div>
           </div>
@@ -73,6 +72,7 @@ class Offers extends React.Component {
 
 const mapState = (state, {match}) => {
   return {
+    user: state.user,
     meme: state.memes.byId[match.params.memeId],
     lastTrade: valueOfLastStockTrade(state, match.params.memeId)
   }

@@ -3,7 +3,6 @@ import {Field, reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 
 let OfferForm = props => {
-  console.log('hello offerForm')
   return (
     <form onSubmit={props.handleSubmit}>
       <div className="field">
@@ -16,7 +15,7 @@ let OfferForm = props => {
             name="name"
             component="input"
             type="text"
-            placeholder="Text input"
+            placeholder="Quantity"
           />
         </div>
       </div>
@@ -31,40 +30,27 @@ let OfferForm = props => {
             name="name"
             component="input"
             type="text"
-            placeholder="Text input"
+            placeholder="Bid Amount"
           />
         </div>
       </div>
 
       <div className="field">
         <div className="control">
-          <label htmlFor="title" className="label">
-            Bid Price
-          </label>
-          <Field
-            className="field input"
-            name="name"
-            component="input"
-            type="text"
-            placeholder="Text input"
-          />
+          <a className="button is-success">Place Bid</a>
         </div>
       </div>
 
-      {/* <div className="input-field">
-          <Field className="field" name="name" component="input" type="text" />
-          <label htmlFor="title">Meme Stock</label>
+      <div className="field">
+        <div className="control">
+          <div className="select is-primary">
+            <select>
+              <option>Select dropdown</option>
+              <option>With options</option>
+            </select>
+          </div>
         </div>
-        
-        
-        <div className="input-field">
-          <Field className="field" name="price" component="input" type="text" />
-          <label htmlFor="title">Price</label>
-        </div>
-        <div className="input-field">
-          <Field className="field" name="price" component="input" type="text" />
-          <label htmlFor="title">Price</label>
-        </div> */}
+      </div>
     </form>
   )
 }
