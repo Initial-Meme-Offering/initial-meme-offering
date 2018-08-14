@@ -50,7 +50,7 @@ class Offers extends React.Component {
                       <div className="level-item">
                         <strong>Last Traded At:&nbsp;&nbsp;</strong>
                         {!lastTrade.price
-                          ? 'None recorded'
+                          ? 'No transactions on record'
                           : `$${lastTrade.price} on ${lastDate}`}
                       </div>
                     </div>
