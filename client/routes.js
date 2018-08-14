@@ -10,7 +10,6 @@ import {
   Stockcard,
   SmallStockCard,
   SingleIndice,
-  SmallStockCard,
   Offers
 } from './components'
 import {
@@ -44,7 +43,7 @@ class Routes extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route
           exact
-          path="/offers/:userId/:offerId([0-9]*)"
+          path="/offers/:userId/:memeId([0-9]*)"
           component={Offers}
         />
         {isLoggedIn && (
