@@ -9,7 +9,7 @@ let OfferForm = props => {
       <div className="field">
         <div className="control">
           <label htmlFor="title" className="label">
-            Meme Stock
+            Quantity
           </label>
           <Field
             className="field input"
@@ -24,7 +24,7 @@ let OfferForm = props => {
       <div className="field">
         <div className="control">
           <label htmlFor="title" className="label">
-            Last Traded
+            Bid Amount
           </label>
           <Field
             className="field input"
