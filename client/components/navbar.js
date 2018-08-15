@@ -27,6 +27,8 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
         data-target="navPrimary"
       >
         <span />
+        <span />
+        <span />
       </div>
 
       <div className="navbar-menu">
@@ -86,12 +88,12 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
             </div>
           )}
           {!isLoggedIn && (
-            <Link to="/login" className="navbar-item">
+            <Link to="/login" id="nav-search" className="navbar-item button">
               Login
             </Link>
           )}
           {!isLoggedIn && (
-            <Link to="/signup" className="navbar-item">
+            <Link to="/signup" id="nav-search" className="navbar-item button">
               Sign up
             </Link>
           )}
