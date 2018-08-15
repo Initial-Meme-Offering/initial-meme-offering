@@ -9,7 +9,8 @@ import {
   LandingPage,
   SmallStockCard,
   SingleIndice,
-  Offers
+  Orders,
+  Homepage
 } from './components'
 import {
   me,
@@ -39,12 +40,12 @@ class Routes extends Component {
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/smallStockCard" component={SmallStockCard} />
         <Route path="/offer/:memeId" component={Offers} />
-        <Route exact path="/" component={LandingPage} />
         <Route
           exact
           path="/offers/:userId/:memeId([0-9]*)"
           component={Offers}
         />
+        <Route exact path="/" component={Homepage} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

@@ -4,6 +4,7 @@
  * having to figure out which file they belong to!
  */
 export {default as Navbar} from './navbar'
+export {default as Footer} from './footer'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
 export {default as LandingPage} from './landing-page'
@@ -13,3 +14,4 @@ export {default as SmallStockCard} from './stock-card-small'
 export {default as SingleIndice} from './single-indice'
 export {default as Offers} from './offers'
 export {default as OfferForm} from './offer-form'
+export {default as Homepage} from './homepage'

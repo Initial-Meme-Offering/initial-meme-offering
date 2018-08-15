@@ -13,10 +13,10 @@ const toggleNav = event => {
 }
 
 const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
-  <nav className="navbar is-primary is-fixed-top level">
+  <nav className="navbar is-transparent is-fixed-top level">
     <div className="container">
       <div className="navbar-brand">
-        <Link to="/" className="navbar-item has-text-weight-bold meme-font">
+        <Link to="/" className="navbar-item has-text-weight-bold">
           Memenomics
         </Link>
       </div>
@@ -26,6 +26,8 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
         onClick={event => toggleNav(event)}
         data-target="navPrimary"
       >
+        <span />
+        <span />
         <span />
       </div>
 
@@ -41,7 +43,7 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
               />
             </div>
             <div className="control">
-              <a id="nav-search" className="button is-info meme-font">
+              <a id="nav-search" className="button is-info">
                 Search
               </a>
             </div>
@@ -51,17 +53,17 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
         <div className="navbar-end">
           {isLoggedIn && (
             <div className="navbar-item has-dropdown is-hoverable">
-              <Link className="navbar-link meme-font" to={`/account`}>
+              <Link className="navbar-link" to={`/account`}>
                 Account
               </Link>
               <div className="navbar-dropdown">
-                <Link to={`/portfolio`} className="navbar-item meme-font">
+                <Link to={`/portfolio`} className="navbar-item">
                   Portfolio
                 </Link>
-                <Link to={`/offers`} className="navbar-item meme-font">
+                <Link to={`/offers`} className="navbar-item">
                   Offers
                 </Link>
-                <Link to={`/manage`} className="navbar-item meme-font">
+                <Link to={`/manage`} className="navbar-item">
                   Manage Account
                 </Link>
 
@@ -79,21 +81,27 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
                 )} */}
 
                 <hr className="navbar-divider" />
-                <a href="#" onClick={handleLogout} className="navbar-item meme-font">
+                <a href="#" onClick={handleLogout} className="navbar-item">
                   Logout
                 </a>
               </div>{' '}
             </div>
           )}
           {!isLoggedIn && (
-            <Link to="/login" className="navbar-item meme-font">
-              Login
-            </Link>
-          )}
-          {!isLoggedIn && (
-            <Link to="/signup" className="navbar-item meme-font">
-              Sign up
-            </Link>
+            <div className="navbar-item">
+              <div className="field is-grouped">
+                <p className="control">
+                  <Link to="/login" className="button is-link is-success">
+                    Login
+                  </Link>
+                </p>
+                <p className="control">
+                  <Link to="/signup" className="button is-link is-success">
+                    Sign up
+                  </Link>
+                </p>
+              </div>
+            </div>
           )}
         </div>
       </div>

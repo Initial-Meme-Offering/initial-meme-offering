@@ -11,7 +11,7 @@ const LandingPage = props => {
   const {trending, totalMarket} = props
   return (
     <div>
-      <MarketChart 
+      <MarketChart
         data={totalMarket}
         title="Total Market Value"
         x={totalMarket.x}
@@ -21,7 +21,7 @@ const LandingPage = props => {
         <h1>Trending Stocks</h1>
       </div>
       {trending.map((trend, i) => (
-        <MarketChart 
+        <MarketChart
           key={trend.memeId}
           data={trend.chart}
           title={trend.name}
