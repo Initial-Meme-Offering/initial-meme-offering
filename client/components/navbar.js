@@ -88,14 +88,20 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
             </div>
           )}
           {!isLoggedIn && (
-            <Link to="/login" id="nav-search" className="navbar-item button">
-              Login
-            </Link>
-          )}
-          {!isLoggedIn && (
-            <Link to="/signup" id="nav-search" className="navbar-item button">
-              Sign up
-            </Link>
+            <div className="navbar-item">
+              <div className="field is-grouped">
+                <p className="control">
+                  <Link to="/login" className="button is-link is-success">
+                    Login
+                  </Link>
+                </p>
+                <p className="control">
+                  <Link to="/signup" className="button is-link is-success">
+                    Sign up
+                  </Link>
+                </p>
+              </div>
+            </div>
           )}
         </div>
       </div>
