@@ -49,7 +49,7 @@ class Routes extends Component {
         <Route path="/offer/:memeId" component={Offers} />
         <Route
           exact
-          path="/offers/:userId/:memeId([0-9]*)"
+          path="/offer/:memeId([0-9]*)"
           component={Offers}
         />
         <Route path="/portfolio" component={Portfolio} />
