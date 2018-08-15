@@ -1,35 +1,34 @@
 import React from 'react'
 
 //May need to afix cemented size to make sure multiple per row fit
-const SmallStockCard = () => {
+const SmallStockCard = props => {
+  const {memeImage, memeName} = props
   return (
-   <div class='container column is-one-quarter'> 
-    <div class="card below-nav-bar">
-    <div class="card-image">
-      <figure class="image is-4by3">
-        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image"/>
-      </figure>
-    </div>
-    <div class="card-content">
-      <div class="media">
-        <div class="media-left">
-          <figure class="image is-48x48">
-            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image"/>
-          </figure>
+    <div className="card">
+      <div className="card-image">
+        <figure className="image is-4by3">
+          <img src={memeImage} alt="Placeholder image" />
+        </figure>
+      </div>
+      <div className="card-content">
+        <div className="media">
+          <div className="media-left">
+            <figure className="image is-48x48">
+              <img src={memeImage} alt="Placeholder image" />
+            </figure>
+          </div>
+          <div className="media-content">
+            <p className="title is-4 meme-font">{memeName}</p>
+            <p className="subtitle is-6 meme-font">@{memeName}</p>
+          </div>
         </div>
-        <div class="media-content">
-          <p class="title is-4">Meme Name</p>
-          <p class="subtitle is-6">@memename</p>
+        <div className="content meme-font">
+          Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Phasellus nec iaculis mauris.
+          <br />
         </div>
       </div>
-      <div class="content">
-        Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Phasellus nec iaculis mauris.
-        <br/>
-      </div>
     </div>
-  </div>
-  </div>
   )
 }
 

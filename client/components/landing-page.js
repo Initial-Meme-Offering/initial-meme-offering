@@ -11,7 +11,6 @@ const LandingPage = props => {
   const {trending, totalMarket} = props
   return (
     <div>
-      {/* <BackgroundVideo className="lowest-level" /> */}
       <MarketChart
         data={totalMarket}
         title="Total Market Value"
@@ -21,7 +20,7 @@ const LandingPage = props => {
       <div className="container">
         <h1>Trending Stocks</h1>
       </div>
-      {trending.map(trend => (
+      {trending.map((trend, i) => (
         <MarketChart
           key={trend.memeId}
           data={trend.chart}
