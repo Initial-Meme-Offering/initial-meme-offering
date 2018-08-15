@@ -9,7 +9,6 @@ import {
 
 const LandingPage = props => {
   const {trending, totalMarket} = props
-  console.log('totalMarket', totalMarket)
   return (
     <div>
       <MarketChart
@@ -18,7 +17,6 @@ const LandingPage = props => {
         x={totalMarket.x}
         y={totalMarket.y}
       />
-
       <div className="container">
         <h1>Trending Stocks</h1>
       </div>
@@ -37,7 +35,6 @@ const LandingPage = props => {
 
 const mapState = state => {
   const memeIds = getTrendingStocks(state)
-
   return {
     totalMarket: getSingleStockChart(state, 1),
     trending: memeIds.map(memeId => ({
