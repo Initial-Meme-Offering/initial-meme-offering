@@ -10,7 +10,8 @@ import {
   Stockcard,
   SmallStockCard,
   SingleIndice,
-  Orders
+  Orders,
+  Homepage
 } from './components'
 import {
   me,
@@ -42,7 +43,7 @@ class Routes extends Component {
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/stockcard" component={Stockcard} />
         <Route path="/smallStockCard" component={SmallStockCard} />
-        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/" component={Homepage} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
