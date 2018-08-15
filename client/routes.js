@@ -19,8 +19,7 @@ import {
   getMemes,
   getTransactions,
   getIndices,
-  getMemeIndices,
-  getMemeStocksByUser
+  getMemeIndices
 } from './store'
 
 /**
@@ -29,10 +28,6 @@ import {
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
-    console.log('hello')
-    if(this.props.isLoggedIn){
-      this.props.getMemeStocks(this.props.userId)
-    }
   }
 
   render() {
@@ -88,8 +83,7 @@ const mapDispatch = dispatch => {
       dispatch(getTransactions())
       dispatch(getIndices())
       dispatch(getMemeIndices())
-    },
-    getMemeStocks: userId => getMemeStocksByUser(userId)
+    }
   }
 }
 

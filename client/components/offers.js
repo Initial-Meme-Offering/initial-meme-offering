@@ -2,14 +2,14 @@ import React from 'react'
 import {OfferForm} from '../components'
 import {connect} from 'react-redux'
 import {postOffer, valueOfLastStockTrade} from '../store'
-import moment from 'moment'
-import SmallStockCard from './stock-card-small'
 
 class Offers extends React.Component {
-  handleSubmit = newOffer => {
-    newOffer.userId = this.props.user.id
-    newOffer.memeId = this.props.meme.id
-    this.props.postOffer(newOffer)
+  handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(e.target.value)
+    // newOffer.userId = this.props.user.id
+    // newOffer.memeId = this.props.meme.id
+    // this.props.postOffer(newOffer)
   }
 
   render() {
@@ -28,7 +28,7 @@ class Offers extends React.Component {
               </figure>
             </div>
             <footer className="card-footer">
-              <OfferForm {...this.props} handleSubmit={this.handleSubmit} />
+              <OfferForm {...this.props} />
             </footer>
           </div>
         </div>

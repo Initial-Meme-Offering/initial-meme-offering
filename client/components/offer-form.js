@@ -1,63 +1,70 @@
 import React from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
+import {getMemeStocksByUser} from '../store'
+import {
+  renderQuantityField,
+  renderPriceField,
+  renderBuyButton,
+  renderSellButton
+} from './offers-form-renders'
+class OfferForm extends React.Component {
+  componentDidMount() {
+    const {userId, getMemeStocks} = this.props
+    getMemeStocks(userId)
+  }
 
-let OfferForm = props => {
-  const {lastTrade, meme, memeStocks} = props
-  console.log(memeStocks)
-  return (
-    <form onSubmit={props.handleSubmit}>
-      <div className="field">
-        <div className="control">
-          <label htmlFor="title" className="label">
-            Quantity
-          </label>
+  handleOfferFormSubmit = data => {
+  console.log(data, 'data')
+  }
+
+  render() {
+    const {lastTrade, meme, memeStocks, handleSubmit} = this.props
+    return (
+      <form onSubmit={handleSubmit(this.handleOfferFormSubmit.bind(this))}>
+        <Field
+          className="field input"
+          name="quantity"
+          component={renderQuantityField}
+          type="text"
+          placeholder={0}
+        />
+        <Field
+          className="field input"
+          name="price"
+          component={renderPriceField}
+          type="number"
+          placeholder={!lastTrade.price ? 0 : lastTrade.price}
+        />
+        {memeStocks[meme.id] && memeStocks[meme.id].quantity > 0 ? (
+          <div>
+            <Field
+              className="field input"
+              name="offerType"
+              value="Buy"
+              component={renderBuyButton}
+              placeholder={!lastTrade.price ? 0 : lastTrade.price}
+            />
+            <Field
+              className="field input"
+              name="offerType"
+              value="Sell"
+              component={renderSellButton}
+              placeholder={!lastTrade.price ? 0 : lastTrade.price}
+            />
+          </div>
+        ) : (
           <Field
             className="field input"
-            name="quantity"
-            component="input"
-            type="text"
-            placeholder={0}
-          />
-        </div>
-      </div>
-
-      <div className="field">
-        <div className="control">
-          <label htmlFor="title" className="label">
-            Amount ($)
-          </label>
-          <Field
-            className="field input"
-            name="price"
-            component="input"
-            type="number"
+            name="offerType"
+            value="Buy"
+            component={renderBuyButton}
             placeholder={!lastTrade.price ? 0 : lastTrade.price}
           />
-        </div>
-      </div>
-      {memeStocks[meme.id] && memeStocks[meme.id].quantity > 0 ? (
-        <div>
-          <div className="field">
-            <div className="control">
-              <a className="button is-success">Buy</a>
-            </div>
-          </div>
-          <div className="field">
-            <div className="control">
-              <a className="button is-failure">Sell</a>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="field">
-          <div className="control">
-            <a className="button is-success">Buy</a>
-          </div>
-        </div>
-      )}
-    </form>
-  )
+        )}
+      </form>
+    )
+  }
 }
 
 const mapState = (state, ownProps) => ({
@@ -66,12 +73,14 @@ const mapState = (state, ownProps) => ({
     price: ownProps.lastTrade.price,
     quantity: ownProps.lastTrade.quantity
   },
-  memeStocks: state.memeStocks.byId
+  memeStocks: state.memeStocks.byId,
+  userId: state.user.id
 })
 
-const mapDispatch = dispatch => ({})
+const mapDispatch = dispatch => ({
+  getMemeStocks: userId => dispatch(getMemeStocksByUser(userId))
+})
 
-OfferForm = reduxForm({form: 'OfferForm'})(OfferForm)
-OfferForm = connect(mapState, mapDispatch)(OfferForm)
+const connectedForm = connect(mapState, mapDispatch)(OfferForm)
 
-export default OfferForm
+export default reduxForm({form: 'OfferForm'})(connectedForm)
