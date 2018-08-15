@@ -12,11 +12,12 @@ class Portfolio extends React.Component {
   render() {
     return (
       <div>
-        <div className="columns">
-          <div className="column">
+        <div className="columns is-variable">
+          <div className="column is-2">
             <PieChart data={this.props.pieChart} />
           </div>
-          <div className="column">Hello World</div>
+          <div className="column is-2">Hello World</div>
+          <div className="column is-2">Hello World</div>
         </div>
       </div>
     )
