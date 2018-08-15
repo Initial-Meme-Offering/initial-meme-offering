@@ -9,14 +9,14 @@ import {
   //LandingPage,
   SingleIndice,
   AllMemes,
-  Orders,
   Homepage,
-  TrendingMemes
+  TrendingMemes,
+  Offers,
+  Portfolio
 } from './components'
 import {
   me,
   getMemes,
-  getMemeStocks,
   getTransactions,
   getIndices,
   getMemeIndices,
@@ -38,9 +38,10 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/index/:indiceId" component={SingleIndice} />
-        <Route path="/orders/:userId" component={Orders} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/offer/:memeId([0-9]*)" component={Offers} />
+        <Route path="/portfolio" component={Portfolio} />
         <Route path="/allmemes" component={AllMemes} />
         <Route path="/trendingmemes" component={TrendingMemes} />
         <Route exact path="/" component={Homepage} />

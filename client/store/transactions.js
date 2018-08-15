@@ -51,7 +51,6 @@ export default function(state = defaultTransactions, action) {
 }
 
 //SELECTORS
-
 export const getTotalMarketChart = state => {
   return state.transactions.allIds.reduce((result, transId) => {
     result.push({
@@ -93,4 +92,12 @@ export const getTrendingStocks = state => {
     .slice(0, 5)
 }
 
-// export const getIndiceChart = (state,
+export const valueOfLastStockTrade = (state, memeId) => {
+  const len = state.transactions.allIds.length
+  for (let i = len; i >= 1; i--) {
+    if (state.transactions.byId[i].memeId == memeId) {
+      return state.transactions.byId[i]
+    }
+  }
+  return -1
+}

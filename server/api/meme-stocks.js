@@ -11,3 +11,16 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const memeStocks = await MemeStock.findAll({
+      where: {
+        userId: req.params.userId
+      }
+    })
+    res.json(memeStocks)
+  } catch (err) {
+    next(err)
+  }
+})

@@ -9,6 +9,8 @@ import transactions from './transactions'
 import indices from './indices'
 import memeIndices from './meme-indices'
 import marketHistory from './market-history'
+import offers from './offers'
+import {reducer as formReducer} from 'redux-form'
 
 const reducer = combineReducers({
   user,
@@ -17,7 +19,9 @@ const reducer = combineReducers({
   transactions,
   indices,
   memeIndices,
-  marketHistory
+  marketHistory,
+  offers,
+  form: formReducer
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -32,3 +36,4 @@ export * from './transactions'
 export * from './indices'
 export * from './meme-indices'
 export * from './market-history'
+export * from './offers'
