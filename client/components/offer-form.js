@@ -7,45 +7,49 @@ let OfferForm = props => {
   const {lastTrade} = props
   const lastDate = moment(lastTrade.seedDate).format('LLL')
   return (
-    <form onSubmit={props.handleSubmit}>
-      <div className="field">
-        <div className="control">
-          <label htmlFor="title" className="label">
-            Quantity
-          </label>
-          <Field
-            className="field input"
-            name="name"
-            component="input"
-            type="text"
-            placeholder="Quantity"
-          />
+    <div className="section">
+      <form onSubmit={props.handleSubmit}>
+        <div className="field">
+          <div className="control">
+            <label htmlFor="title" className="label">
+              Quantity
+            </label>
+            <Field
+              className="field input"
+              name="name"
+              component="input"
+              type="text"
+              placeholder="Quantity"
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="field">
-        <div className="control">
-          <label htmlFor="title" className="label">
-            Amount
-          </label>
-          <Field
-            className="field input"
-            name="name"
-            component="input"
-            type="text"
-            placeholder={!lastTrade.price
-              ? 'None recorded'
-              : `$${lastTrade.price} on ${lastDate}`}
-          />
+        <div className="field">
+          <div className="control">
+            <label htmlFor="title" className="label">
+              Amount
+            </label>
+            <Field
+              className="field input"
+              name="name"
+              component="input"
+              type="text"
+              placeholder={
+                !lastTrade.price
+                  ? 'None recorded'
+                  : `$${lastTrade.price} on ${lastDate}`
+              }
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="field">
-        <div className="control">
-          <a className="button is-success">Place Bid</a>
+        <div className="field">
+          <div className="control">
+            <a className="button is-success">Place Bid</a>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   )
 }
 

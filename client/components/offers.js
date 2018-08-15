@@ -18,40 +18,6 @@ class Offers extends React.Component {
     return !meme ? (
       'Loading...'
     ) : (
-      // <div>
-      //   <section className="section">
-      //     <h3 className="title is-3">Place an Offer</h3>
-      //     <div className="container">
-      //       <div className="notification">
-      //         <article className="media">
-      //           <figure className="media-center">
-      //             <p className="image is-128x128">
-      //               <img src={meme.imageUrl} />
-      //             </p>
-      //           </figure>
-      //           <div className="media-content">
-      //             <div className="content">
-      //               <p>
-      //                 <strong>{meme.name}</strong>
-      //                 &nbsp;
-      //                 <small>{meme.symbol || 'DB'}</small>
-      //                 <br />
-      //                 </p>
-      //             </div>
-      //             <nav className="level is-mobile">
-      //               <div className="level-left">
-      //                 <div className="level-item">
-      //                   <strong>Last Traded At:&nbsp;&nbsp;</strong>
-      //                   {!lastTrade.price
-      //                     ? 'None recorded'
-      //                     : `$${lastTrade.price} on ${lastDate}`}
-      //                 </div>
-      //               </div>
-      //             </nav>
-      //           </div>
-      //         </article>
-      //       </div>
-      //     </div>
       <div>
         <section>
           <SmallStockCard {...meme} />
