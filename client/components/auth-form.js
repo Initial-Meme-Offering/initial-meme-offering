@@ -11,38 +11,37 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-//   <div>
-//     <div className='card'>
-//     <form className='move-form-down'>
-//       <div class="field">
-//         <div class="sucess">
-//           <input class="input is-primary" type="text" placeholder="Primary input"/>
-//         </div>
-//       </div>
-//     </form>
-//     </div>
-//  </div>
-<div className='move-form-down is-centered'>
-  <div class="field column is-4">
-    <p class="control has-icons-left has-icons-right">
-      <input class="input" type="email" placeholder="Email"/>
-      <span class="icon is-small is-left">
-        <i class="fas fa-envelope"></i>
-      </span>
-      <span class="icon is-small is-right">
-        <i class="fas fa-check"></i>
-    </span>
-  </p>
-</div>
-  <div class="field column is-4">
-    <p class="control has-icons-left">
-      <input class="input" type="password" placeholder="Password"/>
-      <span class="icon is-small is-left">
-        <i class="fas fa-lock"></i>
-      </span>
+<div className='meme-font'>
+    <h1 className="title is-3">{displayName}</h1>
+    <div className="box">
+      <form onSubmit={handleSubmit} name={name}>
+        <div className="field">
+          <label htmlFor="email" className="label has-text-left meme-font">
+            Email
+          </label>
+          <input name="email" type="email" className="input meme-font" />
+        </div>
+        <div className="field">
+          <label htmlFor="password" className="label has-text-left meme-font">
+            Password
+          </label>
+          <input name="password" type="password" className="input meme-font" />
+        </div>
+        <div className="field">
+          <button
+            type="submit"
+            className="button is-block is-link is-large is-fullwidth meme-font"
+          >
+            {displayName}
+          </button>
+          {error && error.response && <p className="help is-danger has-text-left">{error.response.data}</p>}
+        </div>
+      </form>
+    </div>
+    <p className="has-text-grey">
+      <a href="/auth/google">{displayName} with Google</a>
     </p>
   </div>
-</div>
   )
 }
 
