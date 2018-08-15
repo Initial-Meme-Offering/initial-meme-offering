@@ -27,6 +27,8 @@ const SmallStockCard = (props) => {
           </div>
         </div>
       </div>
+    
+
     </div>
   )
 }
