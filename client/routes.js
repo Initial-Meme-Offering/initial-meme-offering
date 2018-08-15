@@ -19,7 +19,8 @@ import {
   getMemeStocks,
   getTransactions,
   getIndices,
-  getMemeIndices
+  getMemeIndices,
+  getMarketHistory
 } from './store'
 
 /**
@@ -75,6 +76,7 @@ const mapDispatch = dispatch => {
       dispatch(getTransactions())
       dispatch(getIndices())
       dispatch(getMemeIndices())
+      dispatch(getMarketHistory())
     }
   }
 }

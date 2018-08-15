@@ -25,7 +25,7 @@ const gotMarketHistory = history => ({
 //THUNK CREATORS
 export const getMarketHistory = () => dispatch => {
   axios
-    .get('api/markethistory')
+    .get('/api/markethistory')
     .then(({data}) => dispatch(gotMarketHistory(data)))
     .catch(error => console.error(error))
 }
@@ -51,13 +51,16 @@ export default function(state = defaultMarketHistory, action) {
 export const getTrendingMemes = state => {
   const oneMonthAgo = new Date()
   oneMonthAgo.setDate(oneMonthAgo.getDate() - 30)
-  const counts = Object.values(state.history.byId).reduce((tally, hist) => {
-    let date = new Date(hist.seedDateDay)
-    if (date > oneMonthAgo) {
-      tally[hist.memeId] = (tally[hist.memeId] || 0) + 1
-    }
-    return tally
-  }, {})
+  const counts = Object.values(state.marketHistory.byId).reduce(
+    (tally, hist) => {
+      let date = new Date(hist.seedDateDay)
+      if (date > oneMonthAgo) {
+        tally[hist.memeId] = (tally[hist.memeId] || 0) + 1
+      }
+      return tally
+    },
+    {}
+  )
   return Object.keys(counts)
     .sort((a, b) => counts[a] < counts[b])
     .slice(0, 5)
