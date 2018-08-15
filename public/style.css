@@ -20,10 +20,6 @@ form div {
   display: inline-block;
 }
 
-.below-nav-bar {
-  margin-top: 100px;
-}
-
-.meme-font {
+* {
   font-family: impact;
 }

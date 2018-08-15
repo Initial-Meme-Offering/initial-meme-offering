@@ -51,7 +51,6 @@ export default function(state = defaultTransactions, action) {
 }
 
 //SELECTORS
-
 export const getTotalMarketChart = state => {
   return state.transactions.allIds.reduce((result, transId) => {
     result.push({

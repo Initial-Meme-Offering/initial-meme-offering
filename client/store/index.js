@@ -10,6 +10,7 @@ import transactions from './transactions'
 import indices from './indices'
 import memeIndices from './meme-indices'
 import offers from './offers'
+import {reducer as formReducer} from 'redux-form'
 
 const reducer = combineReducers({
   user,

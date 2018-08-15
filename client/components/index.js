@@ -7,11 +7,22 @@ export {default as Navbar} from './navbar'
 export {default as Footer} from './footer'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
+<<<<<<< HEAD
 export {default as LandingPage} from './landing-page'
+=======
+//export {default as LandingPage} from './landing-page'
+export {Stockcard} from './stock-card'
+>>>>>>> master
 export {default as MarketChart} from './market-chart'
-export {BackgroundVideo} from './background-video'
 export {default as SmallStockCard} from './stock-card-small'
 export {default as SingleIndice} from './single-indice'
 export {default as Offers} from './offers'
 export {default as OfferForm} from './offer-form'
+<<<<<<< HEAD
 export {default as Homepage} from './homepage'
+=======
+export {default as Portfolio} from './portfolio'
+export {default as PieChart} from './pie-chart'
+export {default as AllMemes} from './all-memes'
+export {default as Homepage} from './homepage'
+>>>>>>> master

@@ -13,12 +13,6 @@ $primary: $red;
 
 //Custom CSS
 
-//Small stock card
-#small-stock-card {
-  margin: $size-1;
-  padding: $size-1;
-}
-
 //Navbar customization
 #nav-search {
   margin: $size-3;
@@ -31,14 +25,6 @@ $primary: $red;
 .navbar-burger {
   height: auto;
 }
-
-.below-nav-bar {
-  margin-top: 100px;
-}
-
-// #first-division {
-//   background-color: $lightblue;
-// }
 
 #footer {
   background-color: $lightgrey;

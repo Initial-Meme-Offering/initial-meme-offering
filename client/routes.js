@@ -6,11 +6,13 @@ import {
   Login,
   Signup,
   UserHome,
-  LandingPage,
+  Stockcard,
   SmallStockCard,
   SingleIndice,
+  AllMemes,
   Offers,
-  Homepage
+  Homepage,
+  Portfolio
 } from './components'
 import {
   me,
@@ -37,7 +39,7 @@ class Routes extends Component {
         <Route path="/index/:indiceId" component={SingleIndice} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <Route path="/landingPage" component={LandingPage} />
+        <Route path="/stockcard" component={Stockcard} />
         <Route path="/smallStockCard" component={SmallStockCard} />
         <Route path="/offer/:memeId" component={Offers} />
         <Route
@@ -45,6 +47,8 @@ class Routes extends Component {
           path="/offers/:userId/:memeId([0-9]*)"
           component={Offers}
         />
+        <Route path="/portfolio" component={Portfolio} />
+        <Route path="/allmemes" component={AllMemes} />
         <Route exact path="/" component={Homepage} />
         {isLoggedIn && (
           <Switch>
