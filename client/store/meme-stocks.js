@@ -36,10 +36,10 @@ export default function(state = defaultMemeStocks, action) {
     case GET_MEMESTOCKS_BY_USER:
       return {
         byId: action.memeStocks.reduce((result, memeStock) => {
-          result[memeStock.id] = memeStock
+          result[memeStock.memeId] = memeStock
           return result
         }, {}),
-        allIds: action.memeStocks.map(memeStock => memeStock.id)
+        allIds: action.memeStocks.map(memeStock => memeStock.memeId)
       }
     default:
       return state
