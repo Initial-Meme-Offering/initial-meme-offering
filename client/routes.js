@@ -6,12 +6,12 @@ import {
   Login,
   Signup,
   UserHome,
-  Stockcard,
-  SmallStockCard,
+  //LandingPage,
   SingleIndice,
   AllMemes,
-  Offers,
   Homepage,
+  TrendingMemes,
+  Offers,
   Portfolio
 } from './components'
 import {
@@ -19,7 +19,8 @@ import {
   getMemes,
   getTransactions,
   getIndices,
-  getMemeIndices
+  getMemeIndices,
+  getMarketHistory
 } from './store'
 
 /**
@@ -39,16 +40,10 @@ class Routes extends Component {
         <Route path="/index/:indiceId" component={SingleIndice} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <Route path="/stockcard" component={Stockcard} />
-        <Route path="/smallStockCard" component={SmallStockCard} />
-        <Route path="/offer/:memeId" component={Offers} />
-        <Route
-          exact
-          path="/offer/:memeId([0-9]*)"
-          component={Offers}
-        />
+        <Route exact path="/offer/:memeId([0-9]*)" component={Offers} />
         <Route path="/portfolio" component={Portfolio} />
         <Route path="/allmemes" component={AllMemes} />
+        <Route path="/trendingmemes" component={TrendingMemes} />
         <Route exact path="/" component={Homepage} />
         {isLoggedIn && (
           <Switch>
@@ -83,6 +78,7 @@ const mapDispatch = dispatch => {
       dispatch(getTransactions())
       dispatch(getIndices())
       dispatch(getMemeIndices())
+      dispatch(getMarketHistory())
     }
   }
 }

@@ -10,7 +10,7 @@ import {
 
 const HomePage = () => {
   return (
-    <section id="first-division" className="section is-medium">
+    <section className="section is-medium">
       <div className="container">
         <div className="columns is-multiline is-centered">
           <div className="column is-one-third">
