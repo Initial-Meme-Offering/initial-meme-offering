@@ -16,7 +16,7 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
   <nav className="navbar is-primary is-fixed-top level">
     <div className="container">
       <div className="navbar-brand">
-        <Link to="/" className="navbar-item has-text-weight-bold">
+        <Link to="/" className="navbar-item has-text-weight-bold meme-font">
           Memenomics
         </Link>
       </div>
@@ -41,7 +41,7 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
               />
             </div>
             <div className="control">
-              <a id="nav-search" className="button is-info">
+              <a id="nav-search" className="button is-info meme-font">
                 Search
               </a>
             </div>
@@ -51,17 +51,17 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
         <div className="navbar-end">
           {isLoggedIn && (
             <div className="navbar-item has-dropdown is-hoverable">
-              <Link className="navbar-link" to={`/account`}>
+              <Link className="navbar-link meme-font" to={`/account`}>
                 Account
               </Link>
               <div className="navbar-dropdown">
-                <Link to={`/portfolio`} className="navbar-item">
+                <Link to={`/portfolio`} className="navbar-item meme-font">
                   Portfolio
                 </Link>
-                <Link to={`/offers`} className="navbar-item">
+                <Link to={`/offers`} className="navbar-item meme-font">
                   Offers
                 </Link>
-                <Link to={`/manage`} className="navbar-item">
+                <Link to={`/manage`} className="navbar-item meme-font">
                   Manage Account
                 </Link>
 
@@ -79,19 +79,19 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
                 )} */}
 
                 <hr className="navbar-divider" />
-                <a href="#" onClick={handleLogout} className="navbar-item">
+                <a href="#" onClick={handleLogout} className="navbar-item meme-font">
                   Logout
                 </a>
               </div>{' '}
             </div>
           )}
           {!isLoggedIn && (
-            <Link to="/login" className="navbar-item">
+            <Link to="/login" className="navbar-item meme-font">
               Login
             </Link>
           )}
           {!isLoggedIn && (
-            <Link to="/signup" className="navbar-item">
+            <Link to="/signup" className="navbar-item meme-font">
               Sign up
             </Link>
           )}
