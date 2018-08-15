@@ -37,6 +37,7 @@ router.post('/', async (req, res, next) => {
       memeId,
       userId
     })
+    
     //find all offers of opposite type, for the same meme, with the same price
     const otherOffers = await Offer.findAll({
       where: {
