@@ -18,6 +18,7 @@ class AllMemes extends Component {
                   className=""
                   memeImage={byId[id].imageUrl}
                   memeName={byId[id].name}
+                  memeId={id}
                 />
               </div>
             ))}

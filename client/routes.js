@@ -44,7 +44,7 @@ class Routes extends Component {
         <Route path="/smallStockCard" component={SmallStockCard} />
         <Route
           exact
-          path="/offers/:userId/:memeId([0-9]*)"
+          path="/offer/:memeId([0-9]*)"
           component={Offers}
         />
         <Route path="/portfolio" component={Portfolio} />
