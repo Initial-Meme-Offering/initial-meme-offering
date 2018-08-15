@@ -73,7 +73,7 @@ export const getSingleStockChart = (state, memeId) => {
   }, [])
 }
 
-export const getTrendingStocks = state => {
+export const getTrendingStocks = (state, num) => {
   const oneMonthAgo = new Date()
   oneMonthAgo.setDate(oneMonthAgo.getDate() - 30)
   const counts = Object.values(state.transactions.byId).reduce(
@@ -88,7 +88,7 @@ export const getTrendingStocks = state => {
   )
   return Object.keys(counts)
     .sort((a, b) => counts[a] < counts[b])
-    .slice(0, 3)
+    .slice(0, num)
 }
 
 export const valueOfLastStockTrade = (state, memeId) => {
