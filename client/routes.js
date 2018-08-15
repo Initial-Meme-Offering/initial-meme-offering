@@ -6,7 +6,7 @@ import {
   Login,
   Signup,
   UserHome,
-  LandingPage,
+  //LandingPage,
   Stockcard,
   SmallStockCard,
   SingleIndice,
@@ -41,7 +41,6 @@ class Routes extends Component {
         <Route path="/orders/:userId" component={Orders} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <Route path="/landingPage" component={LandingPage} />
         <Route path="/stockcard" component={Stockcard} />
         <Route path="/smallStockCard" component={SmallStockCard} />
         <Route path="/allmemes" component={AllMemes} />
