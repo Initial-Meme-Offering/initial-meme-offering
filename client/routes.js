@@ -11,13 +11,13 @@ import {
   SmallStockCard,
   SingleIndice,
   AllMemes,
-  Orders,
-  Homepage
+  Offers,
+  Homepage,
+  Portfolio
 } from './components'
 import {
   me,
   getMemes,
-  getMemeStocks,
   getTransactions,
   getIndices,
   getMemeIndices
@@ -38,11 +38,16 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/index/:indiceId" component={SingleIndice} />
-        <Route path="/orders/:userId" component={Orders} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route path="/stockcard" component={Stockcard} />
         <Route path="/smallStockCard" component={SmallStockCard} />
+        <Route
+          exact
+          path="/offers/:userId/:memeId([0-9]*)"
+          component={Offers}
+        />
+        <Route path="/portfolio" component={Portfolio} />
         <Route path="/allmemes" component={AllMemes} />
         <Route exact path="/" component={Homepage} />
         {isLoggedIn && (

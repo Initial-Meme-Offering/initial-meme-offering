@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 //ACTION TYPES
-const GET_MEMESTOCKS = 'GET_MEMESTOCKS'
+const GET_MEMESTOCKS_BY_USER = 'GET_MEMESTOCKS_BY_USER'
 
 //INITIAL STATE
 const defaultMemeStocks = {
@@ -17,23 +17,23 @@ const defaultMemeStocks = {
 }
 
 //ACTION CREATORS
-const gotMemeStocks = memeStocks => ({
-  type: GET_MEMESTOCKS,
+const gotMemeStocksByUser = memeStocks => ({
+  type: GET_MEMESTOCKS_BY_USER,
   memeStocks
 })
 
 //THUNK CREATORS
-export const getMemeStocks = () => dispatch => {
+export const getMemeStocksByUser = userId => dispatch => {
   axios
-    .get('/api/memeStocks')
-    .then(({data}) => dispatch(gotMemeStocks(data)))
+    .get(`/api/memeStocks/${userId}`)
+    .then(({data}) => dispatch(gotMemeStocksByUser(data)))
     .catch(error => console.error(error))
 }
 
 //REDUCER
 export default function(state = defaultMemeStocks, action) {
   switch (action.type) {
-    case GET_MEMESTOCKS:
+    case GET_MEMESTOCKS_BY_USER:
       return {
         byId: action.memeStocks.reduce((result, memeStock) => {
           result[memeStock.id] = memeStock
@@ -44,4 +44,24 @@ export default function(state = defaultMemeStocks, action) {
     default:
       return state
   }
+}
+
+//SELECTORS
+
+//***THIS FUNCTION CHEATS BY ASSUMING ONLY ONE USER'S WORTH OF MEMESTOCK IN THE STORE AT A TIME, WE'LL NEED TO UPDATE DEPENDING ON HOW THINGS PROGRESS */
+export const getUserPieChart = state => {
+  const hash = Object.values(state.memeStocks.byId).reduce(
+    (tally, memeStock) => {
+      if (state.memes.byId[memeStock.memeId]) {
+        let memeName = state.memes.byId[memeStock.memeId].name
+        tally[memeName] = (tally[memeName] || 0) + 1
+      }
+      return tally
+    },
+    {}
+  )
+  return Object.keys(hash).map(name => ({
+    x: name,
+    y: hash[name]
+  }))
 }

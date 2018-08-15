@@ -11,37 +11,46 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-<div className='meme-font'>
-    <h1 className="title is-3">{displayName}</h1>
-    <div className="box">
-      <form onSubmit={handleSubmit} name={name}>
-        <div className="field">
-          <label htmlFor="email" className="label has-text-left meme-font">
-            Email
-          </label>
-          <input name="email" type="email" className="input meme-font" />
-        </div>
-        <div className="field">
-          <label htmlFor="password" className="label has-text-left meme-font">
-            Password
-          </label>
-          <input name="password" type="password" className="input meme-font" />
-        </div>
-        <div className="field">
-          <button
-            type="submit"
-            className="button is-block is-link is-large is-fullwidth meme-font"
-          >
-            {displayName}
-          </button>
-          {error && error.response && <p className="help is-danger has-text-left">{error.response.data}</p>}
-        </div>
-      </form>
+    <div className="meme-font">
+      <h1 className="title is-3">{displayName}</h1>
+      <div className="box">
+        <form onSubmit={handleSubmit} name={name}>
+          <div className="field">
+            <label htmlFor="email" className="label has-text-left meme-font">
+              Email
+            </label>
+            <input name="email" type="email" className="input meme-font" />
+          </div>
+          <div className="field">
+            <label htmlFor="password" className="label has-text-left meme-font">
+              Password
+            </label>
+            <input
+              name="password"
+              type="password"
+              className="input meme-font"
+            />
+          </div>
+          <div className="field">
+            <button
+              type="submit"
+              className="button is-block is-link is-large is-fullwidth meme-font"
+            >
+              {displayName}
+            </button>
+            {error &&
+              error.response && (
+                <p className="help is-danger has-text-left">
+                  {error.response.data}
+                </p>
+              )}
+          </div>
+        </form>
+      </div>
+      <p className="has-text-grey">
+        <a href="/auth/google">{displayName} with Google</a>
+      </p>
     </div>
-    <p className="has-text-grey">
-      <a href="/auth/google">{displayName} with Google</a>
-    </p>
-  </div>
   )
 }
 
