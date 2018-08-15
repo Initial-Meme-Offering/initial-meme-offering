@@ -2,11 +2,12 @@ import React, {Component} from 'react'
 import SmallStockCard from './stock-card-small'
 import {Router, Route, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getTrendingMemes} from '../store'
+import {getTrendingStocks} from '../store'
 
 class TrendingMemes extends Component {
   render() {
     const memes = this.props.memes
+    console.log('memes', memes)
     return (
       <section className="section is-medium">
         <div className="container">
@@ -32,7 +33,7 @@ class TrendingMemes extends Component {
 
 const mapState = state => {
   //console.log('state', state)
-  const memeIds = getTrendingMemes(state)
+  const memeIds = getTrendingStocks(state)
 
   return {
     memes: memeIds.map(memeId => state.memes.byId[memeId])
