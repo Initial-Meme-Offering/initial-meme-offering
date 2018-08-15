@@ -9,7 +9,7 @@ import {
   LandingPage,
   SmallStockCard,
   SingleIndice,
-  Orders,
+  Offers,
   Homepage
 } from './components'
 import {

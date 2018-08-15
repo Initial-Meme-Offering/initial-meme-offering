@@ -1,6 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
+import {reducer as formReducer} from 'redux-form'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import memes from './memes'
@@ -17,7 +18,8 @@ const reducer = combineReducers({
   transactions,
   indices,
   memeIndices,
-  offers
+  offers,
+  form: formReducer
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

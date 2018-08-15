@@ -16,7 +16,7 @@ let OfferForm = props => {
             </label>
             <Field
               className="field input"
-              name="name"
+              name="quantity"
               component="input"
               type="text"
               placeholder="Quantity"
@@ -31,7 +31,7 @@ let OfferForm = props => {
             </label>
             <Field
               className="field input"
-              name="name"
+              name="price"
               component="input"
               type="text"
               placeholder={
@@ -43,11 +43,12 @@ let OfferForm = props => {
           </div>
         </div>
 
-        <div className="field">
+        {<div className="field">
           <div className="control">
             <a className="button is-success">Place Bid</a>
           </div>
         </div>
+        }
       </form>
     </div>
   )
