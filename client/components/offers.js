@@ -1,19 +1,10 @@
 import React from 'react'
 import {OfferForm} from '../components'
 import {connect} from 'react-redux'
-import {postOffer, valueOfLastStockTrade} from '../store'
+import {valueOfLastStockTrade} from '../store'
 
-class Offers extends React.Component {
-  handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(e.target.value)
-    // newOffer.userId = this.props.user.id
-    // newOffer.memeId = this.props.meme.id
-    // this.props.postOffer(newOffer)
-  }
-
-  render() {
-    const {meme, lastTrade} = this.props
+const Offers = props => {
+    const {meme, lastTrade} = props
     // const lastDate = moment(lastTrade.seedDate).format('LLL')
     return !meme ? (
       'Loading...'
@@ -28,7 +19,7 @@ class Offers extends React.Component {
               </figure>
             </div>
             <footer className="card-footer">
-              <OfferForm {...this.props} />
+              <OfferForm {...props} />
             </footer>
           </div>
         </div>
@@ -36,7 +27,6 @@ class Offers extends React.Component {
       </div>
     )
   }
-}
 
 const mapState = (state, {match}) => {
   return {

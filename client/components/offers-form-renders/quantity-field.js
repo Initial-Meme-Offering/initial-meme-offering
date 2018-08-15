@@ -1,13 +1,15 @@
 import React from 'react'
 
-const renderQuantityField = field => {
+const renderQuantityField = ({input, label, type, placeholder, meta: {touched, error}}) => {
 return (
   <div className="field">
   <div className="control">
     <label htmlFor="title" className="label">
       Quantity
     </label>
-    <input className="field input" {...field.input} placeholder={field.placeholder} type="text" />
+    {(touched && (error && <p className="help is-danger">{error}</p>)) || <p/>}
+    <input className="field input" {...input} placeholder={placeholder} type="text" />
+    
   </div>
 </div>
 )
