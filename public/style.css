@@ -21,9 +21,9 @@ form div {
 }
 
 .below-nav-bar {
-  margin-top: 100px;
+  margin-top: 200px;
 }
 
-.meme-font {
+* {
   font-family: impact;
 }
