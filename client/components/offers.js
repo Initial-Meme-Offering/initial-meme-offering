@@ -14,19 +14,25 @@ class Offers extends React.Component {
 
   render() {
     const {meme, lastTrade} = this.props
-    const lastDate = moment(lastTrade.seedDate).format('LLL')
+    // const lastDate = moment(lastTrade.seedDate).format('LLL')
     return !meme ? (
       'Loading...'
     ) : (
-      <div>
-        <section>
-          <SmallStockCard {...meme} />
-          <div className="container">
-            <div className="notification">
-              <OfferForm {...this.props} handleSubmit={this.handleSubmit} />
+      <div className="columns">
+        <div className="column"/>
+        <div className="column is-half">
+          <div className="card is-small">
+            <div className="card-image">
+              <figure className="image is-48by48">
+                <img src={meme.imageUrl} alt="Placeholder image" />
+              </figure>
             </div>
+            <footer className="card-footer">
+              <OfferForm {...this.props} handleSubmit={this.handleSubmit} />
+            </footer>
           </div>
-        </section>
+        </div>
+        <div className="column"/>
       </div>
     )
   }

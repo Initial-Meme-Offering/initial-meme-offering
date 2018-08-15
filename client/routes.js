@@ -19,7 +19,8 @@ import {
   getMemes,
   getTransactions,
   getIndices,
-  getMemeIndices
+  getMemeIndices,
+  getMemeStocksByUser
 } from './store'
 
 /**
@@ -28,6 +29,10 @@ import {
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    console.log('hello')
+    if(this.props.isLoggedIn){
+      this.props.getMemeStocks(this.props.userId)
+    }
   }
 
   render() {
@@ -70,7 +75,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    userId: state.user.id || 0
   }
 }
 
@@ -82,7 +88,8 @@ const mapDispatch = dispatch => {
       dispatch(getTransactions())
       dispatch(getIndices())
       dispatch(getMemeIndices())
-    }
+    },
+    getMemeStocks: userId => getMemeStocksByUser(userId)
   }
 }
 

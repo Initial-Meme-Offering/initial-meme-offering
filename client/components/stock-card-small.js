@@ -17,13 +17,9 @@ const SmallStockCard = (props) => {
         <div className="card-content">
           <div className="media">
             <div className="media-content">
-              <p className="title is-4 is-center">{name}</p>
-              <p className="subtitle is-6 is-center">{`${symbol}`}</p>
+              {/* <p className="title is-4 is-center">{name}</p> */}
+              <p className="subtitle is-4 is-center">{`${symbol}`}</p>
             </div>
-          </div>
-          <div className="content">
-            {desc}
-            <br />
           </div>
         </div>
       </div>
