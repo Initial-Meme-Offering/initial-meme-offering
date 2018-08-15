@@ -29,3 +29,8 @@ form div {
   background: black;
   transition: .8s;
 }
+
+.center {
+  margin: 0 auto;
+  text-align: center;
+}

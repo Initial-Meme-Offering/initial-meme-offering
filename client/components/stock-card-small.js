@@ -16,13 +16,13 @@ const SmallStockCard = props => {
     <div className="card-content">
       <div className="media">
           <div className="media-content">
-            <p className="subtitle is-4 is-centered">{memeName}</p>
+            <p className="subtitle is-4 center">{memeName}</p>
           </div>
         </div>
         <div className='columns'>
-          <div className='column is-6 is-centered'>
+          <div className='column is-12 center'>
             <Link to={`/offer/${memeId}`}>
-                <button type='button' className='button is-blue'>
+                <button type='button' className='button is-primary'>
                   TRADE THIS MEME
                 </button>
             </Link>
