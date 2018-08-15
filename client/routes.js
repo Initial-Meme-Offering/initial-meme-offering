@@ -7,12 +7,11 @@ import {
   Signup,
   UserHome,
   //LandingPage,
-  Stockcard,
-  SmallStockCard,
   SingleIndice,
   AllMemes,
   Orders,
-  Homepage
+  Homepage,
+  TrendingMemes
 } from './components'
 import {
   me,
@@ -41,9 +40,8 @@ class Routes extends Component {
         <Route path="/orders/:userId" component={Orders} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <Route path="/stockcard" component={Stockcard} />
-        <Route path="/smallStockCard" component={SmallStockCard} />
         <Route path="/allmemes" component={AllMemes} />
+        <Route path="/trendingmemes" component={TrendingMemes} />
         <Route exact path="/" component={Homepage} />
         {isLoggedIn && (
           <Switch>
