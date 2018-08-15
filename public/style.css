@@ -27,3 +27,9 @@ form div {
 * {
   font-family: impact;
 }
+
+.meme-card:hover {
+  color: red;
+  background: black;
+  transition: .8s;
+}

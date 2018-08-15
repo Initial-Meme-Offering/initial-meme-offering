@@ -4,7 +4,7 @@ import React from 'react'
 const SmallStockCard = (props) => {
   const {memeImage, memeName} = props 
   return (
-    <div className="card below-nav-bar">
+    <div className="card below-nav-bar meme-card">
     <div className="card-image">
       <figure className="image is-4by3">
         <img src={memeImage} alt="Placeholder image"/>
