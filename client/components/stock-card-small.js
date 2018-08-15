@@ -22,7 +22,7 @@ const SmallStockCard = props => {
         <div className='columns'>
           <div className='column is-12 center'>
             <Link to={`/offer/${memeId}`}>
-                <button type='button' className='button is-primary'>
+                <button type='button' className='button is-primary meme-font'>
                   TRADE THIS MEME
                 </button>
             </Link>
