@@ -1,6 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
+import {reducer as formReducer} from 'redux-form'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import memes from './memes'
@@ -10,7 +11,6 @@ import indices from './indices'
 import memeIndices from './meme-indices'
 import marketHistory from './market-history'
 import offers from './offers'
-import {reducer as formReducer} from 'redux-form'
 
 const reducer = combineReducers({
   user,

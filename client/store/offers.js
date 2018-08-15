@@ -12,7 +12,7 @@ const defaultOffers = {
       offerType: '',
       status: '',
       quantity: 0,
-      price: NaN,
+      price: 0,
       memeId: 0,
       userId: 0
     }
