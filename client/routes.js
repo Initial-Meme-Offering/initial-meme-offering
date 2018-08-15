@@ -10,7 +10,8 @@ import {
   Stockcard,
   SmallStockCard,
   SingleIndice,
-  Offers
+  Offers,
+  Portfolio
 } from './components'
 import {
   me,
@@ -46,6 +47,7 @@ class Routes extends Component {
           path="/offers/:userId/:memeId([0-9]*)"
           component={Offers}
         />
+        <Route path="/portfolio" component={Portfolio} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
