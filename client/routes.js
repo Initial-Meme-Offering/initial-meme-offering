@@ -11,7 +11,8 @@ import {
   SmallStockCard,
   SingleIndice,
   // SmallStockCard,
-  Orders
+  Orders,
+  AllMemes
 } from './components'
 import {
   me,
@@ -43,6 +44,7 @@ class Routes extends Component {
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/stockcard" component={Stockcard} />
         <Route path="/smallStockCard" component={SmallStockCard} />
+        <Route path="/allmemes" component={AllMemes} />
         <Route exact path="/" component={LandingPage} />
         {isLoggedIn && (
           <Switch>
