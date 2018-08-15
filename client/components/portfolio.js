@@ -5,21 +5,23 @@ import {connect} from 'react-redux'
 
 class Portfolio extends React.Component {
   componentDidMount() {
-    this.props.getMemeStocksByUser(4)
+    this.props.getMemeStocksByUser(2)
     //(this.props.user.id)
   }
 
   render() {
     return (
-      <div>
-        <div className="columns is-variable">
-          <div className="column is-2">
-            <PieChart data={this.props.pieChart} />
+      <section className="section is-medium">
+        <div className="container">
+          <div className="columns is-variable">
+            <div className="column is-2">
+              <PieChart data={this.props.pieChart} />
+            </div>
+            <div className="column is-2">Hello World</div>
+            <div className="column is-2">Hello World</div>
           </div>
-          <div className="column is-2">Hello World</div>
-          <div className="column is-2">Hello World</div>
         </div>
-      </div>
+      </section>
     )
   }
 }

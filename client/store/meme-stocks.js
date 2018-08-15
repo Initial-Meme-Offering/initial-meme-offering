@@ -17,24 +17,12 @@ const defaultMemeStocks = {
 }
 
 //ACTION CREATORS
-const gotMemeStocks = memeStocks => ({
-  type: GET_MEMESTOCKS,
-  memeStocks
-})
-
 const gotMemeStocksByUser = memeStocks => ({
   type: GET_MEMESTOCKS_BY_USER,
   memeStocks
 })
 
 //THUNK CREATORS
-export const getMemeStocks = () => dispatch => {
-  axios
-    .get('/api/memeStocks')
-    .then(({data}) => dispatch(gotMemeStocks(data)))
-    .catch(error => console.error(error))
-}
-
 export const getMemeStocksByUser = userId => dispatch => {
   axios
     .get(`/api/memeStocks/${userId}`)
@@ -45,23 +33,12 @@ export const getMemeStocksByUser = userId => dispatch => {
 //REDUCER
 export default function(state = defaultMemeStocks, action) {
   switch (action.type) {
-    case GET_MEMESTOCKS:
+    case GET_MEMESTOCKS_BY_USER:
       return {
         byId: action.memeStocks.reduce((result, memeStock) => {
           result[memeStock.id] = memeStock
           return result
         }, {}),
-        allIds: action.memeStocks.map(memeStock => memeStock.id)
-      }
-    case GET_MEMESTOCKS_BY_USER:
-      return {
-        byId: {
-          ...state.byId,
-          ...action.memeStocks.reduce((result, memeStock) => {
-            result[memeStock.id] = memeStock
-            return result
-          }, {})
-        },
         allIds: action.memeStocks.map(memeStock => memeStock.id)
       }
     default:

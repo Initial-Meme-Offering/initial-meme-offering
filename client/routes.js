@@ -11,8 +11,9 @@ import {
   SmallStockCard,
   SingleIndice,
   AllMemes,
-  Orders,
-  Homepage
+  Offers,
+  Homepage,
+  Portfolio
 } from './components'
 import {
   me,
