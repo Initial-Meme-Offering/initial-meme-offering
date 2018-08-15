@@ -44,12 +44,8 @@ class Routes extends Component {
         <Route path="/landingPage" component={LandingPage} />
         <Route path="/stockcard" component={Stockcard} />
         <Route path="/smallStockCard" component={SmallStockCard} />
-<<<<<<< HEAD
         <Route path="/allmemes" component={AllMemes} />
-        <Route exact path="/" component={LandingPage} />
-=======
         <Route exact path="/" component={Homepage} />
->>>>>>> master
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
