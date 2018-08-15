@@ -8,6 +8,7 @@ import memeStocks from './meme-stocks'
 import transactions from './transactions'
 import indices from './indices'
 import memeIndices from './meme-indices'
+import marketHistory from './market-history'
 import offers from './offers'
 import {reducer as formReducer} from 'redux-form'
 
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   transactions,
   indices,
   memeIndices,
+  marketHistory,
   offers,
   form: formReducer
 })
@@ -33,4 +35,5 @@ export * from './meme-stocks'
 export * from './transactions'
 export * from './indices'
 export * from './meme-indices'
+export * from './market-history'
 export * from './offers'
