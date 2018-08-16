@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 //May need to afix cemented size to make sure multiple per row fit
 const SmallStockCard = props => {
   const {memeImage, memeName, memeId} = props
-  console.log('props from stock-card-small', props)
   return (
     <div className="card meme-card">
     <div className="card-image">
