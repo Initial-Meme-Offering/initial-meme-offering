@@ -4,35 +4,33 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 module.exports = router
 
-const getMatches = (offers, quantity) => {
-  let isMatch = false
-  let matchingOffers, quantitySum
+const getMatches = (otherOffers, quantity) => {
   //loop through otherOffers to see if any combination matches to quantity
-  for (let currentOffer = 0; currentOffer < offers.length; currentOffer++) {
-    matchingOffers = [offers[currentOffer].id]
-    quantitySum = offers[currentOffer].quantity
-    if (quantitySum === quantity) {
-      break
+  for (let offer = 0; offer < otherOffers.length; offer++) {
+    let matchingOffers = [otherOffers[offer].dataValues.id]
+    let quantitySum = otherOffers[offer].dataValues.quantity
+    console.log(quantitySum, 'quantitySum')
+    console.log(quantity, 'quantity')
+    if (+quantitySum === +quantity) {
+      console.log('hello')
+      return matchingOffers
     }
-    for (
-      let matchingOffer = currentOffer + 1;
-      matchingOffer < offers.length;
-      matchingOffer++
-    ) {
-      if (quantitySum + offers[matchingOffer].quantity < quantity) {
-        quantitySum += offers[matchingOffer].quantity //add the current quantity to the temporary sum
-        matchingOffers.push(offers[matchingOffer].id) //push the id into the potential matching offers array
-      } else if (quantitySum + offers[matchingOffer].quantity === quantity) {
-        matchingOffers.push(offers[matchingOffer].id) //make sure to include the offerId in our array of offers
-        isMatch = true //we found a match!
+    for (let match = 0; match < otherOffers.length; match++) {
+      if (match === offer) {
         break
       }
-    }
-    if (isMatch) {
-      break
+      const matchQuant = otherOffers[match].dataValues.quantity
+      const matchId = otherOffers[match].dataValues.id
+      if (+quantitySum + +matchQuant < +quantity) {
+        quantitySum = +quantitySum + +matchQuant //add the current quantity to the temporary sum
+        matchingOffers.push(matchId) //push the id into the potential matching offers array
+      } else if (+quantitySum + +matchQuant === +quantity) {
+        matchingOffers.push(matchId) //make sure to include the offerId in our array of offers
+        return matchingOffers
+      }
     }
   }
-  return isMatch
+  return false
 }
 
 router.get('/', async (req, res, next) => {
@@ -78,45 +76,10 @@ router.post('/', async (req, res, next) => {
       }
     })
 
-    console.log(otherOffers)
-
-    let isMatch = false
-    let matchingOffers, quantitySum
-    //loop through otherOffers to see if any combination matches to quantity
-    for (
-      let currentOffer = 0;
-      currentOffer < otherOffers.length;
-      currentOffer++
-    ) {
-      matchingOffers = [otherOffers[currentOffer].id]
-      quantitySum = otherOffers[currentOffer].quantity
-      if (quantitySum === quantity) {
-        break
-      }
-      for (
-        let matchingOffer = currentOffer + 1;
-        matchingOffer < otherOffers.length;
-        matchingOffer++
-      ) {
-        if (quantitySum + otherOffers[matchingOffer].quantity < quantity) {
-          quantitySum += otherOffers[matchingOffer].quantity //add the current quantity to the temporary sum
-          matchingOffers.push(otherOffers[matchingOffer].id) //push the id into the potential matching offers array
-        } else if (
-          quantitySum + otherOffers[matchingOffer].quantity ===
-          quantity
-        ) {
-          matchingOffers.push(otherOffers[matchingOffer].id) //make sure to include the offerId in our array of offers
-          isMatch = true //we found a match!
-          break
-        }
-      }
-      if (isMatch) {
-        break
-      }
-    }
-
+    const matchingOffers = getMatches(otherOffers, quantity)
+    console.log('matchingOffers', matchingOffers)
     //if there's a match, create a transaction and set the status of all the offers in the
-    if (isMatch) {
+    if (matchingOffers) {
       //create transaction record
       const newTransaction = await Transaction.create({
         quantity,
@@ -127,6 +90,7 @@ router.post('/', async (req, res, next) => {
       let transactionOffers = [offer]
       await offer.update({status: 'Complete'})
       for (let i = 0; i < matchingOffers.length; i++) {
+        console.log(matchingOffers[i], 'matchingOffers[i]')
         const closedOffer = await Offer.findById(matchingOffers[i])
         await closedOffer.update({status: 'Complete'})
         transactionOffers.push(closedOffer)

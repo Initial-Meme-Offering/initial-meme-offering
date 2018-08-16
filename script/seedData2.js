@@ -996,7 +996,13 @@ const offersdata = [{"offerType":"buy","status":"Pending","quantity":15,"price":
 {"offerType":"buy","status":"Pending","quantity":105,"price":80,"userId":13,"memeId":1},
 {"offerType":"buy","status":"Pending","quantity":20,"price":85,"userId":39,"memeId":3},
 {"offerType":"buy","status":"Pending","quantity":30,"price":45,"userId":2,"memeId":1},
-{"offerType":"sell","status":"Pending","quantity":55,"price":60,"userId":42,"memeId":1}]
+{"offerType":"sell","status":"Pending","quantity":55,"price":60,"userId":42,"memeId":1},
+{"offerType":"sell","status":"Pending","quantity":2,"price":5,"userId":42,"memeId":1},
+{"offerType":"sell","status":"Pending","quantity":7,"price":5,"userId":39,"memeId":1}]
+
+
+
+
 const offersdata1 = [{"offerType":"buy","status":"Pending","quantity":80,"price":80,"userId":38,"memeId":1},
 {"offerType":"sell","status":"Pending","quantity":45,"price":70,"userId":14,"memeId":1},
 {"offerType":"sell","status":"Pending","quantity":120,"price":60,"userId":36,"memeId":5},
