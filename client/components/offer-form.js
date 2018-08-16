@@ -18,7 +18,7 @@ class OfferForm extends React.Component {
   handleOfferFormSubmit = data => {
     const {userId, meme} = this.props
     const {quantity, price, offerType } = data
-    postOffer({userId, memeId: meme.id, quantity, price, offerType})
+    this.props.postOffer({userId, memeId: meme.id, quantity, price, offerType})
   }
 
   render() {

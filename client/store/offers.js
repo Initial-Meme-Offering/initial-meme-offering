@@ -39,6 +39,7 @@ export const getOffers = () => dispatch => {
 }
 
 export const postOffer = newOffer => dispatch => {
+  console.log(newOffer, 'newOffer')
   axios
     .post('/api/offers', newOffer)
     .then(({data}) => {
