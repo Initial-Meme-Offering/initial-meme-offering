@@ -46,6 +46,9 @@ router.post('/', async (req, res, next) => {
         },
         price,
         memeId,
+        quantity: {
+          [Op.lte]: quantity
+        },
         userId: {
           [Op.ne]: userId
         }
@@ -53,9 +56,34 @@ router.post('/', async (req, res, next) => {
     })
 
     let isMatch = false
+    let matchingOffers, quantitySum;
     //loop through otherOffers to see if any combination matches to quantity
     for (currentOffer = 0; currentOffer < otherOffers.length; currentOffer++) {
-      isMatch = true
+    matchingOffers = [otherOffers[currentOffer].id]
+    quantitySum = otherOffers[currentOffer].quantity;
+      if(quantitySum === quantity){
+        break
+      }  
+      for(matchingOffer = currentOffer + 1; matchingOffer < otherOffers.length; matchingOffer++){
+        if(quantitySum + otherOffers[matchingOffer].quantity < quantity){
+          quantitySum += otherOffers[matchingOffer].quantity //add the current quantity to the temporary sum
+          matchingOffers.push(otherOffers[matchingOffer].id) //push the id into the potential matching offers array
+        } 
+        else if(quantitySum + otherOffers[matchingOffer].quantity === quantity){
+          matchingOffers.push(otherOffers[matchingOffer].id); //make sure to include the offerId in our array of offers
+          isMatch = true; //we found a match!
+          break
+        }
+      }
+      if(isMatch){
+        break
+      }
+    }
+
+    //if there's a match, create a transaction and set the status of all the offers in the 
+    if(isMatch){
+      //create transaction record      
+ 
     }
 
     res.json(offer)
