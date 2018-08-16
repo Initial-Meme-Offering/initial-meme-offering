@@ -101,16 +101,38 @@ async function seed() {
   const offers = await Offer.findAll()
   const users = await User.findAll()
 
+  async function seedMemeIndices() {
+    for (let i = 0; i < memes.length; i++) {
+      const randomIndices = indices.sort(shuffle).slice(0, 2)
+      await memes[i].setIndices(randomIndices)
+    }
+    return memes
+  }
+
+  await seedMemeIndices()
+  console.log('Meme Indices seeded')
+
   async function seedOfferTransactions() {
     for (let i = 0; i < transactions.length; i++) {
       const randomOffers = offers.sort(shuffle).slice(0, 2)
-      await transactions[i].setOffer(randomOffers)
+      await transactions[i].setOffers(randomOffers)
     }
     return transactions
   }
 
   await seedOfferTransactions()
   console.log('Offer Transactions seeded')
+
+  async function seedUserComments() {
+    for (let i = 0; i < usercomments.length; i++) {
+      const randomUser = users.sort(shuffle)[0]
+      const randomMeme = memes.sort(shuffle)[0]
+      await usercomments[i].setUser(randomUser)
+      await usercomments[i].setMeme(randomMeme)
+    }
+  }
+  await seedUserComments()
+  console.log('User Comments seeded')
 
   await db.sync()
   console.log(`seeded successfully`)
