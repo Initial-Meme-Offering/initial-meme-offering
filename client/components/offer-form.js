@@ -1,68 +1,112 @@
 import React from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
+import {getMemeStocksByUser, postOffer} from '../store'
+import {
+  renderQuantityField,
+  renderPriceField
+} from './offers-form-renders'
 
-let OfferForm = props => {
-  return (
-    <form onSubmit={props.handleSubmit}>
-      <div className="field">
-        <div className="control">
-          <label htmlFor="title" className="label">
-            Quantity
-          </label>
-          <Field
-            className="field input"
-            name="name"
-            component="input"
-            type="text"
-            placeholder="Quantity"
-          />
-        </div>
-      </div>
 
-      <div className="field">
-        <div className="control">
-          <label htmlFor="title" className="label">
-            Bid Amount
-          </label>
-          <Field
-            className="field input"
-            name="name"
-            component="input"
-            type="text"
-            placeholder="Bid Amount"
-          />
-        </div>
-      </div>
+class OfferForm extends React.Component {
+  componentDidMount() {
+    const {userId, getMemeStocks} = this.props
+    getMemeStocks(userId)
+  }
 
-      <div className="field">
-        <div className="control">
-          <a className="button is-success">Place Bid</a>
-        </div>
-      </div>
+  handleOfferFormSubmit = data => {
+    const {userId, meme} = this.props
+    const {quantity, price, offerType } = data
+    postOffer({userId, memeId: meme.id, quantity, price, offerType})
+  }
 
-      <div className="field">
-        <div className="control">
-          <div className="select is-primary">
-            <select>
-              <option>Select dropdown</option>
-              <option>With options</option>
-            </select>
+  render() {
+    const {lastTrade, meme, memeStocks, handleSubmit} = this.props
+    return (
+      <form>
+        <Field
+          className="field input"
+          name="quantity"
+          component={renderQuantityField}
+          type="text"
+        />
+        <Field
+          className="field input"
+          name="price"
+          component={renderPriceField}
+          type="number"
+          placeholder={!lastTrade.price ? '' : lastTrade.price}
+        />
+        {memeStocks[meme.id] && memeStocks[meme.id].quantity > 0 ? (
+          <div>
+            <button
+              name="offerType"
+              value="Buy"
+              className="button is-success"
+              type="submit"
+              onClick={handleSubmit(values => {
+                this.handleOfferFormSubmit({...values, offerType: 'buy'})
+              })}
+            >
+              Buy
+            </button>
+            <button
+              className="button is-danger"
+              name="offerType"
+              value="Sell"
+              type="submit"
+              onClick={handleSubmit(values => {
+                this.handleOfferFormSubmit({...values, offerType: 'sell'})
+              })}
+            >
+              Sell
+            </button>
           </div>
-        </div>
-      </div>
-    </form>
-  )
+        ) : (
+          <button
+            name="offerType"
+            value="Buy"
+            className="button is-success"
+            type="submit"
+            onClick={handleSubmit(values => {
+              this.handleOfferFormSubmit({...values, offerType: 'buy'})
+            })}
+          >
+            Buy
+          </button>
+        )}
+      </form>
+    )
+  }
 }
 
-const mapState = (state, {match}) => ({
-  initialValues: state.offers.byId[0]
-  // [match.params.offerId]
+const validate = values => {
+  const errors = {}
+  if (!values.quantity || values.quantity <= 0) {
+    errors.quantity = 'Can has more than 1 share?'
+  }
+  if (!values.price || values.price <= 0) {
+    errors.price = 'More money plz'
+  }
+  return errors
+}
+
+const mapState = (state, ownProps) => ({
+  initialValues: {
+    ...state.offers.byId[0],
+    price: ownProps.lastTrade.price,
+    quantity: ownProps.lastTrade.quantity
+  },
+  memeStocks: state.memeStocks.byId,
+  userId: state.user.id
 })
 
-const mapDispatch = dispatch => ({})
+const mapDispatch = dispatch => ({
+  getMemeStocks: userId => dispatch(getMemeStocksByUser(userId)),
+  postOffer: offer => dispatch(postOffer(offer))
+})
 
-OfferForm = reduxForm({form: 'OfferForm'})(OfferForm)
-OfferForm = connect(mapState, mapDispatch)(OfferForm)
+OfferForm = withRouter(connect(mapState, mapDispatch)(OfferForm))
 
-export default OfferForm
+export default reduxForm({validate, form: 'OfferForm'})(OfferForm)

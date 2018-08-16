@@ -8,7 +8,9 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <Routes />
+      <section className="section is-medium">
+        <Routes />
+      </section>
       <Footer />
     </div>
   )

@@ -7,12 +7,11 @@ import {
   Signup,
   UserHome,
   //LandingPage,
-  Stockcard,
-  SmallStockCard,
   SingleIndice,
   AllMemes,
-  Offers,
   Homepage,
+  TrendingMemes,
+  Offers,
   Portfolio
 } from './components'
 import {
@@ -20,7 +19,8 @@ import {
   getMemes,
   getTransactions,
   getIndices,
-  getMemeIndices
+  getMemeIndices,
+  getMarketHistory
 } from './store'
 
 /**
@@ -40,15 +40,10 @@ class Routes extends Component {
         <Route path="/index/:indiceId" component={SingleIndice} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <Route path="/stockcard" component={Stockcard} />
-        <Route path="/smallStockCard" component={SmallStockCard} />
-        <Route
-          exact
-          path="/offer/:memeId([0-9]*)"
-          component={Offers}
-        />
+        <Route exact path="/offer/:memeId([0-9]*)" component={Offers} />
         <Route path="/portfolio" component={Portfolio} />
         <Route path="/allmemes" component={AllMemes} />
+        <Route path="/trendingmemes" component={TrendingMemes} />
         <Route exact path="/" component={Homepage} />
         {isLoggedIn && (
           <Switch>
@@ -70,7 +65,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    userId: state.user.id || 0
   }
 }
 
@@ -82,6 +78,7 @@ const mapDispatch = dispatch => {
       dispatch(getTransactions())
       dispatch(getIndices())
       dispatch(getMemeIndices())
+      dispatch(getMarketHistory())
     }
   }
 }
