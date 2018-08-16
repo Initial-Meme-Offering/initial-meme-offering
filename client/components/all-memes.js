@@ -6,11 +6,10 @@ import {connect} from 'react-redux'
 import {} from '../store'
 
 class AllMemes extends Component {
-
   constructor() {
     super()
     this.state = {
-      text: '',
+      text: ''
     }
   }
 
@@ -21,7 +20,9 @@ class AllMemes extends Component {
     })
     console.log('this.state.text', this.state.text)
     return (
-      <section className="section is-medium">      
+      <section className="section">
+        <h1 className="is-size-1 has-text-centered">All Memes</h1>
+        <div className="container">
           <div className="field has-addons">
             <div className="control">
               <input
@@ -29,15 +30,16 @@ class AllMemes extends Component {
                 className="input"
                 type="text"
                 placeholder="Search"
-                onChange={(event) => this.setState({text: event.target.value})} />
+                onChange={event => this.setState({text: event.target.value})}
+              />
             </div>
             <div className="control">
-              <button type='button' id="nav-search" className="button is-info">
+              <button type="button" id="nav-search" className="button is-info">
                 Search
               </button>
             </div>
           </div>
-        <div className="container">
+
           <div className="columns is-multiline">
             {searchResults.map(id => (
               <div key={id} className="column is-4">
