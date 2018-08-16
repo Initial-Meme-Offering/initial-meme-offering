@@ -32,24 +32,6 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
       </div>
 
       <div className="navbar-menu">
-        <div className="navbar-start">
-          <div className="field has-addons">
-            <div className="control">
-              <input
-                id="nav-search"
-                className="input"
-                type="text"
-                placeholder="Search"
-              />
-            </div>
-            <div className="control">
-              <a id="nav-search" className="button is-info">
-                Search
-              </a>
-            </div>
-          </div>
-        </div>
-
         <div className="navbar-end">
           {isLoggedIn && (
             <div className="navbar-item has-dropdown is-hoverable">
