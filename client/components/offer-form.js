@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {getMemeStocksByUser, postOffer} from '../store'
 import {renderQuantityField, renderPriceField} from './offers-form-renders'
+import history from '../history'
 
 class OfferForm extends React.Component {
   componentDidMount() {
@@ -14,11 +15,16 @@ class OfferForm extends React.Component {
   handleOfferFormSubmit = data => {
     const {userId, meme} = this.props
     const {quantity, price, offerType} = data
-    this.props.postOffer({userId, memeId: meme.id, quantity, price, offerType})
+    if(userId > 0) {
+      this.props.postOffer({userId, memeId: meme.id, quantity, price, offerType})
+    }
+    else{
+      history.push('/login')
+    }
   }
 
   render() {
-    const {lastTrade, meme, memeStocks, handleSubmit} = this.props
+    const {lastTrade, meme, memeStocks, handleSubmit, userId} = this.props
     return (
       <form>
         <Field
