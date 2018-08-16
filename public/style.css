@@ -26,4 +26,14 @@ form div {
 
 .no-pad {
   padding: 0;
+
+.meme-card:hover {
+  color: white;
+  background: lightgrey;
+  transition: .6s;
+}
+
+.center {
+  margin: 0 auto;
+  text-align: center;
 }

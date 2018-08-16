@@ -18,6 +18,9 @@ const Meme = db.define('meme', {
             isIn: [['review', 'offering', 'released', 'removed']]
         }
     },
+    symbol: {
+        type: Sequelize.STRING
+    },
     totalStock: {
         type: Sequelize.INTEGER
     }
