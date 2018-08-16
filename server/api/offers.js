@@ -4,6 +4,37 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 module.exports = router
 
+const getMatches = (offers, quantity) => {
+  let isMatch = false
+  let matchingOffers, quantitySum
+  //loop through otherOffers to see if any combination matches to quantity
+  for (let currentOffer = 0; currentOffer < offers.length; currentOffer++) {
+    matchingOffers = [offers[currentOffer].id]
+    quantitySum = offers[currentOffer].quantity
+    if (quantitySum === quantity) {
+      break
+    }
+    for (
+      let matchingOffer = currentOffer + 1;
+      matchingOffer < offers.length;
+      matchingOffer++
+    ) {
+      if (quantitySum + offers[matchingOffer].quantity < quantity) {
+        quantitySum += offers[matchingOffer].quantity //add the current quantity to the temporary sum
+        matchingOffers.push(offers[matchingOffer].id) //push the id into the potential matching offers array
+      } else if (quantitySum + offers[matchingOffer].quantity === quantity) {
+        matchingOffers.push(offers[matchingOffer].id) //make sure to include the offerId in our array of offers
+        isMatch = true //we found a match!
+        break
+      }
+    }
+    if (isMatch) {
+      break
+    }
+  }
+  return isMatch
+}
+
 router.get('/', async (req, res, next) => {
   try {
     const offers = await Offer.findAll({})
@@ -21,6 +52,7 @@ router.post('/', async (req, res, next) => {
       error.message = 'Not enough shares to sell or money to buy'
       next(error)
     }
+
     const offer = await Offer.create({
       offerType,
       quantity,
@@ -46,17 +78,23 @@ router.post('/', async (req, res, next) => {
       }
     })
 
+    console.log(otherOffers)
+
     let isMatch = false
     let matchingOffers, quantitySum
     //loop through otherOffers to see if any combination matches to quantity
-    for (currentOffer = 0; currentOffer < otherOffers.length; currentOffer++) {
+    for (
+      let currentOffer = 0;
+      currentOffer < otherOffers.length;
+      currentOffer++
+    ) {
       matchingOffers = [otherOffers[currentOffer].id]
       quantitySum = otherOffers[currentOffer].quantity
       if (quantitySum === quantity) {
         break
       }
       for (
-        matchingOffer = currentOffer + 1;
+        let matchingOffer = currentOffer + 1;
         matchingOffer < otherOffers.length;
         matchingOffer++
       ) {
@@ -85,13 +123,13 @@ router.post('/', async (req, res, next) => {
         price,
         memeId
       })
-      
+
       let transactionOffers = [offer]
       await offer.update({status: 'Complete'})
-      for(let i = 0; i < matchingOffers.length; i++){
+      for (let i = 0; i < matchingOffers.length; i++) {
         const closedOffer = await Offer.findById(matchingOffers[i])
         await closedOffer.update({status: 'Complete'})
-         transactionOffers.push(closedOffer)
+        transactionOffers.push(closedOffer)
       }
       await newTransaction.setOffers(transactionOffers)
     }
