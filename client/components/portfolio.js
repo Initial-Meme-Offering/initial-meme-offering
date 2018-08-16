@@ -52,7 +52,7 @@ const mapState = state => ({
   user: state.user,
   pieChartData: getUserPieChart(state),
   lineChartData: getSingleStockChart(state, 2),
-  offers: offersByUser(state, 42)
+  offers: offersByUser(state, 2)
 })
 
 const mapDispatch = dispatch => ({
