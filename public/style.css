@@ -24,6 +24,9 @@ form div {
   font-family: impact;
 }
 
+.no-pad {
+  padding: 0;
+
 .meme-card:hover {
   color: white;
   background: lightgrey;
