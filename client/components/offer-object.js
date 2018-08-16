@@ -21,7 +21,9 @@ const OfferObject = props => {
         <div className="level-item has-text-centered">
           <div>
             <p className="heading">
-              {offer.offerType == 'sell' ? 'Sold At' : 'Purchased At'}
+              {offer.offerType == 'sell'
+                ? 'Offer to Sell'
+                : 'Offer to Purchase'}
             </p>
             <p className="title">{`$${offer.price}`}</p>
           </div>

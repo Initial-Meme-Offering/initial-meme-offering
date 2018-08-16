@@ -48,21 +48,16 @@ class Portfolio extends React.Component {
   }
 }
 
-const mapState = state => {
-  return {
-    user: state.user,
-    memes: state.memes.byId,
-    pieChartData: getUserPieChart(state),
-    lineChartData: getSingleStockChart(state, 1),
-    offers: offersByUser(state, 42)
-  }
-}
+const mapState = state => ({
+  user: state.user,
+  pieChartData: getUserPieChart(state),
+  lineChartData: getSingleStockChart(state, 2),
+  offers: offersByUser(state, 42)
+})
 
-const mapDispatch = dispatch => {
-  return {
-    getMemeStocksByUser: userId => dispatch(getMemeStocksByUser(userId)),
-    getOffers: () => dispatch(getOffers())
-  }
-}
+const mapDispatch = dispatch => ({
+  getMemeStocksByUser: userId => dispatch(getMemeStocksByUser(userId)),
+  getOffers: () => dispatch(getOffers())
+})
 
 export default connect(mapState, mapDispatch)(Portfolio)
