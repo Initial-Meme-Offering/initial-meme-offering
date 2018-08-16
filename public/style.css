@@ -27,7 +27,7 @@ form div {
 .meme-card:hover {
   color: white;
   background: lightgrey;
-  transition: .8s;
+  transition: .6s;
 }
 
 .center {
