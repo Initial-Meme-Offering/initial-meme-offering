@@ -21,6 +21,7 @@ class TrendingMemes extends Component {
                   className=""
                   memeImage={meme.imageUrl}
                   memeName={meme.name}
+                  memeId={meme.id}
                 />
               </div>
             ))}
