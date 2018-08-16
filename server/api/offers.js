@@ -9,15 +9,12 @@ const getMatches = (otherOffers, quantity) => {
   for (let offer = 0; offer < otherOffers.length; offer++) {
     let matchingOffers = [otherOffers[offer].dataValues.id]
     let quantitySum = otherOffers[offer].dataValues.quantity
-    console.log(quantitySum, 'quantitySum')
-    console.log(quantity, 'quantity')
     if (+quantitySum === +quantity) {
-      console.log('hello')
       return matchingOffers
     }
     for (let match = 0; match < otherOffers.length; match++) {
       if (match === offer) {
-        break
+        continue
       }
       const matchQuant = otherOffers[match].dataValues.quantity
       const matchId = otherOffers[match].dataValues.id
@@ -77,7 +74,6 @@ router.post('/', async (req, res, next) => {
     })
 
     const matchingOffers = getMatches(otherOffers, quantity)
-    console.log('matchingOffers', matchingOffers)
     //if there's a match, create a transaction and set the status of all the offers in the
     if (matchingOffers) {
       //create transaction record
@@ -90,7 +86,6 @@ router.post('/', async (req, res, next) => {
       let transactionOffers = [offer]
       await offer.update({status: 'Complete'})
       for (let i = 0; i < matchingOffers.length; i++) {
-        console.log(matchingOffers[i], 'matchingOffers[i]')
         const closedOffer = await Offer.findById(matchingOffers[i])
         await closedOffer.update({status: 'Complete'})
         transactionOffers.push(closedOffer)
