@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container">
         <div className="content has-text-centered">
           <p>
-            Memonomics is to sole property of Barnacles Inc.<br />
+            Memenomics is the sole property of Barnacles Inc.<br />
             <br />
             <Link to="/privacypolicy">Privacy Policy |</Link>
             <Link to="/termsofservice"> Terms of Service</Link>
