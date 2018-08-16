@@ -13,17 +13,7 @@ const {
 } = require('../server/db/models')
 const {memesdata, usersdata, usercommentsdata} = require('./seedData1')
 const {
-  offersdata,
-  offersdata1,
-  offersdata2,
-  offersdata3,
-  offersdata4,
-  offersdata5,
-  offersdata6,
-  offersdata7,
-  offersdata8,
-  offersdata9,
-  offersdata10
+  offersdata
 } = require('./seedData2')
 const {memestocksdata, transactionsdata, indicesdata} = require('./seedData3')
 

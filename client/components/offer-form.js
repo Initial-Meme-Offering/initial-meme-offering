@@ -3,11 +3,8 @@ import {Field, reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {getMemeStocksByUser, postOffer} from '../store'
-import {
-  renderQuantityField,
-  renderPriceField
-} from './offers-form-renders'
-
+import {renderQuantityField, renderPriceField} from './offers-form-renders'
+import history from '../history'
 
 class OfferForm extends React.Component {
   componentDidMount() {
@@ -17,12 +14,17 @@ class OfferForm extends React.Component {
 
   handleOfferFormSubmit = data => {
     const {userId, meme} = this.props
-    const {quantity, price, offerType } = data
-    postOffer({userId, memeId: meme.id, quantity, price, offerType})
+    const {quantity, price, offerType} = data
+    if(userId > 0) {
+      this.props.postOffer({userId, memeId: meme.id, quantity, price, offerType})
+    }
+    else{
+      history.push('/login')
+    }
   }
 
   render() {
-    const {lastTrade, meme, memeStocks, handleSubmit} = this.props
+    const {lastTrade, meme, memeStocks, handleSubmit, userId} = this.props
     return (
       <form>
         <Field
@@ -64,17 +66,19 @@ class OfferForm extends React.Component {
             </button>
           </div>
         ) : (
-          <button
-            name="offerType"
-            value="Buy"
-            className="button is-success"
-            type="submit"
-            onClick={handleSubmit(values => {
-              this.handleOfferFormSubmit({...values, offerType: 'buy'})
-            })}
-          >
-            Buy
-          </button>
+          <div>
+            <button
+              name="offerType"
+              value="Buy"
+              className="button is-success"
+              type="submit"
+              onClick={handleSubmit(values => {
+                this.handleOfferFormSubmit({...values, offerType: 'buy'})
+              })}
+            >
+              Buy
+            </button>
+          </div>
         )}
       </form>
     )
