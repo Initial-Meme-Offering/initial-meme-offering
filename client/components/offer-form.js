@@ -15,10 +15,16 @@ class OfferForm extends React.Component {
   handleOfferFormSubmit = data => {
     const {userId, meme} = this.props
     const {quantity, price, offerType} = data
-    if(userId > 0) {
-      this.props.postOffer({userId, memeId: meme.id, quantity, price, offerType})
-    }
-    else{
+    if (userId > 0) {
+      this.props.postOffer({
+        userId,
+        memeId: meme.id,
+        quantity,
+        price,
+        offerType
+      })
+      history.push('/portfolio')
+    } else {
       history.push('/login')
     }
   }

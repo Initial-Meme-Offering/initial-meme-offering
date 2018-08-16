@@ -8,7 +8,7 @@ const OfferObject = props => {
         <img className="image is-64x64" src={meme.imageUrl} />
         <div className="level-item has-text-centered">
           <div>
-            <p className="heading">{meme.symbol || 'DB'}</p>
+            <p className="heading">{meme.symbol || 'SYM'}</p>
             <p className="title">{meme.name}</p>
           </div>
         </div>

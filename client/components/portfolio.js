@@ -11,12 +11,14 @@ import {connect} from 'react-redux'
 
 class Portfolio extends React.Component {
   componentDidMount() {
+    const {user} = this.props.user
     this.props.getOffers()
-    this.props.getMemeStocksByUser(2)
+    this.props.getMemeStocksByUser(user ? user.id : 2)
     //(this.props.user.id)
   }
 
   render() {
+    console.log('user', this.props.user)
     const {lineChartData, pieChartData, offers} = this.props
     return (
       <section className="section is-medium">
@@ -28,7 +30,7 @@ class Portfolio extends React.Component {
             <div className="level-item">
               <MarketChart
                 data={lineChartData}
-                title="Total Portfolio"
+                title="Total Portfolio Value"
                 x={lineChartData.x}
                 y={lineChartData.y}
               />
@@ -36,7 +38,7 @@ class Portfolio extends React.Component {
           </div>
         </div>
         <div className="container">
-          <h5 className="title is-5">Past Transactions</h5>
+          <h5 className="title is-5">Active Offers</h5>
           {!offers[0] || !offers[0].meme
             ? 'Loading...'
             : offers.map(offer => (
@@ -52,7 +54,7 @@ const mapState = state => ({
   user: state.user,
   pieChartData: getUserPieChart(state),
   lineChartData: getSingleStockChart(state, 2),
-  offers: offersByUser(state, 42)
+  offers: offersByUser(state, state.user ? state.user.id : 2)
 })
 
 const mapDispatch = dispatch => ({
