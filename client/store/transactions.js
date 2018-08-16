@@ -73,8 +73,8 @@ export const getSingleStockChart = (state, memeId) => {
   }, [])
 }
 
+
 export const getTrendingStocks = state => {
-  console.log(state)
   const oneMonthAgo = new Date()
   oneMonthAgo.setDate(oneMonthAgo.getDate() - 30)
   const counts = Object.values(state.transactions.byId).reduce(

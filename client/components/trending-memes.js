@@ -9,7 +9,7 @@ class TrendingMemes extends Component {
     const memes = this.props.memes
     console.log('memes', memes)
     return (
-      <section className="section is-medium">
+      <section className="section">
         <div className="container">
           <h1 className="is-size-1 has-text-centered">Trending Memes</h1>
           <br />

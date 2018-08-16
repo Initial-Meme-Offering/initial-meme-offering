@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <section className="section is-medium">
+      <section className="section is-small">
         <Routes />
       </section>
       <Footer />

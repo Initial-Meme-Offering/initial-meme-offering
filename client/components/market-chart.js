@@ -4,7 +4,7 @@ import {VictoryChart, VictoryLine, VictoryZoomContainer} from 'victory'
 class MarketChart extends React.Component {
   state = {
     zoomDomain: {
-      x: [new Date('2018-07-14'), new Date('2017-08-09')]
+      x: [1, 2]
     }
   }
 
@@ -12,11 +12,19 @@ class MarketChart extends React.Component {
     this.setState({zoomDomain: domain})
   }
 
+  componentDidUpdate(prevProps) {
+    const {data} = this.props
+    if (data[0] !== prevProps.data[0])
+      this.setState({
+        zoomDomain: {x: [data[0].x, data[data.length - 1].x]}
+      })
+  }
+
   render() {
     const {x, y, title, data} = this.props
     return (
-      <div className="container">
-        <h1>{title}</h1>
+      <div>
+        <h5 className="title is-5 has-text-centered">{title}</h5>
         <VictoryChart
           containerComponent={
             <VictoryZoomContainer
