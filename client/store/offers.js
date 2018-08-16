@@ -67,3 +67,17 @@ export default function(state = defaultOffers, action) {
       return state
   }
 }
+
+//SELECTORS
+
+// This selector eager loads the whole meme object along with the offer
+export const offersByUser = (state, userId) => {
+  return Object.values(state.offers.byId).reduce((result, offer) => {
+    if (offer.userId == userId)
+      result.push({
+        meme: state.memes.byId[offer.memeId],
+        ...offer
+      })
+    return result
+  }, [])
+}

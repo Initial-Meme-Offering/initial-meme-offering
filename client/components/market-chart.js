@@ -22,10 +22,9 @@ class MarketChart extends React.Component {
 
   render() {
     const {x, y, title, data} = this.props
-    console.log('data', data)
     return (
       <div>
-        <h1>{title}</h1>
+        <h5 className="title is-5 has-text-centered">{title}</h5>
         <VictoryChart
           containerComponent={
             <VictoryZoomContainer
