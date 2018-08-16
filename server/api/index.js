@@ -7,6 +7,7 @@ router.use('/memeStocks', require('./meme-stocks'))
 router.use('/transactions', require('./transactions'))
 router.use('/indices', require('./indices'))
 router.use('/memeIndices', require('./meme-indices'))
+router.use('/markethistory', require('./market-history'))
 router.use('/offers', require('./offers'))
 
 router.use((req, res, next) => {
