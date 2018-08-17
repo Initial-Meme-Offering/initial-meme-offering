@@ -6,11 +6,11 @@ import Routes from './routes'
 
 const App = () => {
   return (
-    <div>
+    <div id="app">
       <Navbar />
-      <section className="section is-small">
-        <Routes />
-      </section>
+      {/* <section className="section is-small"> */}
+      <Routes />
+      {/* </section> */}
       <Footer />
     </div>
   )
