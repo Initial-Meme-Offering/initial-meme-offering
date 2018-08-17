@@ -91,4 +91,8 @@ const mapDispatch = dispatch => ({
 
 OrderForm = withRouter(connect(mapState, mapDispatch)(OrderForm))
 
-export default reduxForm({validate, form: 'OrderForm'})(OrderForm)
+export default reduxForm({
+  validate,
+  form: 'OrderForm',
+  destroyOnUnmount: false
+})(OrderForm)
