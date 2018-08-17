@@ -11,26 +11,37 @@ import {connect} from 'react-redux'
 
 class Portfolio extends React.Component {
   componentDidMount() {
-    const {user} = this.props.user
-    this.props.getOffers()
-    this.props.getMemeStocksByUser(user ? user.id : 2)
-    //(this.props.user.id)
+    if (this.props.user) {
+      this.props.getOffers()
+      this.props.getMemeStocksByUser(this.props.user.id)
+    }
   }
 
   render() {
     console.log('user', this.props.user)
     const {lineChartData, pieChartData, offers} = this.props
+    console.log('pieChartData', pieChartData)
     return (
       <section className="section is-medium">
         <div className="container">
           <div className="level">
             <div className="level-item">
-              <PieChart data={pieChartData} />
+              <div>
+                <h5 className="title is-5 has-text-centered">
+                  Percentage of Portfolio
+                </h5>
+                <PieChart data={pieChartData} />
+              </div>
             </div>
             <div className="level-item">
+              {console.log('lineChartData', lineChartData)}
               <MarketChart
                 data={lineChartData}
-                title="Total Portfolio Value"
+                title={
+                  lineChartData[0]
+                    ? 'Total Portfolio Value'
+                    : 'Eagerly Awaiting Your Memes'
+                }
                 x={lineChartData.x}
                 y={lineChartData.y}
               />
@@ -53,8 +64,8 @@ class Portfolio extends React.Component {
 const mapState = state => ({
   user: state.user,
   pieChartData: getUserPieChart(state),
-  lineChartData: getSingleStockChart(state, 2),
-  offers: offersByUser(state, state.user ? state.user.id : 2)
+  lineChartData: getSingleStockChart(state, state.user.id),
+  offers: offersByUser(state, state.user.id)
 })
 
 const mapDispatch = dispatch => ({
