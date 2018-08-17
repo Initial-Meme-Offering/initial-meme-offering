@@ -5,7 +5,7 @@ class MarketChart extends React.Component {
   state = {
     zoomDomain: {
       x: [new Date('2016'), new Date('2018')],
-      y: [0, 2]
+      y: [0, 80]
     }
   }
 
@@ -28,9 +28,9 @@ class MarketChart extends React.Component {
       <div>
         <h5 className="title is-5 has-text-centered">{title}</h5>
         <br />
-        <h7 className="subtitle is-7 has-text-centered">
+        <h6 id="graph-subtitle" className="subtitle is-6">
           scroll chart for more detail by date
-        </h7>
+        </h6>
 
         <VictoryChart
           containerComponent={
