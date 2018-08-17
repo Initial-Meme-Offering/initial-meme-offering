@@ -4,17 +4,11 @@ const renderPriceField = ({input, meta: {touched, error}}) => {
   return (
     <div className="field">
       <div className="control">
-        <label htmlFor="title" className="label">
-          Price ($)
-        </label>
-        {(touched && (error && <p className="help is-danger">{error}</p>)) || (
-          <p />
+        <label className="label">Price ($)</label>
+        <input className="input" {...input} type="text" />
+        {(touched && (error && <span className="help is-danger">{error}</span>)) || (
+          <span />
         )}
-        <input
-          className="input"
-          {...input}
-          type="text"
-        />
       </div>
     </div>
   )

@@ -22,6 +22,9 @@ const SingleMeme = props => {
       <div className="column is-half">
         <OrderForm {...props} />
       </div>
+      <div className="column">
+        <h2>Pending Orders</h2>
+      </div>
     </div>
   )
 }

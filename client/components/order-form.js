@@ -19,54 +19,45 @@ class OrderForm extends React.Component {
 
   handleOfferFormSubmit = data => {
     const {userId, meme} = this.props
-    console.log(data)
-    // const {quantity, price, offerType} = data
-    // if (userId > 0) {
-    //   this.props.postOffer({
-    //     userId,
-    //     memeId: meme.id,
-    //     quantity,
-    //     price,
-    //     offerType
-    //   })
-    //   history.push('/portfolio')
-    // } else {
-    //   history.push('/login')
-    // }
+    const {quantity, price, orderType} = data
+    if (userId > 0) {
+      this.props.postOffer({
+        userId,
+        memeId: meme.id,
+        quantity,
+        price,
+        orderType
+      })
+      history.push('/portfolio')
+    } else {
+      history.push('/login')
+    }
   }
 
   render() {
     const {lastTrade, meme, memeStocks, handleSubmit, userId} = this.props
     return (
-      <form>
-          <Field
-            name="quantity"
-            component={renderQuantityField}
-            type="text"
-          />
-          <Field
-            name="price"
-            component={renderPriceField}
-            type="number"
-            placeholder={!lastTrade.price ? '' : lastTrade.price}
-          />
+      <form onSubmit={handleSubmit(this.handleOfferFormSubmit.bind(this))}>
+        <Field name="quantity" component={renderQuantityField} type="text" />
+        <Field
+          name="price"
+          component={renderPriceField}
+          type="number"
+          placeholder={!lastTrade.price ? '' : lastTrade.price}
+        />
+        <div className="field is-grouped">
           {memeStocks[meme.id] && memeStocks[meme.id].quantity > 0 ? (
             <Field
-              name="order"
+              name="orderType"
+              type="select"
               component={renderOrderSelect}
               value="both"
             />
           ) : (
-            <Field
-              name="order"
-              component={renderOrderSelect}
-              value="buy"
-            />
+            <Field name="orderType" component={renderOrderSelect} value="buy" />
           )}
-          <Field
-            name="submit"
-            component={renderSubmitButton}
-            />
+          <Field name="submit" component={renderSubmitButton} />
+        </div>
       </form>
     )
   }
@@ -75,7 +66,7 @@ class OrderForm extends React.Component {
 const validate = values => {
   const errors = {}
   if (!values.quantity || values.quantity <= 0) {
-    errors.quantity = 'Can has more than 1 share?'
+    errors.quantity = 'Can has more shares?'
   }
   if (!values.price || values.price <= 0) {
     errors.price = 'More money plz'

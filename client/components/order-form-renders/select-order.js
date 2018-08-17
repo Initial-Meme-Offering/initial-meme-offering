@@ -1,20 +1,14 @@
 import React from 'react'
 
-const renderOrderSelect = ({
-  input,
-  label,
-  type,
-  value,
-  meta: {touched, error}
-}) => {
+const renderOrderSelect = ({input, value}) => {
   return (
     <div className="field">
-      <label htmlFor="title" className="label">
-        Order Type
-      </label>
       <div className="select">
-        <select>
-          <option value="buy">Buy</option>
+        <select {...input} defaultValue="">
+          <option value="" hidden>Order Type</option>
+          <option value="buy">
+            Buy
+          </option>
           <option value="sell" disabled={value === 'both' ? false : true}>
             Sell
           </option>
