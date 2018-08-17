@@ -1,6 +1,6 @@
 import React from 'react'
 
-const OfferObject = props => {
+const OrderObject = props => {
   const {meme, offer} = props
   return (
     <div className="box no-pad">
@@ -22,8 +22,8 @@ const OfferObject = props => {
           <div>
             <p className="heading">
               {offer.offerType == 'sell'
-                ? 'Offer to Sell'
-                : 'Offer to Purchase'}
+                ? 'Sell Order'
+                : 'Buy Order'}
             </p>
             <p className="title">{`$${offer.price}`}</p>
           </div>
@@ -33,4 +33,4 @@ const OfferObject = props => {
   )
 }
 
-export default OfferObject
+export default OrderObject

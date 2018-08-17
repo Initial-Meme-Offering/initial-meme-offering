@@ -1,0 +1,103 @@
+import React from 'react'
+import {Field, reduxForm} from 'redux-form'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
+import {getMemeStocksByUser, postOffer} from '../store'
+import {
+  renderQuantityField,
+  renderPriceField,
+  renderOrderSelect,
+  renderSubmitButton
+} from './order-form-renders'
+import history from '../history'
+
+class OrderForm extends React.Component {
+  componentDidMount() {
+    const {userId, getMemeStocks} = this.props
+    getMemeStocks(userId)
+  }
+
+  handleOfferFormSubmit = data => {
+    const {userId, meme} = this.props
+    console.log(data)
+    // const {quantity, price, offerType} = data
+    // if (userId > 0) {
+    //   this.props.postOffer({
+    //     userId,
+    //     memeId: meme.id,
+    //     quantity,
+    //     price,
+    //     offerType
+    //   })
+    //   history.push('/portfolio')
+    // } else {
+    //   history.push('/login')
+    // }
+  }
+
+  render() {
+    const {lastTrade, meme, memeStocks, handleSubmit, userId} = this.props
+    return (
+      <form>
+          <Field
+            name="quantity"
+            component={renderQuantityField}
+            type="text"
+          />
+          <Field
+            name="price"
+            component={renderPriceField}
+            type="number"
+            placeholder={!lastTrade.price ? '' : lastTrade.price}
+          />
+          {memeStocks[meme.id] && memeStocks[meme.id].quantity > 0 ? (
+            <Field
+              name="order"
+              component={renderOrderSelect}
+              value="both"
+            />
+          ) : (
+            <Field
+              name="order"
+              component={renderOrderSelect}
+              value="buy"
+            />
+          )}
+          <Field
+            name="submit"
+            component={renderSubmitButton}
+            />
+      </form>
+    )
+  }
+}
+
+const validate = values => {
+  const errors = {}
+  if (!values.quantity || values.quantity <= 0) {
+    errors.quantity = 'Can has more than 1 share?'
+  }
+  if (!values.price || values.price <= 0) {
+    errors.price = 'More money plz'
+  }
+  return errors
+}
+
+const mapState = (state, ownProps) => ({
+  initialValues: {
+    ...state.offers.byId[0],
+    price: ownProps.lastTrade.price,
+    quantity: ownProps.lastTrade.quantity
+  },
+  memeStocks: state.memeStocks.byId,
+  userId: state.user.id
+})
+
+const mapDispatch = dispatch => ({
+  getMemeStocks: userId => dispatch(getMemeStocksByUser(userId)),
+  postOffer: offer => dispatch(postOffer(offer))
+})
+
+OrderForm = withRouter(connect(mapState, mapDispatch)(OrderForm))
+
+export default reduxForm({validate, form: 'OrderForm'})(OrderForm)

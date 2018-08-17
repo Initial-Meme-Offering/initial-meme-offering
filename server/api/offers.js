@@ -7,21 +7,21 @@ module.exports = router
 const getMatches = (otherOffers, quantity) => {
   //loop through otherOffers to see if any combination matches to quantity
   for (let offer = 0; offer < otherOffers.length; offer++) {
-    let matchingOffers = [otherOffers[offer].dataValues.id]
-    let quantitySum = otherOffers[offer].dataValues.quantity
-    if (+quantitySum === +quantity) {
+    let matchingOffers = [otherOffers[offer].dataValues.id] //track offer ids that match to the sum
+    let quantitySum = otherOffers[offer].dataValues.quantity //track sum starting with current value
+    if (+quantitySum === +quantity) {//found a match
       return matchingOffers
     }
     for (let match = 0; match < otherOffers.length; match++) {
       if (match === offer) {
-        continue
+        continue //skip the same offer
       }
       const matchQuant = otherOffers[match].dataValues.quantity
       const matchId = otherOffers[match].dataValues.id
       if (+quantitySum + +matchQuant < +quantity) {
         quantitySum = +quantitySum + +matchQuant //add the current quantity to the temporary sum
         matchingOffers.push(matchId) //push the id into the potential matching offers array
-      } else if (+quantitySum + +matchQuant === +quantity) {
+      } else if (+quantitySum + +matchQuant === +quantity) { //found a match
         matchingOffers.push(matchId) //make sure to include the offerId in our array of offers
         return matchingOffers
       }
@@ -73,9 +73,11 @@ router.post('/', async (req, res, next) => {
         userId: {
           [Op.ne]: userId
         }
-      },
-      order: Sequelize.literal('quantity DESC')
+      }
     })
+
+    // otherOffers.sort((a,b)=> a.dataValues.quantity < b.dataValues.quantity)
+
 
     const matchingOffers = getMatches(otherOffers, quantity)
     //if there's a match, create a transaction and set the status of all the offers in the
