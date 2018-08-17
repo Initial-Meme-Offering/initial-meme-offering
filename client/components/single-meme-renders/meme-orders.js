@@ -1,11 +1,11 @@
 import React from 'react'
 
 const SingleMemeOrder = props => {
-  const {orderType} = props
+  const {orderType, meme} = props
   return (
     <div className="box no-pad">
       <div className="level">
-        <img className="image is-64x64" src={meme.imageUrl} />
+        <img className="image is-64x64" src={meme.img} />
         <div className="level-item has-text-centered">
           <div>
             <p className="heading">{meme.symbol || 'SYM'}</p>
@@ -15,15 +15,15 @@ const SingleMemeOrder = props => {
         <div className="level-item has-text-centered">
           <div>
             <p className="heading">Quantity</p>
-            <p className="title">{offer.quantity}</p>
+            <p className="title">{'20'}</p>
           </div>
         </div>
         <div className="level-item has-text-centered">
           <div>
             <p className="heading">
-              {offer.offerType == 'sell' ? 'Sell Order' : 'Buy Order'}
+              {orderType == 'sell' ? 'Sell Order' : 'Buy Order'}
             </p>
-            <p className="title">{`$${offer.price}`}</p>
+            <p className="title">{`$30`}</p>
           </div>
         </div>
       </div>

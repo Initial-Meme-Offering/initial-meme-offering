@@ -1,7 +1,7 @@
 import React from 'react'
-import {OrderForm} from '../components'
+import {OrderForm, MarketChart} from '../components'
 import {connect} from 'react-redux'
-import {valueOfLastStockTrade} from '../store'
+import {valueOfLastStockTrade, getSingleStockChart} from '../store'
 import {SingleMemeHeader, SingleMemeOrder} from './single-meme-renders'
 
 class SingleMeme extends React.Component {
@@ -17,7 +17,7 @@ class SingleMeme extends React.Component {
   }
 
   render() {
-    const {meme, lastTrade} = this.props
+    const {meme, lineChartData} = this.props
     const {tabActive} = this.state
     // const lastDate = moment(lastTrade.seedDate).format('LLL')
     return !meme ? (
@@ -36,6 +36,12 @@ class SingleMeme extends React.Component {
             </div>
           </div>
           <div className="column is-half">
+          <MarketChart
+                data={lineChartData}
+                title={`${meme.name} Simple Moving Average`}
+                x={lineChartData.x}
+                y={lineChartData.y}
+              />
             <OrderForm {...this.props} />
           </div>
         </div>
@@ -59,7 +65,7 @@ class SingleMeme extends React.Component {
             </li>
           </ul>
         </div>
-        <SingleMemeOrder orderType={tabActive}/>
+        <SingleMemeOrder orderType={tabActive} meme={meme} />
       </div>
     )
   }
@@ -69,7 +75,8 @@ const mapState = (state, {match}) => {
   return {
     user: state.user,
     meme: state.memes.byId[match.params.memeId],
-    lastTrade: valueOfLastStockTrade(state, match.params.memeId)
+    lastTrade: valueOfLastStockTrade(state, match.params.memeId),
+    lineChartData: getSingleStockChart(state, match.params.memeId),
   }
 }
 
