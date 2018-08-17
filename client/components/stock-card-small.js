@@ -9,7 +9,9 @@ const SmallStockCard = props => {
     <div className="card meme-card">
     <div className="card-image">
       <figure className="image is-4by3">
-        <img src={memeImage} alt="Placeholder image"/>
+        <Link to={`/allmemes/${memeId}`}>
+          <img src={memeImage} alt="Placeholder image"/>
+        </Link>  
       </figure>
     </div>
     <div className="card-content">
