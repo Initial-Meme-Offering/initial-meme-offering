@@ -73,7 +73,6 @@ export const getSingleStockChart = (state, memeId) => {
   }, [])
 }
 
-
 export const getTrendingStocks = state => {
   const oneMonthAgo = new Date()
   oneMonthAgo.setDate(oneMonthAgo.getDate() - 30)

@@ -12,7 +12,9 @@ import {
   Homepage,
   TrendingMemes,
   Offers,
-  Portfolio,
+  BuyPortfolio,
+  SellPortfolio,
+  TotalPortfolio,
   SubmitMeme
 } from './components'
 import {
@@ -43,7 +45,11 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/offer/:memeId([0-9]*)" component={Offers} />
-        <Route path="/portfolio" component={Portfolio} />
+
+        <Route exact path="/portfolio/buy" component={BuyPortfolio} />
+        <Route exact path="/portfolio/sell" component={SellPortfolio} />
+        <Route exact path="/portfolio/total" component={TotalPortfolio} />
+        <Route exact path="/portfolio" component={BuyPortfolio} />
         <Route path="/allmemes" component={AllMemes} />
         <Route path="/trendingmemes" component={TrendingMemes} />
         <Route exact path="/" component={Homepage} />

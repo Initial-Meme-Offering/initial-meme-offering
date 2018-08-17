@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {valueOfLastStockTrade, lastPurchasePriceByUser} from '../store'
 
 //ACTION TYPES
 const GET_MEMESTOCKS_BY_USER = 'GET_MEMESTOCKS_BY_USER'
@@ -61,5 +62,24 @@ export const getUserPieChart = state => {
   return Object.keys(hash).map(name => ({
     x: name,
     y: hash[name]
+  }))
+}
+
+export const getUserMemeStocksListItem = state => {
+  const hash = Object.values(state.memeStocks.byId).reduce(
+    (tally, memeStock) => {
+      if (state.memes.byId[memeStock.memeId]) {
+        let memeId = state.memes.byId[memeStock.memeId].id
+        tally[memeId] = (tally[memeId] || 0) + 1
+      }
+      return tally
+    },
+    {}
+  )
+  return Object.keys(hash).map(memeId => ({
+    meme: state.memes.byId[memeId],
+    quantity: hash[memeId],
+    currentPrice: valueOfLastStockTrade(memeId),
+    lastPurchasePrice: lastPurchasePriceByUser(state, memeId)
   }))
 }

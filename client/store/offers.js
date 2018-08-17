@@ -82,3 +82,39 @@ export const offersByUser = (state, userId) => {
     return result
   }, [])
 }
+
+export const buyOffersByUser = (state, userId) => {
+  return Object.values(state.offers.byId).reduce((result, offer) => {
+    if (offer.userId == userId && offer.offerType === 'buy')
+      result.push({
+        meme: state.memes.byId[offer.memeId],
+        ...offer
+      })
+    return result
+  }, [])
+}
+
+export const sellOffersByUser = (state, userId) => {
+  return Object.values(state.offers.byId).reduce((result, offer) => {
+    if (offer.userId == userId && offer.offerType === 'sell')
+      result.push({
+        meme: state.memes.byId[offer.memeId],
+        ...offer
+      })
+    return result
+  }, [])
+}
+
+export const lastPurchasePriceByUser = (state, memeId) => {
+  const len = state.offers.allIds.length
+  for (let i = len; i >= 1; i--) {
+    if (
+      state.offers.byId[i].memeId == memeId &&
+      state.offers.byId[i].userId == state.user.id &&
+      state.offers.byId[i].status === 'Completed'
+    ) {
+      return state.offers.byId[i].price
+    }
+  }
+  return -1
+}
