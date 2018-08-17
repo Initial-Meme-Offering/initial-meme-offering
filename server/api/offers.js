@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Offer, Transaction} = require('../db/models')
+const {Offer, Transaction, MemeStock} = require('../db/models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 module.exports = router
@@ -42,6 +42,9 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {userId, memeId, quantity, price, offerType} = req.body
+    const userMemeStock = await MemeStock.findById(memeId)
+
+    //dynamic programming 
     if (quantity <= 0 || price <= 0) {
       const error = new Error()
       error.message = 'Not enough shares to sell or money to buy'
@@ -70,7 +73,8 @@ router.post('/', async (req, res, next) => {
         userId: {
           [Op.ne]: userId
         }
-      }
+      },
+      order: Sequelize.literal('quantity DESC')
     })
 
     const matchingOffers = getMatches(otherOffers, quantity)
@@ -85,12 +89,19 @@ router.post('/', async (req, res, next) => {
 
       let transactionOffers = [offer]
       await offer.update({status: 'Complete'})
+      /*go through the offers and:
+        1. link transactions and offers
+        2. find and move shares between users
+        3. return offer object at the end
+      */
       for (let i = 0; i < matchingOffers.length; i++) {
         const closedOffer = await Offer.findById(matchingOffers[i])
         await closedOffer.update({status: 'Complete'})
         transactionOffers.push(closedOffer)
       }
       await newTransaction.setOffers(transactionOffers)
+
+
     }
 
     res.json(offer)
