@@ -12,7 +12,8 @@ import {
   Homepage,
   TrendingMemes,
   Offers,
-  Portfolio
+  Portfolio,
+  SingleMeme
 } from './components'
 import {
   me,
@@ -37,6 +38,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route path="/allmemes/:memeId" component={SingleMeme} />
         <Route path="/index/:indiceId" component={SingleIndice} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
