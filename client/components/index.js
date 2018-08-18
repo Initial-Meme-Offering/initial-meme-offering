@@ -13,7 +13,12 @@ export {default as SmallStockCard} from './stock-card-small'
 export {default as SingleIndice} from './single-indice'
 export {default as Offers} from './offers'
 export {default as OfferForm} from './offer-form'
-export {BuyPortfolio, SellPortfolio, TotalPortfolio} from './portfolio'
+export {
+  BuyPortfolio,
+  SellPortfolio,
+  TotalPortfolio,
+  TransPortfolio
+} from './portfolio'
 export {default as PieChart} from './pie-chart'
 export {default as AllMemes} from './all-memes'
 export {default as Homepage} from './homepage'

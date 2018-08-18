@@ -7,7 +7,8 @@ import {
   buyOffersByUser,
   sellOffersByUser,
   getOffers,
-  getUserMemeStocksListItem
+  getUserMemeStocksListItem,
+  completedOffersByUser
 } from '../store'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
@@ -37,7 +38,6 @@ class Portfolio extends React.Component {
               </div>
             </div>
             <div className="level-item">
-              {console.log('lineChartData', lineChartData)}
               <MarketChart
                 data={lineChartData}
                 title={
@@ -58,6 +58,9 @@ class Portfolio extends React.Component {
             </li>
             <li className={url === 'sell' ? 'is-active' : ''}>
               <Link to="/portfolio/sell">Sell Orders</Link>
+            </li>
+            <li className={url === 'trans' ? 'is-active' : ''}>
+              <Link to="/portfolio/trans">Transactions History</Link>
             </li>
             <li className={url === 'total' ? 'is-active' : ''}>
               <Link to="/portfolio/total">Total Meme Stock</Link>
@@ -81,7 +84,7 @@ const mapBuy = state => {
     user: state.user,
     pieChartData: getUserPieChart(state),
     lineChartData: getSingleStockChart(state, state.user.id),
-    offers: buyOffersByUser(state, state.user.id)
+    offers: buyOffersByUser(state)
   }
 }
 
@@ -90,7 +93,16 @@ const mapSell = state => {
     user: state.user,
     pieChartData: getUserPieChart(state),
     lineChartData: getSingleStockChart(state, state.user.id),
-    offers: sellOffersByUser(state, state.user.id)
+    offers: sellOffersByUser(state)
+  }
+}
+
+const mapTrans = state => {
+  return {
+    user: state.user,
+    pieChartData: getUserPieChart(state),
+    lineChartData: getSingleStockChart(state, state.user.id),
+    offers: completedOffersByUser(state)
   }
 }
 
@@ -111,3 +123,4 @@ const mapDispatch = dispatch => ({
 export const BuyPortfolio = connect(mapBuy, mapDispatch)(Portfolio)
 export const SellPortfolio = connect(mapSell, mapDispatch)(Portfolio)
 export const TotalPortfolio = connect(mapTotal, mapDispatch)(Portfolio)
+export const TransPortfolio = connect(mapTrans, mapDispatch)(Portfolio)

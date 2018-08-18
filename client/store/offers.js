@@ -83,9 +83,9 @@ export const offersByUser = (state, userId) => {
   }, [])
 }
 
-export const buyOffersByUser = (state, userId) => {
+export const buyOffersByUser = state => {
   return Object.values(state.offers.byId).reduce((result, offer) => {
-    if (offer.userId == userId && offer.offerType === 'buy')
+    if (offer.userId == state.user.id && offer.offerType === 'buy')
       result.push({
         meme: state.memes.byId[offer.memeId],
         ...offer
@@ -94,9 +94,20 @@ export const buyOffersByUser = (state, userId) => {
   }, [])
 }
 
-export const sellOffersByUser = (state, userId) => {
+export const sellOffersByUser = state => {
   return Object.values(state.offers.byId).reduce((result, offer) => {
-    if (offer.userId == userId && offer.offerType === 'sell')
+    if (offer.userId == state.user.id && offer.offerType === 'sell')
+      result.push({
+        meme: state.memes.byId[offer.memeId],
+        ...offer
+      })
+    return result
+  }, [])
+}
+
+export const completedOffersByUser = state => {
+  return Object.values(state.offers.byId).reduce((result, offer) => {
+    if (offer.userId == state.user.id && offer.status === 'Completed')
       result.push({
         meme: state.memes.byId[offer.memeId],
         ...offer

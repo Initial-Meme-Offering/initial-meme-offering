@@ -53,7 +53,7 @@ export const getUserPieChart = state => {
     (tally, memeStock) => {
       if (state.memes.byId[memeStock.memeId]) {
         let memeName = state.memes.byId[memeStock.memeId].name
-        tally[memeName] = (tally[memeName] || 0) + 1
+        tally[memeName] = (tally[memeName] || 0) + memeStock.quantity
       }
       return tally
     },
@@ -69,17 +69,18 @@ export const getUserMemeStocksListItem = state => {
   const hash = Object.values(state.memeStocks.byId).reduce(
     (tally, memeStock) => {
       if (state.memes.byId[memeStock.memeId]) {
-        let memeId = state.memes.byId[memeStock.memeId].id
-        tally[memeId] = (tally[memeId] || 0) + 1
+        let memeId = memeStock.memeId
+        tally[memeId] = (tally[memeId] || 0) + memeStock.quantity
       }
       return tally
     },
     {}
   )
   return Object.keys(hash).map(memeId => ({
+    id: memeId,
     meme: state.memes.byId[memeId],
     quantity: hash[memeId],
-    currentPrice: valueOfLastStockTrade(memeId),
+    currentPrice: valueOfLastStockTrade(state, memeId),
     lastPurchasePrice: lastPurchasePriceByUser(state, memeId)
   }))
 }
