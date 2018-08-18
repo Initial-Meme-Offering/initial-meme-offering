@@ -18,9 +18,6 @@ const PieChart = ({data}) => {
   )
 }
 
-const newUserData = [
-  {x: 'Your\nMeme\nFuture', y: 1},
-  {x: 'Your\nMeme\nFuture', y: 1}
-]
+const newUserData = [{x: 'Begins\nNow', y: 1}, {x: 'Your\nMeme\nFuture', y: 1}]
 
 export default PieChart

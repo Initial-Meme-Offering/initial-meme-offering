@@ -65,3 +65,35 @@ export const getTrendingMemes = state => {
     .sort((a, b) => counts[a] < counts[b])
     .slice(0, 5)
 }
+
+export const userTotalStockChart = (state, memeId) => {
+  return state.transactions.allIds.reduce((result, transId) => {
+    if (state.transactions.byId[transId].memeId == memeId) {
+      result.push({
+        x: new Date(state.transactions.byId[transId].seedDate),
+        y: state.transactions.byId[transId].price
+      })
+    }
+    return result
+  }, [])
+}
+
+// export const getUserMemeStocksListItem = state => {
+//   const hash = Object.values(state.memeStocks.byId).reduce(
+//     (tally, memeStock) => {
+//       if (state.memes.byId[memeStock.memeId]) {
+//         let memeId = memeStock.memeId
+//         tally[memeId] = (tally[memeId] || 0) + memeStock.quantity
+//       }
+//       return tally
+//     },
+//     {}
+//   )
+//   return Object.keys(hash).map(memeId => ({
+//     id: memeId,
+//     meme: state.memes.byId[memeId],
+//     quantity: hash[memeId],
+//     currentPrice: valueOfLastStockTrade(state, memeId),
+//     lastPurchasePrice: lastPurchasePriceByUser(state, memeId)
+//   }))
+// }

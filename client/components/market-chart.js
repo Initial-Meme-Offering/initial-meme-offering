@@ -23,7 +23,6 @@ class MarketChart extends React.Component {
 
   render() {
     const {x, y, title, data} = this.props
-
     return (
       <div>
         <h5 className="title is-5 has-text-centered">{title}</h5>

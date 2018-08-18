@@ -48,20 +48,31 @@ export default function(state = defaultMemeStocks, action) {
 }
 
 //SELECTORS
+export const stockQuantitiesByUser = state => {
+  return Object.values(state.memeStocks.byId).reduce((tally, memeStock) => {
+    if (state.memes.byId[memeStock.memeId]) {
+      let memeName = state.memes.byId[memeStock.memeId].name
+      tally[memeName] = (tally[memeName] || 0) + memeStock.quantity
+    }
+    return tally
+  }, {})
+}
+
 export const getUserPieChart = state => {
-  const hash = Object.values(state.memeStocks.byId).reduce(
-    (tally, memeStock) => {
-      if (state.memes.byId[memeStock.memeId]) {
-        let memeName = state.memes.byId[memeStock.memeId].name
-        tally[memeName] = (tally[memeName] || 0) + memeStock.quantity
-      }
-      return tally
-    },
-    {}
-  )
-  return Object.keys(hash).map(name => ({
+  // const hash = Object.values(state.memeStocks.byId).reduce(
+  //   (tally, memeStock) => {
+  //     if (state.memes.byId[memeStock.memeId]) {
+  //       let memeName = state.memes.byId[memeStock.memeId].name
+  //       tally[memeName] = (tally[memeName] || 0) + memeStock.quantity
+  //     }
+  //     return tally
+  //   },
+  //   {}
+  // )
+  const quantities = stockQuantitiesByUser(state)
+  return Object.keys(quantities).map(name => ({
     x: name,
-    y: hash[name]
+    y: quantities[name]
   }))
 }
 

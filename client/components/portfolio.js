@@ -60,7 +60,7 @@ class Portfolio extends React.Component {
               <Link to="/portfolio/sell">Sell Orders</Link>
             </li>
             <li className={url === 'trans' ? 'is-active' : ''}>
-              <Link to="/portfolio/trans">Transactions History</Link>
+              <Link to="/portfolio/trans">Transaction History</Link>
             </li>
             <li className={url === 'total' ? 'is-active' : ''}>
               <Link to="/portfolio/total">Total Meme Stock</Link>
