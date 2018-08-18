@@ -24,7 +24,7 @@ class Portfolio extends React.Component {
   render() {
     const {lineChartData, pieChartData, offers} = this.props
     const url = this.props.match.url.split('/')[2]
-    console.log('offers', offers)
+    console.log('pieChart', pieChartData)
     return (
       <section className="section is-medium">
         <div className="container">

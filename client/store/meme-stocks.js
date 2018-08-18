@@ -48,49 +48,32 @@ export default function(state = defaultMemeStocks, action) {
 }
 
 //SELECTORS
-export const stockQuantitiesByUser = state => {
+export const userStockQuantitiesByMemeId = state => {
   return Object.values(state.memeStocks.byId).reduce((tally, memeStock) => {
-    if (state.memes.byId[memeStock.memeId]) {
-      let memeName = state.memes.byId[memeStock.memeId].name
-      tally[memeName] = (tally[memeName] || 0) + memeStock.quantity
-    }
+    tally[memeStock.memeId] =
+      (tally[memeStock.memeId] || 0) + memeStock.quantity
     return tally
   }, {})
 }
 
 export const getUserPieChart = state => {
-  // const hash = Object.values(state.memeStocks.byId).reduce(
-  //   (tally, memeStock) => {
-  //     if (state.memes.byId[memeStock.memeId]) {
-  //       let memeName = state.memes.byId[memeStock.memeId].name
-  //       tally[memeName] = (tally[memeName] || 0) + memeStock.quantity
-  //     }
-  //     return tally
-  //   },
-  //   {}
-  // )
-  const quantities = stockQuantitiesByUser(state)
-  return Object.keys(quantities).map(name => ({
-    x: name,
-    y: quantities[name]
-  }))
+  const quantities = userStockQuantitiesByMemeId(state)
+  return Object.keys(quantities).map(memeId => {
+    if (state.memes.byId[memeId]) {
+      return {
+        x: state.memes.byId[memeId].name,
+        y: quantities[memeId]
+      }
+    }
+  })
 }
 
 export const getUserMemeStocksListItem = state => {
-  const hash = Object.values(state.memeStocks.byId).reduce(
-    (tally, memeStock) => {
-      if (state.memes.byId[memeStock.memeId]) {
-        let memeId = memeStock.memeId
-        tally[memeId] = (tally[memeId] || 0) + memeStock.quantity
-      }
-      return tally
-    },
-    {}
-  )
-  return Object.keys(hash).map(memeId => ({
+  const quantities = userStockQuantitiesByMemeId(state)
+  return Object.keys(quantities).map(memeId => ({
     id: memeId,
     meme: state.memes.byId[memeId],
-    quantity: hash[memeId],
+    quantity: quantities[memeId],
     currentPrice: valueOfLastStockTrade(state, memeId),
     lastPurchasePrice: lastPurchasePriceByUser(state, memeId)
   }))

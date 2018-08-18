@@ -92,7 +92,6 @@ export const getTrendingStocks = state => {
 }
 
 export const valueOfLastStockTrade = (state, memeId) => {
-  console.log('state.transactions', state.transactions)
   const len = state.transactions.allIds.length
   for (let i = len; i >= 1; i--) {
     if (state.transactions.byId[i].memeId == memeId) {
