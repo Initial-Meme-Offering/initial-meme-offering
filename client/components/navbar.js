@@ -4,31 +4,17 @@ import {connect} from 'react-redux'
 import {Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 
-const toggleNav = event => {
-  const navbarBurger = event.target
-  const navbarMenu = document.getElementById('navPrimary')
-
-  navbarBurger.classList.toggle('is-active')
-  navbarMenu.classList.toggle('is-active')
-}
-
 const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
-  <nav className="navbar is-transparent is-fixed-top level">
+  <nav id="navbar" className="navbar is-fixed-top">
     <div className="container">
       <div className="navbar-brand">
-        <Link to="/" className="navbar-item has-text-weight-bold">
-          Memenomics
-        </Link>
-      </div>
-
-      <div
-        className="navbar-burger burger"
-        onClick={event => toggleNav(event)}
-        data-target="navPrimary"
-      >
-        <span />
-        <span />
-        <span />
+        <div className="navbar-item">
+          <p className="control">
+            <Link to="/" className="has-text-weight-bold">
+              Memenomics
+            </Link>
+          </p>
+        </div>
       </div>
 
       <div className="navbar-menu">
@@ -50,17 +36,17 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
                 </Link>
 
                 {/* {isAdmin && (
-                  <div>
-                    <hr className="navbar-divider" />
-                    <NavLink
-                      to="/manage"
-                      className="navbar-item"
-                      activeClassName="is-active"
-                    >
-                      Manage
-                    </NavLink>
-                  </div>
-                )} */}
+              <div>
+                <hr className="navbar-divider" />
+                <NavLink
+                  to="/manage"
+                  className="navbar-item"
+                  activeClassName="is-active"
+                >
+                  Manage
+                </NavLink>
+              </div>
+            )} */}
 
                 <hr className="navbar-divider" />
                 <a href="#" onClick={handleLogout} className="navbar-item">
@@ -90,9 +76,9 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
     </div>
   </nav>
 )
-/**
- * CONTAINER
- */
+// /**
+//  * CONTAINER
+//  */
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id
