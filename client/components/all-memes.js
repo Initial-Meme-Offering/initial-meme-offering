@@ -7,11 +7,6 @@ import {allMemesList, memesListBySearch} from '../store'
 import history from '../history'
 
 class MemeList extends Component {
-  // handleClick = evt => {
-  //   evt.preventDefault()
-  //   history.push(`/search`)
-  // }
-
   handleChange = evt => {
     evt.preventDefault()
     history.push(`/search/${evt.target.value}`)
@@ -30,7 +25,6 @@ class MemeList extends Component {
                 className="input"
                 type="text"
                 placeholder="Search"
-                // onClick={this.handleClick}
                 onChange={this.handleChange}
               />
             </div>

@@ -59,24 +59,12 @@ export const allMemesList = state => {
 export const memesListBySearch = (state, search) => {
   return state.memes.allIds.reduce((result, id) => {
     let meme = state.memes.byId[id]
-    if (
+    if (!search) result.push(meme)
+    else if (
       meme.name.toLowerCase().includes(search.toLowerCase()) ||
       meme.symbol.includes(search.toLowerCase())
     )
       result.push(meme)
-    return result
-  }, [])
-}
-
-export const getProductsBySearch = (productsState, productName) => {
-  return productsState.allIds.reduce((result, id) => {
-    if (
-      productsState.byId[id].title
-        .toLowerCase()
-        .indexOf(productName.toLowerCase()) >= 0 ||
-      productsState.byId[id].description.indexOf(productName.toLowerCase()) >= 0
-    )
-      result.push(productsState.byId[id])
     return result
   }, [])
 }

@@ -48,10 +48,9 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/offer/:memeId([0-9]*)" component={Offers} />
         <Route path="/portfolio" component={Portfolio} />
-        <Route path="/allmemes" component={AllMemes} />
-
+        <Route path="/allmemes" component={MemesBySearch} />
+        <Route exact path="/search" component={MemesBySearch} />
         <Route exact path="/search/:memeName" component={MemesBySearch} />
-        <Route exact path="/search" component={AllMemes} />
         <Route path="/trendingmemes" component={TrendingMemes} />
         <Route exact path="/" component={Homepage} />
         {isLoggedIn && (
