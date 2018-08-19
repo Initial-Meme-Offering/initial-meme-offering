@@ -65,11 +65,10 @@ router.post('/complete/:orderId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {userId, memeId, quantity, price, orderType} = req.body
-    const userMemeStock = await MemeStock.findAll({where: {userId, memeId}})
-    const numShares = userMemeStock
-      .map(memestock => memestock.dataValues.quantity)
-      .reduce((accumulator, quant) => accumulator + quant)
+    const userMemeStock = await MemeStock.findOne({where: {userId, memeId}})
+    const numShares = userMemeStock.dataValues.quantity
 
+    //error handling in case someone sends bad offers
     if (quantity <= 0 || price <= 0 || numShares < quantity) {
       const error = new Error('Not enough shares to sell or money to buy')
       next(error)
@@ -105,35 +104,47 @@ router.post('/', async (req, res, next) => {
       quantity: offer.dataValues.quantity
     }))
 
+
     const potentialOffers = getMatches(simpleOtherOffers, quantity)
-    const matchingOffers = potentialOffers[0].indexOf(',') > 0 ? potentialOffers[0].split(',') : Number(potentialOffers[0]) 
+    //sort to find least number of combinations to get match
+    potentialOffers.sort((a, b) => a.length < b.length)
+    //a bit unfair, but we pick the first.
+    const matchingOffers = potentialOffers[0]
 
-    console.log(matchingOffers)
     // if there's a match, create a transaction and set the status of all the offers in the
-    // if (matchingOffers) {
-    //   //create transaction record
-    //   const newTransaction = await Transaction.create({
-    //     quantity,
-    //     price,
-    //     memeId
-    //   })
+    if (matchingOffers.length > 0) {
+      console.log(quantity, 'quantity')
+      //update user stocks
+      orderType === 'sell'
+        ? await userMemeStock.update({
+            quantity: numShares - Number(quantity)
+          })
+        : await userMemeStock.update({quantity: numShares + Number(quantity)})
 
-    //   let transactionOffers = [offer]
-    //   await offer.update({status: 'Complete'})
-    //   // go through the offers and:
-    //   //   1. link transactions and offers
-    //   //   2. find and move shares between users
-    //   //   3. return offer object at the end
-      
-    //   for (let i = 0; i < matchingOffers.length; i++) {
-    //     const closedOffer = await Offer.findById(matchingOffers[i])
-    //     await closedOffer.update({status: 'Complete'})
-    //     transactionOffers.push(closedOffer)
-    //   }
-    //   await newTransaction.setOffers(transactionOffers)
-    // }
+      //   //create transaction record
+      const newTransaction = await Transaction.create({
+        quantity,
+        price,
+        memeId
+      })
 
-    // res.json(offer)
+      let transactionOffers = [offer]
+      await offer.update({status: 'Complete'})
+      // go through the offers and:
+      //   1. link transactions and offers
+      //   2. find and move shares between users
+      //   3. return offer object at the end
+
+      for (let i = 0; i < matchingOffers.length; i++) {
+        const closedOffer = await Offer.findById(matchingOffers[i])
+        await updateStockShares(closedOffer, orderType, memeId)
+        await closedOffer.update({status: 'Complete'})
+        transactionOffers.push(closedOffer)
+      }
+      await newTransaction.setOffers(transactionOffers)
+    }
+
+    res.json(offer)
   } catch (err) {
     next(err)
   }
@@ -162,7 +173,7 @@ const getMatches = (offers, target) => {
     // if the current quantity is already equal to target
     // immediately push to results, no need to enter second for loop
     if (+curOfferQty === +target) {
-      results.push('' + curOfferId)
+      results.push([curOfferId])
       continue
     }
 
@@ -174,12 +185,12 @@ const getMatches = (offers, target) => {
 
       // if total sum is found, add to result array
       if (+totalSum === +target) {
-        results.push(sumArrIds + ',' + curOfferId)
+        results.push(sumArrIds.concat([curOfferId]))
       } else if (+totalSum < +target) {
         // if total sum is less than target, store in sums array
         sumArrs.push({
           sum: totalSum,
-          ids: sumArrIds + ',' + curOfferId
+          ids: sumArrIds.concat([curOfferId])
         })
       }
     }
@@ -187,10 +198,31 @@ const getMatches = (offers, target) => {
     // store current quantity in sums array
     sumArrs.push({
       sum: curOfferQty,
-      ids: '' + curOfferId
+      ids: [curOfferId]
     })
   }
   return results
+}
+
+const updateStockShares = async (closedOffer, orderType, memeId) => {
+  const closedOfferQuant = closedOffer.dataValues.quantity
+  const closedOfferUser = closedOffer.dataValues.userId
+  const closedOfferUserStocks = await MemeStock.findOne({
+    where: {userId: closedOfferUser, memeId}
+  })
+  //get original quantity
+  const closedOfferNumShares = closedOfferUserStocks.dataValues.quantity
+
+  //takes the incoming order type and does the reverse ==> if the orderType incoming is sell, the matching offers
+  //are buy and so we want to add those shares to the user who created the offers shares. otherwise we want to
+  //deduct since it's a buy order incoming and the matching orders are share.
+  orderType === 'sell'
+    ? await closedOfferUserStocks.update({
+        quantity: closedOfferNumShares + closedOfferQuant
+      })
+    : await closedOfferUserStocks.update({
+        quantity: closedOfferNumShares - closedOfferQuant
+      })
 }
 
 const updateUserStock = async (
