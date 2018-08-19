@@ -95,9 +95,20 @@ export const userTotalStockChart = state => {
   }, [])
 }
 
+export const getSingleStockChart = (state, memeId) => {
+  return state.marketHistory.allIds.reduce((result, histId) => {
+    if (state.marketHistory.byId[histId].memeId == memeId)
+      result.push({
+        x: new Date(state.marketHistory.byId[histId].seedDateDay),
+        y: state.marketHistory.byId[histId].closingPrice
+      })
+    return result
+  }, [])
+}
+
+// Displays daily average from all matching stocks
 export const userAgregateStockChart = state => {
   const userStocks = userStockQuantitiesByMemeId(state)
-
   const dailyPrices = state.marketHistory.allIds.reduce((tally, histId) => {
     let historyRow = state.marketHistory.byId[histId]
     if (userStocks[historyRow.memeId]) {
@@ -109,7 +120,6 @@ export const userAgregateStockChart = state => {
     }
     return tally
   }, {})
-
   return Object.keys(dailyPrices).reduce((result, date) => {
     result.push({
       x: new Date(date),

@@ -1,5 +1,10 @@
 import React from 'react'
-import {PieChart, MarketChart, OfferObject} from '../components'
+import {
+  PieChart,
+  MarketChart,
+  OfferObject,
+  TotalStockObject
+} from '../components'
 import {
   getMemeStocksByUser,
   getUserPieChart,
@@ -24,7 +29,7 @@ class Portfolio extends React.Component {
   }
 
   render() {
-    const {lineChartData, pieChartData, offers} = this.props
+    const {lineChartData, pieChartData, offers, total} = this.props
     const url = this.props.match.url.split('/')[2]
     console.log('lineChartData', lineChartData)
     return (
@@ -72,20 +77,32 @@ class Portfolio extends React.Component {
         <div className="container">
           {!offers[0] || !offers[0].meme
             ? `No ${url} activity just yet`
-            : offers.map(offer => (
-                <OfferObject key={offer.id} meme={offer.meme} offer={offer} />
-              ))}
+            : offers.map(
+                offer =>
+                  total ? (
+                    <TotalStockObject key={offer.id} {...offer} />
+                  ) : (
+                    <OfferObject
+                      key={offer.id}
+                      meme={offer.meme}
+                      offer={offer}
+                    />
+                  )
+              )}
         </div>
       </section>
     )
   }
 }
 
+// const Total = <TotalStockObject key={id} {...offer} />
+// const Offer = <OfferObject key={offer.id} meme={offer.meme} offer={offer} />
+
 const mapBuy = state => {
   return {
     user: state.user,
     pieChartData: getUserPieChart(state),
-    lineChartData: userTotalStockChart(state),
+    lineChartData: userAgregateStockChart(state),
     offers: buyOffersByUser(state)
   }
 }
@@ -94,7 +111,7 @@ const mapSell = state => {
   return {
     user: state.user,
     pieChartData: getUserPieChart(state),
-    lineChartData: userTotalStockChart(state),
+    lineChartData: userAgregateStockChart(state),
     offers: sellOffersByUser(state)
   }
 }
@@ -112,8 +129,9 @@ const mapTotal = state => {
   return {
     user: state.user,
     pieChartData: getUserPieChart(state),
-    lineChartData: userTotalStockChart(state),
-    offers: getUserMemeStocksListItem(state)
+    lineChartData: userAgregateStockChart(state),
+    offers: getUserMemeStocksListItem(state),
+    total: true
   }
 }
 

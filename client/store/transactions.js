@@ -61,18 +61,6 @@ export const getTotalMarketChart = state => {
   }, [])
 }
 
-export const getSingleStockChart = (state, memeId) => {
-  return state.transactions.allIds.reduce((result, transId) => {
-    if (state.transactions.byId[transId].memeId == memeId) {
-      result.push({
-        x: new Date(state.transactions.byId[transId].seedDate),
-        y: state.transactions.byId[transId].price
-      })
-    }
-    return result
-  }, [])
-}
-
 export const getTrendingStocks = state => {
   const oneMonthAgo = new Date()
   oneMonthAgo.setDate(oneMonthAgo.getDate() - 30)

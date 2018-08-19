@@ -1,5 +1,9 @@
 import axios from 'axios'
-import {valueOfLastStockTrade, lastPurchasePriceByUser} from '../store'
+import {
+  valueOfLastStockTrade,
+  lastPurchasePriceByUser,
+  getSingleStockChart
+} from '../store'
 
 //ACTION TYPES
 const GET_MEMESTOCKS_BY_USER = 'GET_MEMESTOCKS_BY_USER'
@@ -74,6 +78,7 @@ export const getUserMemeStocksListItem = state => {
     meme: state.memes.byId[memeId],
     quantity: quantities[memeId],
     currentPrice: valueOfLastStockTrade(state, memeId),
-    lastPurchasePrice: lastPurchasePriceByUser(state, memeId)
+    lastPurchasePrice: lastPurchasePriceByUser(state, memeId),
+    chartData: getSingleStockChart(state, memeId)
   }))
 }

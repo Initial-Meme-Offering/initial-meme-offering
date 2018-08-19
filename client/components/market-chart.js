@@ -26,10 +26,6 @@ class MarketChart extends React.Component {
     return (
       <div>
         <h5 className="title is-5 has-text-centered">{title}</h5>
-        <br />
-        <h6 id="graph-subtitle" className="subtitle is-6">
-          averaged by daily closing value
-        </h6>
 
         <VictoryChart
           containerComponent={
