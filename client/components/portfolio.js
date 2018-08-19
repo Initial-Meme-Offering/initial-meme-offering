@@ -95,9 +95,6 @@ class Portfolio extends React.Component {
   }
 }
 
-// const Total = <TotalStockObject key={id} {...offer} />
-// const Offer = <OfferObject key={offer.id} meme={offer.meme} offer={offer} />
-
 const mapBuy = state => {
   return {
     user: state.user,

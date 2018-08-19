@@ -26,7 +26,6 @@ class MarketChart extends React.Component {
     return (
       <div>
         <h5 className="title is-5 has-text-centered">{title}</h5>
-
         <VictoryChart
           containerComponent={
             <VictoryZoomContainer

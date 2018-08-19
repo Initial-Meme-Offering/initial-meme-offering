@@ -29,7 +29,7 @@ const TotalStockObject = props => {
         <div className="column is-half">
           <MarketChart
             data={chartData}
-            title="Stock History"
+            title={`${meme.symbol} History`}
             x={chartData.x}
             y={chartData.y}
           />
