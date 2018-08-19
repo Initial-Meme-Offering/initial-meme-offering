@@ -33,14 +33,21 @@ router.post('/complete/:orderId', async (req, res, next) => {
   try {
     const newUserId = req.body.userId
     const orderId = req.params.orderId
-
     const completedOrder = await Offer.findById(orderId)
-    if (completedOrder.dataValues.userId === newUserId || completedOrder.dataValues.offerType === 'sell') {
+    const {
+      quantity,
+      price,
+      memeId,
+      userId,
+      offerType
+    } = completedOrder.dataValues
+
+    if (completedOrder.dataValues.userId === newUserId) {
       const error = new Error("Can't complete your own order")
       next(error)
     }
 
-    const {quantity, price, memeId, userId, offerType} = completedOrder.dataValues
+    await updateUserStock(userId, newUserId, quantity, offerType, memeId)
 
     await completedOrder.update({status: 'Complete'})
     const newTransaction = await Transaction.create({
@@ -49,10 +56,7 @@ router.post('/complete/:orderId', async (req, res, next) => {
       memeId
     })
     await newTransaction.setOffers([completedOrder])
-
-    //Transfer of shares
-    await updateUserStock(userId, newUserId, quantity, offerType, memeId)
-
+    res.json(completedOrder)
   } catch (err) {
     next(err)
   }
@@ -62,8 +66,9 @@ router.post('/', async (req, res, next) => {
   try {
     const {userId, memeId, quantity, price, offerType} = req.body
     const userMemeStock = await MemeStock.findAll({where: {userId, memeId}})
-    const numShares = userMemeStock.map(memestock => memestock.dataValues.quantity).reduce((accumulator, quantity) => accumulator + quantity)
-
+    const numShares = userMemeStock
+      .map(memestock => memestock.dataValues.quantity)
+      .reduce((accumulator, quantity) => accumulator + quantity)
 
     if (quantity <= 0 || price <= 0 || numShares < quantity) {
       const error = new Error('Not enough shares to sell or money to buy')
@@ -95,7 +100,11 @@ router.post('/', async (req, res, next) => {
       }
     })
 
-    const matchingOffers = getMatches(otherOffers, quantity)
+    const simpleOtherOffers = otherOffers.map(offer => ({id: offer.dataValues.id,
+      quantity: offer.dataValues.quantity
+    }))
+
+    const matchingOffers = getMatches(simpleOtherOffers, quantity)
     //if there's a match, create a transaction and set the status of all the offers in the
     if (matchingOffers) {
       //create transaction record
@@ -126,7 +135,6 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-
 const getMatches = (otherOffers, quantity) => {
   //loop through otherOffers to see if any combination matches to quantity
   for (let offer = 0; offer < otherOffers.length; offer++) {
@@ -155,28 +163,35 @@ const getMatches = (otherOffers, quantity) => {
   return false
 }
 
-const updateUserStock = async (origUserId, newUserId, orderQuantity, offerType, memeId) => {
-  const originalUserStock = await MemeStock.findOrCreate({
+const updateUserStock = async (
+  origUserId,
+  newUserId,
+  orderQuantity,
+  offerType,
+  memeId
+) => {
+  const originalUserStock = await MemeStock.findOne({
     where: {userId: origUserId, memeId}
   })
+
   const newUserStock = await MemeStock.findOrCreate({
     where: {userId: newUserId, memeId}
   })
 
   const origUserQuantity = originalUserStock.dataValues.quantity
-  const newUserQuantity = newUserStock.dataValues.quantity
+  const newUserQuantity = newUserStock[0].dataValues.quantity
 
-  if(offerType === 'sell'){
+  if (offerType === 'sell') {
     //cases of completing an open sell order - new user is buying the shares of stock for sale
-    const orig = await originalUserStock.update({quantity: origUserQuantity - orderQuantity})
-    const newStock = await newUserStock.update({quantity: newUserQuantity + orderQuantity})
-    console.log(orig)
-  console.log(newStock)
-  }
-  else {
+    await originalUserStock.update({
+      quantity: origUserQuantity - orderQuantity
+    })
+    await newUserStock[0].update({
+      quantity: newUserQuantity + orderQuantity
+    })
+  } else {
     //case of completing an open buy order - new user is selling their shares of stock to fulfill the buy order
     await originalUserStock.update({quantity: origUserQuantity + orderQuantity})
-    await newUserStock.update({quantity: newUserQuantity - orderQuantity})
+    await newUserStock[0].update({quantity: newUserQuantity - orderQuantity})
   }
-  
 }

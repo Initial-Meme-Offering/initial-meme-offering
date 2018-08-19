@@ -40,7 +40,7 @@ export const getMemeOrders = memeId => dispatch => {
 
 export const respondToOffer = (offerId, userId) => dispatch => {
   axios
-    .post(`/api/offers/complete/${offerId}`, userId)
+    .post(`/api/offers/complete/${offerId}`, {userId})
     .then(({data}) => {
       dispatch(removeOrder(data))
     })
