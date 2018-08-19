@@ -77,7 +77,7 @@ export const getUserMemeStocksListItem = state => {
     id: memeId,
     meme: state.memes.byId[memeId],
     quantity: quantities[memeId],
-    currentPrice: valueOfLastStockTrade(state, memeId),
+    currentPrice: valueOfLastStockTrade(state, memeId).price,
     lastPurchasePrice: lastPurchasePriceByUser(state, memeId),
     chartData: getSingleStockChart(state, memeId)
   }))
