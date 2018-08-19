@@ -1,31 +1,62 @@
 //Customized Variables
 
 //Initial variable (our color pallete)
-$red: #ea443c;
-$black: #080808;
-$darkgrey: #4d5560;
-$grey: #9cacbb;
-$lightgrey: #f5f9fc;
-$lightblue: #30c9e9;
+$red: #d70026;
+$night: #000b29;
+$pearl: #f8f5f2;
+$yellow: #edb83d;
+
+$family-sans-serif: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol';
+// $family-serif: 'Kreon', 'Georgia', serif; // add a serif family
+
+// $easing: ease-in-out;
+// $speed: 118ms;
+
+// $size-7: 0.875rem;
 
 //Derived variables
 $primary: $red;
+$background: $red;
 
 //Custom CSS
 
 //Navbar customization
-#nav-search {
-  margin: $size-3;
+
+#app {
+  background-color: $pearl;
 }
 
-.navbar {
-  font-size: 1.075rem;
+#navbar {
+  display: inline-block;
+  margin: 1em;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.body-center {
+  text-align: center;
+}
+
+#home-middle-section {
+  background-color: #edb83d;
 }
 
 .navbar-burger {
   height: auto;
 }
 
+#home-rel {
+  position: relative;
+  top: -50px;
+}
+
+#card-rel {
+  position: relative;
+  top: -200px;
+}
+
 #footer {
-  background-color: $lightgrey;
+  background-color: $night;
+  color: $pearl;
 }
