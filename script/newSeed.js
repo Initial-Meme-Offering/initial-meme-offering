@@ -150,14 +150,14 @@ async function preSeed() {
   await seedUsers()
   console.log('Users seeded')
 
-  async function seedComments() {
-    for (let i = 0; i < usercommentsdata.length; i++) {
-      await UserComment.create(usercommentsdata[i])
-    }
-  }
+  // async function seedComments() {
+  //   for (let i = 0; i < usercommentsdata.length; i++) {
+  //     await UserComment.create(usercommentsdata[i])
+  //   }
+  // }
 
-  await seedComments()
-  console.log('Comments seeded')
+  // await seedComments()
+  // console.log('Comments seeded')
 
   async function seedOffers() {
     for (let i = 0; i < offersdata.length; i++) {
@@ -191,9 +191,9 @@ async function seed() {
   //get previous data loaded
   const indices = await Indice.findAll()
   const allMemes = await Meme.findAll()
-  const usercomments = await UserComment.findAll()
-  const offers = await Offer.findAll()
-  const users = await User.findAll()
+  // const usercomments = await UserComment.findAll()
+  // const offers = await Offer.findAll()
+  // const users = await User.findAll()
   const memes = allMemes.slice(0, 5)
 
   async function seedMarketHistory() {
@@ -288,16 +288,16 @@ async function seed() {
   // await seedOfferTransactions()
   // console.log('Offer Transactions seeded')
 
-  async function seedUserComments() {
-    for (let i = 0; i < usercomments.length; i++) {
-      const randomUser = users.sort(shuffle)[0]
-      const randomMeme = memes.sort(shuffle)[0]
-      await usercomments[i].setUser(randomUser)
-      await usercomments[i].setMeme(randomMeme)
-    }
-  }
-  await seedUserComments()
-  console.log('User Comments seeded')
+  // async function seedUserComments() {
+  //   for (let i = 0; i < usercomments.length; i++) {
+  //     const randomUser = users.sort(shuffle)[0]
+  //     const randomMeme = memes.sort(shuffle)[0]
+  //     await usercomments[i].setUser(randomUser)
+  //     await usercomments[i].setMeme(randomMeme)
+  //   }
+  // }
+  // await seedUserComments()
+  // console.log('User Comments seeded')
 
   await db.sync()
   console.log(`seeded successfully`)
