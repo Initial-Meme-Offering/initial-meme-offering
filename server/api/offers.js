@@ -113,7 +113,6 @@ router.post('/', async (req, res, next) => {
 
     // if there's a match, create a transaction and set the status of all the offers in the
     if (matchingOffers.length > 0) {
-      console.log(quantity, 'quantity')
       //update user stocks
       orderType === 'sell'
         ? await userMemeStock.update({
