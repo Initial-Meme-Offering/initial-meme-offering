@@ -2,8 +2,6 @@ import React from 'react'
 import {
   PieChart,
   MarketChart,
-  OfferObject,
-  TotalStockObject,
   BuyPortfolio,
   SellPortfolio,
   TotalPortfolio,
@@ -12,13 +10,7 @@ import {
 import {
   getMemeStocksByUser,
   getUserPieChart,
-  buyOffersByUser,
-  sellOffersByUser,
   getOffers,
-  getUserMemeStocksListItem,
-  completedOffersByUser,
-  userTotalStockChart,
-  getSingleStockChart,
   userAgregateStockChart
 } from '../store'
 import {Route, Switch} from 'react-router-dom'
@@ -33,9 +25,7 @@ class Portfolio extends React.Component {
   }
 
   render() {
-    const {lineChartData, pieChartData, offers, total} = this.props
-    // const url = this.props.match.url.split('/')[2]
-    // console.log('lineChartData', lineChartData)
+    const {lineChartData, pieChartData} = this.props
     return (
       <section className="section is-medium">
         <div className="container">
@@ -69,79 +59,16 @@ class Portfolio extends React.Component {
           <Route exact path="/portfolio/total" component={TotalPortfolio} />
           <Route exact path="/portfolio" component={BuyPortfolio} />
         </Switch>
-        {/* <div className="container tabs">
-          <ul>
-            <li className={url === 'buy' ? 'is-active' : ''}>
-              <Link to="/portfolio/buy">Buy Orders</Link>
-            </li>
-            <li className={url === 'sell' ? 'is-active' : ''}>
-              <Link to="/portfolio/sell">Sell Orders</Link>
-            </li>
-            <li className={url === 'trans' ? 'is-active' : ''}>
-              <Link to="/portfolio/trans">Transaction History</Link>
-            </li>
-            <li className={url === 'total' ? 'is-active' : ''}>
-              <Link to="/portfolio/total">Total Meme Stock</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="container">
-          {!offers[0] || !offers[0].meme
-            ? `No ${url} activity just yet`
-            : offers.map(
-                offer =>
-                  total ? (
-                    <TotalStockObject key={offer.id} {...offer} />
-                  ) : (
-                    <OfferObject
-                      key={offer.id}
-                      meme={offer.meme}
-                      offer={offer}
-                    />
-                  )
-              )}
-        </div> */}
       </section>
     )
   }
 }
 
-const mapState = state => {
-  return {
-    user: state.user,
-    pieChartData: getUserPieChart(state),
-    lineChartData: userAgregateStockChart(state)
-    // offers: buyOffersByUser(state)
-  }
-}
-
-// const mapSell = state => {
-//   return {
-//     user: state.user,
-//     pieChartData: getUserPieChart(state),
-//     lineChartData: userAgregateStockChart(state)
-//     // offers: sellOffersByUser(state)
-//   }
-// }
-
-// const mapTrans = state => {
-//   return {
-//     user: state.user,
-//     pieChartData: getUserPieChart(state),
-//     lineChartData: userAgregateStockChart(state),
-//     offers: completedOffersByUser(state)
-//   }
-// }
-
-// const mapTotal = state => {
-//   return {
-//     user: state.user,
-//     pieChartData: getUserPieChart(state),
-//     lineChartData: userAgregateStockChart(state),
-//     offers: getUserMemeStocksListItem(state),
-//     total: true
-//   }
-// }
+const mapState = state => ({
+  user: state.user,
+  pieChartData: getUserPieChart(state),
+  lineChartData: userAgregateStockChart(state)
+})
 
 const mapDispatch = dispatch => ({
   getMemeStocksByUser: userId => dispatch(getMemeStocksByUser(userId)),
@@ -149,6 +76,3 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapState, mapDispatch)(Portfolio)
-// export const SellPortfolio = connect(mapSell, mapDispatch)(Portfolio)
-// export const TotalPortfolio = connect(mapTotal, mapDispatch)(Portfolio)
-// export const TransPortfolio = connect(mapTrans, mapDispatch)(Portfolio)

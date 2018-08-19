@@ -18,10 +18,10 @@ const TotalStockObject = props => {
                 <strong>Quantity Owned:</strong>&nbsp;{quantity}
               </p>
               <p>
-                <strong>Last Purchase Price:</strong>&nbsp;{lastPurchasePrice}
+                <strong>Last Purchase Price:</strong>&nbsp; ${lastPurchasePrice}
               </p>
               <p>
-                <strong>Currently Trending At:</strong>&nbsp;{currentPrice}
+                <strong>Trading At:</strong>&nbsp; ${currentPrice}
               </p>
             </div>
           </div>
