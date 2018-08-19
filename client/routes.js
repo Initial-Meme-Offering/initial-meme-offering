@@ -14,7 +14,8 @@ import {
   Offers,
   Portfolio,
   SingleMeme,
-  SubmitMeme
+  SubmitMeme,
+  MemesBySearch
 } from './components'
 import {
   me,
@@ -48,6 +49,9 @@ class Routes extends Component {
         <Route exact path="/offer/:memeId([0-9]*)" component={Offers} />
         <Route path="/portfolio" component={Portfolio} />
         <Route path="/allmemes" component={AllMemes} />
+
+        <Route exact path="/search/:memeName" component={MemesBySearch} />
+        <Route exact path="/search" component={AllMemes} />
         <Route path="/trendingmemes" component={TrendingMemes} />
         <Route exact path="/" component={Homepage} />
         {isLoggedIn && (

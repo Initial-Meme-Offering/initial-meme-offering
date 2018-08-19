@@ -49,3 +49,34 @@ export default function(state = defaultMemes, action) {
 }
 
 //SELECTORS
+export const allMemesList = state => {
+  return state.memes.allIds.reduce((result, memeId) => {
+    result.push(state.memes.byId[memeId])
+    return result
+  }, [])
+}
+
+export const memesListBySearch = (state, search) => {
+  return state.memes.allIds.reduce((result, id) => {
+    let meme = state.memes.byId[id]
+    if (
+      meme.name.toLowerCase().includes(search.toLowerCase()) ||
+      meme.symbol.includes(search.toLowerCase())
+    )
+      result.push(meme)
+    return result
+  }, [])
+}
+
+export const getProductsBySearch = (productsState, productName) => {
+  return productsState.allIds.reduce((result, id) => {
+    if (
+      productsState.byId[id].title
+        .toLowerCase()
+        .indexOf(productName.toLowerCase()) >= 0 ||
+      productsState.byId[id].description.indexOf(productName.toLowerCase()) >= 0
+    )
+      result.push(productsState.byId[id])
+    return result
+  }, [])
+}
