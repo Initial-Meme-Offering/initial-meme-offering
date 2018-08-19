@@ -13,6 +13,14 @@ class MarketChart extends React.Component {
     this.setState({zoomDomain: domain})
   }
 
+  componentDidMount() {
+    const {data} = this.props
+    if (data[0])
+      this.setState({
+        zoomDomain: {x: [data[0].x, data[data.length - 1].x]}
+      })
+  }
+
   componentDidUpdate(prevProps) {
     const {data} = this.props
     if (data[0] !== prevProps.data[0])
