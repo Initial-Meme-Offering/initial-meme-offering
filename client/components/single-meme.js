@@ -30,7 +30,7 @@ class SingleMeme extends React.Component {
     const allIds = memeOrders.allIds
     const byId = memeOrders.byId
     const {tabActive} = this.state
-    // const lastDate = moment(lastTrade.seedDate).format('LLL')
+
     return !meme ? (
       'Loading...'
     ) : (
@@ -81,7 +81,6 @@ class SingleMeme extends React.Component {
             return (byId[id].offerType === tabActive && byId[id].userId !== user.id ? (
               <SingleMemeOrder
                 orderType={tabActive}
-                meme={meme}
                 order={byId[id]}
                 key={id}
               />

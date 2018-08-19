@@ -2,6 +2,7 @@ import axios from 'axios'
 
 // ACTION TYPES
 const GET_MEME_ORDERS = 'GET_MEME_ORDERS'
+const REMOVE_ORDER = 'REMOVE_ORDER'
 
 //INITIAL STATE
 const defaultMemeOrders = {
@@ -25,10 +26,24 @@ const gotMemeOrders = orders => ({
   orders
 })
 
+const removeOrder = order => ({
+  type: REMOVE_ORDER,
+  order
+})
+
 export const getMemeOrders = memeId => dispatch => {
   axios
     .get(`/api/offers/${memeId}`)
     .then(({data}) => dispatch(gotMemeOrders(data)))
+    .catch(error => console.error(error))
+}
+
+export const respondToOffer = (offerId, userId) => dispatch => {
+  axios
+    .post(`/api/offers/complete/${offerId}`, userId)
+    .then(({data}) => {
+      dispatch(removeOrder(data))
+    })
     .catch(error => console.error(error))
 }
 
@@ -43,10 +58,11 @@ export default function(state = defaultMemeOrders, action) {
         }, {}),
         allIds: action.orders.map(order => order.id)
       }
+    case REMOVE_ORDER:
+      return state
     default:
       return state
   }
 }
 
 //SELECTORS
-

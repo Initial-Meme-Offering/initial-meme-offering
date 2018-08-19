@@ -1,13 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {respondToOffer} from '../../store'
 
 class SingleMemeOrder extends React.Component {
   handleClick = () => {
-
+    const {respondToOrder, user, order} = this.props
+    respondToOrder(order.id, user.id)
   }
 
   render() {
-    const {orderType, meme, order} = this.props
+    const {orderType, order} = this.props
     return (
       <div className="box no-pad">
         <div className="level">
@@ -26,16 +28,28 @@ class SingleMemeOrder extends React.Component {
             </div>
           </div>
           <div className="level-item has-text-centered">
-            <button className="button is-link" onClick={this.handleClick}>{orderType === 'buy' ? 'Buy' : 'Sell'}</button>
-          </div> 
+            {orderType === 'buy' ? (
+              <button
+                className="button is-link"
+                onClick={this.handleClick}
+                type="button"
+              >
+                'Buy'
+              </button>
+            ) : (
+              <span className="tag is-info">Sell</span>
+            )}
+          </div>
         </div>
       </div>
     )
   }
 }
 
-const mapState = (state, {match}) => ({})
+const mapState = (state, {match}) => ({user: state.user})
 
-const mapDispatch = dispatch => ({})
+const mapDispatch = dispatch => ({
+  respondToOrder: (offerId, userId) => dispatch(respondToOffer(offerId, userId))
+})
 
 export default connect(mapState, mapDispatch)(SingleMemeOrder)

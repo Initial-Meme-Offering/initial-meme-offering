@@ -4,34 +4,6 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 module.exports = router
 
-const getMatches = (otherOffers, quantity) => {
-  //loop through otherOffers to see if any combination matches to quantity
-  for (let offer = 0; offer < otherOffers.length; offer++) {
-    let matchingOffers = [otherOffers[offer].dataValues.id] //track offer ids that match to the sum
-    let quantitySum = otherOffers[offer].dataValues.quantity //track sum starting with current value
-    if (+quantitySum === +quantity) {
-      //found a match
-      return matchingOffers
-    }
-    for (let match = 0; match < otherOffers.length; match++) {
-      if (match === offer) {
-        continue //skip the same offer
-      }
-      const matchQuant = otherOffers[match].dataValues.quantity
-      const matchId = otherOffers[match].dataValues.id
-      if (+quantitySum + +matchQuant < +quantity) {
-        quantitySum = +quantitySum + +matchQuant //add the current quantity to the temporary sum
-        matchingOffers.push(matchId) //push the id into the potential matching offers array
-      } else if (+quantitySum + +matchQuant === +quantity) {
-        //found a match
-        matchingOffers.push(matchId) //make sure to include the offerId in our array of offers
-        return matchingOffers
-      }
-    }
-  }
-  return false
-}
-
 router.get('/', async (req, res, next) => {
   try {
     const offers = await Offer.findAll({})
@@ -52,6 +24,36 @@ router.get('/:memeId', async (req, res, next) => {
       limit: 100
     })
     res.json(offers)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/complete/:orderId', async (req, res, next) => {
+  try {
+    const newUserId = req.body.userId
+    const orderId = req.params.orderId
+
+    const completedOrder = await Offer.findById(orderId)
+    if (completedOrder.dataValues.userId === newUserId) {
+      const error = new Error()
+      error.message = "Can't complete your own order"
+      next(error)
+    }
+
+    console.log(completedOrder.dataValues)
+    const {quantity, price, memeId, userId, type} = completedOrder.dataValues
+
+    await completedOrder.update({status: 'Complete'})
+    const newTransaction = await Transaction.create({
+      quantity,
+      price,
+      memeId
+    })
+    await newTransaction.setOffers([completedOrder])
+
+    //Transfer of shares
+
   } catch (err) {
     next(err)
   }
@@ -123,3 +125,41 @@ router.post('/', async (req, res, next) => {
     next(err)
   }
 })
+
+
+const getMatches = (otherOffers, quantity) => {
+  //loop through otherOffers to see if any combination matches to quantity
+  for (let offer = 0; offer < otherOffers.length; offer++) {
+    let matchingOffers = [otherOffers[offer].dataValues.id] //track offer ids that match to the sum
+    let quantitySum = otherOffers[offer].dataValues.quantity //track sum starting with current value
+    if (+quantitySum === +quantity) {
+      //found a match
+      return matchingOffers
+    }
+    for (let match = 0; match < otherOffers.length; match++) {
+      if (match === offer) {
+        continue //skip the same offer
+      }
+      const matchQuant = otherOffers[match].dataValues.quantity
+      const matchId = otherOffers[match].dataValues.id
+      if (+quantitySum + +matchQuant < +quantity) {
+        quantitySum = +quantitySum + +matchQuant //add the current quantity to the temporary sum
+        matchingOffers.push(matchId) //push the id into the potential matching offers array
+      } else if (+quantitySum + +matchQuant === +quantity) {
+        //found a match
+        matchingOffers.push(matchId) //make sure to include the offerId in our array of offers
+        return matchingOffers
+      }
+    }
+  }
+  return false
+}
+
+const updateUserStock = async (origUserId, newUserId, orderQuantity) => {
+  const originalUserStock = await MemeStock.findOrCreate({
+    where: {origUserId, memeId}
+  })
+  const newUserStock = await MemeStock.findOrCreate({
+    where: {newUserId, memeId}
+  })
+}
