@@ -35,14 +35,14 @@ router.post('/complete/:orderId', async (req, res, next) => {
     const orderId = req.params.orderId
 
     const completedOrder = await Offer.findById(orderId)
-    if (completedOrder.dataValues.userId === newUserId) {
+    if (completedOrder.dataValues.userId === newUserId || completedOrder.dataValues.offerType === 'sell') {
       const error = new Error()
       error.message = "Can't complete your own order"
       next(error)
     }
 
     console.log(completedOrder.dataValues)
-    const {quantity, price, memeId, userId, type} = completedOrder.dataValues
+    const {quantity, price, memeId, userId, offerType} = completedOrder.dataValues
 
     await completedOrder.update({status: 'Complete'})
     const newTransaction = await Transaction.create({
@@ -53,6 +53,7 @@ router.post('/complete/:orderId', async (req, res, next) => {
     await newTransaction.setOffers([completedOrder])
 
     //Transfer of shares
+    await updateUserStock(userId, newUserId, quantity, offerType)
 
   } catch (err) {
     next(err)
@@ -155,11 +156,14 @@ const getMatches = (otherOffers, quantity) => {
   return false
 }
 
-const updateUserStock = async (origUserId, newUserId, orderQuantity) => {
+const updateUserStock = async (origUserId, newUserId, orderQuantity, offerType) => {
   const originalUserStock = await MemeStock.findOrCreate({
     where: {origUserId, memeId}
   })
   const newUserStock = await MemeStock.findOrCreate({
     where: {newUserId, memeId}
   })
+
+  const origQuantity = originalUserStock.dataValues.quantity
+  const {quantity} = newUserStock.dataValues.quantity
 }
