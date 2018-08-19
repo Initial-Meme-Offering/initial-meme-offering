@@ -63,9 +63,11 @@ router.post('/complete/:orderId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {userId, memeId, quantity, price, offerType} = req.body
-    const userMemeStock = await MemeStock.findById(memeId)
+    const userMemeStock = await MemeStock.findAll({where: {userId, memeId}})
+    const numShares = userMemeStock.map(memestock => memestock.dataValues.quantity).reduce((accumulator, quantity) => accumulator + quantity)
 
-    if (quantity <= 0 || price <= 0) {
+
+    if (quantity <= 0 || price <= 0 || numShares < quantity) {
       const error = new Error()
       error.message = 'Not enough shares to sell or money to buy'
       next(error)
