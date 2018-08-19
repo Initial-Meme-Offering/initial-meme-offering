@@ -1,7 +1,7 @@
 import React from 'react'
 
 const OfferObject = props => {
-  const {meme, offer} = props
+  const {meme, status, offerType, price, quantity} = props
   return (
     <div className="box no-pad">
       <div className="level">
@@ -15,19 +15,17 @@ const OfferObject = props => {
         <div className="level-item has-text-centered">
           <div>
             <p className="heading">Quantity</p>
-            <p className="title">{offer.quantity}</p>
+            <p className="title">{quantity}</p>
           </div>
         </div>
         <div className="level-item has-text-centered">
           <div>
             <p className="heading">
-              {offer.status === 'Completed'
-                ? offer.offerType === 'sell'
-                  ? 'Completed Sale'
-                  : 'Completed Purchase'
-                : offer.offerType === 'sell' ? 'Sell Order' : 'Buy Order'}
+              {status === 'Completed'
+                ? offerType === 'sell' ? 'Completed Sale' : 'Completed Purchase'
+                : offerType === 'sell' ? 'Sell Order' : 'Buy Order'}
             </p>
-            <p className="title">{`$${offer.price}`}</p>
+            <p className="title">{`$${price}`}</p>
           </div>
         </div>
       </div>

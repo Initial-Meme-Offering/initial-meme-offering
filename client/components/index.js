@@ -18,7 +18,8 @@ export {
   SellPortfolio,
   TotalPortfolio,
   TransPortfolio
-} from './portfolio'
+} from './portfolio-tabs'
+export {default as Portfolio} from './portfolio'
 export {default as PieChart} from './pie-chart'
 export {default as AllMemes} from './all-memes'
 export {default as Homepage} from './homepage'

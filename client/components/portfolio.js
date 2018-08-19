@@ -3,7 +3,11 @@ import {
   PieChart,
   MarketChart,
   OfferObject,
-  TotalStockObject
+  TotalStockObject,
+  BuyPortfolio,
+  SellPortfolio,
+  TotalPortfolio,
+  TransPortfolio
 } from '../components'
 import {
   getMemeStocksByUser,
@@ -17,7 +21,7 @@ import {
   getSingleStockChart,
   userAgregateStockChart
 } from '../store'
-import {Link} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 class Portfolio extends React.Component {
@@ -30,8 +34,8 @@ class Portfolio extends React.Component {
 
   render() {
     const {lineChartData, pieChartData, offers, total} = this.props
-    const url = this.props.match.url.split('/')[2]
-    console.log('lineChartData', lineChartData)
+    // const url = this.props.match.url.split('/')[2]
+    // console.log('lineChartData', lineChartData)
     return (
       <section className="section is-medium">
         <div className="container">
@@ -58,7 +62,14 @@ class Portfolio extends React.Component {
             </div>
           </div>
         </div>
-        <div className="container tabs">
+        <Switch>
+          <Route exact path="/portfolio/buy" component={BuyPortfolio} />
+          <Route exact path="/portfolio/sell" component={SellPortfolio} />
+          <Route exact path="/portfolio/trans" component={TransPortfolio} />
+          <Route exact path="/portfolio/total" component={TotalPortfolio} />
+          <Route exact path="/portfolio" component={BuyPortfolio} />
+        </Switch>
+        {/* <div className="container tabs">
           <ul>
             <li className={url === 'buy' ? 'is-active' : ''}>
               <Link to="/portfolio/buy">Buy Orders</Link>
@@ -89,55 +100,55 @@ class Portfolio extends React.Component {
                     />
                   )
               )}
-        </div>
+        </div> */}
       </section>
     )
   }
 }
 
-const mapBuy = state => {
+const mapState = state => {
   return {
     user: state.user,
     pieChartData: getUserPieChart(state),
-    lineChartData: userAgregateStockChart(state),
-    offers: buyOffersByUser(state)
+    lineChartData: userAgregateStockChart(state)
+    // offers: buyOffersByUser(state)
   }
 }
 
-const mapSell = state => {
-  return {
-    user: state.user,
-    pieChartData: getUserPieChart(state),
-    lineChartData: userAgregateStockChart(state),
-    offers: sellOffersByUser(state)
-  }
-}
+// const mapSell = state => {
+//   return {
+//     user: state.user,
+//     pieChartData: getUserPieChart(state),
+//     lineChartData: userAgregateStockChart(state)
+//     // offers: sellOffersByUser(state)
+//   }
+// }
 
-const mapTrans = state => {
-  return {
-    user: state.user,
-    pieChartData: getUserPieChart(state),
-    lineChartData: userAgregateStockChart(state),
-    offers: completedOffersByUser(state)
-  }
-}
+// const mapTrans = state => {
+//   return {
+//     user: state.user,
+//     pieChartData: getUserPieChart(state),
+//     lineChartData: userAgregateStockChart(state),
+//     offers: completedOffersByUser(state)
+//   }
+// }
 
-const mapTotal = state => {
-  return {
-    user: state.user,
-    pieChartData: getUserPieChart(state),
-    lineChartData: userAgregateStockChart(state),
-    offers: getUserMemeStocksListItem(state),
-    total: true
-  }
-}
+// const mapTotal = state => {
+//   return {
+//     user: state.user,
+//     pieChartData: getUserPieChart(state),
+//     lineChartData: userAgregateStockChart(state),
+//     offers: getUserMemeStocksListItem(state),
+//     total: true
+//   }
+// }
 
 const mapDispatch = dispatch => ({
   getMemeStocksByUser: userId => dispatch(getMemeStocksByUser(userId)),
   getOffers: () => dispatch(getOffers())
 })
 
-export const BuyPortfolio = connect(mapBuy, mapDispatch)(Portfolio)
-export const SellPortfolio = connect(mapSell, mapDispatch)(Portfolio)
-export const TotalPortfolio = connect(mapTotal, mapDispatch)(Portfolio)
-export const TransPortfolio = connect(mapTrans, mapDispatch)(Portfolio)
+export default connect(mapState, mapDispatch)(Portfolio)
+// export const SellPortfolio = connect(mapSell, mapDispatch)(Portfolio)
+// export const TotalPortfolio = connect(mapTotal, mapDispatch)(Portfolio)
+// export const TransPortfolio = connect(mapTrans, mapDispatch)(Portfolio)
