@@ -13,6 +13,7 @@ import {
   TrendingMemes,
   Offers,
   Portfolio,
+  SingleMeme,
   SubmitMeme
 } from './components'
 import {
@@ -38,6 +39,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route path="/allmemes/:memeId" component={SingleMeme} />
         <Route path="/submit" component={SubmitMeme} />
         <Route path="/indices" component={Homepage} />
         <Route path="/index/:indiceId" component={SingleIndice} />
