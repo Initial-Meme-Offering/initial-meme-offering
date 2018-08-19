@@ -102,6 +102,7 @@ export const getTrendingStocks = state => {
 //   return -1
 // }
 
+// Modified the above function so that state was not the arugment being passed in
 export const valueOfLastStockTrade = (transactions, memeId) => {
   const len = transactions.allIds.length
   for (let i = len; i >= 1; i--) {
