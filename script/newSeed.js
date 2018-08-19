@@ -15,7 +15,7 @@ const {memesdata, usersdata, usercommentsdata} = require('./seedData1')
 const {
   offersdata
 } = require('./seedData2')
-const {memestocksdata, transactionsdata, indicesdata} = require('./seedData3')
+const {memestocksdata, indicesdata} = require('./seedData3')
 
 const shuffle = () => 0.5 - Math.random()
 //will be used to add 5 minute intervals of time to dates added to the database for current transaction data
@@ -277,16 +277,16 @@ async function seed() {
 
   const transactions = await Transaction.findAll()
 
-  async function seedOfferTransactions() {
-    for (let i = 0; i < transactions.length; i++) {
-      const randomOffers = offers.sort(shuffle).slice(0, 2)
-      await transactions[i].setOffers(randomOffers)
-    }
-    return transactions
-  }
+  // async function seedOfferTransactions() {
+  //   for (let i = 0; i < transactions.length; i++) {
+  //     const randomOffers = offers.sort(shuffle).slice(0, 2)
+  //     await transactions[i].setOffers(randomOffers)
+  //   }
+  //   return transactions
+  // }
 
-  await seedOfferTransactions()
-  console.log('Offer Transactions seeded')
+  // await seedOfferTransactions()
+  // console.log('Offer Transactions seeded')
 
   async function seedUserComments() {
     for (let i = 0; i < usercomments.length; i++) {
