@@ -37,12 +37,7 @@ class MemeList extends Component {
           <div className="columns is-multiline">
             {memes.map(meme => (
               <div key={meme.id} className="column is-4">
-                <SmallStockCard
-                  image={meme.imageUrl}
-                  name={meme.name}
-                  id={meme.id}
-                  symbol={meme.symbol}
-                />
+                <SmallStockCard meme={meme} />
               </div>
             ))}
           </div>
