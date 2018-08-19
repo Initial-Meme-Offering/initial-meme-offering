@@ -4,12 +4,12 @@ import {respondToOffer} from '../../store'
 
 class SingleMemeOrder extends React.Component {
   handleClick = () => {
-    const {respondToOrder, user, order} = this.props
-    respondToOrder(order.id, user.id)
+    const {respondToOffer, user, order} = this.props
+    respondToOffer(order.id, user.id)
   }
 
   render() {
-    const {orderType, order} = this.props
+    const {orderType, order, memeId, memeStocks} = this.props
     return (
       <div className="box no-pad">
         <div className="level">
@@ -28,16 +28,24 @@ class SingleMemeOrder extends React.Component {
             </div>
           </div>
           <div className="level-item has-text-centered">
-            {orderType === 'buy' ? (
+            {orderType === 'buy' &&
+            memeStocks[memeId] &&
+            memeStocks[memeId].quantity >= order.quantity ? (
               <button
                 className="button is-link"
                 onClick={this.handleClick}
                 type="button"
               >
-                'Buy'
+                Sell
               </button>
-            ) : (
-              <span className="tag is-info">Sell</span>
+            ) : (orderType === 'sell' ?
+              <button
+                className="button is-link"
+                onClick={this.handleClick}
+                type="button"
+              >
+                Buy
+              </button> : ''
             )}
           </div>
         </div>
@@ -46,10 +54,13 @@ class SingleMemeOrder extends React.Component {
   }
 }
 
-const mapState = (state, {match}) => ({user: state.user})
+const mapState = (state, {match}) => ({
+  user: state.user,
+  memeStocks: state.memeStocks.byId
+})
 
 const mapDispatch = dispatch => ({
-  respondToOrder: (offerId, userId) => dispatch(respondToOffer(offerId, userId))
+  respondToOffer: (offerId, userId) => dispatch(respondToOffer(offerId, userId))
 })
 
 export default connect(mapState, mapDispatch)(SingleMemeOrder)

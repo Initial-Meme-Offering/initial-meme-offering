@@ -80,6 +80,7 @@ class SingleMeme extends React.Component {
           {allIds.map(id => {
             return (byId[id].offerType === tabActive && byId[id].userId !== user.id ? (
               <SingleMemeOrder
+                memeId={meme.id}
                 orderType={tabActive}
                 order={byId[id]}
                 key={id}
