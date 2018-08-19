@@ -64,11 +64,11 @@ router.post('/complete/:orderId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const {userId, memeId, quantity, price, offerType} = req.body
+    const {userId, memeId, quantity, price, orderType} = req.body
     const userMemeStock = await MemeStock.findAll({where: {userId, memeId}})
     const numShares = userMemeStock
       .map(memestock => memestock.dataValues.quantity)
-      .reduce((accumulator, quantity) => accumulator + quantity)
+      .reduce((accumulator, quant) => accumulator + quant)
 
     if (quantity <= 0 || price <= 0 || numShares < quantity) {
       const error = new Error('Not enough shares to sell or money to buy')
@@ -76,7 +76,7 @@ router.post('/', async (req, res, next) => {
     }
 
     const offer = await Offer.create({
-      offerType,
+      offerType: orderType,
       quantity,
       price,
       memeId,
@@ -87,7 +87,7 @@ router.post('/', async (req, res, next) => {
     const otherOffers = await Offer.findAll({
       where: {
         offerType: {
-          [Op.ne]: offerType
+          [Op.ne]: orderType
         },
         price,
         memeId,
@@ -100,67 +100,97 @@ router.post('/', async (req, res, next) => {
       }
     })
 
-    const simpleOtherOffers = otherOffers.map(offer => ({id: offer.dataValues.id,
+    const simpleOtherOffers = otherOffers.map(offer => ({
+      id: offer.dataValues.id,
       quantity: offer.dataValues.quantity
     }))
 
-    const matchingOffers = getMatches(simpleOtherOffers, quantity)
-    //if there's a match, create a transaction and set the status of all the offers in the
-    if (matchingOffers) {
-      //create transaction record
-      const newTransaction = await Transaction.create({
-        quantity,
-        price,
-        memeId
-      })
+    const potentialOffers = getMatches(simpleOtherOffers, quantity)
+    const matchingOffers = potentialOffers[0].indexOf(',') > 0 ? potentialOffers[0].split(',') : Number(potentialOffers[0]) 
 
-      let transactionOffers = [offer]
-      await offer.update({status: 'Complete'})
-      /*go through the offers and:
-        1. link transactions and offers
-        2. find and move shares between users
-        3. return offer object at the end
-      */
-      for (let i = 0; i < matchingOffers.length; i++) {
-        const closedOffer = await Offer.findById(matchingOffers[i])
-        await closedOffer.update({status: 'Complete'})
-        transactionOffers.push(closedOffer)
-      }
-      await newTransaction.setOffers(transactionOffers)
-    }
+    console.log(matchingOffers)
+    // if there's a match, create a transaction and set the status of all the offers in the
+    // if (matchingOffers) {
+    //   //create transaction record
+    //   const newTransaction = await Transaction.create({
+    //     quantity,
+    //     price,
+    //     memeId
+    //   })
 
-    res.json(offer)
+    //   let transactionOffers = [offer]
+    //   await offer.update({status: 'Complete'})
+    //   // go through the offers and:
+    //   //   1. link transactions and offers
+    //   //   2. find and move shares between users
+    //   //   3. return offer object at the end
+      
+    //   for (let i = 0; i < matchingOffers.length; i++) {
+    //     const closedOffer = await Offer.findById(matchingOffers[i])
+    //     await closedOffer.update({status: 'Complete'})
+    //     transactionOffers.push(closedOffer)
+    //   }
+    //   await newTransaction.setOffers(transactionOffers)
+    // }
+
+    // res.json(offer)
   } catch (err) {
     next(err)
   }
 })
 
-const getMatches = (otherOffers, quantity) => {
-  //loop through otherOffers to see if any combination matches to quantity
-  for (let offer = 0; offer < otherOffers.length; offer++) {
-    let matchingOffers = [otherOffers[offer].dataValues.id] //track offer ids that match to the sum
-    let quantitySum = otherOffers[offer].dataValues.quantity //track sum starting with current value
-    if (+quantitySum === +quantity) {
-      //found a match
-      return matchingOffers
+const getMatches = (offers, target) => {
+  // instantiate sum array with first offer quantity and id
+  const initialQty = +offers[0].quantity
+  const initialId = '' + offers[0].id
+
+  const sumArrs = [
+    {
+      sum: initialQty,
+      ids: initialId
     }
-    for (let match = 0; match < otherOffers.length; match++) {
-      if (match === offer) {
-        continue //skip the same offer
-      }
-      const matchQuant = otherOffers[match].dataValues.quantity
-      const matchId = otherOffers[match].dataValues.id
-      if (+quantitySum + +matchQuant < +quantity) {
-        quantitySum = +quantitySum + +matchQuant //add the current quantity to the temporary sum
-        matchingOffers.push(matchId) //push the id into the potential matching offers array
-      } else if (+quantitySum + +matchQuant === +quantity) {
-        //found a match
-        matchingOffers.push(matchId) //make sure to include the offerId in our array of offers
-        return matchingOffers
+  ]
+
+  const results = initialQty === target ? ['' + initialId] : []
+  // loop through each of the offers,
+  // starts at one since zeroth index offer is already in sums array
+  for (let i = 0; i < offers.length; i++) {
+    const curOfferId = offers[i].id
+    const curOfferQty = offers[i].quantity
+    const curLength = sumArrs.length
+
+    // if the current quantity is already equal to target
+    // immediately push to results, no need to enter second for loop
+    if (+curOfferQty === +target) {
+      results.push('' + curOfferId)
+      continue
+    }
+
+    // second loop adds current quantity to each sum quantity in sums array
+    for (let j = 0; j < curLength; j++) {
+      const sumArrIds = sumArrs[j].ids
+      const sumArrSum = sumArrs[j].sum
+      const totalSum = sumArrSum + curOfferQty
+
+      // if total sum is found, add to result array
+      if (+totalSum === +target) {
+        results.push(sumArrIds + ',' + curOfferId)
+      } else if (+totalSum < +target) {
+        // if total sum is less than target, store in sums array
+        sumArrs.push({
+          sum: totalSum,
+          ids: sumArrIds + ',' + curOfferId
+        })
       }
     }
+
+    // store current quantity in sums array
+    sumArrs.push({
+      sum: curOfferQty,
+      ids: '' + curOfferId
+    })
   }
-  return false
+  return results
 }
 
 const updateUserStock = async (

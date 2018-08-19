@@ -20,6 +20,7 @@ class OrderForm extends React.Component {
   handleOfferFormSubmit = data => {
     const {userId, meme} = this.props
     const {quantity, price, orderType} = data
+    
     if (userId > 0) {
       this.props.postOffer({
         userId,
@@ -28,7 +29,7 @@ class OrderForm extends React.Component {
         price,
         orderType
       })
-      history.push('/portfolio')
+      // history.push('/portfolio')
     } else {
       history.push('/login')
     }
