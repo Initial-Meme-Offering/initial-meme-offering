@@ -9,7 +9,8 @@ const getMatches = (otherOffers, quantity) => {
   for (let offer = 0; offer < otherOffers.length; offer++) {
     let matchingOffers = [otherOffers[offer].dataValues.id] //track offer ids that match to the sum
     let quantitySum = otherOffers[offer].dataValues.quantity //track sum starting with current value
-    if (+quantitySum === +quantity) {//found a match
+    if (+quantitySum === +quantity) {
+      //found a match
       return matchingOffers
     }
     for (let match = 0; match < otherOffers.length; match++) {
@@ -21,7 +22,8 @@ const getMatches = (otherOffers, quantity) => {
       if (+quantitySum + +matchQuant < +quantity) {
         quantitySum = +quantitySum + +matchQuant //add the current quantity to the temporary sum
         matchingOffers.push(matchId) //push the id into the potential matching offers array
-      } else if (+quantitySum + +matchQuant === +quantity) { //found a match
+      } else if (+quantitySum + +matchQuant === +quantity) {
+        //found a match
         matchingOffers.push(matchId) //make sure to include the offerId in our array of offers
         return matchingOffers
       }
@@ -39,12 +41,27 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:memeId', async (req, res, next) => {
+  try {
+    const memeId = req.params.memeId
+    const offers = await Offer.findAll({
+      where: {
+        status: 'Pending',
+        memeId
+      },
+      limit: 100
+    })
+    res.json(offers)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const {userId, memeId, quantity, price, offerType} = req.body
     const userMemeStock = await MemeStock.findById(memeId)
 
-    //dynamic programming 
     if (quantity <= 0 || price <= 0) {
       const error = new Error()
       error.message = 'Not enough shares to sell or money to buy'
@@ -76,9 +93,6 @@ router.post('/', async (req, res, next) => {
       }
     })
 
-    // otherOffers.sort((a,b)=> a.dataValues.quantity < b.dataValues.quantity)
-
-
     const matchingOffers = getMatches(otherOffers, quantity)
     //if there's a match, create a transaction and set the status of all the offers in the
     if (matchingOffers) {
@@ -102,8 +116,6 @@ router.post('/', async (req, res, next) => {
         transactionOffers.push(closedOffer)
       }
       await newTransaction.setOffers(transactionOffers)
-
-
     }
 
     res.json(offer)

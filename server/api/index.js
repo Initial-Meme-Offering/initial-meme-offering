@@ -8,6 +8,7 @@ router.use('/transactions', require('./transactions'))
 router.use('/indices', require('./indices'))
 router.use('/memeIndices', require('./meme-indices'))
 router.use('/markethistory', require('./market-history'))
+router.use('/offers', require('./offers'))
 
 function isAdmin(req, res, next) {
   if (req.user && req.user.dataValues.isAdmin) {
@@ -28,7 +29,6 @@ function isUser(req, res, next) {
     next(error)
   }
 }
-router.use('/offers', isUser, require('./offers'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')

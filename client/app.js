@@ -8,9 +8,7 @@ const App = () => {
   return (
     <div id="app">
       <Navbar />
-      {/* <section className="section is-small"> */}
       <Routes />
-      {/* </section> */}
       <Footer />
     </div>
   )

@@ -11,6 +11,7 @@ import indices from './indices'
 import memeIndices from './meme-indices'
 import marketHistory from './market-history'
 import offers from './offers'
+import memeOrders from './meme-orders'
 
 const reducer = combineReducers({
   user,
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   memeIndices,
   marketHistory,
   offers,
+  memeOrders,
   form: formReducer
 })
 const middleware = composeWithDevTools(
@@ -37,3 +39,4 @@ export * from './indices'
 export * from './meme-indices'
 export * from './market-history'
 export * from './offers'
+export * from './meme-orders'

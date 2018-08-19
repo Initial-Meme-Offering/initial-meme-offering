@@ -38,6 +38,8 @@ class OrderForm extends React.Component {
     const {lastTrade, meme, memeStocks, handleSubmit, userId} = this.props
     return (
       <form onSubmit={handleSubmit(this.handleOfferFormSubmit.bind(this))}>
+      <p className="subtitle">Enter Order</p> 
+      <div className="field is-grouped">
         <Field name="quantity" component={renderQuantityField} type="text" />
         <Field
           name="price"
@@ -45,7 +47,6 @@ class OrderForm extends React.Component {
           type="number"
           placeholder={!lastTrade.price ? '' : lastTrade.price}
         />
-        <div className="field is-grouped">
           {memeStocks[meme.id] && memeStocks[meme.id].quantity > 0 ? (
             <Field
               name="orderType"
