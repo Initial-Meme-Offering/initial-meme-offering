@@ -6,11 +6,19 @@ class MarketChart extends React.Component {
     zoomDomain: {
       x: [new Date('2016'), new Date('2018')],
       y: [0, 80]
-    }
+    },
+    allowZoom: false
+  }
+
+  handleClick = evt => {
+    console.log('clicked')
+    this.setState({
+      allowZoom: () => !this.state.allowZoom
+    })
   }
 
   handleZoom = domain => {
-    this.setState({zoomDomain: domain})
+    if (this.state.allowZoom) this.setState({zoomDomain: domain})
   }
 
   componentDidMount() {
@@ -31,7 +39,6 @@ class MarketChart extends React.Component {
 
   render() {
     const {x, y, title, data} = this.props
-    console.log(this.props)
     return (
       <div>
         <h5 className="title is-5 has-text-centered">{title}</h5>
