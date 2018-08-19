@@ -39,11 +39,8 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-<<<<<<< HEAD
         <Route path="/allmemes/:memeId" component={SingleMeme} />
-=======
         <Route path="/submit" component={SubmitMeme} />
->>>>>>> master
         <Route path="/index/:indiceId" component={SingleIndice} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
