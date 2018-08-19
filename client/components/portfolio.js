@@ -3,12 +3,14 @@ import {PieChart, MarketChart, OfferObject} from '../components'
 import {
   getMemeStocksByUser,
   getUserPieChart,
-  getSingleStockChart,
   buyOffersByUser,
   sellOffersByUser,
   getOffers,
   getUserMemeStocksListItem,
-  completedOffersByUser
+  completedOffersByUser,
+  userTotalStockChart,
+  getSingleStockChart,
+  userAgregateStockChart
 } from '../store'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
@@ -24,7 +26,7 @@ class Portfolio extends React.Component {
   render() {
     const {lineChartData, pieChartData, offers} = this.props
     const url = this.props.match.url.split('/')[2]
-    console.log('pieChart', pieChartData)
+    console.log('lineChartData', lineChartData)
     return (
       <section className="section is-medium">
         <div className="container">
@@ -83,7 +85,7 @@ const mapBuy = state => {
   return {
     user: state.user,
     pieChartData: getUserPieChart(state),
-    lineChartData: getSingleStockChart(state, state.user.id),
+    lineChartData: userTotalStockChart(state),
     offers: buyOffersByUser(state)
   }
 }
@@ -92,7 +94,7 @@ const mapSell = state => {
   return {
     user: state.user,
     pieChartData: getUserPieChart(state),
-    lineChartData: getSingleStockChart(state, state.user.id),
+    lineChartData: userTotalStockChart(state),
     offers: sellOffersByUser(state)
   }
 }
@@ -101,7 +103,7 @@ const mapTrans = state => {
   return {
     user: state.user,
     pieChartData: getUserPieChart(state),
-    lineChartData: getSingleStockChart(state, state.user.id),
+    lineChartData: userAgregateStockChart(state),
     offers: completedOffersByUser(state)
   }
 }
@@ -110,7 +112,7 @@ const mapTotal = state => {
   return {
     user: state.user,
     pieChartData: getUserPieChart(state),
-    lineChartData: getSingleStockChart(state, state.user.id),
+    lineChartData: userTotalStockChart(state),
     offers: getUserMemeStocksListItem(state)
   }
 }

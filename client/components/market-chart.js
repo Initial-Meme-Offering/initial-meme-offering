@@ -28,7 +28,7 @@ class MarketChart extends React.Component {
         <h5 className="title is-5 has-text-centered">{title}</h5>
         <br />
         <h6 id="graph-subtitle" className="subtitle is-6">
-          scroll chart for more detail by date
+          averaged by daily closing value
         </h6>
 
         <VictoryChart
