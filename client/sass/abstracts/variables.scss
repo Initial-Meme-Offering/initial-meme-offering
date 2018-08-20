@@ -30,9 +30,8 @@ $background: $red;
 }
 
 #navbar {
-  display: inline-block;
-  margin: 1em;
   background-color: rgba(0, 0, 0, 0);
+  //height: 5rem;
 }
 
 .body-center {
@@ -43,9 +42,9 @@ $background: $red;
   background-color: #edb83d;
 }
 
-.navbar-burger {
-  height: auto;
-}
+// .navbar-burger {
+//   height: auto;
+// }
 
 #home-rel {
   position: relative;
