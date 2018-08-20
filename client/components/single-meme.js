@@ -31,6 +31,7 @@ class SingleMeme extends React.Component {
   render() {
     const {meme, lineChartData, buyOrders, sellOrders, user, memeStocks} = this.props
     const {tabActive} = this.state
+    console.log(buyOrders, 'buyOrders')
     return !meme ? (
       'Loading...'
     ) : (
@@ -74,9 +75,9 @@ class SingleMeme extends React.Component {
             {memeStocks && memeStocks[meme.id] ? <p className="tag is-large is-info">Total Shares Owned: {memeStocks[meme.id].quantity}</p> : ''}
           </div>
           {tabActive === 'sell' ? (
-            <SingleMemeBuyList orders={buyOrders} user={user} />
+            <SingleMemeSellList orders={buyOrders} user={user} memeId={meme.id}/>
           ) : (
-            <SingleMemeSellList orders={sellOrders} user={user} memeId={meme.id}/>
+            <SingleMemeBuyList orders={sellOrders} user={user} />
           )}
         </section>
       </div>

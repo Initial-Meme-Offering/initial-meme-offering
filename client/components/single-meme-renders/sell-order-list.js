@@ -4,12 +4,16 @@ import SingleMemeOrder from './meme-orders'
 
 const SingleMemeSellList = props => {
   const {orders, user, memeStocks, memeId} = props
+  console.log(orders, 'sellOrders')
+  console.log(memeId, 'memeId')
   return (
     <div>
       {orders.map(order => {
+        console.log(memeStocks[memeId], 'memestocks[memeId]')
         return order.userId !== user.id &&
           memeStocks[memeId] &&
-          memeStocks[memeId].quantity >= order.quantity ? (
+          +memeStocks[memeId].quantity >= +order.quantity &&
+          order.status === 'Pending' ? (
           <SingleMemeOrder
             memeId={order.memeId}
             orderType={order.offerType}

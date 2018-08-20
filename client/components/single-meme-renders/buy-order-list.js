@@ -6,7 +6,8 @@ const SingleMemeBuyList = props => {
   return (
     <div>
       {orders.map(order => {
-        return order.userId !== user.id ? (
+        return order.userId !== user.id 
+        && order.status === 'Pending' ? (
           <SingleMemeOrder
             memeId={order.memeId}
             orderType={order.offerType}
