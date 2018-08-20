@@ -1,11 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {respondToOffer} from '../../store'
+import history from '../../history'
 
 class SingleMemeOrder extends React.Component {
   handleClick = () => {
     const {respondToOffer, user, order} = this.props
-    if (userId > 0) {
+    if (user.id > 0) {
       respondToOffer(order.id, user.id)
       history.push('/portfolio')
     } else {

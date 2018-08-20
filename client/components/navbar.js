@@ -5,18 +5,8 @@ import {Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
-  <nav id="navbar" className="navbar is-fixed-top">
+  <nav id="navbar" className="navbar">
     <div className="container">
-      <div className="navbar-brand">
-        <div className="navbar-item">
-          <p className="control">
-            <Link to="/" className="has-text-weight-bold">
-              Memenomics
-            </Link>
-          </p>
-        </div>
-      </div>
-
       <div className="navbar-menu">
         <div className="navbar-end">
           {isLoggedIn && (
@@ -27,9 +17,6 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
               <div className="navbar-dropdown">
                 <Link to={`/portfolio/buy`} className="navbar-item">
                   Portfolio
-                </Link>
-                <Link to={`/offers`} className="navbar-item">
-                  Offers
                 </Link>
                 <Link to={`/manage`} className="navbar-item">
                   Manage Account
@@ -60,12 +47,12 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
               <div className="field is-grouped">
                 <p className="control">
                   <Link to="/login" className="button is-link is-success">
-                    Login
+                    Enter
                   </Link>
                 </p>
                 <p className="control">
-                  <Link to="/signup" className="button is-link is-success">
-                    Sign up
+                  <Link to="/" className="button is-link is-success">
+                    Home
                   </Link>
                 </p>
               </div>
