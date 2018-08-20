@@ -101,27 +101,17 @@ export const valueOfLastStockTrade = (state, memeId) => {
   return -1
 }
 
-// // Modified the above function so that state was not the arugment being passed in
-// export const valueOfLastStockTrade = (transactions, memeId) => {
-//   const len = transactions.allIds.length
-//   for (let i = len; i >= 1; i--) {
-//     if (transactions.byId[i].memeId == memeId) {
-//       return transactions.byId[i]
-//     }
-//   }
-//   return -1
-// }
-
 export const percentChange = (state, memeId) => {
-  if (valueOfLastStockTrade > -1) {
-    const lastTrade = valueOfLastStockTrade(state, memeId).price
-    const secondToLast = state.transactions.byId[lastTrade.id - 1].price
-    // console.log('lastTrade, secondToLast', lastTrade, secondToLast)
-    return ((lastTrade - secondToLast.price) / secondToLast * 100).toFixed(1)
-  } else return -1
+  const len = state.transactions.allIds.length
+  const arr = []
+  for (let i = len; i >= 1; i--) {
+    if (state.transactions.byId[i].memeId == memeId) {
+      arr.push(state.transactions.byId[i].price)
+      if (arr.length === 2) {
+        let [newest, prior] = arr
+        return ((newest - prior) / prior * 100).toFixed(1)
+      }
+    }
+  }
+  return -1
 }
-
-// export const valueOfSecondLastStockTrade = (transactions, memeId) => {
-//   const lastStockTrade = valueOfLastStockTrade(transactions, memeId)
-//   return transactions.byId[lastStockTrade.id - 1]
-// }

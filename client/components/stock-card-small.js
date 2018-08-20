@@ -7,22 +7,6 @@ import {valueOfLastStockTrade, percentChange} from '../store'
 class SmallStockCard extends Component {
   render() {
     const {meme, lastTradePrice, percentChange} = this.props
-    // const lastTradePrice = valueOfLastStockTrade(this.props.transactions, id)
-    //   .price
-    // if (lastTradePrice) {
-    //   var secondLastTradePrice = valueOfSecondLastStockTrade(
-    //     this.props.transactions,
-    //     id
-    //   ).price
-    // }
-    // const percentChange = (
-    //   (lastTradePrice - secondLastTradePrice) /
-    //   secondLastTradePrice *
-    //   100
-    // ).toFixed(1)
-
-    // if (this.props.transactions) {
-    console.log('lastTradePrice, percentChange', lastTradePrice, percentChange)
     return (
       <div className="card meme-card">
         <div className="card-image">
@@ -51,16 +35,12 @@ class SmallStockCard extends Component {
         </div>
       </div>
     )
-    // } else {
-    //   return <h1>Data did not render</h1>
-    // }
   }
 }
 
 const mapState = (state, ownProps) => ({
-  transactions: state.transactions,
-  lastTradePrice: valueOfLastStockTrade(state, ownProps.meme.id),
+  lastTradePrice: valueOfLastStockTrade(state, ownProps.meme.id).price,
   percentChange: percentChange(state, ownProps.meme.id)
 })
 
-export default connect(mapState, null)(SmallStockCard)
+export default connect(mapState)(SmallStockCard)
