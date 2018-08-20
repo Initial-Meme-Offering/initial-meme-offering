@@ -1,0 +1,1 @@
+export {default as AuthFormAll} from './auth-form-all'

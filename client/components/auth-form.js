@@ -3,56 +3,32 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import {AuthFormAll} from './auth-form-renders'
 
 /**
  * COMPONENT
  */
 
-const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
+class AuthForm extends React.Component {
+  render() {
+    const {name, displayName, handleSubmit, error} = this.props
 
-  return (
-    <div className="meme-font">
-      <h1 className="title is-3">{displayName}</h1>
-      <div className="box">
-        <form onSubmit={handleSubmit} name={name}>
-          <div className="field">
-            <label htmlFor="email" className="label has-text-left meme-font">
-              Email
-            </label>
-            <input name="email" type="email" className="input meme-font" />
+    return (
+      <div className="section is-medium">
+        <div className="card">
+          <p className="title is-3">{displayName}</p>
+          <div className="card-conent">
+            <AuthFormAll {...this.props} />
           </div>
-          <div className="field">
-            <label htmlFor="password" className="label has-text-left meme-font">
-              Password
-            </label>
-            <input
-              name="password"
-              type="password"
-              className="input meme-font"
-            />
-          </div>
-          <div className="field">
-            <button
-              type="submit"
-              className="button is-block is-link is-large is-fullwidth meme-font"
-            >
-              {displayName}
-            </button>
-            {error &&
-              error.response && (
-                <p className="help is-danger has-text-left">
-                  {error.response.data}
-                </p>
-              )}
-          </div>
-        </form>
+          <footer className="card-footer">
+            <p className="has-text-grey is-center">
+              <a href="/auth/google">{displayName} with Google</a>
+            </p>
+          </footer>
+        </div>
       </div>
-      <p className="has-text-grey">
-        <a href="/auth/google">{displayName} with Google</a>
-      </p>
-    </div>
-  )
+    )
+  }
 }
 
 /**
