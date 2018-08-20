@@ -12,7 +12,6 @@ export {default as MarketChart} from './market-chart'
 export {default as SmallStockCard} from './stock-card-small'
 export {default as SingleIndice} from './single-indice'
 export {default as SingleMeme} from './single-meme'
-export {default as Offers} from './offers'
 export {default as OfferForm} from './offer-form'
 export {
   BuyPortfolio,
@@ -23,7 +22,7 @@ export {
 export {default as Portfolio} from './portfolio'
 export {default as PieChart} from './pie-chart'
 export {default as Homepage} from './homepage'
-export {default as OrderObject} from './order-object'
+export {default as OfferObject} from './offer-object'
 export {default as TrendingMemes} from './trending-memes'
 export {default as SubmitMeme} from './submit-meme'
 export {default as TotalStockObject} from './total-stock-object'

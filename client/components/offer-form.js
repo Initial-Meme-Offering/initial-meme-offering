@@ -11,16 +11,18 @@ import {
 } from './order-form-renders'
 import history from '../history'
 
-class OrderForm extends React.Component {
+class OfferForm extends React.Component {
   componentDidMount() {
     const {userId, getMemeStocks} = this.props
-    getMemeStocks(userId)
+    if (userId > 0) {
+      getMemeStocks(userId)
+    }
   }
 
   handleOfferFormSubmit = data => {
     const {userId, meme} = this.props
     const {quantity, price, orderType} = data
-    
+
     if (userId > 0) {
       this.props.postOffer({
         userId,
@@ -91,10 +93,10 @@ const mapDispatch = dispatch => ({
   postOffer: offer => dispatch(postOffer(offer))
 })
 
-OrderForm = withRouter(connect(mapState, mapDispatch)(OrderForm))
+OfferForm = withRouter(connect(mapState, mapDispatch)(OfferForm))
 
 export default reduxForm({
   validate,
   form: 'OrderForm',
   destroyOnUnmount: false
-})(OrderForm)
+})(OfferForm)

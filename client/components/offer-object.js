@@ -33,4 +33,4 @@ const OfferObject = props => {
   )
 }
 
-export default OrderObject
+export default OfferObject

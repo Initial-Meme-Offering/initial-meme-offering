@@ -6,6 +6,7 @@ import {
   getSingleStockChart,
   getMemeOrders
 } from '../store'
+import SmallStockCard from './stock-card-small'
 import {SingleMemeHeader, SingleMemeOrder} from './single-meme-renders'
 
 class SingleMeme extends React.Component {
@@ -39,13 +40,7 @@ class SingleMeme extends React.Component {
           <SingleMemeHeader name={meme.name} />
           <div className="columns">
             <div className="column is-half">
-              <div className="card is-small">
-                <div className="card-image">
-                  <figure className="image is-48by48">
-                    <img src={meme.imageUrl} alt="Placeholder image" />
-                  </figure>
-                </div>
-              </div>
+              <SmallStockCard meme={meme}/>
             </div>
             <div className="column is-half">
               <MarketChart

@@ -4,15 +4,12 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Login,
-  Signup,
   UserHome,
   SingleIndice,
-  AllMemes,
   Homepage,
   TrendingMemes,
   SingleMeme,
   Portfolio,
-  SingleMeme,
   SubmitMeme,
   MemesBySearch
 } from './components'
