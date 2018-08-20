@@ -38,7 +38,9 @@ class OfferForm extends React.Component {
   }
 
   render() {
-    const {lastTrade, meme, memeStocks, handleSubmit, userId} = this.props
+    const {lastTrade, meme, memeStocks, handleSubmit} = this.props
+    const buy = {value: 'buy'}
+    const both = {value: 'both'}
     return (
       <form onSubmit={handleSubmit(this.handleOfferFormSubmit.bind(this))}>
         <p className="subtitle">Enter Order</p>
@@ -55,10 +57,10 @@ class OfferForm extends React.Component {
               name="orderType"
               type="select"
               component={renderOrderSelect}
-              value="both"
+              props={both}
             />
           ) : (
-            <Field name="orderType" component={renderOrderSelect} value="buy" />
+            <Field name="orderType" component={renderOrderSelect} props={buy} />
           )}
           <Field name="submit" component={renderSubmitButton} />
         </div>
