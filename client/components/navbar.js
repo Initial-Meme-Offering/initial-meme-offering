@@ -10,19 +10,69 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
       <div className="navbar-menu">
         <div className="navbar-end">
           {isLoggedIn && (
-            <div className="navbar-item has-dropdown is-hoverable">
-              <Link className="navbar-link" to={`/account`}>
-                Account
-              </Link>
-              <div className="navbar-dropdown">
-                <Link to={`/portfolio/buy`} className="navbar-item">
-                  Portfolio
-                </Link>
-                <Link to={`/manage`} className="navbar-item">
-                  Manage Account
-                </Link>
+            // <div className="field is-grouped">
+            //   <p className="control">
+            //     <a href="/" className="button is-link">
+            //       Home
+            //     </a>
+            //   </p>
+            //   <p className="control">
+            //     <a className="button">Cancel</a>
+            //   </p>
+            //   <p className="control">
+            //     <a className="button is-danger">Delete post</a>
+            //   </p>
+            // </div>
 
-                {/* {isAdmin && (
+            <div className="field is-grouped">
+              <div id="nav-button" className="navbar-item">
+                <p className="control">
+                  <Link
+                    to="/"
+                    className="button is-link is-info is-hoverable is-outlined"
+                  >
+                    Home
+                  </Link>
+                </p>
+              </div>
+              <div id="nav-button" className="navbar-item">
+                <p className="control">
+                  <Link
+                    to="/allmemes"
+                    className="button is-link is-info is-hoverable is-outlined"
+                  >
+                    All Memes
+                  </Link>
+                </p>
+              </div>
+              <div id="nav-button" className="navbar-item">
+                <p className="control">
+                  <Link
+                    to="/trendingmemes"
+                    className="button is-link is-info is-hoverable is-outlined"
+                  >
+                    Trending
+                  </Link>
+                </p>
+              </div>
+              <div id="nav-button" className="navbar-item is-hoverable">
+                <p className="control">
+                  <Link
+                    className="button navbar-link is-info is-outlined"
+                    to="/account"
+                  >
+                    Account
+                  </Link>
+                </p>
+                <div className="navbar-dropdown">
+                  <Link to="/portfolio/buy" className="navbar-item">
+                    Portfolio
+                  </Link>
+                  <Link to="/manage" className="navbar-item">
+                    Manage Account
+                  </Link>
+
+                  {/* {isAdmin && (
               <div>
                 <hr className="navbar-divider" />
                 <NavLink
@@ -35,11 +85,12 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
               </div>
             )} */}
 
-                <hr className="navbar-divider" />
-                <a href="#" onClick={handleLogout} className="navbar-item">
-                  Logout
-                </a>
-              </div>{' '}
+                  <hr className="navbar-divider" />
+                  <a href="#" onClick={handleLogout} className="navbar-item">
+                    Logout
+                  </a>
+                </div>{' '}
+              </div>
             </div>
           )}
           {!isLoggedIn && (
