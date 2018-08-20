@@ -5,22 +5,16 @@ const {
   User,
   Meme,
   MemeStock,
-  Indice,
   Offer,
   Transaction,
-  UserComment,
   MarketHistory
 } = require('../server/db/models')
-const {memesdata, usersdata, usercommentsdata} = require('./seedData1')
-const {offersdata} = require('./seedData2')
-const {memestocksdata, indicesdata} = require('./seedData3')
+const {memesdata, usersdata} = require('./seedData1')
+const {indicesdata} = require('./seedData3')
 
 const shuffle = () => 0.5 - Math.random()
 //will be used to add 5 minute intervals of time to dates added to the database for current transaction data
 //want to mutate the original date in this instance
-function addMinutes(date, minutes) {
-  return date.getTime() + minutes * 60000
-}
 
 function dateChange(date, interval, units) {
   switch (interval) {
