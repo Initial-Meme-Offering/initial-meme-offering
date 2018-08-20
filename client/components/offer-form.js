@@ -3,25 +3,33 @@ import {Field, reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {getMemeStocksByUser, postOffer} from '../store'
-import {renderQuantityField, renderPriceField} from './offers-form-renders'
+import {
+  renderQuantityField,
+  renderPriceField,
+  renderOrderSelect,
+  renderSubmitButton
+} from './order-form-renders'
 import history from '../history'
 
 class OfferForm extends React.Component {
   componentDidMount() {
     const {userId, getMemeStocks} = this.props
-    getMemeStocks(userId)
+    if (userId > 0) {
+      getMemeStocks(userId)
+    }
   }
 
   handleOfferFormSubmit = data => {
     const {userId, meme} = this.props
-    const {quantity, price, offerType} = data
+    const {quantity, price, orderType} = data
+
     if (userId > 0) {
       this.props.postOffer({
         userId,
         memeId: meme.id,
         quantity,
         price,
-        offerType
+        orderType
       })
       history.push('/portfolio')
     } else {
@@ -32,60 +40,28 @@ class OfferForm extends React.Component {
   render() {
     const {lastTrade, meme, memeStocks, handleSubmit, userId} = this.props
     return (
-      <form>
-        <Field
-          className="field input"
-          name="quantity"
-          component={renderQuantityField}
-          type="text"
-        />
-        <Field
-          className="field input"
-          name="price"
-          component={renderPriceField}
-          type="number"
-          placeholder={!lastTrade.price ? '' : lastTrade.price}
-        />
-        {memeStocks[meme.id] && memeStocks[meme.id].quantity > 0 ? (
-          <div>
-            <button
-              name="offerType"
-              value="Buy"
-              className="button is-success"
-              type="submit"
-              onClick={handleSubmit(values => {
-                this.handleOfferFormSubmit({...values, offerType: 'buy'})
-              })}
-            >
-              Buy
-            </button>
-            <button
-              className="button is-danger"
-              name="offerType"
-              value="Sell"
-              type="submit"
-              onClick={handleSubmit(values => {
-                this.handleOfferFormSubmit({...values, offerType: 'sell'})
-              })}
-            >
-              Sell
-            </button>
-          </div>
-        ) : (
-          <div>
-            <button
-              name="offerType"
-              value="Buy"
-              className="button is-success"
-              type="submit"
-              onClick={handleSubmit(values => {
-                this.handleOfferFormSubmit({...values, offerType: 'buy'})
-              })}
-            >
-              Buy
-            </button>
-          </div>
-        )}
+      <form onSubmit={handleSubmit(this.handleOfferFormSubmit.bind(this))}>
+        <p className="subtitle">Enter Order</p>
+        <div className="field is-grouped">
+          <Field name="quantity" component={renderQuantityField} type="text" />
+          <Field
+            name="price"
+            component={renderPriceField}
+            type="number"
+            placeholder={!lastTrade.price ? '' : lastTrade.price}
+          />
+          {memeStocks[meme.id] && memeStocks[meme.id].quantity > 0 ? (
+            <Field
+              name="orderType"
+              type="select"
+              component={renderOrderSelect}
+              value="both"
+            />
+          ) : (
+            <Field name="orderType" component={renderOrderSelect} value="buy" />
+          )}
+          <Field name="submit" component={renderSubmitButton} />
+        </div>
       </form>
     )
   }
@@ -94,7 +70,7 @@ class OfferForm extends React.Component {
 const validate = values => {
   const errors = {}
   if (!values.quantity || values.quantity <= 0) {
-    errors.quantity = 'Can has more than 1 share?'
+    errors.quantity = 'Can has more shares?'
   }
   if (!values.price || values.price <= 0) {
     errors.price = 'More money plz'
@@ -119,4 +95,8 @@ const mapDispatch = dispatch => ({
 
 OfferForm = withRouter(connect(mapState, mapDispatch)(OfferForm))
 
-export default reduxForm({validate, form: 'OfferForm'})(OfferForm)
+export default reduxForm({
+  validate,
+  form: 'OrderForm',
+  destroyOnUnmount: false
+})(OfferForm)

@@ -4,15 +4,12 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Login,
-  Signup,
   UserHome,
   SingleIndice,
-  AllMemes,
   Homepage,
   TrendingMemes,
-  Offers,
-  Portfolio,
   SingleMeme,
+  Portfolio,
   SubmitMeme,
   MemesBySearch
 } from './components'
@@ -44,8 +41,8 @@ class Routes extends Component {
         <Route path="/indices" component={Homepage} />
         <Route path="/index/:indiceId" component={SingleIndice} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/offer/:memeId([0-9]*)" component={Offers} />
+        <Route exact path="/signup" component={Login} />
+        <Route exact path="/offer/:memeId([0-9]*)" component={SingleMeme} />
         <Route path="/portfolio" component={Portfolio} />
         <Route path="/allmemes" component={MemesBySearch} />
         <Route exact path="/search" component={MemesBySearch} />

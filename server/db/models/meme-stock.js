@@ -10,6 +10,7 @@ const MemeStock = db.define('memestock', {
     quantity: {
       type: Sequelize.INTEGER,
       allowNull: false,
+      defaultValue: 0,
       validate: {
         notEmpty: true
       }

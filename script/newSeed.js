@@ -12,10 +12,8 @@ const {
   MarketHistory
 } = require('../server/db/models')
 const {memesdata, usersdata, usercommentsdata} = require('./seedData1')
-const {
-  offersdata
-} = require('./seedData2')
-const {memestocksdata, transactionsdata, indicesdata} = require('./seedData3')
+const {offersdata} = require('./seedData2')
+const {memestocksdata, indicesdata} = require('./seedData3')
 
 const shuffle = () => 0.5 - Math.random()
 //will be used to add 5 minute intervals of time to dates added to the database for current transaction data
@@ -97,15 +95,27 @@ function dateAdd(date, interval, units) {
   return ret
 }
 
+function randomPlusMinus() {
+  return Math.random() * 2 - 1
+}
+
+function randomNumOffers() {
+  return Math.floor(Math.random() * 100)
+}
+
+function randomQuantity() {
+  return Math.floor(Math.random() * 200)
+}
+
+function randomUser() {
+  return Math.floor(Math.random() * 50) + 1
+}
+
 //returns an array of generated data points to simulate stock activity
 function getRandomData(numPoints, center, min, max, cycles) {
   var result = []
   //   var phase = Math.random() * Math.PI
   var y = center
-
-  function randomPlusMinus() {
-    return Math.random() * 2 - 1
-  }
 
   cycles.forEach(function(thisCycle) {
     thisCycle.phase = Math.random() * Math.PI
@@ -141,6 +151,7 @@ async function preSeed() {
 
   await seedMemes()
   console.log('Memes seeded')
+
   async function seedUsers() {
     for (let i = 0; i < usersdata.length; i++) {
       await User.create(usersdata[i])
@@ -149,28 +160,11 @@ async function preSeed() {
 
   await seedUsers()
   console.log('Users seeded')
-
-  async function seedComments() {
-    for (let i = 0; i < usercommentsdata.length; i++) {
-      await UserComment.create(usercommentsdata[i])
-    }
-  }
-
-  await seedComments()
-  console.log('Comments seeded')
-
-  async function seedOffers() {
-    for (let i = 0; i < offersdata.length; i++) {
-      await Offer.create(offersdata[i])
-    }
-  }
-
-  await seedOffers()
-  console.log('Offers seeded')
-
   async function seedMemeStocks() {
-    for (let i = 0; i < memestocksdata.length; i++) {
-      await MemeStock.create(memestocksdata[i])
+    for (let i = 1; i <= memesdata.length; i++) {
+      for (let j = 1; j <= usersdata.length; j++) {
+        await MemeStock.create({quantity: 4000, memeId: i, userId: j})
+      }
     }
   }
 
@@ -185,84 +179,10 @@ async function preSeed() {
 
   await seedIndices()
   console.log('Indices seeded')
-}
 
-async function seed() {
-  //get previous data loaded
   const indices = await Indice.findAll()
   const allMemes = await Meme.findAll()
-  const usercomments = await UserComment.findAll()
-  const offers = await Offer.findAll()
-  const users = await User.findAll()
   const memes = allMemes.slice(0, 5)
-
-  async function seedMarketHistory() {
-    for (let memeIndex = 0; memeIndex < memes.length; memeIndex++) {
-      let highVar = Math.floor(Math.random() * 51) + 50 //between 50 and 100
-      let medVar = Math.floor(Math.random() * 21) + 20 //between 20 and 40
-      let lowVar = Math.floor(Math.random() * 4) + 1 //between 1 and 4
-
-      let center = Math.floor(Math.random() * 421) + 80
-      let min = center - 0.6 * center
-      let max = center + 0.25 * center
-      let data = getRandomData(365, center, min, max, [
-        {length: 7, variance: highVar, noise: 1, trend: 0},
-        {length: 365, variance: medVar, noise: 1, trend: 0},
-        {length: 700, variance: lowVar, noise: 0, trend: 100}
-      ])
-
-      let today = new Date()
-      let yearAgoDate = dateAdd(today, 'year', -1)
-      for (let day = 0; day < data.length; day++) {
-        await MarketHistory.create({
-          closingPrice: data[day],
-          seedDateDay: yearAgoDate,
-          memeId: memes[memeIndex].id
-        })
-        dateChange(yearAgoDate, 'day', 1)
-      }
-    }
-  }
-
-  await seedMarketHistory()
-  console.log('Market history seeded')
-
-  async function seedTransactions() {
-    for (let memeIndex = 0; memeIndex < memes.length; memeIndex++) {
-      let highVar = Math.floor(Math.random() * 51) + 50 //between 50 and 100
-      let medVar = Math.floor(Math.random() * 21) + 20 //between 20 and 40
-      let lowVar = Math.floor(Math.random() * 4) + 1 //between 1 and 4
-
-      let center = Math.floor(Math.random() * 421) + 80
-      let min = center - 0.6 * center
-      let max = center + 0.25 * center
-      let today = new Date()
-      today.getUTCDate()
-      today.setUTCHours(12)
-      let now = new Date()
-      now.getUTCDate()
-      let minutesDiff = Math.abs(now - today) / 36e5 * 12
-
-      let data = getRandomData(minutesDiff, center, min, max, [
-        {length: 7, variance: highVar, noise: 1, trend: 0},
-        {length: 365, variance: medVar, noise: 1, trend: 0},
-        {length: 700, variance: lowVar, noise: 0, trend: 100}
-      ])
-
-      for (let minutes = 0; minutes < data.length; minutes++) {
-        await Transaction.create({
-          quantity: 1,
-          price: data[minutes],
-          seedDate: today,
-          memeId: memes[memeIndex].id
-        })
-        dateChange(today, 'minute', 5)
-      }
-    }
-  }
-
-  await seedTransactions()
-  console.log('Transactions seeded')
 
   async function seedMemeIndices() {
     for (let i = 0; i < memes.length; i++) {
@@ -274,30 +194,100 @@ async function seed() {
 
   await seedMemeIndices()
   console.log('Meme Indices seeded')
+}
+
+async function generateTransactionData(dataVariances, memeIndex, memes) {
+  const [center, min, max, highVar, medVar, lowVar] = dataVariances
+  let today = new Date()
+  today.getUTCDate()
+  today.setUTCHours(12)
+  let now = new Date()
+  now.getUTCDate()
+  let minutesDiff = Math.abs(now - today) / 36e5 * 12
+
+  let data = getRandomData(minutesDiff, center, min, max, [
+    {length: 7, variance: highVar, noise: 1, trend: 0},
+    {length: 365, variance: medVar, noise: 1, trend: 0},
+    {length: 700, variance: lowVar, noise: 0, trend: 100}
+  ])
+
+  for (let minutes = 0; minutes < data.length; minutes++) {
+    await Transaction.create({
+      quantity: 1,
+      price: data[minutes],
+      seedDate: today,
+      memeId: memes[memeIndex].id
+    })
+    dateChange(today, 'minute', 5)
+  }
+}
+
+async function generateMarketHistoryData(dataVariances, memeIndex, memes) {
+  const [center, min, max, highVar, medVar, lowVar] = dataVariances
+  let today = new Date()
+  let yearAgoDate = dateAdd(today, 'year', -1)
+  let data = getRandomData(365, center, min, max, [
+    {length: 7, variance: highVar, noise: 1, trend: 0},
+    {length: 365, variance: medVar, noise: 1, trend: 0},
+    {length: 700, variance: lowVar, noise: 0, trend: 100}
+  ])
+  for (let day = 0; day < data.length; day++) {
+    await MarketHistory.create({
+      closingPrice: data[day],
+      seedDateDay: yearAgoDate,
+      memeId: memes[memeIndex].id
+    })
+    dateChange(yearAgoDate, 'day', 1)
+  }
+}
+
+async function seedOffers(dataVariances, memeIndex, memes) {
+  const offersLength = randomNumOffers()
+  const [center, min, max, highVar, medVar, lowVar] = dataVariances
+  let data = getRandomData(offersLength, center, min, max, [
+    {length: 7, variance: highVar, noise: 1, trend: 0},
+    {length: 365, variance: medVar, noise: 1, trend: 0},
+    {length: 700, variance: lowVar, noise: 0, trend: 100}
+  ])
+  for (let i = 0; i < offersLength ; i++) {
+    const offerType = randomPlusMinus() < 0 ? 'sell' : 'buy'
+    await Offer.create({
+      offerType,
+      status: 'Pending',
+      quantity: randomQuantity(),
+      price: data[i],
+      userId: randomUser(),
+      memeId: memes[memeIndex].id
+    })
+  }
+}
+
+async function seed() {
+  //get previous data loaded
+  const allMemes = await Meme.findAll()
+  const memes = allMemes.slice(0, 5)
+
+  async function seedMarketData() {
+    for (let memeIndex = 0; memeIndex < memes.length; memeIndex++) {
+      let highVar = Math.floor(Math.random() * 51) + 50 //between 50 and 100
+      let medVar = Math.floor(Math.random() * 21) + 20 //between 20 and 40
+      let lowVar = Math.floor(Math.random() * 4) + 1 //between 1 and 4
+
+      let center = Math.floor(Math.random() * 421) + 80
+      let min = center - 0.6 * center
+      let max = center + 0.25 * center
+      const dataVariances = [center, min, max, highVar, medVar, lowVar]
+
+      await generateMarketHistoryData(dataVariances, memeIndex, memes)
+      await generateTransactionData(dataVariances, memeIndex, memes)
+      await seedOffers(dataVariances, memeIndex, memes)
+    }
+  }
+
+  await seedMarketData()
+  console.log('Market data seeded')
 
   const transactions = await Transaction.findAll()
-
-  async function seedOfferTransactions() {
-    for (let i = 0; i < transactions.length; i++) {
-      const randomOffers = offers.sort(shuffle).slice(0, 2)
-      await transactions[i].setOffers(randomOffers)
-    }
-    return transactions
-  }
-
-  await seedOfferTransactions()
-  console.log('Offer Transactions seeded')
-
-  async function seedUserComments() {
-    for (let i = 0; i < usercomments.length; i++) {
-      const randomUser = users.sort(shuffle)[0]
-      const randomMeme = memes.sort(shuffle)[0]
-      await usercomments[i].setUser(randomUser)
-      await usercomments[i].setMeme(randomMeme)
-    }
-  }
-  await seedUserComments()
-  console.log('User Comments seeded')
 
   await db.sync()
   console.log(`seeded successfully`)

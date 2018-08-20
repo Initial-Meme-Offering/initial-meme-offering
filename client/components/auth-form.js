@@ -1,57 +1,71 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import {AuthFormAll} from './auth-form-renders'
 
 /**
  * COMPONENT
  */
 
-const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
+class AuthForm extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      name: 'login',
+      displayName: 'Login'
+    }
+  }
 
-  return (
-    <div className="meme-font">
-      <h1 className="title is-3">{displayName}</h1>
-      <div className="box">
-        <form onSubmit={handleSubmit} name={name}>
-          <div className="field">
-            <label htmlFor="email" className="label has-text-left meme-font">
-              Email
-            </label>
-            <input name="email" type="email" className="input meme-font" />
+  handleTabClick = (name, displayName) => {
+    this.setState({name, displayName})
+  }
+
+  render() {
+    const {name, displayName} = this.state
+    return (
+      <div className="section is-medium">
+        <div className="tile is-ancestor">
+          <div className="tile is-vertical is-8">
+            <div className="tile">
+              <div className="tile is-parent is-vertical" />
+              <div className="tile is-parent">
+                <article className="tile is-child is-info">
+                  <div className="tabs">
+                    <ul>
+                      <li
+                        className={name === 'login' ? 'is-active' : ''}
+                        onClick={() => {
+                          this.handleTabClick('login', 'Log In')
+                        }}
+                      >
+                        <a>Log In</a>
+                      </li>
+                      <li
+                        className={name === 'signup' ? 'is-active' : ''}
+                        onClick={() => {
+                          this.handleTabClick('signup', 'Sign Up')
+                        }}
+                      >
+                        <a>Sign Up</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <AuthFormAll {...this.props} {...this.state} />
+                  <footer className="has-text-centered">
+                    <p className="">
+                      <a href="/auth/google">{displayName} with Google</a>
+                    </p>
+                  </footer>
+                </article>
+              </div>
+            </div>
           </div>
-          <div className="field">
-            <label htmlFor="password" className="label has-text-left meme-font">
-              Password
-            </label>
-            <input
-              name="password"
-              type="password"
-              className="input meme-font"
-            />
-          </div>
-          <div className="field">
-            <button
-              type="submit"
-              className="button is-block is-link is-large is-fullwidth meme-font"
-            >
-              {displayName}
-            </button>
-            {error &&
-              error.response && (
-                <p className="help is-danger has-text-left">
-                  {error.response.data}
-                </p>
-              )}
-          </div>
-        </form>
+        </div>
       </div>
-      <p className="has-text-grey">
-        <a href="/auth/google">{displayName} with Google</a>
-      </p>
-    </div>
-  )
+    )
+  }
 }
 
 /**
@@ -61,21 +75,12 @@ const AuthForm = props => {
  *   function, and share the same Component. This is a good example of how we
  *   can stay DRY with interfaces that are very similar to each other!
  */
-const mapLogin = state => {
+const mapState = state => {
   return {
-    name: 'login',
-    displayName: 'Login',
     error: state.user.error
   }
 }
 
-const mapSignup = state => {
-  return {
-    name: 'signup',
-    displayName: 'Sign Up',
-    error: state.user.error
-  }
-}
 
 const mapDispatch = dispatch => {
   return {
@@ -89,15 +94,9 @@ const mapDispatch = dispatch => {
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export default withRouter(connect(mapState, mapDispatch)(AuthForm))
 
 /**
  * PROP TYPES
  */
-AuthForm.propTypes = {
-  name: PropTypes.string.isRequired,
-  displayName: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object
-}
+
