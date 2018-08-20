@@ -40,7 +40,7 @@ class SingleMeme extends React.Component {
           <SingleMemeHeader name={meme.name} />
           <div className="columns">
             <div className="column is-half">
-              <SmallStockCard meme={meme}/>
+              <SmallStockCard meme={meme} />
             </div>
             <div className="column is-half">
               <MarketChart
@@ -73,7 +73,8 @@ class SingleMeme extends React.Component {
             </ul>
           </div>
           {allIds.map(id => {
-            return (byId[id].offerType === tabActive && byId[id].userId !== user.id ? (
+            return byId[id].offerType === tabActive &&
+              byId[id].userId !== user.id ? (
               <SingleMemeOrder
                 memeId={meme.id}
                 orderType={tabActive}
@@ -82,7 +83,7 @@ class SingleMeme extends React.Component {
               />
             ) : (
               ''
-            ))
+            )
           })}
         </section>
       </div>
