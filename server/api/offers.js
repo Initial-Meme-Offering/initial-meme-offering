@@ -18,7 +18,6 @@ router.get('/:memeId', async (req, res, next) => {
     const memeId = req.params.memeId
     const offers = await Offer.findAll({
       where: {
-        status: 'Pending',
         memeId
       },
       limit: 100
