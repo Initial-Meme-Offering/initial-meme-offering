@@ -19,21 +19,8 @@ form div {
   padding: 0;
 }
 
-.meme-card:hover {
-  color: white;
-  background: lightgrey;
-  transition: 0.6s;
+* {
+  text-decoration: none;
 }
 
-.center {
-  margin: 0 auto;
-  text-align: center;
-}
 
-.green {
-  color: green;
-}
-
-.red {
-  color: red;
-}

@@ -11,17 +11,19 @@ class SmallStockCard extends Component {
     const colorOfPercent = () => {
       if (percentChange >= 0) {
         return (
-          <h1 className='green'>+{percentChange}%</h1>
+          <h1 className='green-background meme-market-data white'>+{percentChange}%</h1>
         );
       }
-      return <h1 className='red'>{percentChange}%</h1>
+      return <h1 className='red-background meme-market-data white'>{percentChange}%</h1>
     }
   
     return (
       <div className="card meme-card">
+        <p className='control'>
+        <Link id='card-link' className='is-link is-primary' style={{textDecoration: 'none'}} to={`/allmemes/${meme.id}`}>
         <div className="card-image">
           <figure className="image is-4by3">
-            <Link to={`/allmemes/${meme.id}`}>
+            <Link style={{textDecoration: 'none'}} to={`/allmemes/${meme.id}`}>
               <img src={meme.imageUrl} alt="Placeholder image" />
             </Link>
           </figure>
@@ -29,20 +31,22 @@ class SmallStockCard extends Component {
         <div className="card-content">
           <div className="media">
             <div className="media-content">
-              <p className="subtitle is-4 center">
+              <p className=" is-4 center meme-heading">
                 {meme.name} ({meme.symbol})
               </p>
             </div>
           </div>
-          <div className="columns center">
-            <div className="column is-6 center">
-              <h1>LastPrice: ${lastTradePrice}</h1>
+            <div className="columns center">
+              <div className="column is-6 center meme-market-data">
+                <h1 className="meme-market-data">${lastTradePrice}</h1>
+              </div>
+              <div className="column is-6 center meme-market-data">
+                {colorOfPercent()}
+              </div>
             </div>
-            <div className="column is-6 center">
-              {colorOfPercent()}
-            </div>
-          </div>
         </div>
+        </Link>
+        </p>
       </div>
     )
   }
