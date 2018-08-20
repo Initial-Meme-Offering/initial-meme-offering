@@ -55,5 +55,4 @@ const mapSearch = (state, {match}) => ({
   memes: memesListBySearch(state, match.params.memeName)
 })
 
-export const AllMemes = connect(mapMemes)(MemeList)
 export const MemesBySearch = connect(mapSearch)(MemeList)
