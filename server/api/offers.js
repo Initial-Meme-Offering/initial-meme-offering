@@ -50,10 +50,13 @@ router.post('/complete/:orderId', async (req, res, next) => {
     await updateUserStock(userId, newUserId, quantity, offerType, memeId)
 
     await completedOrder.update({status: 'Complete'})
+    let now = new Date()
+    now.getUTCDate()
     const newTransaction = await Transaction.create({
       quantity,
       price,
-      memeId
+      memeId,
+      seedDate: now
     })
     await newTransaction.setOffers([completedOrder])
     res.json(completedOrder)
@@ -69,7 +72,7 @@ router.post('/', async (req, res, next) => {
     const numShares = userMemeStock.dataValues.quantity
 
     //error handling in case someone sends bad offers
-    if (quantity <= 0 || price <= 0 || numShares < quantity) {
+    if (quantity <= 0 || price <= 0 || (orderType === 'sell' && numShares < quantity)) {
       const error = new Error('Not enough shares to sell or money to buy')
       next(error)
     }
@@ -104,7 +107,6 @@ router.post('/', async (req, res, next) => {
       quantity: offer.dataValues.quantity
     }))
 
-
     const potentialOffers = getMatches(simpleOtherOffers, quantity)
     //sort to find least number of combinations to get match
     potentialOffers.sort((a, b) => a.length < b.length)
@@ -119,12 +121,14 @@ router.post('/', async (req, res, next) => {
             quantity: numShares - Number(quantity)
           })
         : await userMemeStock.update({quantity: numShares + Number(quantity)})
-
+      let now = new Date()
+      now.getUTCDate()
       //   //create transaction record
       const newTransaction = await Transaction.create({
         quantity,
         price,
-        memeId
+        memeId,
+        seedDate: now
       })
 
       let transactionOffers = [offer]

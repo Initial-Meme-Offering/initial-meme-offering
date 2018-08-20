@@ -29,7 +29,7 @@ class OrderForm extends React.Component {
         price,
         orderType
       })
-      // history.push('/portfolio')
+      history.push('/portfolio')
     } else {
       history.push('/login')
     }
