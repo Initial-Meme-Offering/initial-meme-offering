@@ -7,16 +7,6 @@ import {logout} from '../store'
 const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
   <nav id="navbar" className="navbar is-fixed-top">
     <div className="container">
-      <div className="navbar-brand">
-        <div className="navbar-item">
-          <p className="control">
-            <Link to="/" className="has-text-weight-bold">
-              Memenomics
-            </Link>
-          </p>
-        </div>
-      </div>
-
       <div className="navbar-menu">
         <div className="navbar-end">
           {isLoggedIn && (
@@ -59,13 +49,19 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
             <div className="navbar-item">
               <div className="field is-grouped">
                 <p className="control">
-                  <Link to="/login" className="button is-link is-success">
-                    Login
+                  <Link
+                    to="/login"
+                    className="button is-link is-inverted is-outlined"
+                  >
+                    Enter
                   </Link>
                 </p>
                 <p className="control">
-                  <Link to="/signup" className="button is-link is-success">
-                    Sign up
+                  <Link
+                    to="/"
+                    className="button is-link button is-inverted is-outlined"
+                  >
+                    Home
                   </Link>
                 </p>
               </div>
