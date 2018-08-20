@@ -29,7 +29,7 @@ class SingleMeme extends React.Component {
   }
 
   render() {
-    const {meme, lineChartData, buyOrders, sellOrders, user} = this.props
+    const {meme, lineChartData, buyOrders, sellOrders, user, memeStocks} = this.props
     const {tabActive} = this.state
     return !meme ? (
       'Loading...'
@@ -69,7 +69,9 @@ class SingleMeme extends React.Component {
               >
                 <a>Sell</a>
               </li>
+              
             </ul>
+            {memeStocks && memeStocks[meme.id] ? <p className="tag is-large is-info">Total Shares Owned: {memeStocks[meme.id].quantity}</p> : ''}
           </div>
           {tabActive === 'sell' ? (
             <SingleMemeBuyList orders={buyOrders} user={user} />
@@ -86,6 +88,7 @@ const mapState = (state, {match}) => {
   return {
     user: state.user,
     meme: state.memes.byId[match.params.memeId],
+    memeStocks: state.memeStocks.byId,
     buyOrders: buyOffersByMeme(state, {
       memeId: match.params.memeId,
       userId: state.user.id
