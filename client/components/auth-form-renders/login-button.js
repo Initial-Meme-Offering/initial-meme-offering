@@ -1,6 +1,6 @@
 import React from 'react'
 
-const renderLoginButton = ({input, error}) => {
+const renderLoginButton = ({input, displayName, error}) => {
   return (
     <div className="field">
       <button
@@ -8,7 +8,7 @@ const renderLoginButton = ({input, error}) => {
         {...input}
         className="button is-block is-link is-large is-fullwidth meme-font"
       >
-        Login {/*eventually displayName*/}
+        {displayName}
       </button>
       {error &&
         error.response && (
