@@ -10,7 +10,7 @@ const renderSubmitButton = field => (
         className="button is-link"
         type="submit"
       >
-        Create Order
+        Place Bid
       </button>
     </div>
   </div>

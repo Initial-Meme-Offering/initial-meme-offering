@@ -28,7 +28,7 @@ class SingleMemeOrder extends React.Component {
           <div className="level-item has-text-centered">
             <div>
               <p className="heading">
-                {orderType == 'sell' ? 'Sell Order' : 'Buy Order'}
+                Price Per Share ($)
               </p>
               <p className="title">{`$${order.price}`}</p>
             </div>

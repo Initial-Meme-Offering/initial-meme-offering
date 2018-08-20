@@ -66,28 +66,33 @@ export default function(state = defaultMemeOrders, action) {
 }
 
 //SELECTORS
-export const buyOffersByMeme = state => {
+export const buyOffersByMeme = (state, {memeId, userId}) => {
+  // console.log(state.memeOrders, 'memeOrders')
+  // console.log(memeId, 'memeId')
+  // console.log(userId, 'userId')
   return Object.values(state.memeOrders.byId).reduce((result, offer) => {
     if (
       offer.offerType === 'buy' &&
-      offer.status !== 'Completed'
+      offer.status !== 'Completed' &&
+      offer.memeId === Number(memeId) &&
+      offer.userId !== userId
     )
       result.push({
-        meme: state.memes.byId[offer.memeId],
         ...offer
       })
     return result
   }, [])
 }
 
-export const sellOffersByMeme = state => {
+export const sellOffersByMeme = (state, {memeId, userId}) => {
   return Object.values(state.memeOrders.byId).reduce((result, offer) => {
     if (
       offer.offerType === 'sell' &&
-      offer.status !== 'Completed'
+      offer.status !== 'Completed' &&
+      offer.memeId === Number(memeId) &&
+      offer.userId !== userId
     )
       result.push({
-        meme: state.memes.byId[offer.memeId],
         ...offer
       })
     return result
