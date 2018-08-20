@@ -8,7 +8,6 @@ class SingleMemeOrder extends React.Component {
     const {respondToOffer, user, order} = this.props
     if (user.id > 0) {
       respondToOffer(order.id, user.id)
-      history.push('/portfolio')
     } else {
       history.push('/login')
     }
@@ -28,15 +27,13 @@ class SingleMemeOrder extends React.Component {
           <div className="level-item has-text-centered">
             <div>
               <p className="heading">
-                {orderType == 'sell' ? 'Sell Order' : 'Buy Order'}
+                Price Per Share ($)
               </p>
               <p className="title">{`$${order.price}`}</p>
             </div>
           </div>
           <div className="level-item has-text-centered">
-            {orderType === 'buy' &&
-            memeStocks[memeId] &&
-            memeStocks[memeId].quantity >= order.quantity ? (
+            {orderType === 'buy' ? (
               <button
                 className="button is-link"
                 onClick={this.handleClick}
