@@ -5,7 +5,7 @@ import {Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
-  <nav id="navbar" className="navbar is-fixed-top">
+  <nav id="navbar" className="navbar">
     <div className="container">
       <div className="navbar-menu">
         <div className="navbar-end">
@@ -49,18 +49,12 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
             <div className="navbar-item">
               <div className="field is-grouped">
                 <p className="control">
-                  <Link
-                    to="/login"
-                    className="button is-link is-inverted is-outlined"
-                  >
+                  <Link to="/login" className="button is-link is-success">
                     Enter
                   </Link>
                 </p>
                 <p className="control">
-                  <Link
-                    to="/"
-                    className="button is-link button is-inverted is-outlined"
-                  >
+                  <Link to="/" className="button is-link is-success">
                     Home
                   </Link>
                 </p>
