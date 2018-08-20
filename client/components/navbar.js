@@ -25,7 +25,7 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
                 Account
               </Link>
               <div className="navbar-dropdown">
-                <Link to={`/portfolio`} className="navbar-item">
+                <Link to={`/portfolio/buy`} className="navbar-item">
                   Portfolio
                 </Link>
                 <Link to={`/offers`} className="navbar-item">

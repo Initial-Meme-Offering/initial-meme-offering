@@ -1,5 +1,5 @@
 import React from 'react'
-import {OrderForm, MarketChart} from '../components'
+import {OfferForm, MarketChart} from '../components'
 import {connect} from 'react-redux'
 import {
   valueOfLastStockTrade,
@@ -54,7 +54,7 @@ class SingleMeme extends React.Component {
                 x={lineChartData.x}
                 y={lineChartData.y}
               />
-              <OrderForm {...this.props} />
+              <OfferForm {...this.props} />
             </div>
           </div>
           <div className="tabs">

@@ -1,4 +1,6 @@
 import axios from 'axios'
+import {userStockQuantitiesByMemeId} from '../store'
+import moment from 'moment'
 
 //ACTION TYPES
 const GET_HISTORY = 'GET_HISTORY'
@@ -64,4 +66,68 @@ export const getTrendingMemes = state => {
   return Object.keys(counts)
     .sort((a, b) => counts[a] < counts[b])
     .slice(0, 5)
+}
+
+export const blahChart = (state, memeId) => {
+  return state.transactions.allIds.reduce((result, transId) => {
+    if (state.transactions.byId[transId].memeId == memeId) {
+      result.push({
+        x: new Date(state.transactions.byId[transId].seedDate),
+        y: state.transactions.byId[transId].price
+      })
+    }
+    return result
+  }, [])
+}
+
+// Displays all points from all matching stocks
+export const userTotalStockChart = state => {
+  const userStocks = userStockQuantitiesByMemeId(state)
+  return state.marketHistory.allIds.reduce((result, histId) => {
+    const historyMemeId = state.marketHistory.byId[histId].memeId
+    if (userStocks[historyMemeId])
+      result.push({
+        x: new Date(state.marketHistory.byId[histId].seedDateDay),
+        y: +state.marketHistory.byId[histId].closingPrice,
+        meme: historyMemeId
+      })
+    return result
+  }, [])
+}
+
+export const getSingleStockChart = (state, memeId) => {
+  return state.marketHistory.allIds.reduce((result, histId) => {
+    if (state.marketHistory.byId[histId].memeId == memeId)
+      result.push({
+        x: new Date(state.marketHistory.byId[histId].seedDateDay),
+        y: state.marketHistory.byId[histId].closingPrice
+      })
+    return result
+  }, [])
+}
+
+// Displays daily average from all matching stocks
+export const userAgregateStockChart = state => {
+  const userStocks = userStockQuantitiesByMemeId(state)
+  const dailyPrices = state.marketHistory.allIds.reduce((tally, histId) => {
+    let historyRow = state.marketHistory.byId[histId]
+    if (userStocks[historyRow.memeId]) {
+      let date = moment(new Date(historyRow.seedDateDay))
+        .format('L')
+        .toString()
+      tally[date] = tally[date] || []
+      tally[date].push(historyRow.closingPrice)
+    }
+    return tally
+  }, {})
+  return Object.keys(dailyPrices).reduce((result, date) => {
+    result.push({
+      x: new Date(date),
+      y: dailyPrices[date].reduce((total, price, i, arr) => {
+        total += price
+        return i === arr.length - 1 ? total / arr.length : total
+      }, 0)
+    })
+    return result.sort((a, b) => a.x - b.x)
+  }, [])
 }

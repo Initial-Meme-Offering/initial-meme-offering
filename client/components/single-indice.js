@@ -7,7 +7,6 @@ const SingleIndice = props => {
   const {totalMarket, memes, indice} = props
   return (
     <div>
-      {/* <BackgroundVideo className="lowest-level" /> */}
       <div className="container">
         <MarketChart
           data={totalMarket}
