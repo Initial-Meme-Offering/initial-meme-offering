@@ -90,14 +90,11 @@ $info: $night;
 
 .green-background {
   background: green;
-  width: 60%;
-  // height: auto;
+
 }
 
 .red-background {
   background: $red;
-  width: 60%;
-  // height: auto;
 }
 
 .white {
@@ -115,6 +112,5 @@ $info: $night;
 }
 
 #card-link {
-  // text-decoration: none
   color: $night;
 }
