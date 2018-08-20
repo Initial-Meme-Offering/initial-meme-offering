@@ -1,15 +1,12 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {
-  AllMemes,
-  TrendingMemes,
-  Indices,
-  SearchMemes,
-  PurchaseMemes
-} from './index'
+import {connect} from 'react-redux'
+import {MarketChart} from './index'
+import {getSingleStockChart} from '../store'
 import HomeButtonCard from './homepage-card-button'
 
-const HomePage = () => {
+const HomePage = props => {
+  const {totalMarket} = props
   return (
     <div>
       <section id="home-rel" className="hero is-primary is-large is-bold">
@@ -31,9 +28,12 @@ const HomePage = () => {
         <div className="container body-center">
           <div className="columns">
             <div className="column">
-              <br />
-              <br />
-              <h1>Buy</h1>
+              <p
+                id="buy"
+                className="is-size-1 has-text-centered has-text-weight-semibold"
+              >
+                Buy
+              </p>
               <br />
               <br />
             </div>
@@ -52,16 +52,28 @@ const HomePage = () => {
         <div className="container body-center">
           <div className="columns">
             <div className="column">
-              <br />
-              <br />
-              <h1>Market trend graph here</h1>
-              <br />
-              <br />
+              <div className="card">
+                <br />
+                <MarketChart
+                  data={totalMarket}
+                  title="Total Market Value"
+                  x={totalMarket.x}
+                  y={totalMarket.y}
+                />
+                <br />
+              </div>
             </div>
             <div className="column">
               <br />
               <br />
-              <h2>Sell</h2>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <h1 className="is-size-1 has-text-white has-text-centered has-text-weight-semibold">
+                Sell
+              </h1>
               <br />
               <br />
             </div>
@@ -75,14 +87,22 @@ const HomePage = () => {
             <div className="column">
               <br />
               <br />
-              <h1>Trade</h1>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <p className=" is-primary is-size-1 has-text-primary has-text-centered has-text-weight-semibold">
+                Trade
+              </p>
               <br />
               <br />
             </div>
             <div className="column">
               <br />
               <br />
-              <h2>Handshake icon here</h2>
+              {/* <h2>Handshake icon here</h2> */}
+              <img src="https://openclipart.org/download/276483/1490609861.svg" />
               <br />
               <br />
             </div>
@@ -92,5 +112,10 @@ const HomePage = () => {
     </div>
   )
 }
+const mapState = state => {
+  return {
+    totalMarket: getSingleStockChart(state, 1)
+  }
+}
 
-export default HomePage
+export default connect(mapState)(HomePage)
