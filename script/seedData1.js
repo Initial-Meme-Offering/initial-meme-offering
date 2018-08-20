@@ -513,21 +513,30 @@ const memesdata = [
     name: 'NASDANQ',
     imageUrl: 'https://i.imgflip.com/2g8gtv.jpg',
     status: 'released',
-    symbol: 'NASDANQ'
+    symbol: 'NASDANQ',
+    isIndex: true
   },
   {
     name: 'DOGE 500',
     imageUrl: 'https://i.imgflip.com/2g8gyb.jpg',
     status: 'released',
-    symbol: 'DOGE'
+    symbol: 'DOGE',
+    isIndex: true
   },
   {
-    name: 'DOGE 500',
-    imageUrl: 'https://i.imgflip.com/2g8gyb.jpg',
+    name: 'TWTR',
+    imageUrl: 'https://i.imgflip.com/2g8i2d.jpg',
     status: 'released',
-    symbol: 'DOGE'
+    symbol: 'TWTR',
+    isIndex: true
+  },
+  {
+    name: 'TUMBLR',
+    imageUrl: 'https://i.imgflip.com/2g8i94.jpg',
+    status: 'released',
+    symbol: 'TUMBLR',
+    isIndex: true
   }
-
 ]
 
 const usersdata = [

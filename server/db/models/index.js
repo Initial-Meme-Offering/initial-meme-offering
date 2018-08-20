@@ -47,8 +47,8 @@ Offer.belongsToMany(Transaction, {through: 'offer-transactions'})
 Transaction.belongsToMany(Offer, {through: 'offer-transactions'})
 
 //Link between Memes & Indices
-Meme.belongsToMany(Meme, {through: 'meme-indices'})
-Meme.belongsToMany(Meme, {through: 'meme-indices'})
+Meme.belongsToMany(Meme, {as: 'members', foreignKey: 'parentIndexId', through: 'meme-indices'})
+Meme.belongsToMany(Meme, {as: 'indices', foreignKey: 'childMemeId', through: 'meme-indices'})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

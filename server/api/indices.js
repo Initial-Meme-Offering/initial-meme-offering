@@ -1,11 +1,15 @@
 const router = require('express').Router()
-const {Indice} = require('../db/models')
+const {Meme} = require('../db/models')
 
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const indices = await Indice.findAll({})
+    const indices = await Meme.findAll({
+      where: {
+        isIndex: true
+      }
+    })
     res.json(indices)
   } catch (err) {
     next(err)
