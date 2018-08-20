@@ -49,3 +49,22 @@ export default function(state = defaultMemes, action) {
 }
 
 //SELECTORS
+export const allMemesList = state => {
+  return state.memes.allIds.reduce((result, memeId) => {
+    result.push(state.memes.byId[memeId])
+    return result
+  }, [])
+}
+
+export const memesListBySearch = (state, search) => {
+  return state.memes.allIds.reduce((result, id) => {
+    let meme = state.memes.byId[id]
+    if (!search) result.push(meme)
+    else if (
+      meme.name.toLowerCase().includes(search.toLowerCase()) ||
+      meme.symbol.includes(search.toLowerCase())
+    )
+      result.push(meme)
+    return result
+  }, [])
+}
