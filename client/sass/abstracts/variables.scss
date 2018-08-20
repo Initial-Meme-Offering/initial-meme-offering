@@ -46,6 +46,16 @@ $background: $red;
   height: auto;
 }
 
+#home-rel {
+  position: relative;
+  top: -50px;
+}
+
+#card-rel {
+  position: relative;
+  top: -200px;
+}
+
 #footer {
   background-color: $night;
   color: $pearl;

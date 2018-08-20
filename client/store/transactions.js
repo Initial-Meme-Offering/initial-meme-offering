@@ -88,3 +88,18 @@ export const valueOfLastStockTrade = (state, memeId) => {
   }
   return -1
 }
+
+export const percentChange = (state, memeId) => {
+  const len = state.transactions.allIds.length
+  const arr = []
+  for (let i = len; i >= 1; i--) {
+    if (state.transactions.byId[i].memeId == memeId) {
+      arr.push(state.transactions.byId[i].price)
+      if (arr.length === 2) {
+        let [newest, prior] = arr
+        return ((newest - prior) / prior * 100).toFixed(1)
+      }
+    }
+  }
+  return -1
+}

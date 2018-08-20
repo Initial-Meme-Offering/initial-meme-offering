@@ -1,37 +1,46 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-
+import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {valueOfLastStockTrade, percentChange} from '../store'
 
 //May need to afix cemented size to make sure multiple per row fit
-const SmallStockCard = props => {
-  const {memeImage, memeName, memeId} = props
-  return (
-    <div className="card meme-card">
-    <div className="card-image">
-      <figure className="image is-4by3">
-        <img src={memeImage} alt="Placeholder image"/>
-      </figure>
-    </div>
-    <div className="card-content">
-      <div className="media">
-          <div className="media-content">
-            <p className="subtitle is-4 center">{memeName}</p>
-          </div>
-        </div>
-        <div className='columns'>
-          <div className='column is-12 center'>
-            <Link to={`/offer/${memeId}`}>
-                <button type='button' className='button is-primary meme-font'>
-                  TRADE THIS MEME
-                </button>
+class SmallStockCard extends Component {
+  render() {
+    const {meme, lastTradePrice, percentChange} = this.props
+    return (
+      <div className="card meme-card">
+        <div className="card-image">
+          <figure className="image is-4by3">
+            <Link to={`/allmemes/${meme.id}`}>
+              <img src={meme.imageUrl} alt="Placeholder image" />
             </Link>
+          </figure>
+        </div>
+        <div className="card-content">
+          <div className="media">
+            <div className="media-content">
+              <p className="subtitle is-4 center">
+                {meme.name} ({meme.symbol})
+              </p>
+            </div>
+          </div>
+          <div className="columns center">
+            <div className="column is-6 center">
+              <h1>LastPrice: ${lastTradePrice}</h1>
+            </div>
+            <div className="column is-6 center">
+              <h1 className="green">{percentChange}%</h1>
+            </div>
           </div>
         </div>
       </div>
-    
-
-    </div>
-  )
+    )
+  }
 }
 
-export default SmallStockCard
+const mapState = (state, ownProps) => ({
+  lastTradePrice: valueOfLastStockTrade(state, ownProps.meme.id).price,
+  percentChange: percentChange(state, ownProps.meme.id)
+})
+
+export default connect(mapState)(SmallStockCard)
