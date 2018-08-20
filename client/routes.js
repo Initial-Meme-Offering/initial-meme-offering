@@ -6,7 +6,6 @@ import {
   Login,
   Signup,
   UserHome,
-  //LandingPage,
   SingleIndice,
   AllMemes,
   Homepage,
