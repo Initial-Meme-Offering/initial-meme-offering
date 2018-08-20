@@ -3,22 +3,17 @@ import axios from 'axios'
 import SmallStockCard from './stock-card-small'
 import {Router, Route, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {} from '../store'
+import {allMemesList, memesListBySearch} from '../store'
+import history from '../history'
 
-class AllMemes extends Component {
-  constructor() {
-    super()
-    this.state = {
-      text: ''
-    }
+class MemeList extends Component {
+  handleChange = evt => {
+    evt.preventDefault()
+    history.push(`/search/${evt.target.value}`)
   }
 
   render() {
-    const {allIds, byId} = this.props.memes
-    const searchResults = allIds.filter(id => {
-      return byId[id].name.toLowerCase().includes(this.state.text.toLowerCase())
-    })
-    console.log('this.state.text', this.state.text)
+    const {memes} = this.props
     return (
       <section className="section">
         <h1 className="is-size-1 has-text-centered">All Memes</h1>
@@ -30,7 +25,7 @@ class AllMemes extends Component {
                 className="input"
                 type="text"
                 placeholder="Search"
-                onChange={event => this.setState({text: event.target.value})}
+                onChange={this.handleChange}
               />
             </div>
             <div className="control">
@@ -39,16 +34,10 @@ class AllMemes extends Component {
               </button>
             </div>
           </div>
-
           <div className="columns is-multiline">
-            {searchResults.map(id => (
-              <div key={id} className="column is-4">
-                <SmallStockCard
-                  className=""
-                  memeImage={byId[id].imageUrl}
-                  memeName={byId[id].name}
-                  memeId={id}
-                />
+            {memes.map(meme => (
+              <div key={meme.id} className="column is-4">
+                <SmallStockCard meme={meme} />
               </div>
             ))}
           </div>
@@ -58,8 +47,12 @@ class AllMemes extends Component {
   }
 }
 
-const mapState = state => ({
-  memes: state.memes
+const mapMemes = state => ({
+  memes: allMemesList(state)
 })
 
-export default connect(mapState, null)(AllMemes)
+const mapSearch = (state, {match}) => ({
+  memes: memesListBySearch(state, match.params.memeName)
+})
+
+export const MemesBySearch = connect(mapSearch)(MemeList)

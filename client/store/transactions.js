@@ -73,7 +73,6 @@ export const getSingleStockChart = (state, memeId) => {
   }, [])
 }
 
-
 export const getTrendingStocks = state => {
   const oneMonthAgo = new Date()
   oneMonthAgo.setDate(oneMonthAgo.getDate() - 30)
@@ -97,6 +96,21 @@ export const valueOfLastStockTrade = (state, memeId) => {
   for (let i = len; i >= 1; i--) {
     if (state.transactions.byId[i].memeId == memeId) {
       return state.transactions.byId[i]
+    }
+  }
+  return -1
+}
+
+export const percentChange = (state, memeId) => {
+  const len = state.transactions.allIds.length
+  const arr = []
+  for (let i = len; i >= 1; i--) {
+    if (state.transactions.byId[i].memeId == memeId) {
+      arr.push(state.transactions.byId[i].price)
+      if (arr.length === 2) {
+        let [newest, prior] = arr
+        return ((newest - prior) / prior * 100).toFixed(1)
+      }
     }
   }
   return -1

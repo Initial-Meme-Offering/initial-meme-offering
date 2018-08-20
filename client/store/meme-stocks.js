@@ -48,7 +48,6 @@ export default function(state = defaultMemeStocks, action) {
 
 //SELECTORS
 
-//***THIS FUNCTION CHEATS BY ASSUMING ONLY ONE USER'S WORTH OF MEMESTOCK IN THE STORE AT A TIME, WE'LL NEED TO UPDATE DEPENDING ON HOW THINGS PROGRESS */
 export const getUserPieChart = state => {
   const hash = Object.values(state.memeStocks.byId).reduce(
     (tally, memeStock) => {
