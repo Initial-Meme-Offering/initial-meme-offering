@@ -42,6 +42,15 @@ router.post('/complete/:orderId', async (req, res, next) => {
       offerType
     } = completedOrder.dataValues
 
+    const newUserOrder = await Offer.create({
+      quantity,
+      price,
+      memeId,
+      userId: newUserId,
+      offerType: offerType === 'sell' ? 'buy' : 'sell',
+      status: 'Complete'
+    })
+
     if (completedOrder.dataValues.userId === newUserId) {
       const error = new Error("Can't complete your own order")
       next(error)
@@ -58,7 +67,7 @@ router.post('/complete/:orderId', async (req, res, next) => {
       memeId,
       seedDate: now
     })
-    await newTransaction.setOffers([completedOrder])
+    await newTransaction.setOffers([completedOrder, newUserOrder])
     res.json(completedOrder)
   } catch (err) {
     next(err)
@@ -68,7 +77,8 @@ router.post('/complete/:orderId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {userId, memeId, quantity, price, orderType} = req.body
-    const userMemeStock = await MemeStock.findOne({where: {userId, memeId}})
+    const userMemeStockData = await MemeStock.findOrCreate({where: {userId, memeId}})
+    const userMemeStock = userMemeStockData[0]
     const numShares = userMemeStock.dataValues.quantity
 
     //error handling in case someone sends bad offers
@@ -108,6 +118,7 @@ router.post('/', async (req, res, next) => {
     }))
 
     const potentialOffers = getMatches(simpleOtherOffers, quantity)
+    console.log(potentialOffers, 'potentialOffers')
     //sort to find least number of combinations to get match
     potentialOffers.sort((a, b) => a.length < b.length)
     //a bit unfair, but we pick the first.
