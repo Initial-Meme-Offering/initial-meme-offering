@@ -17,12 +17,7 @@ class TrendingMemes extends Component {
           <div className="columns is-multiline is-centered">
             {memes.map(meme => (
               <div key={meme.name} className="column is-4">
-                <SmallStockCard
-                  className=""
-                  memeImage={meme.imageUrl}
-                  memeName={meme.name}
-                  memeId={meme.id}
-                />
+                <SmallStockCard meme={meme} />
               </div>
             ))}
           </div>
