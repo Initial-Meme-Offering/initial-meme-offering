@@ -3,10 +3,10 @@ import React from 'react'
 const renderOrderSelect = ({input, value}) => {
   return (
     <div className="field">
-    <label className="label"/>
+    <label className="label">Order Type</label>
       <div className="select">
         <select {...input} defaultValue="">
-          <option value="" hidden>Order Type</option>
+          <option value="" hidden>Select One...</option>
           <option value="buy">
             Buy
           </option>

@@ -160,10 +160,9 @@ async function preSeed() {
 
   await seedUsers()
   console.log('Users seeded')
-
   async function seedMemeStocks() {
-    for (let i = 1; i <= 5 /* memesdata.length*/; i++) {
-      for (let j = 1; j <= 5 /*usersdata.length*/; j++) {
+    for (let i = 1; i <= memesdata.length; i++) {
+      for (let j = 1; j <= usersdata.length; j++) {
         await MemeStock.create({quantity: 4000, memeId: i, userId: j})
       }
     }
