@@ -6,20 +6,20 @@ class MarketChart extends React.Component {
     zoomDomain: {
       x: [new Date('2016'), new Date('2018')],
       y: [0, 80]
-    },
-    allowZoom: false
+    }
+    // allowZoom: false
   }
 
-  handleClick = evt => {
-    console.log('clicked', this.state.allowZoom)
-    evt.preventDefault()
-    this.setState({
-      allowZoom: !this.state.allowZoom
-    })
-  }
+  // handleClick = evt => {
+  //   console.log('clicked', this.state.allowZoom)
+  //   evt.preventDefault()
+  //   this.setState({
+  //     allowZoom: !this.state.allowZoom
+  //   })
+  // }
 
   handleZoom = domain => {
-    // if (this.state.allowZoom) this.setState({zoomDomain: domain})
+    this.setState({zoomDomain: domain})
   }
 
   componentDidMount() {
@@ -41,14 +41,14 @@ class MarketChart extends React.Component {
   render() {
     const {x, y, title, data} = this.props
     return (
-      <a href="#" onClick={this.handleClick}>
+      <div>
         <h5 className="title is-5 has-text-centered">{title}</h5>
         <VictoryChart
           containerComponent={
             <VictoryZoomContainer
               zoomDimension="x"
-              zoomDomain={this.allowZoom ? this.state.zoomDomain : null}
-              onZoomDomainChange={this.allowZoom ? this.handleZoom : null}
+              zoomDomain={this.state.zoomDomain}
+              onZoomDomainChange={this.handleZoom}
             />
           }
           scale={{x: 'time'}}
@@ -65,7 +65,7 @@ class MarketChart extends React.Component {
             }}
           />
         </VictoryChart>
-      </a>
+      </div>
     )
   }
 }

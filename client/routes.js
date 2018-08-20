@@ -19,7 +19,9 @@ import {
   getTransactions,
   getIndices,
   getMemeIndices,
-  getMarketHistory
+  getMarketHistory,
+  getOffers,
+  getMemeStocksByUser
 } from './store'
 
 /**
@@ -28,6 +30,17 @@ import {
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    if (this.props.isLoggedIn) {
+      this.props.getOffers()
+      this.props.getMemeStocksByUser(this.props.userId)
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.isLoggedIn !== prevProps.isLoggedIn) {
+      this.props.getOffers()
+      this.props.getMemeStocksByUser(this.props.userId)
+    }
   }
 
   render() {
@@ -83,7 +96,9 @@ const mapDispatch = dispatch => {
       dispatch(getIndices())
       dispatch(getMemeIndices())
       dispatch(getMarketHistory())
-    }
+    },
+    getOffers: () => dispatch(getOffers()),
+    getMemeStocksByUser: userId => dispatch(getMemeStocksByUser(userId))
   }
 }
 

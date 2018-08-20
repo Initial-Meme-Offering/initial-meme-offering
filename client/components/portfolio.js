@@ -17,14 +17,15 @@ import {Route, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 class Portfolio extends React.Component {
-  componentDidMount() {
-    if (this.props.user) {
+  componentDidUpdate(prevProps) {
+    if (this.props.match.url !== prevProps.match.url) {
       this.props.getOffers()
       this.props.getMemeStocksByUser(this.props.user.id)
     }
   }
 
   render() {
+    console.log('user', this.props.user)
     const {lineChartData, pieChartData} = this.props
     return (
       <section className="section is-medium">

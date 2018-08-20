@@ -83,11 +83,12 @@ export const offersByUser = (state, userId) => {
 }
 
 export const buyOffersByUser = state => {
+  console.log('in buyOffersByUser')
   return Object.values(state.offers.byId).reduce((result, offer) => {
     if (
       offer.userId == state.user.id &&
       offer.offerType === 'buy' &&
-      offer.status !== 'Completed'
+      offer.status !== 'Complete'
     )
       result.push({
         meme: state.memes.byId[offer.memeId],
@@ -102,7 +103,7 @@ export const sellOffersByUser = state => {
     if (
       offer.userId == state.user.id &&
       offer.offerType === 'sell' &&
-      offer.status !== 'Completed'
+      offer.status !== 'Complete'
     )
       result.push({
         meme: state.memes.byId[offer.memeId],
@@ -114,7 +115,7 @@ export const sellOffersByUser = state => {
 
 export const completedOffersByUser = state => {
   return Object.values(state.offers.byId).reduce((result, offer) => {
-    if (offer.userId == state.user.id && offer.status === 'Completed')
+    if (offer.userId == state.user.id && offer.status === 'Complete')
       result.push({
         meme: state.memes.byId[offer.memeId],
         ...offer
@@ -129,7 +130,7 @@ export const lastPurchasePriceByUser = (state, memeId) => {
     if (
       state.offers.byId[i].memeId == memeId &&
       state.offers.byId[i].userId == state.user.id &&
-      state.offers.byId[i].status === 'Completed'
+      state.offers.byId[i].status === 'Complete'
     ) {
       return state.offers.byId[i].price
     }
