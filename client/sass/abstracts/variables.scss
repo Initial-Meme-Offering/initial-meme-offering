@@ -77,3 +77,44 @@ $info: $night;
 .no-pad {
   padding: 0;
 }
+
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.meme-card:hover {
+  background: lightgrey;
+  transition: 0.6s;
+}
+
+.green-background {
+  background: green;
+  width: 60%;
+  // height: auto;
+}
+
+.red-background {
+  background: $red;
+  width: 60%;
+  // height: auto;
+}
+
+.white {
+  color: white;
+}
+
+.meme-heading {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.meme-market-data {
+  font-size: 1.4em;
+  font-weight: normal;
+}
+
+#card-link {
+  // text-decoration: none
+  color: $night;
+}
