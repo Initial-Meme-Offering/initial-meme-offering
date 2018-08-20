@@ -5,7 +5,12 @@ import {respondToOffer} from '../../store'
 class SingleMemeOrder extends React.Component {
   handleClick = () => {
     const {respondToOffer, user, order} = this.props
-    respondToOffer(order.id, user.id)
+    if (userId > 0) {
+      respondToOffer(order.id, user.id)
+      history.push('/portfolio')
+    } else {
+      history.push('/login')
+    }
   }
 
   render() {
@@ -38,14 +43,16 @@ class SingleMemeOrder extends React.Component {
               >
                 Sell
               </button>
-            ) : (orderType === 'sell' ?
+            ) : orderType === 'sell' ? (
               <button
                 className="button is-link"
                 onClick={this.handleClick}
                 type="button"
               >
                 Buy
-              </button> : ''
+              </button>
+            ) : (
+              ''
             )}
           </div>
         </div>
