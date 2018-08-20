@@ -18,9 +18,6 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
                 <Link to={`/portfolio/buy`} className="navbar-item">
                   Portfolio
                 </Link>
-                <Link to={`/offers`} className="navbar-item">
-                  Offers
-                </Link>
                 <Link to={`/manage`} className="navbar-item">
                   Manage Account
                 </Link>
