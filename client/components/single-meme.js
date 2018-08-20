@@ -31,7 +31,6 @@ class SingleMeme extends React.Component {
   render() {
     const {meme, lineChartData, buyOrders, sellOrders, user, memeStocks} = this.props
     const {tabActive} = this.state
-    console.log(buyOrders, 'buyOrders')
     return !meme ? (
       'Loading...'
     ) : (

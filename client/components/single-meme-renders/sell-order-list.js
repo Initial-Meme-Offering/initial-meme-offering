@@ -4,8 +4,6 @@ import SingleMemeOrder from './meme-orders'
 
 const SingleMemeSellList = props => {
   const {orders, user, memeStocks, memeId} = props
-  console.log(orders, 'sellOrders')
-  console.log(memeId, 'memeId')
   return (
     <div>
       {orders.map(order => {
