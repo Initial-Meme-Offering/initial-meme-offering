@@ -7,6 +7,16 @@ import {valueOfLastStockTrade, percentChange} from '../store'
 class SmallStockCard extends Component {
   render() {
     const {meme, lastTradePrice, percentChange} = this.props
+    
+    const colorOfPercent = () => {
+      if (percentChange >= 0) {
+        return (
+          <h1 className='green'>+{percentChange}%</h1>
+        );
+      }
+      return <h1 className='red'>{percentChange}%</h1>
+    }
+  
     return (
       <div className="card meme-card">
         <div className="card-image">
@@ -29,7 +39,7 @@ class SmallStockCard extends Component {
               <h1>LastPrice: ${lastTradePrice}</h1>
             </div>
             <div className="column is-6 center">
-              <h1 className="green">{percentChange}%</h1>
+              {colorOfPercent()}
             </div>
           </div>
         </div>
