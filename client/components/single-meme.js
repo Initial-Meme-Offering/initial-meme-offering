@@ -4,10 +4,12 @@ import {connect} from 'react-redux'
 import {
   valueOfLastStockTrade,
   getSingleStockChart,
-  getMemeOrders
+  getMemeOrders,
+  buyOffersByMeme,
+  sellOffersByMeme
 } from '../store'
 import SmallStockCard from './stock-card-small'
-import {SingleMemeHeader, SingleMemeOrder} from './single-meme-renders'
+import {SingleMemeHeader, SingleMemeBuyList, SingleMemeSellList} from './single-meme-renders'
 
 class SingleMeme extends React.Component {
   constructor() {
@@ -27,11 +29,8 @@ class SingleMeme extends React.Component {
   }
 
   render() {
-    const {meme, lineChartData, memeOrders, user} = this.props
-    const allIds = memeOrders.allIds
-    const byId = memeOrders.byId
+    const {meme, lineChartData, buyOrders, sellOrders, user, memeStocks} = this.props
     const {tabActive} = this.state
-
     return !meme ? (
       'Loading...'
     ) : (
@@ -40,7 +39,7 @@ class SingleMeme extends React.Component {
           <SingleMemeHeader name={meme.name} />
           <div className="columns">
             <div className="column is-half">
-              <SmallStockCard meme={meme}/>
+              <SmallStockCard meme={meme} />
             </div>
             <div className="column is-half">
               <MarketChart
@@ -70,20 +69,15 @@ class SingleMeme extends React.Component {
               >
                 <a>Sell</a>
               </li>
+              
             </ul>
+            {memeStocks && memeStocks[meme.id] ? <p className="tag is-large is-info">Total Shares Owned: {memeStocks[meme.id].quantity}</p> : ''}
           </div>
-          {allIds.map(id => {
-            return (byId[id].offerType === tabActive && byId[id].userId !== user.id ? (
-              <SingleMemeOrder
-                memeId={meme.id}
-                orderType={tabActive}
-                order={byId[id]}
-                key={id}
-              />
-            ) : (
-              ''
-            ))
-          })}
+          {tabActive === 'sell' ? (
+            <SingleMemeSellList orders={buyOrders} user={user} memeId={meme.id}/>
+          ) : (
+            <SingleMemeBuyList orders={sellOrders} user={user} />
+          )}
         </section>
       </div>
     )
@@ -94,7 +88,15 @@ const mapState = (state, {match}) => {
   return {
     user: state.user,
     meme: state.memes.byId[match.params.memeId],
-    memeOrders: state.memeOrders,
+    memeStocks: state.memeStocks.byId,
+    buyOrders: buyOffersByMeme(state, {
+      memeId: match.params.memeId,
+      userId: state.user.id
+    }),
+    sellOrders: sellOffersByMeme(state, {
+      memeId: match.params.memeId,
+      userId: state.user.id
+    }),
     lastTrade: valueOfLastStockTrade(state, match.params.memeId),
     lineChartData: getSingleStockChart(state, match.params.memeId)
   }
