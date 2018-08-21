@@ -11,7 +11,6 @@ $family-sans-serif: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI',
   'Segoe UI Emoji', 'Segoe UI Symbol';
 
 $size-1: 5rem;
-$box-background-color: black;
 
 //Derived variables
 $primary: $red;
@@ -102,7 +101,7 @@ $info: $night;
 
 #card-link {
   color: $night;
-  transition: .6s;
+  transition: 0.6s;
 }
 
 #card-link:hover {
@@ -110,7 +109,7 @@ $info: $night;
 }
 
 .move-card {
-  transition: .6s;
+  transition: 0.6s;
 }
 
 #ticker-card {
@@ -136,6 +135,7 @@ $info: $night;
 }
 
 #ticker-box {
+  background-color: black;
   height: 425px;
   width: 575px;
 }
