@@ -1,5 +1,4 @@
 import React from 'react'
-import AllMemes from './all-memes'
 import {Link} from 'react-router-dom'
 
 const HomeButtonCard = () => {

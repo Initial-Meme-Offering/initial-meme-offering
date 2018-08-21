@@ -1,8 +1,3 @@
-/**
- * `components/index.js` exists simply as a 'central export' for our components.
- * This way, we can import all of our components from the same place, rather than
- * having to figure out which file they belong to!
- */
 export {default as Navbar} from './navbar'
 export {default as Footer} from './footer'
 export {default as UserHome} from './user-home'
@@ -10,7 +5,10 @@ export {default as Login} from './auth-form'
 export {default as MarketChart} from './market-chart'
 export {default as SmallStockCard} from './stock-card-small'
 export {default as SingleIndice} from './single-indice'
-export {SingleMemePage as SingleMeme, SingleIndexPage as SingleIndex} from './single-meme'
+export {
+  SingleMemePage as SingleMeme,
+  SingleIndexPage as SingleIndex
+} from './single-meme'
 export {default as OfferForm} from './offer-form'
 export {
   BuyPortfolio,

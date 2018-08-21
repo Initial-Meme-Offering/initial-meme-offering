@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {valueOfLastStockTrade, percentChange} from '../store'
 
-//May need to afix cemented size to make sure multiple per row fit
 class SmallStockCard extends Component {
   render() {
     const {meme, lastTradePrice, percentChange} = this.props
