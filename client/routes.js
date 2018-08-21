@@ -11,7 +11,8 @@ import {
   SingleMeme,
   Portfolio,
   SubmitMeme,
-  MemesBySearch
+  MemesBySearch,
+  AllIndices
 } from './components'
 import {
   me,
@@ -51,7 +52,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/allmemes/:memeId" component={SingleMeme} />
         <Route path="/submit" component={SubmitMeme} />
-        <Route path="/indices" component={Homepage} />
+        <Route path="/indices" component={AllIndices} />
         <Route path="/index/:indiceId" component={SingleIndice} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Login} />

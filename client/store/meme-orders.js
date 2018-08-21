@@ -1,4 +1,5 @@
 import axios from 'axios'
+import addOffer from '../store'
 
 // ACTION TYPES
 const GET_MEME_ORDERS = 'GET_MEME_ORDERS'
@@ -42,7 +43,8 @@ export const respondToOffer = (offerId, userId) => dispatch => {
   axios
     .post(`/api/offers/complete/${offerId}`, {userId})
     .then(({data}) => {
-      dispatch(updateOrder(data))
+      dispatch(updateOrder(data.originalOrder))
+      dispatch(addOffer(data.newOrder))
     })
     .catch(error => console.error(error))
 }

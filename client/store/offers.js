@@ -26,7 +26,7 @@ const gotOffers = offers => ({
   offers
 })
 
-const addOffer = offer => ({
+export const addOffer = offer => ({
   type: ADD_OFFER,
   offer
 })

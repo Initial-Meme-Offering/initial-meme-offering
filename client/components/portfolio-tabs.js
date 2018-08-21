@@ -66,7 +66,7 @@ const mapSell = state => {
 }
 
 const mapTrans = state => {
-  console.log('arrived at mapTrans!')
+  console.log('state', state)
   return {
     offers: completedOffersByUser(state)
   }
