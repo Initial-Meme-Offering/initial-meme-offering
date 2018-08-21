@@ -17,12 +17,14 @@ class TickerTape extends Component {
     }
 
     return (
-      <div className="box">
-        <article id="ticker-card">
-          <div className="columns">
+      <div id="ticker-box" className="box">
+        <article id="ticker-card" className="is-centered">
+          <div className="columns is-centered">
             <div className="column is-one-third">
-              <figure className="">
+              <figure>
                 <p className="image is-128x128">
+                  <br />
+                  <br />
                   <img src={`${meme.imageUrl}`} />
                 </p>
               </figure>
@@ -30,6 +32,7 @@ class TickerTape extends Component {
             <div className="column is-two-thirds">
               <div id="ticker-card">
                 <div className="content">
+                  <br />
                   <div id="ticker-title">{`${
                     meme.symbol
                   } $${lastTradePrice}`}</div>
