@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import history from '../history'
 // ACTION TYPES
 const GET_OFFERS = 'GET_OFFERS'
 const ADD_OFFER = 'ADD_OFFER'
@@ -43,6 +43,7 @@ export const postOffer = newOffer => dispatch => {
     .post('/api/offers', newOffer)
     .then(({data}) => {
       dispatch(addOffer(data))
+      history.push('/portfolio')
     })
     .catch(error => console.error(error))
 }

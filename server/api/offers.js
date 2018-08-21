@@ -123,11 +123,10 @@ router.post('/', async (req, res, next) => {
     }))
 
     const potentialOffers = getMatches(simpleOtherOffers, quantity)
-    console.log(potentialOffers, 'potentialOffers')
     //sort to find least number of combinations to get match
     potentialOffers.sort((a, b) => a.length < b.length)
     //a bit unfair, but we pick the first.
-    const matchingOffers = potentialOffers[0]
+    const matchingOffers = potentialOffers[0] || []
 
     // if there's a match, create a transaction and set the status of all the offers in the
     if (matchingOffers.length > 0) {
@@ -170,10 +169,14 @@ router.post('/', async (req, res, next) => {
 })
 
 const getMatches = (offers, target) => {
+  if (!offers.length){
+    return []
+  }
   // instantiate sum array with first offer quantity and id
   const initialQty = +offers[0].quantity
   const initialId = '' + offers[0].id
 
+ 
   const sumArrs = [
     {
       sum: initialQty,
