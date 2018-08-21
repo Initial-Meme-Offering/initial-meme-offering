@@ -1,8 +1,9 @@
 import axios from 'axios'
+import addOffer from '../store'
 
 // ACTION TYPES
 const GET_MEME_ORDERS = 'GET_MEME_ORDERS'
-const REMOVE_ORDER = 'REMOVE_ORDER'
+const UPDATE_ORDER = 'UPDATE_ORDER'
 
 //INITIAL STATE
 const defaultMemeOrders = {
@@ -26,8 +27,8 @@ const gotMemeOrders = orders => ({
   orders
 })
 
-const removeOrder = order => ({
-  type: REMOVE_ORDER,
+const updateOrder = order => ({
+  type: UPDATE_ORDER,
   order
 })
 
@@ -42,7 +43,8 @@ export const respondToOffer = (offerId, userId) => dispatch => {
   axios
     .post(`/api/offers/complete/${offerId}`, {userId})
     .then(({data}) => {
-      dispatch(removeOrder(data))
+      dispatch(updateOrder(data.originalOrder))
+      dispatch(addOffer(data.newOrder))
     })
     .catch(error => console.error(error))
 }
@@ -58,11 +60,43 @@ export default function(state = defaultMemeOrders, action) {
         }, {}),
         allIds: action.orders.map(order => order.id)
       }
-    case REMOVE_ORDER:
-      return state
+    case UPDATE_ORDER:
+      return {
+        allIds: state.allIds,
+        byId: {...state.byId, [action.order.id]: {...action.order}}
+      }
     default:
       return state
   }
 }
 
 //SELECTORS
+export const buyOffersByMeme = (state, {memeId, userId}) => {
+  return Object.values(state.memeOrders.byId).reduce((result, offer) => {
+    if (
+      offer.offerType === 'buy' &&
+      offer.status !== 'Completed' &&
+      offer.memeId === Number(memeId) &&
+      offer.userId !== userId
+    )
+      result.push({
+        ...offer
+      })
+    return result
+  }, [])
+}
+
+export const sellOffersByMeme = (state, {memeId, userId}) => {
+  return Object.values(state.memeOrders.byId).reduce((result, offer) => {
+    if (
+      offer.offerType === 'sell' &&
+      offer.status !== 'Completed' &&
+      offer.memeId === Number(memeId) &&
+      offer.userId !== userId
+    )
+      result.push({
+        ...offer
+      })
+    return result
+  }, [])
+}

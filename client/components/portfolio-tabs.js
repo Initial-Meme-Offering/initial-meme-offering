@@ -10,7 +10,7 @@ import {
 import {OfferObject, TotalStockObject} from '../components'
 
 const PortfolioTabs = props => {
-  const {offers, total} = props
+  const {offers, total, type} = props
   const url = props.match.url.split('/')[2]
   return (
     <div>
@@ -32,7 +32,7 @@ const PortfolioTabs = props => {
       </div>
       <div className="container">
         {!offers[0] || !offers[0].meme
-          ? `No ${url} activity just yet`
+          ? `No ${type} just yet`
           : offers.map(
               offer =>
                 total ? (
@@ -47,20 +47,24 @@ const PortfolioTabs = props => {
 }
 
 const mapBuy = state => ({
-  offers: buyOffersByUser(state)
+  offers: buyOffersByUser(state),
+  type: 'buy orders'
 })
 
 const mapSell = state => ({
-  offers: sellOffersByUser(state)
+  offers: sellOffersByUser(state),
+  type: 'sell orders'
 })
 
 const mapTrans = state => ({
-  offers: completedOffersByUser(state)
+  offers: completedOffersByUser(state),
+  type: 'completed transactions'
 })
 
 const mapTotal = state => ({
   offers: getUserMemeStocksListItem(state),
-  total: true
+  total: true,
+  type: 'stock in portfolio'
 })
 
 export const BuyPortfolio = connect(mapBuy)(PortfolioTabs)
