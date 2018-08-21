@@ -2,11 +2,12 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {MarketChart} from './index'
-import {getSingleStockChart} from '../store'
+import {getSingleStockChart, getTrendingStocks} from '../store'
 import HomeButtonCard from './homepage-card-button'
+import TickerTape from './ticker-tape'
 
 const HomePage = props => {
-  const {totalMarket} = props
+  const {totalMarket, memes} = props
   return (
     <div>
       <section id="home-rel" className="hero is-primary is-large is-bold">
@@ -34,13 +35,13 @@ const HomePage = props => {
               >
                 Buy
               </p>
-              <br />
-              <br />
             </div>
             <div className="column">
-              <br />
-              <br />
-              <h2>Flipping ticker tape here</h2>
+              {memes.map(meme => (
+                <div key={meme.id}>
+                  <TickerTape meme={meme} />
+                </div>
+              ))}
               <br />
               <br />
             </div>
@@ -113,8 +114,10 @@ const HomePage = props => {
   )
 }
 const mapState = state => {
+  const memeIds = getTrendingStocks(state)
   return {
-    totalMarket: getSingleStockChart(state, 1)
+    totalMarket: getSingleStockChart(state, 1),
+    memes: memeIds.map(memeId => state.memes.byId[memeId])
   }
 }
 
