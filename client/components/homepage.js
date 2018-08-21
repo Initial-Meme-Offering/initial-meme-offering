@@ -43,8 +43,7 @@ class HomePage extends React.Component {
                 Memenomics
               </h1>
               <h2 className="subtitle">
-                One stop shop for buying, selling, and trading your favorite
-                memes
+                One stop shop for buying and selling your favorite memes
               </h2>
             </div>
           </div>
@@ -56,6 +55,11 @@ class HomePage extends React.Component {
           <div className="container body-center">
             <div className="columns">
               <div className="column">
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
                 <p
                   id="buy"
                   className="is-size-1 has-text-centered has-text-weight-semibold"
@@ -117,7 +121,7 @@ class HomePage extends React.Component {
                 <br />
                 <br />
                 <p className=" is-primary is-size-1 has-text-primary has-text-centered has-text-weight-semibold">
-                  Trade
+                  Manage Portfolio
                 </p>
                 <br />
                 <br />
