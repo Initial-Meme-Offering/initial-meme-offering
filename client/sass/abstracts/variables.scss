@@ -83,14 +83,8 @@ $info: $night;
   text-align: center;
 }
 
-.meme-card:hover {
-  background: lightgrey;
-  transition: 0.6s;
-}
-
 .green-background {
   background: green;
-
 }
 
 .red-background {
@@ -102,7 +96,7 @@ $info: $night;
 }
 
 .meme-heading {
-  font-size: 2em;
+  font-size: 3em;
   font-weight: bold;
 }
 
@@ -111,6 +105,21 @@ $info: $night;
   font-weight: normal;
 }
 
+.move-card:hover {
+  margin-top: -1.5em;
+  background: $night;
+  color: white;
+}
+
 #card-link {
   color: $night;
+  transition: .6s;
+}
+
+#card-link:hover {
+  color: white;
+}
+
+.move-card {
+  transition: .6s;
 }
