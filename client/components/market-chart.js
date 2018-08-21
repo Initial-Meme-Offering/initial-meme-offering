@@ -12,7 +12,8 @@ class MarketChart extends React.Component {
       x: [new Date('2016'), new Date('2018')],
       y: [0, 80]
     },
-    disableZoom: true
+    disableZoom: true,
+    data: this.props.data.historical
   }
 
   todaysDomain = () => {
@@ -31,12 +32,14 @@ class MarketChart extends React.Component {
     console.log('historic', this.state.zoomDomain)
     const {data} = this.props
     this.setState({
-      zoomDomain: {x: [data[0].x, data[data.length - 1].x]}
+      zoomDomain: {
+        x: [data[0].x, data[data.length - 1].x],
+        y: this.state.zoomDomain.y
+      }
     })
   }
 
   handleClick = evt => {
-    console.log('clicked', this.state.allowZoom)
     evt.preventDefault()
     this.setState({
       disableZoom: !this.state.disableZoom
@@ -49,7 +52,7 @@ class MarketChart extends React.Component {
 
   componentDidMount() {
     const {data} = this.props
-    if (data[0])
+    if (data.historical[0])
       this.setState({
         zoomDomain: {x: [data[0].x, data[data.length - 1].x]}
       })
@@ -65,6 +68,7 @@ class MarketChart extends React.Component {
 
   render() {
     const {x, y, title, data} = this.props
+
     return (
       <div onClick={this.handleClick}>
         <h5 className="title is-5 has-text-centered">{title}</h5>

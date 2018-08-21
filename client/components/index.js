@@ -30,3 +30,5 @@ export {AllMemes, MemesBySearch} from './all-memes'
 export {default as AllIndices} from './all-indices'
 export {default as IndiceObject} from './indice-object'
 export {default as MemesModal} from './memes-modal'
+
+export {default as TrendingMemeObject} from './trending-meme-object'

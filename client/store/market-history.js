@@ -95,8 +95,28 @@ export const userTotalStockChart = state => {
   }, [])
 }
 
+// export const getSingleStockChart = (state, memeId) => {
+//   return state.marketHistory.allIds.reduce((result, histId) => {
+//     if (state.marketHistory.byId[histId].memeId == memeId)
+//       result.push({
+//         x: new Date(state.marketHistory.byId[histId].seedDateDay),
+//         y: state.marketHistory.byId[histId].closingPrice
+//       })
+//     return result
+//   }, [])
+// }
+
 export const getSingleStockChart = (state, memeId) => {
-  return state.marketHistory.allIds.reduce((result, histId) => {
+  let todaysData = state.transactions.allIds.reduce((result, transId) => {
+    if (state.transactions.byId[transId].memeId == memeId)
+      result.push({
+        x: new Date(state.transactions.byId[transId].seedDate),
+        y: state.transactions.byId[transId].price
+      })
+    return result
+  }, [])
+
+  let historicalData = state.marketHistory.allIds.reduce((result, histId) => {
     if (state.marketHistory.byId[histId].memeId == memeId)
       result.push({
         x: new Date(state.marketHistory.byId[histId].seedDateDay),
@@ -104,6 +124,8 @@ export const getSingleStockChart = (state, memeId) => {
       })
     return result
   }, [])
+
+  return {today: todaysData, historical: historicalData}
 }
 
 // Displays daily average from all matching stocks

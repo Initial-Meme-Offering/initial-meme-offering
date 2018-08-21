@@ -46,18 +46,6 @@ export default function(state = defaultIndices, action) {
   }
 }
 
-// export const getUserMemeStocksListItem = state => {
-//   const quantities = userStockQuantitiesByMemeId(state)
-//   return Object.keys(quantities).map(memeId => ({
-//     id: memeId,
-//     meme: state.memes.byId[memeId],
-//     quantity: quantities[memeId],
-//     currentPrice: valueOfLastStockTrade(state, memeId).price,
-//     lastPurchasePrice: lastPurchasePriceByUser(state, memeId),
-//     chartData: getSingleStockChart(state, memeId)
-//   }))
-// }
-
 export const indiceAgregateStockChart = (state, indiceId) => {
   const indiceMemes = getMemeIdsByIndice(state, indiceId)
   const dailyPrices = state.marketHistory.allIds.reduce((tally, histId) => {
