@@ -46,7 +46,7 @@ export const respondToOffer = (offerId, userId) => dispatch => {
       const {completedOrder, newOrder} = data
       dispatch(updateOrder(completedOrder))
       dispatch(addOffer(newOrder))
-      dispatch(updateMemeStocks([newOrder.memeId, newOrder.quantity, newOrder.offerType]))
+      dispatch(updateMemeStocks([newOrder.memeId, newOrder.quantity, newOrder.offerType, newOrder.userId]))
     })
     .catch(error => console.error(error))
 }

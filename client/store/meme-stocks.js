@@ -28,11 +28,12 @@ const gotMemeStocksByUser = memeStocks => ({
   memeStocks
 })
 
-export const updateMemeStocks = ([memeId, quantity, offerType]) => ({
+export const updateMemeStocks = ([memeId, quantity, offerType, userId]) => ({
   type: UPDATE_MEMESTOCKS_BY_USER,
   memeId,
   quantity,
-  offerType
+  offerType,
+  userId
 })
 
 //THUNK CREATORS
@@ -60,10 +61,14 @@ export default function(state = defaultMemeStocks, action) {
           ...state.byId,
           [action.memeId]: {
             ...state.byId[action.memeId],
+            memeId: action.memeId,
+            userId: action.userId,
             quantity:
-              action.offerType === 'sell'
-                ? state.byId[action.memeId].quantity - action.quantity
-                : state.byId[action.memeId].quantity + action.quantity
+              state.byId[action.memeId] 
+                ? action.offerType === 'sell'
+                  ? state.byId[action.memeId].quantity - action.quantity
+                  : state.byId[action.memeId].quantity + action.quantity
+                : action.quantity
           }
         },
         allIds: [...state.allIds]
