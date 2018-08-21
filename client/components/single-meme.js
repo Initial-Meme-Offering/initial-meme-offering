@@ -6,7 +6,8 @@ import {
   getSingleStockChart,
   getMemeOrders,
   buyOffersByMeme,
-  sellOffersByMeme
+  sellOffersByMeme,
+  indiceAgregateStockChart
 } from '../store'
 import {
   SingleMemeHeader,
@@ -120,8 +121,8 @@ const mapStateMeme = (state, {match}) => {
       memeId: match.params.memeId,
       userId: state.user.id
     }),
-    lastTrade: valueOfLastStockTrade(state, match.params.memeId),
-    lineChartData: getSingleStockChart(state, match.params.memeId)
+    lastTrade: valueOfLastStockTrade(state, match.params.indiceId),
+    lineChartData: indiceAgregateStockChart(state, match.params.indiceId)
   }
 }
 
@@ -132,17 +133,17 @@ const mapDispatchMeme = dispatch => ({
 const mapStateIndex = (state, {match}) => {
   return {
     user: state.user,
-    meme: state.memes.byId[match.params.memeId],
+    meme: state.indices.byId[match.params.indiceId],
     memeStocks: state.memeStocks.byId,
     buyOrders: buyOffersByMeme(state, {
-      memeId: match.params.memeId,
+      memeId: match.params.indiceId,
       userId: state.user.id
     }),
     sellOrders: sellOffersByMeme(state, {
-      memeId: match.params.memeId,
+      memeId: match.params.indiceId,
       userId: state.user.id
     }),
-    lastTrade: valueOfLastStockTrade(state, match.params.memeId),
+    lastTrade: valueOfLastStockTrade(state, match.params.indiceId),
     lineChartData: getSingleStockChart(state, match.params.memeId)
   }
 }
