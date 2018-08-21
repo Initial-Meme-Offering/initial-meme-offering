@@ -18,19 +18,19 @@ class SmallStockCard extends Component {
     }
   
     return (
-      <div className="card meme-card">
-        <Link id='card-link' to={`/allmemes/${meme.id}`}>
-        <div className="card-image">
-          <figure className="image is-4by3">
+      <div className="card meme-card move-card">
+       <Link id='card-link' to={`/allmemes/${meme.id}`}>
+        <div className="card-image contains-image">
+          <figure className="image is-4by3 zoom">
             <img src={meme.imageUrl} alt="Placeholder image" />
           </figure>
         </div>
         <div className="card-content">
           <div className="media">
             <div className="media-content">
-              <p className=" is-4 center meme-heading">
-                {meme.name} ({meme.symbol})
-              </p>
+              <h1 className=" is-4 center meme-heading">
+                {meme.symbol}
+              </h1>
             </div>
           </div>
             <div className="columns center">
@@ -42,7 +42,7 @@ class SmallStockCard extends Component {
               </div>
             </div>
         </div>
-        </Link>
+       </Link>
       </div>
     )
   }
