@@ -11,7 +11,8 @@ import {
   SingleMeme,
   Portfolio,
   SubmitMeme,
-  MemesBySearch
+  MemesBySearch,
+  AllIndices
 } from './components'
 import {
   me,
@@ -19,7 +20,9 @@ import {
   getTransactions,
   getIndices,
   getMemeIndices,
-  getMarketHistory
+  getMarketHistory,
+  getOffers,
+  getMemeStocksByUser
 } from './store'
 
 /**
@@ -28,6 +31,17 @@ import {
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    if (this.props.isLoggedIn) {
+      this.props.getOffers()
+      this.props.getMemeStocksByUser(this.props.userId)
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.isLoggedIn !== prevProps.isLoggedIn) {
+      this.props.getOffers()
+      this.props.getMemeStocksByUser(this.props.userId)
+    }
   }
 
   render() {
@@ -38,7 +52,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/allmemes/:memeId" component={SingleMeme} />
         <Route path="/submit" component={SubmitMeme} />
-        <Route path="/indices" component={Homepage} />
+        <Route path="/indices" component={AllIndices} />
         <Route path="/index/:indiceId" component={SingleIndice} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Login} />
@@ -83,7 +97,9 @@ const mapDispatch = dispatch => {
       dispatch(getIndices())
       dispatch(getMemeIndices())
       dispatch(getMarketHistory())
-    }
+    },
+    getOffers: () => dispatch(getOffers()),
+    getMemeStocksByUser: userId => dispatch(getMemeStocksByUser(userId))
   }
 }
 

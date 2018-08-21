@@ -1,5 +1,10 @@
 import React from 'react'
-import {VictoryChart, VictoryLine, VictoryZoomContainer} from 'victory'
+import {
+  VictoryChart,
+  VictoryLine,
+  VictoryZoomContainer,
+  VictoryLegend
+} from 'victory'
 
 class MarketChart extends React.Component {
   state = {
@@ -7,18 +12,39 @@ class MarketChart extends React.Component {
       x: [new Date('2016'), new Date('2018')],
       y: [0, 80]
     },
-    allowZoom: false
+    disableZoom: true
+  }
+
+  todaysDomain = () => {
+    var midnight = new Date()
+    midnight.setHours(0, 0, 0, 0)
+    const {data} = this.props
+    this.setState({
+      zoomDomain: {
+        x: [midnight, data[data.length - 1].x],
+        y: this.state.zoomDomain.y
+      }
+    })
+  }
+
+  historicalDomain = () => {
+    console.log('historic', this.state.zoomDomain)
+    const {data} = this.props
+    this.setState({
+      zoomDomain: {x: [data[0].x, data[data.length - 1].x]}
+    })
   }
 
   handleClick = evt => {
-    console.log('clicked')
+    console.log('clicked', this.state.allowZoom)
+    evt.preventDefault()
     this.setState({
-      allowZoom: () => !this.state.allowZoom
+      disableZoom: !this.state.disableZoom
     })
   }
 
   handleZoom = domain => {
-    if (this.state.allowZoom) this.setState({zoomDomain: domain})
+    this.setState({zoomDomain: domain})
   }
 
   componentDidMount() {
@@ -40,14 +66,24 @@ class MarketChart extends React.Component {
   render() {
     const {x, y, title, data} = this.props
     return (
-      <div>
+      <div onClick={this.handleClick}>
         <h5 className="title is-5 has-text-centered">{title}</h5>
+
+        <div className="buttons has-addons is-centered">
+          <span onClick={this.todaysDomain} className="button is-small">
+            Today
+          </span>
+          <span onClick={this.historicalDomain} className="button is-small">
+            Historical
+          </span>
+        </div>
         <VictoryChart
           containerComponent={
             <VictoryZoomContainer
               zoomDimension="x"
               zoomDomain={this.state.zoomDomain}
               onZoomDomainChange={this.handleZoom}
+              disable={this.state.disableZoom}
             />
           }
           scale={{x: 'time'}}

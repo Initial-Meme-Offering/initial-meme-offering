@@ -67,7 +67,7 @@ router.post('/complete/:orderId', async (req, res, next) => {
       seedDate: now
     })
     await newTransaction.setOffers([completedOrder, newUserOrder])
-    res.json(completedOrder)
+    res.json({completedOrder, newOrder: newUserOrder})
   } catch (err) {
     next(err)
   }
@@ -76,12 +76,18 @@ router.post('/complete/:orderId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {userId, memeId, quantity, price, orderType} = req.body
-    const userMemeStockData = await MemeStock.findOrCreate({where: {userId, memeId}})
+    const userMemeStockData = await MemeStock.findOrCreate({
+      where: {userId, memeId}
+    })
     const userMemeStock = userMemeStockData[0]
     const numShares = userMemeStock.dataValues.quantity
 
     //error handling in case someone sends bad offers
-    if (quantity <= 0 || price <= 0 || (orderType === 'sell' && numShares < quantity)) {
+    if (
+      quantity <= 0 ||
+      price <= 0 ||
+      (orderType === 'sell' && numShares < quantity)
+    ) {
       const error = new Error('Not enough shares to sell or money to buy')
       next(error)
     }

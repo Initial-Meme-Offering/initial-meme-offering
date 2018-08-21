@@ -52,3 +52,10 @@ export const getMemesByIndex = (state, indiceId) => {
     return result
   }, [])
 }
+
+export const getMemeIdsByIndice = (state, indiceId) => {
+  return Object.values(state.memeIndices.byId).reduce((result, row) => {
+    if (row.indiceId == indiceId) result.push(row.memeId)
+    return result
+  }, [])
+}
