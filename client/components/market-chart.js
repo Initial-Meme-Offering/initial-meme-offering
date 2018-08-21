@@ -28,7 +28,6 @@ class MarketChart extends React.Component {
   }
 
   historicalDomain = () => {
-    console.log('historic', this.state.zoomDomain)
     const {data} = this.props
     this.setState({
       zoomDomain: {x: [data[0].x, data[data.length - 1].x]}
@@ -36,7 +35,6 @@ class MarketChart extends React.Component {
   }
 
   handleClick = evt => {
-    console.log('clicked', this.state.allowZoom)
     evt.preventDefault()
     this.setState({
       disableZoom: !this.state.disableZoom
