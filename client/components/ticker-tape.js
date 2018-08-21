@@ -5,9 +5,6 @@ import {valueOfLastStockTrade, percentChange} from '../store'
 class TickerTape extends Component {
   render() {
     const {meme, lastTradePrice, percentChange} = this.props
-    console.log('ticker tape meme', meme)
-    console.log('ticker tape price', lastTradePrice)
-    console.log('ticker tape percent', percentChange)
 
     const colorOfPercent = () => {
       if (percentChange >= 0) {
