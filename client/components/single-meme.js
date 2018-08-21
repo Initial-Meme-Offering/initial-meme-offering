@@ -107,7 +107,7 @@ class SingleMeme extends React.Component {
   }
 }
 
-const mapState = (state, {match}) => {
+const mapStateMeme = (state, {match}) => {
   return {
     user: state.user,
     meme: state.memes.byId[match.params.memeId],
@@ -125,8 +125,33 @@ const mapState = (state, {match}) => {
   }
 }
 
-const mapDispatch = dispatch => ({
+const mapDispatchMeme = dispatch => ({
   getOrders: memeId => dispatch(getMemeOrders(memeId))
 })
 
-export default connect(mapState, mapDispatch)(SingleMeme)
+const mapStateIndex = (state, {match}) => {
+  return {
+    user: state.user,
+    meme: state.memes.byId[match.params.memeId],
+    memeStocks: state.memeStocks.byId,
+    buyOrders: buyOffersByMeme(state, {
+      memeId: match.params.memeId,
+      userId: state.user.id
+    }),
+    sellOrders: sellOffersByMeme(state, {
+      memeId: match.params.memeId,
+      userId: state.user.id
+    }),
+    lastTrade: valueOfLastStockTrade(state, match.params.memeId),
+    lineChartData: getSingleStockChart(state, match.params.memeId)
+  }
+}
+
+const mapDispatchIndex = dispatch => ({
+  getOrders: memeId => dispatch(getMemeOrders(memeId))
+})
+
+
+
+export const SingleMemePage = connect(mapStateMeme, mapDispatchMeme)(SingleMeme)
+export const SingleIndexPage = connect(mapStateIndex, mapDispatchIndex)(SingleMeme)

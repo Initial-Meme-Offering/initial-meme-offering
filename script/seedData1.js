@@ -517,21 +517,21 @@ const memesdata = [
     isIndex: true
   },
   {
-    name: 'DOGE 500',
+    name: 'Doge 500',
     imageUrl: 'https://i.imgflip.com/2g8gyb.jpg',
     status: 'released',
     symbol: 'DOGE',
     isIndex: true
   },
   {
-    name: 'TWTR',
+    name: 'Twitter',
     imageUrl: 'https://i.imgflip.com/2g8i2d.jpg',
     status: 'released',
     symbol: 'TWTR',
     isIndex: true
   },
   {
-    name: 'TUMBLR',
+    name: 'Tumbler',
     imageUrl: 'https://i.imgflip.com/2g8i94.jpg',
     status: 'released',
     symbol: 'TUMBLR',
