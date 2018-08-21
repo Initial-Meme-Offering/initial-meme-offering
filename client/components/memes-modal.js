@@ -30,8 +30,8 @@ class MemesModal extends React.Component {
           </span>
         </button>
         <div className={this.state.toggleDrop ? 'modal is-active' : 'modal'}>
-          <div className="modal-background" />
-          <div className="modal-card meme-modal ">
+          <div onClick={this.handleClick} className="modal-background" />
+          <div className="modal-card" id="meme-modal">
             <header className="modal-card-head">
               <p className="modal-card-title">
                 <strong>{indiceName} Stocks</strong>
@@ -43,9 +43,9 @@ class MemesModal extends React.Component {
               />
             </header>
             <section className="modal-card-body">
-              <div className="columns">
+              <div className="columns columns is-multiline">
                 {memes.map(meme => (
-                  <div className="column">
+                  <div className="column is-4">
                     <SmallStockCard key={meme.id} meme={meme} />
                   </div>
                 ))}
