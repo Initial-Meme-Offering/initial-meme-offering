@@ -103,3 +103,14 @@ export const percentChange = (state, memeId) => {
   }
   return -1
 }
+
+// export const getTickerTapeMemes = state => {
+//   const memes = getTrendingStocks(state)
+//   console.log('store', memes)
+//   return Object.keys(memes).map(memeId => ({
+//     id: memeId,
+//     symbol: memeId.symbol,
+//     currentValue: valueOfLastStockTrade(state, memeId.price),
+//     percentChange: percentChange(state, memeId)
+//   }))
+// }
