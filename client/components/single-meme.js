@@ -7,7 +7,8 @@ import {
   getMemeOrders,
   buyOffersByMeme,
   sellOffersByMeme,
-  indiceAgregateStockChart
+  indiceAgregateStockChart,
+  getMemeStocksByUser
 } from '../store'
 import {
   SingleMemeHeader,
@@ -28,6 +29,7 @@ class SingleMeme extends React.Component {
     const memeId = this.props.match.params.memeId || this.props.match.params.indiceId
     this.props.getOrders(memeId)
   }
+  
 
   handleTabClick = orderType => {
     this.setState({tabActive: orderType})
@@ -127,7 +129,8 @@ const mapStateMeme = (state, {match}) => {
 }
 
 const mapDispatchMeme = dispatch => ({
-  getOrders: memeId => dispatch(getMemeOrders(memeId))
+  getOrders: memeId => dispatch(getMemeOrders(memeId)),
+  getMemeStocks: userId => dispatch(getMemeStocksByUser(userId))
 })
 
 const mapStateIndex = (state, {match}) => {
@@ -149,7 +152,8 @@ const mapStateIndex = (state, {match}) => {
 }
 
 const mapDispatchIndex = dispatch => ({
-  getOrders: memeId => dispatch(getMemeOrders(memeId))
+  getOrders: memeId => dispatch(getMemeOrders(memeId)),
+  getMemeStocks: userId => dispatch(getMemeStocksByUser(userId))
 })
 
 
