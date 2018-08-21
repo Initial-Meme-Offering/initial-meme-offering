@@ -3,7 +3,6 @@ const Meme = require('./meme')
 const Offer = require('./offer')
 const MemeStock = require('./meme-stock')
 const Transaction = require('./transaction')
-const Indice = require('./indice')
 const UserComment = require('./user-comment')
 const MemeIndice = require('./meme-indices')
 const MarketHistory = require('./markethistory')
@@ -15,16 +14,12 @@ const MarketHistory = require('./markethistory')
  */
 
 //MemeStock link to get User shares of a Meme
-// Meme.belongsToMany(User, {through: MemeStock})
-// User.belongsToMany(Meme, {through: MemeStock})
 Meme.hasMany(MemeStock)
 User.hasMany(MemeStock)
 MemeStock.belongsTo(Meme)
 MemeStock.belongsTo(User)
 
 //Offers link for both buy and sell user offers
-// Meme.belongsToMany(User, {through: Offer})
-// User.belongsToMany(Meme, {through: Offer})
 Meme.hasMany(Offer)
 User.hasMany(Offer)
 Offer.belongsTo(Meme)
@@ -52,8 +47,8 @@ Offer.belongsToMany(Transaction, {through: 'offer-transactions'})
 Transaction.belongsToMany(Offer, {through: 'offer-transactions'})
 
 //Link between Memes & Indices
-Meme.belongsToMany(Indice, {through: 'meme-indices'})
-Indice.belongsToMany(Meme, {through: 'meme-indices'})
+Meme.belongsToMany(Meme, {as: 'members', foreignKey: 'parentIndexId', through: 'meme-indices'})
+Meme.belongsToMany(Meme, {as: 'indices', foreignKey: 'childMemeId', through: 'meme-indices'})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -68,7 +63,6 @@ module.exports = {
   Offer,
   Transaction,
   MemeStock,
-  Indice,
   UserComment,
   MemeIndice,
   MarketHistory
