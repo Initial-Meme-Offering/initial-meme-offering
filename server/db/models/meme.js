@@ -23,6 +23,10 @@ const Meme = db.define('meme', {
     },
     totalStock: {
         type: Sequelize.INTEGER
+    },
+    isIndex: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
     }
 })
 

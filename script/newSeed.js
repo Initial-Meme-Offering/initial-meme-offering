@@ -5,22 +5,16 @@ const {
   User,
   Meme,
   MemeStock,
-  Indice,
   Offer,
   Transaction,
-  UserComment,
   MarketHistory
 } = require('../server/db/models')
-const {memesdata, usersdata, usercommentsdata} = require('./seedData1')
-const {offersdata} = require('./seedData2')
-const {memestocksdata, indicesdata} = require('./seedData3')
+const {memesdata, usersdata} = require('./seedData1')
+const {indicesdata} = require('./seedData3')
 
 const shuffle = () => 0.5 - Math.random()
 //will be used to add 5 minute intervals of time to dates added to the database for current transaction data
 //want to mutate the original date in this instance
-function addMinutes(date, minutes) {
-  return date.getTime() + minutes * 60000
-}
 
 function dateChange(date, interval, units) {
   switch (interval) {
@@ -171,17 +165,16 @@ async function preSeed() {
   await seedMemeStocks()
   console.log('Meme Stocks seeded')
 
-  async function seedIndices() {
-    for (let i = 0; i < indicesdata.length; i++) {
-      await Indice.create(indicesdata[i])
+  const indices = await Meme.findAll({
+    where: {
+      isIndex: true
     }
-  }
-
-  await seedIndices()
-  console.log('Indices seeded')
-
-  const indices = await Indice.findAll()
-  const allMemes = await Meme.findAll()
+  })
+  const allMemes = await Meme.findAll({
+    where: {
+      isIndex: false
+    }
+  })
   const memes = allMemes.slice(0, 5)
 
   async function seedMemeIndices() {
@@ -189,7 +182,6 @@ async function preSeed() {
       const randomIndices = indices.sort(shuffle).slice(0, 2)
       await memes[i].setIndices(randomIndices)
     }
-    return memes
   }
 
   await seedMemeIndices()
@@ -249,7 +241,7 @@ async function seedOffers(dataVariances, memeIndex, memes) {
     {length: 365, variance: medVar, noise: 1, trend: 0},
     {length: 700, variance: lowVar, noise: 0, trend: 100}
   ])
-  for (let i = 0; i < offersLength ; i++) {
+  for (let i = 0; i < offersLength; i++) {
     const offerType = randomPlusMinus() < 0 ? 'sell' : 'buy'
     await Offer.create({
       offerType,
@@ -264,7 +256,11 @@ async function seedOffers(dataVariances, memeIndex, memes) {
 
 async function seed() {
   //get previous data loaded
-  const allMemes = await Meme.findAll()
+  const allMemes = await Meme.findAll({
+    where: {
+      isIndex: false
+    }
+  })
   const memes = allMemes.slice(0, 5)
 
   async function seedMarketData() {
@@ -286,8 +282,6 @@ async function seed() {
 
   await seedMarketData()
   console.log('Market data seeded')
-
-  const transactions = await Transaction.findAll()
 
   await db.sync()
   console.log(`seeded successfully`)
