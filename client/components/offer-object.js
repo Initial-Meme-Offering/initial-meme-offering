@@ -23,7 +23,7 @@ const OfferObject = props => {
           <div className="level-item has-text-centered">
             <div>
               <p className="heading">
-                {status === 'Completed'
+                {status === 'Complete'
                   ? offerType === 'sell'
                     ? 'Completed Sale'
                     : 'Completed Purchase'

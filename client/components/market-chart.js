@@ -16,7 +16,6 @@ class MarketChart extends React.Component {
   }
 
   todaysDomain = () => {
-    console.log('today', this.state.zoomDomain)
     var midnight = new Date()
     midnight.setHours(0, 0, 0, 0)
     const {data} = this.props

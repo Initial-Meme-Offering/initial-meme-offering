@@ -27,7 +27,7 @@ class IndiceObject extends React.Component {
           <div className="column is-half">
             <MarketChart
               data={chartData}
-              title={`${indice.symbol || 'SYM'} History`}
+              title={`(${indice.symbol || 'SYM'}) History`}
               x={chartData.x}
               y={chartData.y}
             />
