@@ -46,7 +46,7 @@ const Navbar = ({handleLogout, isLoggedIn}) => (
                   to="/indices"
                   className="button is-link is-info is-hoverable is-outlined"
                 >
-                  Indicies
+                  Indices
                 </Link>
               </p>
             </div>
