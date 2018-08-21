@@ -9,7 +9,11 @@ import {
   sellOffersByMeme
 } from '../store'
 import SmallStockCard from './stock-card-small'
-import {SingleMemeHeader, SingleMemeBuyList, SingleMemeSellList} from './single-meme-renders'
+import {
+  SingleMemeHeader,
+  SingleMemeBuyList,
+  SingleMemeSellList
+} from './single-meme-renders'
 
 class SingleMeme extends React.Component {
   constructor() {
@@ -29,7 +33,14 @@ class SingleMeme extends React.Component {
   }
 
   render() {
-    const {meme, lineChartData, buyOrders, sellOrders, user, memeStocks} = this.props
+    const {
+      meme,
+      lineChartData,
+      buyOrders,
+      sellOrders,
+      user,
+      memeStocks
+    } = this.props
     const {tabActive} = this.state
     return !meme ? (
       'Loading...'
@@ -69,12 +80,21 @@ class SingleMeme extends React.Component {
               >
                 <a>Sell</a>
               </li>
-              
             </ul>
-            {memeStocks && memeStocks[meme.id] ? <p className="tag is-large is-info">Total Shares Owned: {memeStocks[meme.id].quantity}</p> : ''}
+            {memeStocks && memeStocks[meme.id] ? (
+              <p className="tag is-large is-info">
+                Total Shares Owned: {memeStocks[meme.id].quantity}
+              </p>
+            ) : (
+              ''
+            )}
           </div>
           {tabActive === 'sell' ? (
-            <SingleMemeSellList orders={buyOrders} user={user} memeId={meme.id}/>
+            <SingleMemeSellList
+              orders={buyOrders}
+              user={user}
+              memeId={meme.id}
+            />
           ) : (
             <SingleMemeBuyList orders={sellOrders} user={user} />
           )}
