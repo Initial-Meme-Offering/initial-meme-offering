@@ -25,7 +25,6 @@ class Portfolio extends React.Component {
   }
 
   render() {
-    console.log('user', this.props.user)
     const {lineChartData, pieChartData} = this.props
     return (
       <section className="section is-medium">

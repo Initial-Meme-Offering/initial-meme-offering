@@ -1,6 +1,5 @@
 import React from 'react'
-import {MarketChart, MemesDropdown} from '../components'
-import {Link} from 'react-router-dom'
+import {MarketChart, MemesModal} from '../components'
 
 const IMAGE = 'https://i.imgflip.com/1o00in.jpg'
 
@@ -21,9 +20,7 @@ class IndiceObject extends React.Component {
                 <p>
                   <strong>Trading At:</strong>&nbsp; ${currentPrice}
                 </p>
-                {/* DROPDOWN START */}
-                <MemesDropdown memes={indiceMemes} />
-                {/* DROPDOWN END */}
+                <MemesModal memes={indiceMemes} indiceName={indice.name} />
               </div>
             </div>
           </div>
