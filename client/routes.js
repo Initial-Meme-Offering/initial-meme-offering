@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import {
   Login,
   UserHome,
-  SingleIndice,
+  SingleIndex,
   Homepage,
   TrendingMemes,
   SingleMeme,
@@ -53,7 +53,7 @@ class Routes extends Component {
         <Route path="/allmemes/:memeId" component={SingleMeme} />
         <Route path="/submit" component={SubmitMeme} />
         <Route path="/indices" component={AllIndices} />
-        <Route path="/index/:indiceId" component={SingleIndice} />
+        <Route path="/index/:indiceId" component={SingleIndex} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Login} />
         <Route exact path="/offer/:memeId([0-9]*)" component={SingleMeme} />

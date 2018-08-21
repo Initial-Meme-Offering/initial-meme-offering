@@ -14,7 +14,7 @@ class SingleMemeOrder extends React.Component {
   }
 
   render() {
-    const {orderType, order, memeId, memeStocks} = this.props
+    const {orderType, order} = this.props
     return (
       <div className="box no-pad">
         <div className="level">

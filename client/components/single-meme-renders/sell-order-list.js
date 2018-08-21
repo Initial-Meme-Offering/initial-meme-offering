@@ -7,7 +7,6 @@ const SingleMemeSellList = props => {
   return (
     <div>
       {orders.map(order => {
-        console.log(memeStocks[memeId], 'memestocks[memeId]')
         return order.userId !== user.id &&
           memeStocks[memeId] &&
           +memeStocks[memeId].quantity >= +order.quantity &&

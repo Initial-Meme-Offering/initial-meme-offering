@@ -6,13 +6,14 @@ import {
   getSingleStockChart,
   getMemeOrders,
   buyOffersByMeme,
-  sellOffersByMeme
+  sellOffersByMeme,
+  indiceAgregateStockChart
 } from '../store'
-import SmallStockCard from './stock-card-small'
 import {
   SingleMemeHeader,
   SingleMemeBuyList,
-  SingleMemeSellList
+  SingleMemeSellList,
+  SingleMemeCard
 } from './single-meme-renders'
 
 class SingleMeme extends React.Component {
@@ -24,7 +25,7 @@ class SingleMeme extends React.Component {
   }
 
   componentDidMount() {
-    const memeId = this.props.match.params.memeId
+    const memeId = this.props.match.params.memeId || this.props.match.params.indiceId
     this.props.getOrders(memeId)
   }
 
@@ -49,10 +50,12 @@ class SingleMeme extends React.Component {
         <section className="section is-small">
           <SingleMemeHeader name={meme.name} />
           <div className="columns">
-            <div className="column is-half">
-              <SmallStockCard meme={meme} />
+            <div className="column is-two-fifths">
+              <SingleMemeCard meme={meme} />
             </div>
-            <div className="column is-half">
+            <div className="columns">
+            <div className="column is-one-fifth"/>
+            <div className="column is-four-fifths">
               <MarketChart
                 data={lineChartData}
                 title={`${meme.name} Simple Moving Average`}
@@ -60,6 +63,7 @@ class SingleMeme extends React.Component {
                 y={lineChartData.y}
               />
               <OfferForm {...this.props} />
+            </div>
             </div>
           </div>
           <div className="tabs">
@@ -104,7 +108,7 @@ class SingleMeme extends React.Component {
   }
 }
 
-const mapState = (state, {match}) => {
+const mapStateMeme = (state, {match}) => {
   return {
     user: state.user,
     meme: state.memes.byId[match.params.memeId],
@@ -122,8 +126,33 @@ const mapState = (state, {match}) => {
   }
 }
 
-const mapDispatch = dispatch => ({
+const mapDispatchMeme = dispatch => ({
   getOrders: memeId => dispatch(getMemeOrders(memeId))
 })
 
-export default connect(mapState, mapDispatch)(SingleMeme)
+const mapStateIndex = (state, {match}) => {
+  return {
+    user: state.user,
+    meme: state.indices.byId[match.params.indiceId],
+    memeStocks: state.memeStocks.byId,
+    buyOrders: buyOffersByMeme(state, {
+      memeId: match.params.indiceId,
+      userId: state.user.id
+    }),
+    sellOrders: sellOffersByMeme(state, {
+      memeId: match.params.indiceId,
+      userId: state.user.id
+    }),
+    lastTrade: valueOfLastStockTrade(state, match.params.indiceId),
+    lineChartData: indiceAgregateStockChart(state, match.params.indiceId)
+  }
+}
+
+const mapDispatchIndex = dispatch => ({
+  getOrders: memeId => dispatch(getMemeOrders(memeId))
+})
+
+
+
+export const SingleMemePage = connect(mapStateMeme, mapDispatchMeme)(SingleMeme)
+export const SingleIndexPage = connect(mapStateIndex, mapDispatchIndex)(SingleMeme)
