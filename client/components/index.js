@@ -7,11 +7,10 @@ export {default as Navbar} from './navbar'
 export {default as Footer} from './footer'
 export {default as UserHome} from './user-home'
 export {default as Login} from './auth-form'
-//export {default as LandingPage} from './landing-page'
 export {default as MarketChart} from './market-chart'
 export {default as SmallStockCard} from './stock-card-small'
 export {default as SingleIndice} from './single-indice'
-export {default as SingleMeme} from './single-meme'
+export {SingleMemePage as SingleMeme, SingleIndexPage as SingleIndex} from './single-meme'
 export {default as OfferForm} from './offer-form'
 export {
   BuyPortfolio,

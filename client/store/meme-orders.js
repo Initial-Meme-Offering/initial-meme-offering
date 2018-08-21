@@ -43,8 +43,9 @@ export const respondToOffer = (offerId, userId) => dispatch => {
   axios
     .post(`/api/offers/complete/${offerId}`, {userId})
     .then(({data}) => {
-      dispatch(updateOrder(data.originalOrder))
-      dispatch(addOffer(data.newOrder))
+      const {completedOrder, newOrder} = data
+      dispatch(updateOrder(completedOrder))
+      dispatch(addOffer(newOrder))
     })
     .catch(error => console.error(error))
 }

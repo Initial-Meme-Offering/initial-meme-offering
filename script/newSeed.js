@@ -256,12 +256,10 @@ async function seedOffers(dataVariances, memeIndex, memes) {
 
 async function seed() {
   //get previous data loaded
-  const allMemes = await Meme.findAll({
-    where: {
-      isIndex: false
-    }
-  })
-  const memes = allMemes.slice(0, 5)
+  const allMemes = await Meme.findAll({})
+  const memesSlice = allMemes.slice(0, 5)
+  const indicesSlice = allMemes.slice(allMemes.length - 6, allMemes.length)
+  const memes = memesSlice.concat(indicesSlice)
 
   async function seedMarketData() {
     for (let memeIndex = 0; memeIndex < memes.length; memeIndex++) {

@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 
 const AllIndices = props => {
   const {indices} = props
-  console.log('indices', indices)
   return (
     <section>
       <div className="container">

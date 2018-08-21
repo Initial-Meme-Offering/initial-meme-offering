@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {MarketChart, MemesModal} from '../components'
 
 const IMAGE = 'https://i.imgflip.com/1o00in.jpg'
@@ -10,6 +11,7 @@ class IndiceObject extends React.Component {
       <div className="box no-pad">
         <div className="columns is-mobile">
           <div className="column is-half">
+          <Link id='card-link' to={`/index/${indice.id}`}>
             <p className="heading">{indice.symbol || 'SYM'}</p>
             <p className="title">{indice.name || 'Name'}</p>
             <div className="columns">
@@ -23,6 +25,7 @@ class IndiceObject extends React.Component {
                 <MemesModal memes={indiceMemes} indiceName={indice.name} />
               </div>
             </div>
+            </Link>
           </div>
           <div className="column is-half">
             <MarketChart
