@@ -8,8 +8,7 @@ import {
   buyOffersByMeme,
   sellOffersByMeme
 } from '../store'
-import SmallStockCard from './stock-card-small'
-import {SingleMemeHeader, SingleMemeBuyList, SingleMemeSellList} from './single-meme-renders'
+import {SingleMemeHeader, SingleMemeBuyList, SingleMemeSellList, SingleMemeCard} from './single-meme-renders'
 
 class SingleMeme extends React.Component {
   constructor() {
@@ -39,7 +38,7 @@ class SingleMeme extends React.Component {
           <SingleMemeHeader name={meme.name} />
           <div className="columns">
             <div className="column is-half">
-              <SmallStockCard meme={meme} />
+              <SingleMemeCard meme={meme} />
             </div>
             <div className="column is-half">
               <MarketChart
