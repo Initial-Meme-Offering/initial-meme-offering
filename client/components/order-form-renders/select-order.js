@@ -2,7 +2,7 @@ import React from 'react'
 
 const renderOrderSelect = ({input, value}) => {
   return (
-    <div className="field">
+    <div className="control">
     <label className="label">Order Type</label>
       <div className="select">
         <select {...input} defaultValue="">
