@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link, NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
+const Navbar = ({handleLogout, isLoggedIn}) => (
   <nav id="navbar" className="navbar">
     <div className="container">
       <div className="navbar-menu">
