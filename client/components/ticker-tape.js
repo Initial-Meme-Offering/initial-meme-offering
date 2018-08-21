@@ -11,27 +11,34 @@ class TickerTape extends Component {
 
     const colorOfPercent = () => {
       if (percentChange >= 0) {
-        return (
-          <h1 className="green-background meme-market-data white">
-            +{percentChange}%
-          </h1>
-        )
+        return <h1 id="ticker-change-green">+{percentChange}%</h1>
       }
-      return (
-        <h1 className="red-background meme-market-data white">
-          {percentChange}%
-        </h1>
-      )
+      return <h1 id="ticker-change-red">{percentChange}%</h1>
     }
 
     return (
-      <div id="ticker-card" className="card">
-        <div className="card-content">
-          {/* <figure className="image is-4by3"> */}
-          <div className="content">{`${meme.symbol} ${lastTradePrice}`}</div>
-          <div className="content">{colorOfPercent()}</div>
-          {/* </figure> */}
-        </div>
+      <div className="box">
+        <article id="ticker-card">
+          <div className="columns">
+            <div className="column is-one-third">
+              <figure className="">
+                <p className="image is-128x128">
+                  <img src={`${meme.imageUrl}`} />
+                </p>
+              </figure>
+            </div>
+            <div className="column is-two-thirds">
+              <div id="ticker-card">
+                <div className="content">
+                  <div id="ticker-title">{`${
+                    meme.symbol
+                  } $${lastTradePrice}`}</div>
+                  <div id="ticker-change">{colorOfPercent()}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
     )
   }
