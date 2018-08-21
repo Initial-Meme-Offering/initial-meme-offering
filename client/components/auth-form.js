@@ -1,13 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import PropTypes from 'prop-types'
 import {auth} from '../store'
 import {AuthFormAll} from './auth-form-renders'
-
-/**
- * COMPONENT
- */
 
 class AuthForm extends React.Component {
   constructor() {
@@ -68,19 +63,11 @@ class AuthForm extends React.Component {
   }
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapState = state => {
   return {
     error: state.user.error
   }
 }
-
 
 const mapDispatch = dispatch => {
   return {
@@ -95,8 +82,3 @@ const mapDispatch = dispatch => {
 }
 
 export default withRouter(connect(mapState, mapDispatch)(AuthForm))
-
-/**
- * PROP TYPES
- */
-
