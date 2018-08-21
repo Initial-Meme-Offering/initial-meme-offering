@@ -7,6 +7,7 @@ import {
 
 //ACTION TYPES
 const GET_MEMESTOCKS_BY_USER = 'GET_MEMESTOCKS_BY_USER'
+const UPDATE_MEMESTOCKS_BY_USER = 'UPDATE_MEMESTOCKS_BY_USER'
 
 //INITIAL STATE
 const defaultMemeStocks = {
@@ -27,6 +28,13 @@ const gotMemeStocksByUser = memeStocks => ({
   memeStocks
 })
 
+export const updateMemeStocks = ([memeId, quantity, offerType]) => ({
+  type: UPDATE_MEMESTOCKS_BY_USER,
+  memeId,
+  quantity,
+  offerType
+})
+
 //THUNK CREATORS
 export const getMemeStocksByUser = userId => dispatch => {
   axios
@@ -45,6 +53,20 @@ export default function(state = defaultMemeStocks, action) {
           return result
         }, {}),
         allIds: action.memeStocks.map(memeStock => memeStock.memeId)
+      }
+    case UPDATE_MEMESTOCKS_BY_USER:
+      return {
+        byId: {
+          ...state.byId,
+          [action.memeId]: {
+            ...state.byId[action.memeId],
+            quantity:
+              action.offerType === 'sell'
+                ? state.byId[action.memeId].quantity - action.quantity
+                : state.byId[action.memeId].quantity + action.quantity
+          }
+        },
+        allIds: [...state.allIds]
       }
     default:
       return state
