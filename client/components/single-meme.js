@@ -25,7 +25,7 @@ class SingleMeme extends React.Component {
   }
 
   componentDidMount() {
-    const memeId = this.props.match.params.memeId
+    const memeId = this.props.match.params.memeId || this.props.match.params.indiceId
     this.props.getOrders(memeId)
   }
 
@@ -121,8 +121,8 @@ const mapStateMeme = (state, {match}) => {
       memeId: match.params.memeId,
       userId: state.user.id
     }),
-    lastTrade: valueOfLastStockTrade(state, match.params.indiceId),
-    lineChartData: indiceAgregateStockChart(state, match.params.indiceId)
+    lastTrade: valueOfLastStockTrade(state, match.params.memeId),
+    lineChartData: getSingleStockChart(state, match.params.memeId)
   }
 }
 
@@ -144,7 +144,7 @@ const mapStateIndex = (state, {match}) => {
       userId: state.user.id
     }),
     lastTrade: valueOfLastStockTrade(state, match.params.indiceId),
-    lineChartData: getSingleStockChart(state, match.params.memeId)
+    lineChartData: indiceAgregateStockChart(state, match.params.indiceId)
   }
 }
 
