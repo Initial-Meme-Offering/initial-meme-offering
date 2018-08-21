@@ -20,10 +20,8 @@ const AllIndices = props => {
   )
 }
 
-const mapState = state => {
-  return {
-    indices: allIndicesList(state)
-  }
-}
+const mapState = state => ({
+  indices: allIndicesList(state)
+})
 
 export default connect(mapState)(AllIndices)
