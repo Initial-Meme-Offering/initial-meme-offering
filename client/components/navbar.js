@@ -40,6 +40,16 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
                 </Link>
               </p>
             </div>
+            <div id="nav-button" className="navbar-item">
+              <p className="control">
+                <Link
+                  to="/indices"
+                  className="button is-link is-info is-hoverable is-outlined"
+                >
+                  Indicies
+                </Link>
+              </p>
+            </div>
             {isLoggedIn && (
               <div id="nav-button" className="navbar-item is-hoverable">
                 <p className="control">
