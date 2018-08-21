@@ -1,5 +1,5 @@
 import axios from 'axios'
-import addOffer from '../store'
+import {addOffer} from '../store'
 
 // ACTION TYPES
 const GET_MEME_ORDERS = 'GET_MEME_ORDERS'
