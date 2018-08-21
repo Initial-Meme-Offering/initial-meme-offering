@@ -2,7 +2,7 @@ import React from 'react'
 
 const renderSubmitButton = field => (
   <div className="control">
-    <label className="label">{'&nbsp'}</label>
+    <label className="label">&nbsp;</label>
     <button
       {...field.input}
       name="orderSubmit"
