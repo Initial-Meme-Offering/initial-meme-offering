@@ -39,16 +39,18 @@ class Portfolio extends React.Component {
               </div>
             </div>
             <div className="level-item">
-              <MarketChart
-                data={lineChartData}
-                title={
-                  lineChartData['today'][0]
-                    ? 'Total Portfolio Value'
-                    : 'Eagerly Awaiting Your Memes'
-                }
-                x={lineChartData.x}
-                y={lineChartData.y}
-              />
+              <div className="box">
+                <MarketChart
+                  data={lineChartData}
+                  title={
+                    lineChartData['today'][0]
+                      ? 'Total Portfolio Value'
+                      : 'Eagerly Awaiting Your Memes'
+                  }
+                  x={lineChartData.x}
+                  y={lineChartData.y}
+                />
+              </div>
             </div>
           </div>
         </div>

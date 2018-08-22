@@ -1,5 +1,6 @@
 import React from 'react'
 import {VictoryChart, VictoryLine, VictoryZoomContainer, VictoryAxis} from 'victory'
+import moment from 'moment'
 
 class MarketChart extends React.Component {
   state = {
@@ -96,6 +97,7 @@ class MarketChart extends React.Component {
           data={chartData}
           height={250}
         >
+        <VictoryAxis dependentAxis tickFormat={(t) => `$${Math.round(t)}`} />
           <VictoryLine
             interpolation="linear"
             data={chartData}
@@ -105,6 +107,7 @@ class MarketChart extends React.Component {
               data: {stroke: '#c43a31', strokeWidth: 1}
             }}
           />
+          <VictoryAxis />
         </VictoryChart>
       </div>
     )
