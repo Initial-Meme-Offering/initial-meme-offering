@@ -21,7 +21,10 @@ $link: $night;
 //Custom SCSS
 #app {
   background-color: $pearl;
+  //background: linear-gradient(to right, $pearl 50%, $yellow 2%);
 }
+
+// repeating-linear-gradient(to left $pearl 10%, $yellow 2%);
 
 #navbar {
   background-color: rgba(0, 0, 0, 0);

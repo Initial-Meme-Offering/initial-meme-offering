@@ -1,6 +1,5 @@
 import React from 'react'
 import {TrendingMemeObject} from '../components'
-import {Router, Route, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {trendingMemesList} from '../store'
 
