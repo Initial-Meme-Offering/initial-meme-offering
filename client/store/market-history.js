@@ -131,7 +131,6 @@ export const userAgregateBlahStockChart = state => {
 
 export const userAgregateStockChart = state => {
   const userStocks = userStockQuantitiesByMemeId(state)
-
   const dailyPrices = state.marketHistory.allIds.reduce((tally, histId) => {
     let historyRow = state.marketHistory.byId[histId]
     if (userStocks[historyRow.memeId]) {
@@ -143,7 +142,6 @@ export const userAgregateStockChart = state => {
     }
     return tally
   }, {})
-
   const dailyAverages = Object.keys(dailyPrices).reduce((result, date) => {
     result.push({
       x: new Date(date),
@@ -163,7 +161,6 @@ export const userAgregateStockChart = state => {
     }
     return tally
   }, {})
-
   const averages = prices => {
     const memeIds = Object.keys(prices)
     const length = prices[memeIds[0]].length
@@ -180,9 +177,7 @@ export const userAgregateStockChart = state => {
     }
     return result
   }
-
   const todaysAverages = averages(todaysPrices)
-
   const todaysDates = Object.values(state.transactions.byId).reduce(
     (result, transRow) => {
       if (transRow.memeId == 1) {
@@ -195,14 +190,10 @@ export const userAgregateStockChart = state => {
     },
     []
   )
-
   const todaysWithDates = todaysDates.map((dateObj, i) => {
     if (todaysAverages[i]) {
       return {...dateObj, y: todaysAverages[i]}
     }
   })
-
-  console.log('dailyAverages', dailyAverages)
-  console.log('todaysWithDates', todaysWithDates)
   return {today: todaysWithDates, historical: dailyAverages, x: 'x', y: 'y'}
 }
