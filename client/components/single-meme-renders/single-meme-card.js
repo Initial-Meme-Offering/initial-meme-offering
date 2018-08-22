@@ -25,7 +25,6 @@ class SingleMemeCard extends Component {
 
     return (
       <div className="card meme-card">
-        <Link id="card-link" to={`/allmemes/${meme.id}`}>
           <div className="card-image">
             <figure className="image is-4by3">
               <img src={meme.imageUrl} alt="Placeholder image" />
@@ -41,7 +40,6 @@ class SingleMemeCard extends Component {
               </div>
             </div>
           </div>
-        </Link>
       </div>
     )
   }

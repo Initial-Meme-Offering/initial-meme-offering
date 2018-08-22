@@ -26,10 +26,10 @@ class SingleMeme extends React.Component {
   }
 
   componentDidMount() {
-    const memeId = this.props.match.params.memeId || this.props.match.params.indiceId
+    const memeId =
+      this.props.match.params.memeId || this.props.match.params.indiceId
     this.props.getOrders(memeId)
   }
-  
 
   handleTabClick = orderType => {
     this.setState({tabActive: orderType})
@@ -56,16 +56,18 @@ class SingleMeme extends React.Component {
               <SingleMemeCard meme={meme} />
             </div>
             <div className="columns">
-            <div className="column is-one-fifth"/>
-            <div className="column is-four-fifths">
-              <MarketChart
-                data={lineChartData}
-                title={`${meme.name} Simple Moving Average`}
-                x={lineChartData.x}
-                y={lineChartData.y}
-              />
-              <OfferForm {...this.props} />
-            </div>
+              <div className="column is-one-fifth" />
+              <div className="column is-four-fifths">
+                <div className="box">
+                  <MarketChart
+                    data={lineChartData}
+                    title={`${meme.name} Simple Moving Average`}
+                    x={lineChartData.x}
+                    y={lineChartData.y}
+                  />
+                </div>
+                <OfferForm {...this.props} />
+              </div>
             </div>
           </div>
           <div className="tabs">
@@ -156,7 +158,7 @@ const mapDispatchIndex = dispatch => ({
   getMemeStocks: userId => dispatch(getMemeStocksByUser(userId))
 })
 
-
-
 export const SingleMemePage = connect(mapStateMeme, mapDispatchMeme)(SingleMeme)
-export const SingleIndexPage = connect(mapStateIndex, mapDispatchIndex)(SingleMeme)
+export const SingleIndexPage = connect(mapStateIndex, mapDispatchIndex)(
+  SingleMeme
+)
