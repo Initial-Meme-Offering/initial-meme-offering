@@ -16,10 +16,10 @@ class MemeList extends Component {
     const {memes} = this.props
     return (
       <section className="section">
-        <h1 className="is-size-1 has-text-centered">All Memes</h1>
+        <h1 className="is-size-1 has-text-centered night">All Memes</h1>
         <div className="container">
           <div className="field has-addons">
-            <div className="control">
+            <div className="control move-search-up">
               <input
                 id="nav-search"
                 className="input"
@@ -28,7 +28,7 @@ class MemeList extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="control">
+            <div className="control move-search-up">
               <button type="button" id="nav-search" className="button is-info">
                 Search
               </button>
