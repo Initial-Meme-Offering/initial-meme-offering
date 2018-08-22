@@ -16,7 +16,7 @@ class SmallStockCard extends Component {
         )
       }
       return (
-        <h1 className="`meme-market-data">
+        <h1 className="meme-market-data">
           <i className="fa fa-arrow-down red" aria-hidden="true"></i> {percentChange}%
         </h1>
       )
