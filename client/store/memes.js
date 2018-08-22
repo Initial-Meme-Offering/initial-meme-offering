@@ -1,4 +1,10 @@
 import axios from 'axios'
+import {
+  getTrendingStocks,
+  valueOfLastStockTrade,
+  getSingleStockChart,
+  percentChange
+} from '.'
 
 //ACTION TYPES
 const GET_MEMES = 'GET_MEMES'
@@ -65,6 +71,20 @@ export const memesListBySearch = (state, search) => {
       meme.symbol.toLowerCase().includes(search.toLowerCase())
     )
       result.push(meme)
+    return result
+  }, [])
+}
+
+export const trendingMemesList = state => {
+  const memeIds = getTrendingStocks(state)
+  return memeIds.reduce((result, memeId) => {
+    result.push({
+      id: memeId,
+      meme: state.memes.byId[memeId],
+      currentPrice: valueOfLastStockTrade(state, memeId).price,
+      chartData: getSingleStockChart(state, memeId),
+      percentChange: percentChange(state, memeId)
+    })
     return result
   }, [])
 }

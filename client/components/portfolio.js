@@ -42,7 +42,7 @@ class Portfolio extends React.Component {
               <MarketChart
                 data={lineChartData}
                 title={
-                  lineChartData[0]
+                  lineChartData['today'][0]
                     ? 'Total Portfolio Value'
                     : 'Eagerly Awaiting Your Memes'
                 }

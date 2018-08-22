@@ -55,7 +55,7 @@ const Navbar = ({handleLogout, isLoggedIn}) => (
                 <p className="control">
                   <Link
                     className="button navbar-link is-info is-outlined is-medium has-text-weight-semibold"
-                    to="/account"
+                    to="/portfolio"
                   >
                     Account
                   </Link>
@@ -77,7 +77,7 @@ const Navbar = ({handleLogout, isLoggedIn}) => (
                 <p className="control">
                   <Link
                     to="/login"
-                    className="button is-link is-info is-outlined"
+                    className="button is-link is-info is-outlined is-medium has-text-weight-semibold"
                   >
                     Enter
                   </Link>

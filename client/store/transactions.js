@@ -51,14 +51,32 @@ export default function(state = defaultTransactions, action) {
 }
 
 //SELECTORS
+// export const getTotalBlahMarketChart = state => {
+//   return state.transactions.allIds.reduce((result, transId) => {
+//     result.push({
+//       x: new Date(state.transactions.byId[transId].seedDate),
+//       y: state.transactions.byId[transId].price
+//     })
+//     return result
+//   }, [])
+// }
+
 export const getTotalMarketChart = state => {
-  return state.transactions.allIds.reduce((result, transId) => {
+  let todaysData = state.transactions.allIds.reduce((result, transId) => {
     result.push({
       x: new Date(state.transactions.byId[transId].seedDate),
       y: state.transactions.byId[transId].price
     })
     return result
   }, [])
+  let historicalData = state.marketHistory.allIds.reduce((result, histId) => {
+    result.push({
+      x: new Date(state.marketHistory.byId[histId].seedDateDay),
+      y: state.marketHistory.byId[histId].closingPrice
+    })
+    return result
+  }, [])
+  return {today: todaysData, historical: historicalData, x: 'x', y: 'y'}
 }
 
 export const getTrendingStocks = state => {

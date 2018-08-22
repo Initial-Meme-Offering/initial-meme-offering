@@ -2,6 +2,7 @@ import React from 'react'
 import {VictoryPie} from 'victory'
 
 const PieChart = ({data}) => {
+  const newUserData = [{x: 'Begins\nNow', y: 1}, {x: 'Your\nMeme\nFuture', y: 1}]
   const pieData = data[0] ? data : newUserData
   return (
     <div className="below-nav-bar">
@@ -18,6 +19,6 @@ const PieChart = ({data}) => {
   )
 }
 
-const newUserData = [{x: 'Begins\nNow', y: 1}, {x: 'Your\nMeme\nFuture', y: 1}]
+
 
 export default PieChart

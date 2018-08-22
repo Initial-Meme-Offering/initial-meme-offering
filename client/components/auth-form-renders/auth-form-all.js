@@ -13,13 +13,13 @@ let AuthFormAll = props => {
       <br />
       <Field name="email" component={renderEmailField} />
       <Field name="password" component={renderPasswordField} />
+      <br />
       <Field
         name="button"
         error={error}
         displayName={displayName}
         component={renderLoginButton}
       />
-      <br />
       <br />
       <br />
     </form>

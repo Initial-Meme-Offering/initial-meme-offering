@@ -46,19 +46,7 @@ export default function(state = defaultIndices, action) {
   }
 }
 
-// export const getUserMemeStocksListItem = state => {
-//   const quantities = userStockQuantitiesByMemeId(state)
-//   return Object.keys(quantities).map(memeId => ({
-//     id: memeId,
-//     meme: state.memes.byId[memeId],
-//     quantity: quantities[memeId],
-//     currentPrice: valueOfLastStockTrade(state, memeId).price,
-//     lastPurchasePrice: lastPurchasePriceByUser(state, memeId),
-//     chartData: getSingleStockChart(state, memeId)
-//   }))
-// }
-
-export const indiceAgregateStockChart = (state, indiceId) => {
+export const indiceBLAHAgregateStockChart = (state, indiceId) => {
   const indiceMemes = getMemeIdsByIndice(state, indiceId)
   const dailyPrices = state.marketHistory.allIds.reduce((tally, histId) => {
     let historyRow = state.marketHistory.byId[histId]
@@ -81,6 +69,26 @@ export const indiceAgregateStockChart = (state, indiceId) => {
     })
     return result.sort((a, b) => a.x - b.x)
   }, [])
+}
+
+export const indiceAgregateStockChart = (state, indiceId) => {
+  const todaysData = state.transactions.allIds.reduce((result, transId) => {
+    if (state.transactions.byId[transId].memeId == indiceId)
+      result.push({
+        x: new Date(state.transactions.byId[transId].seedDate),
+        y: state.transactions.byId[transId].price
+      })
+    return result
+  }, [])
+  const historicalData = state.marketHistory.allIds.reduce((result, histId) => {
+    if (state.marketHistory.byId[histId].memeId == indiceId)
+      result.push({
+        x: new Date(state.marketHistory.byId[histId].seedDateDay),
+        y: state.marketHistory.byId[histId].closingPrice
+      })
+    return result
+  }, [])
+  return {today: todaysData, historical: historicalData, x: 'x', y: 'y'}
 }
 
 export const allIndicesList = state => {

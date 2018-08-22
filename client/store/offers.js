@@ -84,7 +84,6 @@ export const offersByUser = (state, userId) => {
 }
 
 export const buyOffersByUser = state => {
-  console.log('in buyOffersByUser')
   return Object.values(state.offers.byId).reduce((result, offer) => {
     if (
       offer.userId == state.user.id &&
