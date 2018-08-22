@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {addOffer} from '../store'
+import {addOffer, updateMemeStocks} from '../store'
 
 // ACTION TYPES
 const GET_MEME_ORDERS = 'GET_MEME_ORDERS'
@@ -46,6 +46,7 @@ export const respondToOffer = (offerId, userId) => dispatch => {
       const {completedOrder, newOrder} = data
       dispatch(updateOrder(completedOrder))
       dispatch(addOffer(newOrder))
+      dispatch(updateMemeStocks([newOrder.memeId, newOrder.quantity, newOrder.offerType, newOrder.userId]))
     })
     .catch(error => console.error(error))
 }

@@ -11,12 +11,13 @@ class IndiceObject extends React.Component {
       <div className="box no-pad">
         <div className="columns is-mobile">
           <div className="column is-half">
-          <Link id='card-link' to={`/index/${indice.id}`}>
             <p className="heading">{indice.symbol || 'SYM'}</p>
             <p className="title">{indice.name || 'Name'}</p>
             <div className="columns">
               <div className="column is-half">
-                <img className="image" src={indice.imageUrl || IMAGE} />
+                <Link id="card-link" to={`/index/${indice.id}`}>
+                  <img className="image" src={indice.imageUrl || IMAGE} />
+                </Link>
               </div>
               <div className="column is-half">
                 <p>
@@ -25,7 +26,6 @@ class IndiceObject extends React.Component {
                 <MemesModal memes={indiceMemes} indiceName={indice.name} />
               </div>
             </div>
-            </Link>
           </div>
           <div className="column is-half">
             <MarketChart
