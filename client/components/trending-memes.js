@@ -11,8 +11,7 @@ class TrendingMemes extends Component {
     return (
       <section className="section">
         <div className="container">
-          <h1 className="is-size-1 has-text-centered">Trending Memes</h1>
-          <br />
+          <h1 className="is-size-1 night has-text-centered">Trending Memes</h1>
           <br />
           <div className="columns is-multiline is-centered">
             {memes && memes.map(meme => (
