@@ -9,23 +9,16 @@ $yellow: #edb83d;
 $family-sans-serif: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI',
   Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
   'Segoe UI Emoji', 'Segoe UI Symbol';
-// $family-serif: 'Kreon', 'Georgia', serif; // add a serif family
 
-// $easing: ease-in-out;
-// $speed: 118ms;
-
-// $size-7: 0.875rem;
 $size-1: 5rem;
 
 //Derived variables
 $primary: $red;
 $background: $red;
 $info: $night;
+$link: $night;
 
-//Custom CSS
-
-//Navbar customization
-
+//Custom SCSS
 #app {
   background-color: $pearl;
 }
@@ -39,17 +32,17 @@ $info: $night;
   text-align: center;
 }
 
+#nav-title {
+  top: -50px;
+}
+
 #home-middle-section {
   background-color: #edb83d;
 }
 
-// .navbar-burger {
-//   height: auto;
-// }
-
 #home-rel {
   position: relative;
-  top: -56px;
+  top: -75px;
 }
 
 #nav-button {
@@ -57,8 +50,12 @@ $info: $night;
 }
 
 #card-rel {
-  position: relative;
-  top: -200px;
+  position: absolute;
+  top: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
 }
 
 #buy {
@@ -83,11 +80,6 @@ $info: $night;
   text-align: center;
 }
 
-.meme-card:hover {
-  background: lightgrey;
-  transition: 0.6s;
-}
-
 .green-background {
   background: green;
 }
@@ -101,7 +93,7 @@ $info: $night;
 }
 
 .meme-heading {
-  font-size: 2em;
+  font-size: 3em;
   font-weight: bold;
 }
 
@@ -110,10 +102,77 @@ $info: $night;
   font-weight: normal;
 }
 
+.move-card {
+  transition: 0.6s;
+}
+
+.move-card:hover {
+  margin-top: -1em;
+  background: $night;
+  color: white;
+}
+
 #card-link {
   color: $night;
+  transition: 0.6s;
+}
+
+#card-link:hover {
+  color: white;
+}
+
+#ticker-card {
+  background-color: black;
+}
+
+#ticker-title {
+  color: whitesmoke;
+  font-size: 4rem;
+  text-align: center;
+}
+
+#ticker-change-green {
+  color: green;
+  font-size: 4rem;
+  text-align: center;
+}
+
+#ticker-change-red {
+  color: $red;
+  font-size: 4rem;
+  text-align: center;
+}
+
+#ticker-box {
+  background-color: black;
+  height: 425px;
+  width: 575px;
 }
 
 #meme-modal {
   width: 90%;
+}
+
+.night {
+  color: $night;
+}
+
+.move-search-up {
+  margin-top: -4em;
+}
+
+.move-homepage-card-up {
+  transition: 0.3s;
+}
+
+.move-homepage-card-up:hover {
+  margin-top: -0.75em;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: $red;
 }

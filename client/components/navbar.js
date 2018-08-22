@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link, NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
+const Navbar = ({handleLogout, isLoggedIn}) => (
   <nav id="navbar" className="navbar">
     <div className="container">
       <div className="navbar-menu">
@@ -14,7 +14,7 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
               <p className="control">
                 <Link
                   to="/"
-                  className="button is-link is-info is-hoverable is-outlined"
+                  className="is-link is-size-5 has-text-weight-semibold"
                 >
                   Home
                 </Link>
@@ -24,7 +24,7 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
               <p className="control">
                 <Link
                   to="/allmemes"
-                  className="button is-link is-info is-hoverable is-outlined"
+                  className="is-link is-size-5 has-text-weight-semibold"
                 >
                   All Memes
                 </Link>
@@ -34,9 +34,19 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
               <p className="control">
                 <Link
                   to="/trendingmemes"
-                  className="button is-link is-info is-hoverable is-outlined"
+                  className="is-link is-size-5 has-text-weight-semibold"
                 >
                   Trending
+                </Link>
+              </p>
+            </div>
+            <div id="nav-button" className="navbar-item">
+              <p className="control">
+                <Link
+                  to="/indices"
+                  className="is-link is-size-5 has-text-weight-semibold"
+                >
+                  Indices
                 </Link>
               </p>
             </div>
@@ -44,7 +54,7 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
               <div id="nav-button" className="navbar-item is-hoverable">
                 <p className="control">
                   <Link
-                    className="button navbar-link is-info is-outlined"
+                    className="button navbar-link is-info is-outlined is-medium has-text-weight-semibold"
                     to="/account"
                   >
                     Account
@@ -53,9 +63,6 @@ const Navbar = ({id, handleLogout, isLoggedIn, isAdmin}) => (
                 <div className="navbar-dropdown">
                   <Link to="/portfolio/buy" className="navbar-item">
                     Portfolio
-                  </Link>
-                  <Link to="/manage" className="navbar-item">
-                    Manage Account
                   </Link>
                   <hr className="navbar-divider" />
                   <a href="#" onClick={handleLogout} className="navbar-item">

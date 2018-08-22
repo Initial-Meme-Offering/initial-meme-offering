@@ -14,7 +14,8 @@ const TrendingMemes = props => {
         </h1>
         {!memes[0]
           ? `No activity just yet`
-          : memes.map(meme => <TrendingMemeObject key={meme.id} {...meme} />)}
+          : memes &&
+            memes.map(meme => <TrendingMemeObject key={meme.id} {...meme} />)}
       </div>
     </section>
   )

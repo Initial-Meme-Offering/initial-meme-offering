@@ -68,7 +68,7 @@ export const memesListBySearch = (state, search) => {
     if (!search) result.push(meme)
     else if (
       meme.name.toLowerCase().includes(search.toLowerCase()) ||
-      meme.symbol.includes(search.toLowerCase())
+      meme.symbol.toLowerCase().includes(search.toLowerCase())
     )
       result.push(meme)
     return result
