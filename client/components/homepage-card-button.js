@@ -7,7 +7,7 @@ const HomeButtonCard = () => {
       <div className="columns">
         <div className="column is-4">
           <Link to="/allmemes">
-            <div className="card meme-card">
+            <div className="card meme-card move-homepage-card-up">
               <div className="card-image">
                 <figure className="image is-5by4">
                   <img src="https://i.imgflip.com/2g4746.jpg" />
@@ -25,7 +25,7 @@ const HomeButtonCard = () => {
         </div>
         <div className="column is-4">
           <Link to="/trendingmemes">
-            <div className="card meme-card">
+            <div className="card meme-card move-homepage-card-up">
               <div className="card-image">
                 <figure className="image is-5by4">
                   <img src="https://i.imgflip.com/2g2tb5.jpg" />
@@ -43,7 +43,7 @@ const HomeButtonCard = () => {
         </div>
         <div className="column is-4">
           <Link to="/indices">
-            <div className="card meme-card">
+            <div className="card meme-card move-homepage-card-up">
               <div className="card-image">
                 <figure className="image is-5by4">
                   <img src="https://i.imgflip.com/2g47b3.jpg" />
