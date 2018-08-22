@@ -14,7 +14,7 @@ const Navbar = ({handleLogout, isLoggedIn}) => (
               <p className="control">
                 <Link
                   to="/"
-                  className="button is-link is-info is-hoverable is-outlined"
+                  className="is-link is-size-5 has-text-weight-semibold"
                 >
                   Home
                 </Link>
@@ -24,7 +24,7 @@ const Navbar = ({handleLogout, isLoggedIn}) => (
               <p className="control">
                 <Link
                   to="/allmemes"
-                  className="button is-link is-info is-hoverable is-outlined"
+                  className="is-link is-size-5 has-text-weight-semibold"
                 >
                   All Memes
                 </Link>
@@ -34,7 +34,7 @@ const Navbar = ({handleLogout, isLoggedIn}) => (
               <p className="control">
                 <Link
                   to="/trendingmemes"
-                  className="button is-link is-info is-hoverable is-outlined"
+                  className="is-link is-size-5 has-text-weight-semibold"
                 >
                   Trending
                 </Link>
@@ -44,7 +44,7 @@ const Navbar = ({handleLogout, isLoggedIn}) => (
               <p className="control">
                 <Link
                   to="/indices"
-                  className="button is-link is-info is-hoverable is-outlined"
+                  className="is-link is-size-5 has-text-weight-semibold"
                 >
                   Indices
                 </Link>
@@ -54,7 +54,7 @@ const Navbar = ({handleLogout, isLoggedIn}) => (
               <div id="nav-button" className="navbar-item is-hoverable">
                 <p className="control">
                   <Link
-                    className="button navbar-link is-info is-outlined"
+                    className="button navbar-link is-info is-outlined is-medium has-text-weight-semibold"
                     to="/account"
                   >
                     Account
@@ -63,9 +63,6 @@ const Navbar = ({handleLogout, isLoggedIn}) => (
                 <div className="navbar-dropdown">
                   <Link to="/portfolio/buy" className="navbar-item">
                     Portfolio
-                  </Link>
-                  <Link to="/manage" className="navbar-item">
-                    Manage Account
                   </Link>
                   <hr className="navbar-divider" />
                   <a href="#" onClick={handleLogout} className="navbar-item">

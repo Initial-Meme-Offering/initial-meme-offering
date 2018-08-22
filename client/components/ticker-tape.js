@@ -17,22 +17,17 @@ class TickerTape extends Component {
       <div id="ticker-box" className="box">
         <article id="ticker-card" className="is-centered">
           <div className="columns is-centered">
-            <div className="column is-one-third">
-              <figure>
-                <p className="image is-128x128">
-                  <br />
-                  <br />
-                  <img src={`${meme.imageUrl}`} />
-                </p>
-              </figure>
-            </div>
-            <div className="column is-two-thirds">
+            <div className="column">
               <div id="ticker-card">
                 <div className="content">
                   <br />
-                  <div id="ticker-title">{`${
+                  <br />
+                  <br />
+
+                  <div id="ticker-title" className="is-size-1">{`${
                     meme.symbol
                   } $${lastTradePrice}`}</div>
+                  <br />
                   <div id="ticker-change">{colorOfPercent()}</div>
                 </div>
               </div>

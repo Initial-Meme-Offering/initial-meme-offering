@@ -38,10 +38,8 @@ class HomePage extends React.Component {
       <div>
         <section id="home-rel" className="hero is-primary is-large is-bold">
           <div className="hero-body">
-            <div className="container">
-              <h1 id="nav-title" className="title">
-                Memenomics
-              </h1>
+            <div id="nav-title" className="container">
+              <h1 className="title">Memenomics</h1>
               <h2 className="subtitle">
                 One stop shop for buying and selling your favorite memes
               </h2>
@@ -54,7 +52,11 @@ class HomePage extends React.Component {
         <section className="section">
           <div className="container body-center">
             <div className="columns">
-              <div className="column">
+              <div id="home-first-section" className="column">
+                <br />
+                <br />
+                <br />
+                <br />
                 <br />
                 <br />
                 <br />
@@ -68,9 +70,10 @@ class HomePage extends React.Component {
                 </p>
               </div>
               <div className="column">
+                <br />
+                <br />
+                <br />
                 {memes.length > 0 && <TickerTape meme={memes[idx]} />}
-                <br />
-                <br />
               </div>
             </div>
           </div>
@@ -82,12 +85,14 @@ class HomePage extends React.Component {
               <div className="column">
                 <div className="card">
                   <br />
-                  <MarketChart
-                    data={totalMarket}
-                    title="Total Market Value"
-                    x={totalMarket.x}
-                    y={totalMarket.y}
-                  />
+                  <div>
+                    <MarketChart
+                      data={totalMarket}
+                      title="Total Market Value"
+                      x={totalMarket.x}
+                      y={totalMarket.y}
+                    />
+                  </div>
                   <br />
                 </div>
               </div>
@@ -102,7 +107,6 @@ class HomePage extends React.Component {
                 <h1 className="is-size-1 has-text-white has-text-centered has-text-weight-semibold">
                   Sell
                 </h1>
-                <br />
                 <br />
               </div>
             </div>
@@ -121,7 +125,7 @@ class HomePage extends React.Component {
                 <br />
                 <br />
                 <p className=" is-primary is-size-1 has-text-primary has-text-centered has-text-weight-semibold">
-                  Manage Portfolio
+                  Together
                 </p>
                 <br />
                 <br />
