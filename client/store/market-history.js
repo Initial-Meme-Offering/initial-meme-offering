@@ -103,32 +103,6 @@ export const getSingleStockChart = (state, memeId) => {
   return {today: todaysData, historical: historicalData, x: 'x', y: 'y'}
 }
 
-// Displays daily average from all matching stocks
-export const userAgregateBlahStockChart = state => {
-  const userStocks = userStockQuantitiesByMemeId(state)
-  const dailyPrices = state.marketHistory.allIds.reduce((tally, histId) => {
-    let historyRow = state.marketHistory.byId[histId]
-    if (userStocks[historyRow.memeId]) {
-      let date = moment(new Date(historyRow.seedDateDay))
-        .format('L')
-        .toString()
-      tally[date] = tally[date] || []
-      tally[date].push(historyRow.closingPrice)
-    }
-    return tally
-  }, {})
-  return Object.keys(dailyPrices).reduce((result, date) => {
-    result.push({
-      x: new Date(date),
-      y: dailyPrices[date].reduce((total, price, i, arr) => {
-        total += price
-        return i === arr.length - 1 ? total / arr.length : total
-      }, 0)
-    })
-    return result.sort((a, b) => a.x - b.x)
-  }, [])
-}
-
 export const userAgregateStockChart = state => {
   const userStocks = userStockQuantitiesByMemeId(state)
   const dailyPrices = state.marketHistory.allIds.reduce((tally, histId) => {
@@ -163,7 +137,7 @@ export const userAgregateStockChart = state => {
   }, {})
   const averages = prices => {
     const memeIds = Object.keys(prices)
-    const length = prices[memeIds[0]].length
+    const length = prices && prices[memeIds[0]].length
     const result = []
     for (let i = 0; i < length; i++) {
       let sum = 0
