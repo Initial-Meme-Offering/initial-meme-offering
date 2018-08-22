@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  VictoryChart,
-  VictoryLine,
-  VictoryZoomContainer,
-  VictoryLegend
-} from 'victory'
+import {VictoryChart, VictoryLine, VictoryZoomContainer} from 'victory'
 
 class MarketChart extends React.Component {
   state = {
@@ -13,29 +8,18 @@ class MarketChart extends React.Component {
       y: [0, 80]
     },
     disableZoom: true,
-    data: this.props.data.historical
+    todaysData: false
   }
 
-  todaysDomain = () => {
-    var midnight = new Date()
-    midnight.setHours(0, 0, 0, 0)
-    const {data} = this.props
+  handleTodayClick = () => {
     this.setState({
-      zoomDomain: {
-        x: [midnight, data[data.length - 1].x],
-        y: this.state.zoomDomain.y
-      }
+      todaysData: true
     })
   }
 
-  historicalDomain = () => {
-    console.log('historic', this.state.zoomDomain)
-    const {data} = this.props
+  handleHistoricalClick = () => {
     this.setState({
-      zoomDomain: {
-        x: [data[0].x, data[data.length - 1].x],
-        y: this.state.zoomDomain.y
-      }
+      todaysData: false
     })
   }
 
@@ -51,33 +35,51 @@ class MarketChart extends React.Component {
   }
 
   componentDidMount() {
-    const {data} = this.props
-    if (data.historical[0])
+    if (this.props.data.historical[0] && this.props.data.today[0]) {
+      let data = this.state.todaysData
+        ? this.props.data.today
+        : this.props.data.historical
       this.setState({
-        zoomDomain: {x: [data[0].x, data[data.length - 1].x]}
+        zoomDomain: {
+          x: [data[0].x, data[data.length - 1].x],
+          y: [Math.min(...data.map(d => d.y)), Math.max(...data.map(d => d.y))]
+        }
       })
+    }
   }
 
-  componentDidUpdate(prevProps) {
-    const {data} = this.props
-    if (data[0] !== prevProps.data[0])
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.props.data.historical[0] !== prevProps.data.historical[0] ||
+      this.state.todaysData !== prevState.todaysData
+    ) {
+      let data = this.state.todaysData
+        ? this.props.data.today
+        : this.props.data.historical
       this.setState({
-        zoomDomain: {x: [data[0].x, data[data.length - 1].x]}
+        zoomDomain: {
+          x: [data[0].x, data[data.length - 1].x],
+          y: [Math.min(...data.map(d => d.y)), Math.max(...data.map(d => d.y))]
+        }
       })
+    }
   }
 
   render() {
     const {x, y, title, data} = this.props
-
+    let chartData = this.state.todaysData ? data.today : data.historical
     return (
       <div onClick={this.handleClick}>
         <h5 className="title is-5 has-text-centered">{title}</h5>
 
         <div className="buttons has-addons is-centered">
-          <span onClick={this.todaysDomain} className="button is-small">
+          <span onClick={this.handleTodayClick} className="button is-small">
             Today
           </span>
-          <span onClick={this.historicalDomain} className="button is-small">
+          <span
+            onClick={this.handleHistoricalClick}
+            className="button is-small"
+          >
             Historical
           </span>
         </div>
@@ -91,12 +93,12 @@ class MarketChart extends React.Component {
             />
           }
           scale={{x: 'time'}}
-          data={data}
+          data={chartData}
           height={250}
         >
           <VictoryLine
             interpolation="linear"
-            data={data}
+            data={chartData}
             x={x}
             y={y}
             style={{

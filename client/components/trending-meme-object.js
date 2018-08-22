@@ -3,7 +3,7 @@ import {MarketChart} from '../components'
 
 const TrendingMemeObject = props => {
   const {meme, currentPrice, chartData, percentChange} = props
-  console.log('chartData', chartData)
+
   return (
     <div className="box no-pad">
       <div className="columns is-mobile">
