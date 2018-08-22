@@ -10,14 +10,14 @@ class SmallIndiceCard extends Component {
     const colorOfPercent = () => {
       if (percentChange >= 0) {
         return (
-          <h6 className="green-background meme-market-data white">
-            +{percentChange}%
+          <h6 className="meme-market-data">
+            <i className="fa fa-arrow-up green" aria-hidden="true"></i> {percentChange}%
           </h6>
         )
       }
       return (
-        <h6 className="red-background meme-market-data white">
-          {percentChange}%
+        <h6 className="meme-market-data">
+          <i className="fa fa-arrow-down red" aria-hidden="true"></i> {percentChange}%
         </h6>
       )
     }
