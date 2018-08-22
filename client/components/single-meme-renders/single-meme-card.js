@@ -11,21 +11,20 @@ class SingleMemeCard extends Component {
     const colorOfPercent = () => {
       if (percentChange >= 0) {
         return (
-          <h1 className="green-background meme-market-data white">
-            +{percentChange}%
+          <h1 className="meme-market-data">
+            <i className="fa fa-arrow-up green" aria-hidden="true"></i> {percentChange}%
           </h1>
         )
       }
       return (
-        <h1 className="red-background meme-market-data white">
-          {percentChange}%
+        <h1 className="meme-market-data">
+          <i className="fa fa-arrow-down red" aria-hidden="true"></i> {percentChange}%
         </h1>
       )
     }
 
     return (
       <div className="card meme-card">
-        <Link id="card-link" to={`/allmemes/${meme.id}`}>
           <div className="card-image">
             <figure className="image is-4by3">
               <img src={meme.imageUrl} alt="Placeholder image" />
@@ -41,7 +40,6 @@ class SingleMemeCard extends Component {
               </div>
             </div>
           </div>
-        </Link>
       </div>
     )
   }

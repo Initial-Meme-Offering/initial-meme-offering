@@ -1,5 +1,5 @@
 import React from 'react'
-import {MarketChart, SmallStockCard} from '../components'
+import {MarketChart, SmallIndiceCard} from '../components'
 import {Link} from 'react-router-dom'
 
 class MemesModal extends React.Component {
@@ -44,9 +44,9 @@ class MemesModal extends React.Component {
             </header>
             <section className="modal-card-body">
               <div className="columns columns is-multiline">
-                {memes.map(meme => (
+                {memes && memes.map(meme => (
                   <div className="column is-4">
-                    <SmallStockCard key={meme.id} meme={meme} />
+                    <SmallIndiceCard key={meme && meme.id} meme={meme} />
                   </div>
                 ))}
               </div>

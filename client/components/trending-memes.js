@@ -14,8 +14,8 @@ class TrendingMemes extends Component {
           <h1 className="is-size-1 night has-text-centered">Trending Memes</h1>
           <br />
           <div className="columns is-multiline is-centered">
-            {memes.map(meme => (
-              <div key={meme.name} className="column is-4">
+            {memes && memes.map(meme => (
+              <div key={meme && meme.name} className="column is-4">
                 <SmallStockCard meme={meme} />
               </div>
             ))}
