@@ -23,19 +23,24 @@ class SmallIndiceCard extends Component {
     }
 
     return (
-      <div className="card">
-        <Link id="card-link" to={`/allmemes/${meme.id}`}>
-          <div className="card-image">
-            <figure className="image is-128x128">
+      <div className="card move-card">
+        <div className="card-image">
+          <figure className="image is-4by3">
+            <Link id="card-link" to={`/allmemes/${meme.id}`}>
               <img src={meme.imageUrl} alt="Placeholder image" />
-            </figure>
-          </div>
-          <div className="card-content">
-            <div className="content meme-market-data center">
+            </Link>
+          </figure>
+        </div>
+        <div className="card-content">
+          <div className="columns center">
+            <div className="column is-6 center meme-market-data">
+              <h1 className="meme-market-data">${lastTradePrice}</h1>
+            </div>
+            <div className="column is-6 center meme-market-data">
               {colorOfPercent()}
             </div>
           </div>
-        </Link>
+        </div>
       </div>
     )
   }
