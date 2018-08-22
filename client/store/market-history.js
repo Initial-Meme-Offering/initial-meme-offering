@@ -68,18 +68,6 @@ export const getTrendingMemes = state => {
     .slice(0, 5)
 }
 
-export const blahChart = (state, memeId) => {
-  return state.transactions.allIds.reduce((result, transId) => {
-    if (state.transactions.byId[transId].memeId == memeId) {
-      result.push({
-        x: new Date(state.transactions.byId[transId].seedDate),
-        y: state.transactions.byId[transId].price
-      })
-    }
-    return result
-  }, [])
-}
-
 // Displays all points from all matching stocks
 export const userTotalStockChart = state => {
   const userStocks = userStockQuantitiesByMemeId(state)
@@ -96,7 +84,15 @@ export const userTotalStockChart = state => {
 }
 
 export const getSingleStockChart = (state, memeId) => {
-  return state.marketHistory.allIds.reduce((result, histId) => {
+  const todaysData = state.transactions.allIds.reduce((result, transId) => {
+    if (state.transactions.byId[transId].memeId == memeId)
+      result.push({
+        x: new Date(state.transactions.byId[transId].seedDate),
+        y: state.transactions.byId[transId].price
+      })
+    return result
+  }, [])
+  const historicalData = state.marketHistory.allIds.reduce((result, histId) => {
     if (state.marketHistory.byId[histId].memeId == memeId)
       result.push({
         x: new Date(state.marketHistory.byId[histId].seedDateDay),
@@ -104,9 +100,9 @@ export const getSingleStockChart = (state, memeId) => {
       })
     return result
   }, [])
+  return {today: todaysData, historical: historicalData, x: 'x', y: 'y'}
 }
 
-// Displays daily average from all matching stocks
 export const userAgregateStockChart = state => {
   const userStocks = userStockQuantitiesByMemeId(state)
   const dailyPrices = state.marketHistory.allIds.reduce((tally, histId) => {
@@ -120,7 +116,7 @@ export const userAgregateStockChart = state => {
     }
     return tally
   }, {})
-  return Object.keys(dailyPrices).reduce((result, date) => {
+  const dailyAverages = Object.keys(dailyPrices).reduce((result, date) => {
     result.push({
       x: new Date(date),
       y: dailyPrices[date].reduce((total, price, i, arr) => {
@@ -130,4 +126,52 @@ export const userAgregateStockChart = state => {
     })
     return result.sort((a, b) => a.x - b.x)
   }, [])
+
+  const todaysPrices = state.transactions.allIds.reduce((tally, transId) => {
+    let transRow = state.transactions.byId[transId]
+    if (userStocks[transRow.memeId]) {
+      tally[transRow.memeId] = tally[transRow.memeId] || []
+      tally[transRow.memeId].push(transRow.price)
+    }
+    return tally
+  }, {})
+
+  const averages = prices => {
+
+    const memeIds = Object.keys(prices)
+    const length = prices[memeIds[0]] && prices[memeIds[0]].length
+    const result = []
+    for (let i = 0; i < length; i++) {
+      let sum = 0
+      for (let j = 0; j < memeIds.length; j++) {
+        if (prices[memeIds[j]][i]) {
+          let price = prices[memeIds[j]][i]
+          sum += price
+        }
+      }
+      result.push(sum / memeIds.length)
+    }
+    return result
+  }
+  const todaysAverages = averages(todaysPrices)
+  const todaysDates = Object.values(state.transactions.byId).reduce(
+    (result, transRow) => {
+      if (transRow.memeId == 1) {
+        result.push({
+          x: new Date(transRow.seedDate),
+          y: 0
+        })
+      }
+      return result
+    },
+    []
+  )
+  const todaysWithDates = todaysDates.map((dateObj, i) => {
+    if (todaysAverages[i]) {
+      return {...dateObj, y: todaysAverages[i]}
+    }
+  })
+
+
+  return {today: todaysWithDates, historical: dailyAverages, x: 'x', y: 'y'}
 }

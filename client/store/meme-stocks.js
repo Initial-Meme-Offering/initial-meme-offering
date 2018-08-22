@@ -92,7 +92,7 @@ export const getUserPieChart = state => {
   return Object.keys(quantities).map(memeId => {
     if (state.memes.byId[memeId])
       return {
-        x: state.memes.byId[memeId].name,
+        x: state.memes.byId[memeId].symbol,
         y: quantities[memeId]
       }
   })

@@ -1,39 +1,27 @@
-import React, {Component} from 'react'
-import SmallStockCard from './stock-card-small'
-import {Router, Route, Link} from 'react-router-dom'
+import React from 'react'
+import {TrendingMemeObject} from '../components'
 import {connect} from 'react-redux'
-import {getTrendingStocks} from '../store'
+import {trendingMemesList} from '../store'
 
-class TrendingMemes extends Component {
-  render() {
-    const memes = this.props.memes
-    console.log('memes', memes)
-    return (
-      <section className="section">
-        <div className="container">
-          <h1 className="is-size-1 has-text-centered">Trending Memes</h1>
-          <br />
-          <br />
-          <div className="columns is-multiline is-centered">
-            {memes.map(meme => (
-              <div key={meme.name} className="column is-4">
-                <SmallStockCard meme={meme} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    )
-  }
+const TrendingMemes = props => {
+  const memes = props.memes
+  return (
+    <section>
+      <div className="container">
+        <h1 id="nav-title" className="title">
+          Trending Memes
+        </h1>
+        {!memes[0]
+          ? `No activity just yet`
+          : memes &&
+            memes.map(meme => <TrendingMemeObject key={meme.id} {...meme} />)}
+      </div>
+    </section>
+  )
 }
 
-const mapState = state => {
-  //console.log('state', state)
-  const memeIds = getTrendingStocks(state)
+const mapState = state => ({
+  memes: trendingMemesList(state)
+})
 
-  return {
-    memes: memeIds.map(memeId => state.memes.byId[memeId])
-  }
-}
-
-export default connect(mapState, null)(TrendingMemes)
+export default connect(mapState)(TrendingMemes)

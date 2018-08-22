@@ -5,8 +5,8 @@ import {Link} from 'react-router-dom'
 const TotalStockObject = props => {
   const {meme, quantity, currentPrice, lastPurchasePrice, chartData} = props
   return (
-    <Link to={`/allmemes/${meme.id}`}>
-      <div className="box no-pad">
+    <div className="box no-pad">
+      <Link to={`/allmemes/${meme.id}`}>
         <div className="columns is-mobile">
           <div className="column is-half">
             <p className="heading">{meme.symbol || 'SYM'}</p>
@@ -39,8 +39,8 @@ const TotalStockObject = props => {
             />
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   )
 }
 
