@@ -85,12 +85,14 @@ class HomePage extends React.Component {
               <div className="column">
                 <div className="card">
                   <br />
-                  <MarketChart
-                    data={totalMarket}
-                    title="Total Market Value"
-                    x={totalMarket.x}
-                    y={totalMarket.y}
-                  />
+                  <div>
+                    <MarketChart
+                      data={totalMarket}
+                      title="Total Market Value"
+                      x={totalMarket.x}
+                      y={totalMarket.y}
+                    />
+                  </div>
                   <br />
                 </div>
               </div>
