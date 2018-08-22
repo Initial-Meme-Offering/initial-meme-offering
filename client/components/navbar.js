@@ -64,9 +64,6 @@ const Navbar = ({handleLogout, isLoggedIn}) => (
                   <Link to="/portfolio/buy" className="navbar-item">
                     Portfolio
                   </Link>
-                  <Link to="/manage" className="navbar-item">
-                    Manage Account
-                  </Link>
                   <hr className="navbar-divider" />
                   <a href="#" onClick={handleLogout} className="navbar-item">
                     Logout
