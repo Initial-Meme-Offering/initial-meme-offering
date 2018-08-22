@@ -22,7 +22,6 @@ let AuthFormAll = props => {
       />
       <br />
       <br />
-      <br />
     </form>
   )
 }
