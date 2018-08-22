@@ -133,7 +133,7 @@ class HomePage extends React.Component {
               <div className="column">
                 <br />
                 <br />
-                <img src="https://openclipart.org/download/276483/1490609861.svg" />
+                <img src="/HandshakePNG.png" />
                 <br />
                 <br />
               </div>
