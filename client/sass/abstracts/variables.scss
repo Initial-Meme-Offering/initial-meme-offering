@@ -31,13 +31,17 @@ $info: $night;
   text-align: center;
 }
 
+#nav-title {
+  top: -50px;
+}
+
 #home-middle-section {
   background-color: #edb83d;
 }
 
 #home-rel {
   position: relative;
-  top: -56px;
+  top: -75px;
 }
 
 #nav-button {
@@ -45,8 +49,12 @@ $info: $night;
 }
 
 #card-rel {
-  position: relative;
-  top: -200px;
+  position: absolute;
+  top: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
 }
 
 #buy {
