@@ -27,14 +27,14 @@ class IndiceObject extends React.Component {
               </div>
             </div>
           </div>
-        </div>
-        <div className="column is-half">
-          <MarketChart
-            data={chartData}
-            title={`(${indice.symbol || 'SYM'}) History`}
-            x={chartData.x}
-            y={chartData.y}
-          />
+          <div className="column is-half">
+            <MarketChart
+              data={chartData}
+              title={`(${indice.symbol || 'SYM'}) History`}
+              x={chartData.x}
+              y={chartData.y}
+            />
+          </div>
         </div>
       </div>
     )

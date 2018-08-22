@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {MarketChart} from '../components'
 
 const TrendingMemeObject = props => {
@@ -12,7 +13,9 @@ const TrendingMemeObject = props => {
           <p className="title">{meme.name || 'Name'}</p>
           <div className="columns">
             <div className="column is-half">
-              <img className="image" src={meme.imageUrl || IMAGE} />
+              <Link id="card-link" to={`/allmemes/${meme.id}`}>
+                <img className="image" src={meme.imageUrl || IMAGE} />
+              </Link>
             </div>
             <div className="column is-half">
               <p>

@@ -11,7 +11,8 @@ let AuthFormAll = props => {
       <form onSubmit={handleSubmit} name={name}>
         <Field name="email" component={renderEmailField} />
         <Field name="password" component={renderPasswordField} />
-        <Field name="button" error={error} displayName={displayName}component={renderLoginButton}/>
+        <br/>
+        <Field name="button" error={error} displayName={displayName} component={renderLoginButton}/>
       </form>
     )
 }

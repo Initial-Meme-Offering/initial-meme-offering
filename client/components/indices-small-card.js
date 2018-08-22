@@ -47,8 +47,8 @@ class SmallIndiceCard extends Component {
 }
 
 const mapState = (state, ownProps) => ({
-  lastTradePrice: valueOfLastStockTrade(state, ownProps.meme.id).price,
-  percentChange: percentChange(state, ownProps.meme.id)
+  lastTradePrice: valueOfLastStockTrade(state, ownProps.meme && ownProps.meme.id).price,
+  percentChange: percentChange(state, ownProps.meme && ownProps.meme.id)
 })
 
 export default connect(mapState)(SmallIndiceCard)

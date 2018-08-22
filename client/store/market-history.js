@@ -135,9 +135,11 @@ export const userAgregateStockChart = state => {
     }
     return tally
   }, {})
+
   const averages = prices => {
+
     const memeIds = Object.keys(prices)
-    const length = prices && prices[memeIds[0]].length
+    const length = prices[memeIds[0]] && prices[memeIds[0]].length
     const result = []
     for (let i = 0; i < length; i++) {
       let sum = 0
@@ -169,5 +171,7 @@ export const userAgregateStockChart = state => {
       return {...dateObj, y: todaysAverages[i]}
     }
   })
+
+
   return {today: todaysWithDates, historical: dailyAverages, x: 'x', y: 'y'}
 }
