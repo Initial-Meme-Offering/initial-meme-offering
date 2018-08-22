@@ -1,5 +1,5 @@
 import React from 'react'
-import {VictoryChart, VictoryLine, VictoryZoomContainer} from 'victory'
+import {VictoryChart, VictoryLine, VictoryZoomContainer, VictoryAxis} from 'victory'
 
 class MarketChart extends React.Component {
   state = {
