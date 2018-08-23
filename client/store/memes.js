@@ -56,8 +56,11 @@ export default function(state = defaultMemes, action) {
 
 //SELECTORS
 export const allMemesList = state => {
+  console.log(state.memes.byId)
   return state.memes.allIds.reduce((result, memeId) => {
-    result.push(state.memes.byId[memeId])
+    if (!state.memes.byId[memeId].isIndex) {
+      result.push(state.memes.byId[memeId])
+    }
     return result
   }, [])
 }
@@ -65,12 +68,15 @@ export const allMemesList = state => {
 export const memesListBySearch = (state, search) => {
   return state.memes.allIds.reduce((result, id) => {
     let meme = state.memes.byId[id]
-    if (!search) result.push(meme)
-    else if (
-      meme.name.toLowerCase().includes(search.toLowerCase()) ||
-      meme.symbol.toLowerCase().includes(search.toLowerCase())
-    )
+    if (!search && !state.memes.byId[id].isIndex) {
       result.push(meme)
+    } else if (
+      !state.memes.byId[id].isIndex &&
+      (meme.name.toLowerCase().includes(search.toLowerCase()) ||
+        meme.symbol.toLowerCase().includes(search.toLowerCase()))
+    ) {
+      result.push(meme)
+    }
     return result
   }, [])
 }
@@ -78,13 +84,15 @@ export const memesListBySearch = (state, search) => {
 export const trendingMemesList = state => {
   const memeIds = getTrendingStocks(state)
   return memeIds.reduce((result, memeId) => {
-    result.push({
-      id: memeId,
-      meme: state.memes.byId[memeId],
-      currentPrice: valueOfLastStockTrade(state, memeId).price,
-      chartData: getSingleStockChart(state, memeId),
-      percentChange: percentChange(state, memeId)
-    })
+    if (!state.memes.byId[memeId].isIndex) {
+      result.push({
+        id: memeId,
+        meme: state.memes.byId[memeId],
+        currentPrice: valueOfLastStockTrade(state, memeId).price,
+        chartData: getSingleStockChart(state, memeId),
+        percentChange: percentChange(state, memeId)
+      })
+    }
     return result
   }, [])
 }
