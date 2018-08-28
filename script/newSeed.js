@@ -259,7 +259,7 @@ async function seed() {
   //get previous data loaded
   const memesData = await Meme.findAll({})
   const memesToLoad = memesData.slice(0, 6)
-  const indicesToLoad = memesData.slice(memesData.length - 6)
+  const indicesToLoad = memesData.slice(memesData.length - 5)
   const memes = memesToLoad.concat(indicesToLoad)
 
   async function seedMarketData() {
