@@ -176,7 +176,7 @@ async function preSeed() {
     }
   })
 
-  const memes = allMemes.slice(0, 70)
+  const memes = allMemes.slice(0, 7)
 
   async function seedMemeIndices() {
     for (let i = 0; i < memes.length; i++) {
@@ -257,7 +257,10 @@ async function seedOffers(dataVariances, memeIndex, memes) {
 
 async function seed() {
   //get previous data loaded
-  const memes = await Meme.findAll({})
+  const memesData = await Meme.findAll({})
+  const memesToLoad = memesData.slice(0, 6)
+  const indicesToLoad = memesData.slice(memesData.length - 5)
+  const memes = memesToLoad.concat(indicesToLoad)
 
   async function seedMarketData() {
     for (let memeIndex = 0; memeIndex < memes.length; memeIndex++) {
